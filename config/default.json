@@ -1,0 +1,5 @@
+{
+  "db": "mongodb://localhost/ihg",
+  "port": "3900",
+  "requiresAuth": true
+}
