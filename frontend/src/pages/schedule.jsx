@@ -3,11 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "../components/card";
-import Button from "@material-ui/core/Button";
 import Calendar from "./../components/calendar";
-import { Divider } from "@material-ui/core";
-
 import scheduleService from "../services/scheduleService";
+import { BarChart, ResponsiveContainer } from "recharts";
+import Slider from "../components/slider";
 
 const styles = theme => ({
   paper: {
@@ -31,14 +30,18 @@ const styles = theme => ({
 });
 
 class Schedule extends Component {
-  state = {};
+  state = {
+    schedules: []
+  };
 
   async componentDidMount() {
-    const schedules = await scheduleService.getSchedule();
-    console.log(schedules);
+    const { data: schedules } = await scheduleService.getAllSchedules();
+    this.setState({ schedules });
   }
+
   render() {
     const { classes } = this.props;
+    const { schedules, margin, previous, current, next } = this.state;
 
     return (
       <React.Fragment>
@@ -46,48 +49,33 @@ class Schedule extends Component {
           <Grid item xs={12}>
             <p className={classes.paper}>Today's games</p>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={1}
-            // style={{
-            //   borderStyle: "solid"
-            // }}
-          >
-            <p>Back</p>
-          </Grid>
-          <Grid item xs={12} sm={10}>
-            <Paper className={classes.bopes}>
-              <Grid container spacing={1} className={classes.container}>
-                <Grid item xs={12} sm={4} className={classes.container}>
-                  <Card />
-                </Grid>
-                <Grid item xs={12} sm={4} className={classes.container}>
-                  <Card />
-                </Grid>
-                <Grid item xs={12} sm={4} className={classes.container}>
-                  <Card />
-                </Grid>
-              </Grid>
+          <Grid item xs={12}>
+            <Paper className={classes.bopes} style={{ height: "40vh" }}>
+              {/* {schedules.map((e, index) => {
+                  if (index < 3) {
+                    return (
+                      <Grid
+                        item
+                        xs={12}
+                        sm={12 / margin}
+                        className={classes.container}
+                      >
+                        <Card sport={e} />
+                      </Grid>
+                    );
+                  }
+                })} */}
+              {schedules.length > 0 && <Slider schedules={schedules} />}
             </Paper>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={1}
-            // style={{
-            //   borderStyle: "solid"
-            // }}
-          >
-            <p>Back</p>
-          </Grid>
         </Grid>
+        {/* Calendar */}
         <Grid container spacing={0} className={classes.container}>
           <Grid item xs={12} sm={4}>
             Blank
           </Grid>
           <Grid item xs={12} sm={7}>
-            <Calendar />
+            {schedules.length > 0 && <Calendar schedules={schedules} />}
           </Grid>
           <Grid item xs={12} sm={1}>
             Blank

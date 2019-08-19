@@ -2,11 +2,13 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
 import Container from "@material-ui/core/Container";
+import dateformat from "dateformat";
 
-export default function ScheduleBox() {
+export default function ScheduleBox({ schedule }) {
   const classes = useStyles();
+
+  console.log(schedule);
 
   return (
     <Container maxWidth="xl" className={classes.container}>
@@ -56,31 +58,49 @@ export default function ScheduleBox() {
         /> */}
         <Grid
           item
-          xs={12}
+          xs={true}
           sm={6}
           className={classes.bar}
-          style={{ backgroundColor: "green" }}
+          style={{
+            backgroundColor: schedule.hall[0].colourCode,
+            border:
+              schedule.hall[0].colourCode === "#ffffff"
+                ? "0.005vh solid black"
+                : ``
+            // transform:
+            //   schedule.hall[0].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
+          }}
         />
         <Grid
           item
-          xs={12}
+          xs={true}
           sm={6}
           className={classes.bar}
-          style={{ backgroundColor: "white" }}
+          style={{
+            backgroundColor: schedule.hall[1].colourCode,
+            border:
+              schedule.hall[1].colourCode === "#ffffff"
+                ? "0.005vh solid black"
+                : ``
+            // transform:
+            //   schedule.hall[1].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
+          }}
         />
-        <Grid item xs={12} sm={5} className={classes.center}>
-          RH
+        <Grid item xs={12} sm={5}>
+          {schedule.hall[0].name.split(" ")[0].substring(0, 1)}H
         </Grid>
-        <Grid item xs={12} sm={2} className={classes.center}>
+        <Grid item xs={12} sm={2}>
           vs
         </Grid>
-        <Grid item xs={12} sm={5} className={classes.center}>
-          TH
+        <Grid item xs={12} sm={5}>
+          {schedule.hall[1].name.split(" ")[0].substring(0, 1)}H
         </Grid>
         <Grid item xs={12}>
-          <Typography>Swimming F</Typography>
-          <Typography>Time</Typography>
-          <Typography>Venue</Typography>
+          <Typography>{schedule.sport}</Typography>
+          <Typography>
+            {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h'")}
+          </Typography>
+          <Typography>{schedule.venue}</Typography>
         </Grid>
       </Grid>
     </Container>
@@ -89,18 +109,12 @@ export default function ScheduleBox() {
 
 const useStyles = makeStyles({
   container: {
-    textAlign: "left",
+    textAlign: "center",
     // backgroundColor: "beige",
-    // border: "2px solid",
-    padding: 10,
-    zIndex: 1
+    border: "0.005vh solid grey",
+    padding: 10
   },
   bar: {
-    backgroundColor: "red",
-    height: 15,
-    textAlign: "left"
-  },
-  center: {
-    textAlign: "center"
+    height: "1vh"
   }
 });

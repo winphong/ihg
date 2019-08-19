@@ -8,6 +8,10 @@ const Hall = mongoose.model(
       type: String,
       required: true
     },
+    abbreviation: {
+      type: String,
+      required: true
+    },
     imgUrl: {
       type: String,
       required: true
@@ -23,6 +27,12 @@ const Hall = mongoose.model(
       min: 0
     },
     femalePoint: {
+      type: Number,
+      required: true,
+      default: 0,
+      min: 0
+    },
+    totalPoint: {
       type: Number,
       required: true,
       default: 0,

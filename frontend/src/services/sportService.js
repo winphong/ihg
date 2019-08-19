@@ -1,15 +1,15 @@
 import http from "./httpService";
 
-const apiEndpoint = `/schedule`;
+const apiEndpoint = `/sport`;
 
 function getUrl(pathParam) {
   return `${apiEndpoint}/${pathParam}/`;
 }
 
-function getAllSchedules() {
+function getAllSports() {
   return http.get(apiEndpoint);
 }
 
 export default {
-  getAllSchedules
+  getAllSports
 };

@@ -1,35 +1,71 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import dateformat from "dateformat";
 
-export default function Card({ sport }) {
+export default function Card({ schedule, center, size }) {
   const classes = useStyles();
 
   return (
-    <Grid container>
-      <Grid container spacing={0} className={classes.card}>
-        <Grid item xs={6}>
-          <img src={sport.hall[0].imgUrl} />
-          <p> {sport.hall[0].name} </p>
-        </Grid>
-
-        <Grid item xs={6}>
-          <img src={sport.hall[1].imgUrl} />
-          <p> {sport.hall[1].name} </p>
-        </Grid>
-        <Grid item xs={12}>
-          {sport.sport} <br /> {sport.startTime}, {sport.venue},
-          {sport.startTime}
-        </Grid>
+    <Grid
+      container
+      className={
+        center ? classes.center : size === "big" ? classes.big : classes.small
+      }
+    >
+      <Grid item xs={true} sm={11 / 2}>
+        <img style={{ maxHeight: 150 }} src={schedule.hall[0].imgUrl} />
+        <p> {schedule.hall[0].name} </p>
+      </Grid>
+      <Grid item xs={true} sm={1} className={classes.vs}>
+        <p>vs</p>
+      </Grid>
+      <Grid item xs={true} sm={11 / 2}>
+        <img style={{ maxHeight: 150 }} src={schedule.hall[1].imgUrl} />
+        <p> {schedule.hall[1].name} </p>
+      </Grid>
+      <Grid item xs={12}>
+        {schedule.sport} <br />
+        {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h',")}{" "}
+        {schedule.venue}
       </Grid>
     </Grid>
   );
 }
 
 const useStyles = makeStyles({
-  card: {
-    height: 400,
+  big: {
+    height: "27vh",
+    width: "28vw",
     textAlign: "center",
-    margin: 5
+    margin: "1vh 0.5vw",
+    // backgroundColor: "beige",
+    padding: "0.5vh"
+  },
+  small: {
+    height: "27vh",
+    width: "26vw",
+    textAlign: "center",
+    margin: "1vh 0.5vw",
+    // backgroundColor: "beige",
+    padding: "0.5vh",
+    opacity: 0.5,
+    transform: "scale(0.85)"
+  },
+  center: {
+    height: "27vh",
+    width: "26vw",
+    textAlign: "center",
+    margin: "1vh 0.5vw",
+    // backgroundColor: "beige",
+    padding: "0.5vh",
+    transform: "scale(1.3)"
+  },
+  vs: {
+    // word in the center
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "left"
   }
 });
