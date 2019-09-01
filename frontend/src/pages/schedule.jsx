@@ -80,9 +80,7 @@ class Schedule extends Component {
                     );
                   }
                 })} */}
-                  {schedules.length > 0 && (
-                    <Slider schedules={schedules.slice(0, 2)} />
-                  )}
+                  {schedules.length > 0 && <Slider schedules={schedules} />}
                 </div>
               </CSSTransition>
             </Grid>

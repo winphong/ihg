@@ -50,7 +50,7 @@ const useStyles = makeStyles({
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
     padding: "0.5vh",
-    opacity: 0.5,
+    opacity: 0.3,
     transform: "scale(0.85)",
     border: "0.05vh solid gold"
   },

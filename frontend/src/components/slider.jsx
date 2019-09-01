@@ -46,7 +46,9 @@ export default function Slider({ schedules }) {
           justifyContent: "center"
         }}
       >
-        <Button onClick={handleBack}>Back</Button>
+        <Button onClick={handleBack} disabled={schedules.length == 1}>
+          Back
+        </Button>
       </Grid>
       <Grid item xs={true} sm={10}>
         <TransitionGroup>
@@ -57,12 +59,15 @@ export default function Slider({ schedules }) {
               className={classes.container}
               style={{
                 position: "absolute",
-                width: "84vw"
+                width: "84vw",
+                marginTop: "5vh"
               }}
             >
               <Grid item xs={12} sm={4} className={classes.container}>
                 {/* {previous  && ( */}
-                <Card schedule={schedules[previous]} size="small" />
+                {schedules.length >= 3 && (
+                  <Card schedule={schedules[previous]} size="small" />
+                )}
                 {/* )} */}
               </Grid>
               <Grid item xs={12} sm={4} className={classes.container}>
@@ -74,7 +79,9 @@ export default function Slider({ schedules }) {
               </Grid>
               <Grid item xs={12} sm={4} className={classes.container}>
                 {/* {next < schedules.length && ( */}
-                <Card schedule={schedules[next]} size="small" />
+                {schedules.length >= 3 && (
+                  <Card schedule={schedules[next]} size="small" />
+                )}
                 {/* )} */}
               </Grid>
             </Grid>
@@ -82,7 +89,9 @@ export default function Slider({ schedules }) {
         </TransitionGroup>
       </Grid>
       <Grid item xs={true} sm={1}>
-        <Button onClick={handleNext}>Next</Button>
+        <Button onClick={handleNext} disabled={schedules.length == 1}>
+          Next
+        </Button>
       </Grid>
     </Grid>
   );
