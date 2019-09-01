@@ -78,7 +78,7 @@ class Home extends Component {
           <Grid container>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <img style={{ width: "100%", height: "45vh" }} src={homeUrl} />
+                <img style={{ width: "100%" }} src={homeUrl} />
               </Paper>
             </Grid>
             <Grid container style={{ height: "60vh" }}>
@@ -104,7 +104,14 @@ class Home extends Component {
                         if (index < 4) {
                           return (
                             <Grid item xs={true} sm={6}>
-                              <Card schedule={e} size="big" />
+                              <div
+                                style={{
+                                  height: "27vh",
+                                  width: "28vw"
+                                }}
+                              >
+                                <Card schedule={e} size="big" />
+                              </div>
                             </Grid>
                           );
                         }

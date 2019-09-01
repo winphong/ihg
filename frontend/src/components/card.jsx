@@ -13,16 +13,25 @@ export default function Card({ schedule, center, size }) {
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
     >
-      <Grid item xs={true} sm={11 / 2}>
-        <img style={{ maxHeight: 150 }} src={schedule.hall[0].imgUrl} />
-        <p> {schedule.hall[0].name} </p>
+      <Grid container>
+        <Grid item xs={true} sm={11 / 2}>
+          <img style={{ maxHeight: 150 }} src={schedule.hall[0].imgUrl} />
+        </Grid>
+        <Grid item xs={true} sm={1} className={classes.vs}>
+          <p>vs</p>
+        </Grid>
+        <Grid item xs={true} sm={11 / 2}>
+          <img style={{ maxHeight: 150 }} src={schedule.hall[1].imgUrl} />
+        </Grid>
       </Grid>
-      <Grid item xs={true} sm={1} className={classes.vs}>
-        <p>vs</p>
-      </Grid>
-      <Grid item xs={true} sm={11 / 2}>
-        <img style={{ maxHeight: 150 }} src={schedule.hall[1].imgUrl} />
-        <p> {schedule.hall[1].name} </p>
+      <Grid container>
+        <Grid item xs={true} sm={11 / 2}>
+          <p> {schedule.hall[0].name} </p>
+        </Grid>
+        <Grid item xs={true} sm={1} className={classes.vs}></Grid>
+        <Grid item xs={true} sm={11 / 2}>
+          <p> {schedule.hall[1].name} </p>
+        </Grid>
       </Grid>
       <Grid item xs={12}>
         {schedule.sport} <br />
@@ -35,8 +44,6 @@ export default function Card({ schedule, center, size }) {
 
 const useStyles = makeStyles({
   big: {
-    height: "27vh",
-    width: "28vw",
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
@@ -56,7 +63,7 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
-    padding: "0.5vh",
+    padding: "1vh",
     transform: "scale(1.3)",
     border: "0.05vh solid gold"
   },

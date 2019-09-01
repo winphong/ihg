@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { Button } from "@material-ui/core";
 import Card from "../components/card";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function Slider({ schedules }) {
   const classes = useStyles();
@@ -35,20 +37,11 @@ export default function Slider({ schedules }) {
   }
 
   return (
-    <Grid container style={{ display: "flex", alignItems: "center" }}>
-      <Grid
-        item
-        xs={true}
-        sm={1}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <Button onClick={handleBack} disabled={schedules.length == 1}>
-          Back
-        </Button>
+    <Grid container>
+      <Grid item xs={true} sm={1}>
+        <IconButton onClick={handleBack} disabled={schedules.length == 1}>
+          <KeyboardArrowLeft />
+        </IconButton>
       </Grid>
       <Grid item xs={true} sm={10}>
         <TransitionGroup>
@@ -58,8 +51,8 @@ export default function Slider({ schedules }) {
               spacing={8}
               style={{
                 position: "absolute",
-                width: "84vw",
-                marginTop: "5vh"
+                width: "83.5%",
+                marginTop: "-14vh"
               }}
             >
               <Grid item xs={12} sm={4}>
@@ -97,9 +90,9 @@ export default function Slider({ schedules }) {
         </TransitionGroup>
       </Grid>
       <Grid item xs={true} sm={1}>
-        <Button onClick={handleNext} disabled={schedules.length == 1}>
-          Next
-        </Button>
+        <IconButton onClick={handleNext} disabled={schedules.length == 1}>
+          <KeyboardArrowRight />
+        </IconButton>
       </Grid>
     </Grid>
   );

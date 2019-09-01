@@ -63,23 +63,12 @@ class Schedule extends Component {
                   className={classes.bopes}
                   style={{
                     height: "45vh",
-                    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+                    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`,
+                    display: "flex",
+                    alignItems: "center",
+                    textAlign: "center"
                   }}
                 >
-                  {/* {schedules.map((e, index) => {
-                  if (index < 3) {
-                    return (
-                      <Grid
-                        item
-                        xs={12}
-                        sm={12 / margin}
-                        className={classes.container}
-                      >
-                        <Card sport={e} />
-                      </Grid>
-                    );
-                  }
-                })} */}
                   {schedules.length > 0 && <Slider schedules={schedules} />}
                 </div>
               </CSSTransition>
@@ -94,13 +83,13 @@ class Schedule extends Component {
               height: "100vh"
             }}
           >
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={true} sm={3}>
               Blank
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={true} sm={8}>
               {schedules.length > 0 && <Calendar schedules={schedules} />}
             </Grid>
-            <Grid item xs={12} sm={1}>
+            <Grid item xs={true} sm={1}>
               Blank
             </Grid>
           </Grid>

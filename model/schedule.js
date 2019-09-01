@@ -24,6 +24,10 @@ const Schedule = mongoose.model(
         },
         score: {
           type: Number
+        },
+        abbreviation: {
+          type: String,
+          required: true
         }
       }
     ],

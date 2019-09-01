@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import scheduleService from "../services/scheduleService";
 import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
+import ResultsCarnival from "../components/resultsCarnival";
 import ResultBar from "../components/resultBar";
 import { Divider, Button } from "@material-ui/core";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -296,14 +297,22 @@ class Results extends Component {
                                       "dd'th' mmm"
                                     )}
                                   </p>
-                                  <ResultsTable schedule={schedule} />
+                                  {schedule.stage == "Carnival" ? (
+                                    <ResultsCarnival schedule={schedule} />
+                                  ) : (
+                                    <ResultsTable schedule={schedule} />
+                                  )}
                                   <Divider />
                                 </div>
                               );
                             }
                             return (
                               <div>
-                                <ResultsTable schedule={schedule} />
+                                {schedule.stage == "Carnival" ? (
+                                  <ResultsCarnival schedule={schedule} />
+                                ) : (
+                                  <ResultsTable schedule={schedule} />
+                                )}
                                 <Divider />
                               </div>
                             );

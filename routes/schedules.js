@@ -59,7 +59,13 @@ router.put("/:id", async (req, res) => {
   )
     .then(async () => {
       hall = hall.map(e => {
-        return _.pick(e, ["name", "imgUrl", "colourCode", "abbreviation"]);
+        return _.pick(e, [
+          "name",
+          "imgUrl",
+          "colourCode",
+          "abbreviation",
+          "score"
+        ]);
       });
       req.body.hall = hall;
       schedule = await Schedule.findByIdAndUpdate(
@@ -75,6 +81,7 @@ router.put("/:id", async (req, res) => {
         ]),
         { new: true }
       );
+
       res.send(schedule);
     })
     .catch(err => {

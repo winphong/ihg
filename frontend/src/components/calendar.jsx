@@ -63,13 +63,10 @@ export default function Calendar({ schedules }) {
           xs={12}
           style={{ height: "100vh", border: "1px solid black" }}
         >
-          {/* <TransitionGroup>
-            <CSSTransition key={weekNum} timeout={400} classNames="fade"> */}
-          {/* Days row */}
           <Grid
             container
             style={{
-              width: "57.7vw",
+              width: "66vw",
               position: "absolute"
             }}
           >
@@ -126,7 +123,9 @@ export default function Calendar({ schedules }) {
                                 return (
                                   <tr key={schedule._id}>
                                     <td className={classes.table}>
-                                      <ScheduleBox schedule={schedule} />
+                                      <div>
+                                        <ScheduleBox schedule={schedule} />
+                                      </div>
                                     </td>
                                   </tr>
                                 );
