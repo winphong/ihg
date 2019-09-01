@@ -11,5 +11,7 @@ module.exports = function(app) {
   app.use("/api/hall", hall);
   app.use("/api/sport", sport);
   app.use("/api/enquiry", enquiry);
+  app.use("/api/images", express.static("images"));
+
   app.use(error);
 };

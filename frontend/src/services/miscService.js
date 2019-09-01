@@ -15,7 +15,7 @@ function getInstagramPhotos() {
 }
 
 function getSportsPhoto(path) {
-  return http.get(`../${path}`, {
+  return http.get(`/images/${path}`, {
     responseType: "blob"
   });
 }

@@ -8,7 +8,7 @@ require("./startup/cors")(app);
 require("./startup/db")();
 require("./startup/routes")(app);
 
-app.use(express.static(path.join(__dirname, "images")));
+app.use(express.static(path.join(__dirname, "frontend", "build")));
 
 const port = process.env.PORT || config.get("port");
 
