@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import hallService from "../services/hallService";
 import Container from "@material-ui/core/Container";
 import scheduleService from "../services/scheduleService";
+import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
 import ResultBar from "../components/resultBar";
 import { Divider, Button } from "@material-ui/core";
@@ -32,12 +33,13 @@ const styles = theme => ({
     textAlign: "center",
     display: "flex",
     alignItems: "baseline",
-    marginBottom: "3vh"
+    marginBottom: "3vh",
+    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
   }
 });
 
-let arr = [];
-let idx = 0;
+let arr = []; // keep track of how many resultTable element in a page
+let idx = 0; // index pointer for arr
 
 class Results extends Component {
   state = {
@@ -47,13 +49,22 @@ class Results extends Component {
     originalSchedulesBySport: [],
     index: 0,
     limit: 11,
-    byDate: true
+    byDate: true,
+    selectedSport: {},
+    sports: {}
   };
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getAllSchedules();
-    this.setState({ halls, schedules, originalSchedules: [...schedules] });
+    const { data: sports } = await sportService.getAllSports();
+    console.log(sports);
+    this.setState({
+      halls,
+      schedules,
+      originalSchedules: [...schedules],
+      sports
+    });
   }
 
   handleNext = limit => {
@@ -93,169 +104,260 @@ class Results extends Component {
     this.setState({ schedules, byDate: true, index: 0 });
   };
 
-  handleSortBySport = () => {
+  handleSortBySport = sport => {
     arr = [];
     idx = 0;
-    const schedules = [...this.state.originalSchedules].sort((a, b) => {
-      return a.sport >= b.sport ? 1 : -1;
+    // const schedules = [...this.state.originalSchedules].sort((a, b) => {
+    //   return a.sport >= b.sport ? 1 : -1;
+    // });
+    const schedules = [...this.state.originalSchedules].filter(schedule => {
+      if (schedule.sport == (sport ? sport.name : this.state.sports[0].name)) {
+        return schedule;
+      }
     });
 
     this.setState({
       schedules,
       originalSchedulesBySport: [...schedules],
       byDate: false,
-      index: 0
+      index: 0,
+      selectedSport: sport ? sport : this.state.sports[0]
     });
   };
 
   render() {
     const { classes } = this.props;
-    const { halls, schedules, index, originalSchedules, byDate } = this.state;
+    const {
+      halls,
+      schedules,
+      index,
+      originalSchedules,
+      byDate,
+      sports,
+      selectedSport
+    } = this.state;
 
     let limit = this.state.limit;
     let currentDate = "";
 
     return (
-      <React.Fragment>
-        <Grid container spacing={0} className={classes.barChart}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <p> Ranking as of {new Date().toLocaleDateString()}</p>
-            </Paper>
-          </Grid>
-          <Grid item xs={true} sm={1} />
-          <Grid item xs={true} sm={2}>
-            <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
-            MALE
-          </Grid>
-          <Grid item xs={true} sm={1} />
+      <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
+        <React.Fragment>
+          <Grid container spacing={0} className={classes.barChart}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <p> Ranking as of {new Date().toLocaleDateString()}</p>
+              </Paper>
+            </Grid>
+            <Grid item xs={true} sm={1} />
+            <Grid item xs={true} sm={2}>
+              <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
+              MALE
+            </Grid>
+            <Grid item xs={true} sm={1} />
 
-          <Grid item xs={true} sm={4}>
-            <ResultBar halls={halls} dataKey={"totalPoint"} barSize={10} />
-            OVERALL
-          </Grid>
-          <Grid item xs={true} sm={1} />
+            <Grid item xs={true} sm={4}>
+              <ResultBar halls={halls} dataKey={"totalPoint"} barSize={10} />
+              OVERALL
+            </Grid>
+            <Grid item xs={true} sm={1} />
 
-          <Grid item xs={true} sm={2}>
-            <ResultBar halls={halls} dataKey={"femalePoint"} barSize={6} />
-            FEMALE
+            <Grid item xs={true} sm={2}>
+              <ResultBar halls={halls} dataKey={"femalePoint"} barSize={6} />
+              FEMALE
+            </Grid>
+            <Grid item xs={true} sm={1} />
           </Grid>
-          <Grid item xs={true} sm={1} />
-        </Grid>
-        <Grid container spacing={0} className={classes.container}>
-          <Grid item xs={3}>
-            {/* About IHG */}
-            <Button onClick={this.handleSortByDate}>Sort by date</Button>
-          </Grid>
-          <Grid item xs={1}>
-            {/* About IHG */}
-            <Button onClick={this.handleSortBySport}>Sort by sports</Button>
-          </Grid>
-          <Grid item xs={7}>
-            <Grid container style={{ height: "68vh" }}>
-              <Grid item xs={12}>
-                <TransitionGroup>
-                  <CSSTransition
-                    key={`${index}${byDate}`}
-                    timeout={400}
-                    classNames="fade"
+          <Grid container spacing={0} className={classes.container}>
+            <Grid item xs={4}>
+              {/* About IHG */}
+              <Grid container spacing={0} className={classes.container}>
+                <Grid
+                  container
+                  spacing={0}
+                  className={classes.container}
+                  style={{ height: "50vh" }}
+                >
+                  {!byDate && (
+                    <React.Fragment>
+                      <Grid item xs={6}>
+                        {sports.length > 1 &&
+                          sports.slice(0, 9).map(sport => {
+                            return (
+                              <p
+                                onClick={() => this.handleSortBySport(sport)}
+                                style={{
+                                  color:
+                                    selectedSport.name == sport.name
+                                      ? "black"
+                                      : "grey",
+                                  cursor: "pointer"
+                                }}
+                              >
+                                {sport.name}
+                              </p>
+                            );
+                          })}
+                      </Grid>
+                      <Grid item xs={6}>
+                        {sports.length > 1 &&
+                          sports.slice(9).map(sport => {
+                            return <p> {sport.name}</p>;
+                          })}
+                      </Grid>
+                    </React.Fragment>
+                  )}
+                </Grid>
+
+                <Grid item xs={12}>
+                  RESULTS
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    style={{
+                      color: byDate ? "black" : "grey"
+                    }}
+                    onClick={this.handleSortByDate}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        width: "58.33%"
-                      }}
+                    Sort by date
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    style={{
+                      color: !byDate ? "black" : "grey"
+                    }}
+                    onClick={() => this.handleSortBySport()}
+                  >
+                    Sort by sports
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={7}>
+              <Grid container style={{ height: "68vh" }}>
+                <Grid item xs={12}>
+                  <TransitionGroup>
+                    <CSSTransition
+                      key={`${index}${byDate}${selectedSport.name}`}
+                      timeout={400}
+                      classNames="fade"
                     >
-                      {schedules.map((schedule, index) => {
-                        if (index < limit) {
-                          if (
-                            schedule.startTime.substring(8, 10) != currentDate
-                          ) {
-                            limit = limit - 1;
-                            if (limit <= this.state.limit / 2) {
-                              return;
+                      <div
+                        style={{
+                          position: "absolute",
+                          width: "58.33%"
+                        }}
+                      >
+                        {!byDate && (
+                          <p
+                            style={{
+                              textAlign: "left",
+                              margin: "1vh",
+                              height: "5.1vh",
+                              // backgroundColor: "pink",
+                              display: "flex",
+                              alignItems: "center"
+                            }}
+                          >
+                            {selectedSport.name}
+                          </p>
+                        )}
+                        {schedules.map((schedule, index) => {
+                          if (index < limit) {
+                            if (
+                              byDate &&
+                              schedule.startTime.substring(8, 10) != currentDate
+                            ) {
+                              limit = limit - 1;
+                              if (limit <= this.state.limit / 2) {
+                                return;
+                              }
+                              currentDate = schedule.startTime.substring(8, 10);
+                              return (
+                                <div>
+                                  <p
+                                    style={{
+                                      textAlign: "left",
+                                      margin: "1vh",
+                                      height: "5.1vh",
+                                      // backgroundColor: "pink",
+                                      display: "flex",
+                                      alignItems: "center"
+                                    }}
+                                  >
+                                    {dateformat(
+                                      new Date(
+                                        schedule.startTime
+                                      ).toLocaleString("default", {
+                                        timeZone: "Asia/Singapore"
+                                      }),
+                                      "dd mmm"
+                                    )}
+                                  </p>
+                                  <ResultsTable schedule={schedule} />
+                                  <Divider />
+                                </div>
+                              );
                             }
-                            currentDate = schedule.startTime.substring(8, 10);
                             return (
                               <div>
-                                <p
-                                  style={{
-                                    textAlign: "left",
-                                    margin: "1vh",
-                                    height: "5.1vh",
-                                    // backgroundColor: "pink",
-                                    display: "flex",
-                                    alignItems: "center"
-                                  }}
-                                >
-                                  {dateformat(
-                                    new Date(schedule.startTime).toLocaleString(
-                                      "default",
-                                      {
-                                        timeZone: "Asia/Singapore"
-                                      }
-                                    ),
-                                    "dd mmm"
-                                  )}
-                                </p>
                                 <ResultsTable schedule={schedule} />
                                 <Divider />
                               </div>
                             );
                           }
-                          return (
-                            <div>
-                              <ResultsTable schedule={schedule} />
-                              <Divider />
-                            </div>
-                          );
-                        }
-                      })}
-                    </div>
-                  </CSSTransition>
-                </TransitionGroup>
+                        })}
+                      </div>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid container>
-              <Grid item xs={true} sm={6}>
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "left"
-                  }}
-                >
-                  <IconButton disabled={index === 0} onClick={this.handleBack}>
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </div>
-              </Grid>
-              <Grid item xs={true} sm={6}>
-                <div
-                  style={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "flex-end"
-                  }}
-                >
-                  <IconButton
-                    disabled={
-                      this.state.byDate
-                        ? index >= originalSchedules.length - this.state.limit
-                        : index >= originalSchedules.length - 5
-                    }
-                    onClick={() => {
-                      this.handleNext(limit);
+              <Grid container>
+                <Grid item xs={true} sm={6}>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "left"
                     }}
                   >
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </div>
+                    <IconButton
+                      disabled={index === 0}
+                      onClick={this.handleBack}
+                    >
+                      <KeyboardArrowLeft />
+                    </IconButton>
+                  </div>
+                </Grid>
+                <Grid item xs={true} sm={6}>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      justifyContent: "flex-end"
+                    }}
+                  >
+                    <IconButton
+                      disabled={
+                        this.state.byDate
+                          ? index >= originalSchedules.length - this.state.limit
+                          : index >= originalSchedules.length - 5
+                      }
+                      onClick={() => {
+                        this.handleNext(limit);
+                      }}
+                    >
+                      <KeyboardArrowRight />
+                    </IconButton>
+                  </div>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </React.Fragment>
+        </React.Fragment>
+      </CSSTransition>
     );
   }
 }

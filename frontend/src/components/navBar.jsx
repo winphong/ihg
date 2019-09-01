@@ -4,6 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 // import MenuIcon from "@material-ui/icons/Menu";
 
@@ -32,12 +33,33 @@ export default function NavBar() {
           <Typography variant="h6" className={classes.title}>
             IHG 19/20
           </Typography>
-          <Button color="inherit">ABOUT</Button>
-          <Button color="inherit">SCHEDULE</Button>
-          <Button color="inherit">RESULTS</Button>
-          <Button color="inherit">GALLERY</Button>
-          <Button color="inherit">CONTACT</Button>
+          <IconButton color="inherit" to="/home" component={Link}>
+            HOME
+          </IconButton>
+          <IconButton color="inherit" to="/about" component={Link}>
+            ABOUT
+          </IconButton>
+          <IconButton color="inherit" to="/schedule" component={Link}>
+            SCHEDULE
+          </IconButton>
+          <IconButton color="inherit" to="/results" component={Link}>
+            RESULTS
+          </IconButton>
+          <IconButton color="inherit" to="/gallery" component={Link}>
+            GALLERY
+          </IconButton>
+          <IconButton color="inherit" to="/contact" component={Link}>
+            CONTACT
+          </IconButton>
         </Toolbar>
+        {/* <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="simple tabs example"
+        >
+          <Tab label="Home" to="/home" component={Link} />
+          <Tab label="About" to="/about" component={Link} />
+        </Tabs> */}
       </AppBar>
     </div>
   );

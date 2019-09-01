@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
@@ -7,10 +7,12 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export default function Slider({ schedules }) {
   const classes = useStyles();
-  const [previous, setPrevious] = React.useState(schedules.length - 1);
-  const [current, setCurrent] = React.useState(0);
-  const [next, setNext] = React.useState(1);
-  const [margin, setMargin] = React.useState(
+  const [previous, setPrevious] = useState(
+    schedules.length > 1 ? schedules.length - 1 : 0
+  );
+  const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(schedules.length > 1 ? 1 : 0);
+  const [margin, setMargin] = useState(
     schedules.length >= 3 ? 3 : schedules.length
   );
 
@@ -55,22 +57,22 @@ export default function Slider({ schedules }) {
               className={classes.container}
               style={{
                 position: "absolute",
-                width: "83.33%"
+                width: "84vw"
               }}
             >
-              <Grid item xs={12} sm={12 / margin} className={classes.container}>
+              <Grid item xs={12} sm={4} className={classes.container}>
                 {/* {previous  && ( */}
                 <Card schedule={schedules[previous]} size="small" />
                 {/* )} */}
               </Grid>
-              <Grid item xs={12} sm={12 / margin} className={classes.container}>
+              <Grid item xs={12} sm={4} className={classes.container}>
                 <Card
                   schedule={schedules[current]}
                   center={true}
                   size="small"
                 />
               </Grid>
-              <Grid item xs={12} sm={12 / margin} className={classes.container}>
+              <Grid item xs={12} sm={4} className={classes.container}>
                 {/* {next < schedules.length && ( */}
                 <Card schedule={schedules[next]} size="small" />
                 {/* )} */}

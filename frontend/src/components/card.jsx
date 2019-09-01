@@ -40,7 +40,8 @@ const useStyles = makeStyles({
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
-    padding: "0.5vh"
+    padding: "0.5vh",
+    border: "0.05vh solid gold"
   },
   small: {
     height: "27vh",
@@ -50,7 +51,8 @@ const useStyles = makeStyles({
     // backgroundColor: "beige",
     padding: "0.5vh",
     opacity: 0.5,
-    transform: "scale(0.85)"
+    transform: "scale(0.85)",
+    border: "0.05vh solid gold"
   },
   center: {
     height: "27vh",
@@ -59,7 +61,8 @@ const useStyles = makeStyles({
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
     padding: "0.5vh",
-    transform: "scale(1.3)"
+    transform: "scale(1.3)",
+    border: "0.05vh solid gold"
   },
   vs: {
     // word in the center

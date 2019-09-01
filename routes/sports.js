@@ -3,7 +3,7 @@ const router = express.Router();
 const { Sport, validate } = require("../model/sport");
 
 router.get("/", async (req, res) => {
-  const sport = await Sport.find();
+  const sport = await Sport.find().sort({ name: 1 });
   res.send(sport);
 });
 

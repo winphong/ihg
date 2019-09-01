@@ -12,7 +12,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
         y={y}
         dx={barSize / 2}
         dy={-8}
-        fill="black"
+        fill="white"
         textAnchor="middle"
       >
         {value}

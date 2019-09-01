@@ -6,6 +6,7 @@ import Card from "../components/card";
 import Calendar from "./../components/calendar";
 import scheduleService from "../services/scheduleService";
 import { BarChart, ResponsiveContainer } from "recharts";
+import { CSSTransition } from "react-transition-group";
 import Slider from "../components/slider";
 
 const styles = theme => ({
@@ -21,11 +22,11 @@ const styles = theme => ({
   },
   container: {
     textAlign: "center"
-    // borderStyle: "solid",
   },
   bopes: {
     textAlign: "center",
-    marginBottom: 30
+    marginBottom: "3vh",
+    marginTop: "3vh"
   }
 });
 
@@ -37,21 +38,35 @@ class Schedule extends Component {
   async componentDidMount() {
     const { data: schedules } = await scheduleService.getAllSchedules();
     this.setState({ schedules });
+    console.log("clicked");
   }
 
   render() {
     const { classes } = this.props;
-    const { schedules, margin, previous, current, next } = this.state;
+    const { schedules } = this.state;
 
     return (
-      <React.Fragment>
-        <Grid container spacing={0} className={classes.container}>
-          <Grid item xs={12}>
-            <p className={classes.paper}>Today's games</p>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper className={classes.bopes} style={{ height: "40vh" }}>
-              {/* {schedules.map((e, index) => {
+      <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
+        <React.Fragment>
+          <Grid container spacing={0} className={classes.container}>
+            <Grid item xs={12}>
+              <p className={classes.paper}>Today's games</p>
+            </Grid>
+            <Grid item xs={12}>
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <div
+                  className={classes.bopes}
+                  style={{
+                    height: "45vh",
+                    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+                  }}
+                >
+                  {/* {schedules.map((e, index) => {
                   if (index < 3) {
                     return (
                       <Grid
@@ -65,23 +80,34 @@ class Schedule extends Component {
                     );
                   }
                 })} */}
-              {schedules.length > 0 && <Slider schedules={schedules} />}
-            </Paper>
+                  {schedules.length > 0 && (
+                    <Slider schedules={schedules.slice(0, 2)} />
+                  )}
+                </div>
+              </CSSTransition>
+            </Grid>
           </Grid>
-        </Grid>
-        {/* Calendar */}
-        <Grid container spacing={0} className={classes.container}>
-          <Grid item xs={12} sm={4}>
-            Blank
+          {/* Calendar */}
+          <Grid
+            container
+            spacing={0}
+            className={classes.container}
+            style={{
+              height: "100vh"
+            }}
+          >
+            <Grid item xs={12} sm={4}>
+              Blank
+            </Grid>
+            <Grid item xs={12} sm={7}>
+              {schedules.length > 0 && <Calendar schedules={schedules} />}
+            </Grid>
+            <Grid item xs={12} sm={1}>
+              Blank
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={7}>
-            {schedules.length > 0 && <Calendar schedules={schedules} />}
-          </Grid>
-          <Grid item xs={12} sm={1}>
-            Blank
-          </Grid>
-        </Grid>
-      </React.Fragment>
+        </React.Fragment>
+      </CSSTransition>
     );
   }
 }

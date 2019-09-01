@@ -62,146 +62,148 @@ class About extends Component {
 
     return (
       <React.Fragment>
-        <Grid container spacing={0}>
-          <Grid item xs={12}>
-            {/* About IHG */}
-            <Paper className={classes.paper}>
-              About IHG <br />
-              Description...........
-            </Paper>
-          </Grid>
-          {/* Hall of NUS */}
-          <Grid item xs={12} className={classes.hall}>
-            <Grid container spacing={0}>
-              <Grid item xs={12} sm={3}>
-                Hall of NUS
-              </Grid>
-              <Grid item xs={12} sm={9}>
-                <Grid container spacing={0}>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_8c531011a2024f2f899dfbd889ad82db~mv2.png/v1/fill/w_105,h_113,al_c,q_80,usm_0.66_1.00_0.01/RH%20logo.webp" />
-                    <p>Raffles Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_a66243c354444b14af625f83064b7041~mv2.png/v1/fill/w_90,h_115,al_c,q_80,usm_0.66_1.00_0.01/EH%20logo.webp" />
-                    <p>Eusoff Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img
-                      style={{ width: "25%" }}
-                      src="https://static.wixstatic.com/media/75612e_7a5b17ce7add491cb81c2e43d8762f58~mv2.jpg/v1/fill/w_202,h_278,al_c,q_80,usm_0.66_1.00_0.01/TH%20logo.webp"
-                    />
-                    <p> Temasek Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_bb53dd7f9e0b4ca39bc6fd9ff47de689~mv2.jpg/v1/fill/w_127,h_124,al_c,q_80,usm_0.66_1.00_0.01/SH%20logo.webp" />
-                    <p> Sheares Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_ae210bf29d314e55a4b45690125682f3~mv2.png/v1/fill/w_99,h_109,al_c,q_80,usm_0.66_1.00_0.01/hall-crest-vector.webp" />
-                    <p> King Edward VII Hall</p>
-                    <p />
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_008e77074a08483e87c5bdc12a28d648~mv2.jpg/v1/fill/w_121,h_113,al_c,q_80,usm_0.66_1.00_0.01/KR%20logo.webp" />
-                    <p> Kent Ridge Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_0e7db723601d4b8ea7de9b44a12af805~mv2.png/v1/fill/w_122,h_122,al_c,q_80,usm_0.66_1.00_0.01/pgp.webp" />
-                    <p>Prince George's Park Residence</p>
+        <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
+          <Grid container spacing={0}>
+            <Grid item xs={12}>
+              {/* About IHG */}
+              <Paper className={classes.paper}>
+                About IHG <br />
+                Description...........
+              </Paper>
+            </Grid>
+            {/* Hall of NUS */}
+            <Grid item xs={12} className={classes.hall}>
+              <Grid container spacing={0}>
+                <Grid item xs={12} sm={3}>
+                  Hall of NUS
+                </Grid>
+                <Grid item xs={12} sm={9}>
+                  <Grid container spacing={0}>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_8c531011a2024f2f899dfbd889ad82db~mv2.png/v1/fill/w_105,h_113,al_c,q_80,usm_0.66_1.00_0.01/RH%20logo.webp" />
+                      <p>Raffles Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_a66243c354444b14af625f83064b7041~mv2.png/v1/fill/w_90,h_115,al_c,q_80,usm_0.66_1.00_0.01/EH%20logo.webp" />
+                      <p>Eusoff Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img
+                        style={{ width: "25%" }}
+                        src="https://static.wixstatic.com/media/75612e_7a5b17ce7add491cb81c2e43d8762f58~mv2.jpg/v1/fill/w_202,h_278,al_c,q_80,usm_0.66_1.00_0.01/TH%20logo.webp"
+                      />
+                      <p> Temasek Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_bb53dd7f9e0b4ca39bc6fd9ff47de689~mv2.jpg/v1/fill/w_127,h_124,al_c,q_80,usm_0.66_1.00_0.01/SH%20logo.webp" />
+                      <p> Sheares Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_ae210bf29d314e55a4b45690125682f3~mv2.png/v1/fill/w_99,h_109,al_c,q_80,usm_0.66_1.00_0.01/hall-crest-vector.webp" />
+                      <p> King Edward VII Hall</p>
+                      <p />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_008e77074a08483e87c5bdc12a28d648~mv2.jpg/v1/fill/w_121,h_113,al_c,q_80,usm_0.66_1.00_0.01/KR%20logo.webp" />
+                      <p> Kent Ridge Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_0e7db723601d4b8ea7de9b44a12af805~mv2.png/v1/fill/w_122,h_122,al_c,q_80,usm_0.66_1.00_0.01/pgp.webp" />
+                      <p>Prince George's Park Residence</p>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
+              <Divider />
             </Grid>
-            <Divider />
-          </Grid>
 
-          {/* Sports Director */}
-          <Grid item xs={12} className={classes.hall}>
-            <Grid container spacing={0}>
-              <Grid item xs={12} sm={9}>
-                <Grid container spacing={0}>
-                  <Grid item xs={12} sm={3} />
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_8c531011a2024f2f899dfbd889ad82db~mv2.png/v1/fill/w_105,h_113,al_c,q_80,usm_0.66_1.00_0.01/RH%20logo.webp" />
-                    <p>Raffles Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_a66243c354444b14af625f83064b7041~mv2.png/v1/fill/w_90,h_115,al_c,q_80,usm_0.66_1.00_0.01/EH%20logo.webp" />
-                    <p>Eusoff Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img
-                      style={{ width: "25%" }}
-                      src="https://static.wixstatic.com/media/75612e_7a5b17ce7add491cb81c2e43d8762f58~mv2.jpg/v1/fill/w_202,h_278,al_c,q_80,usm_0.66_1.00_0.01/TH%20logo.webp"
-                    />
-                    <p> Temasek Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_bb53dd7f9e0b4ca39bc6fd9ff47de689~mv2.jpg/v1/fill/w_127,h_124,al_c,q_80,usm_0.66_1.00_0.01/SH%20logo.webp" />
-                    <p> Sheares Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_ae210bf29d314e55a4b45690125682f3~mv2.png/v1/fill/w_99,h_109,al_c,q_80,usm_0.66_1.00_0.01/hall-crest-vector.webp" />
-                    <p> King Edward VII Hall</p>
-                    <p />
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_008e77074a08483e87c5bdc12a28d648~mv2.jpg/v1/fill/w_121,h_113,al_c,q_80,usm_0.66_1.00_0.01/KR%20logo.webp" />
-                    <p> Kent Ridge Hall</p>
-                  </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <img src="https://static.wixstatic.com/media/75612e_0e7db723601d4b8ea7de9b44a12af805~mv2.png/v1/fill/w_122,h_122,al_c,q_80,usm_0.66_1.00_0.01/pgp.webp" />
-                    <p>Prince George's Park Residence</p>
+            {/* Sports Director */}
+            <Grid item xs={12} className={classes.hall}>
+              <Grid container spacing={0}>
+                <Grid item xs={12} sm={9}>
+                  <Grid container spacing={0}>
+                    <Grid item xs={12} sm={3} />
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_8c531011a2024f2f899dfbd889ad82db~mv2.png/v1/fill/w_105,h_113,al_c,q_80,usm_0.66_1.00_0.01/RH%20logo.webp" />
+                      <p>Raffles Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_a66243c354444b14af625f83064b7041~mv2.png/v1/fill/w_90,h_115,al_c,q_80,usm_0.66_1.00_0.01/EH%20logo.webp" />
+                      <p>Eusoff Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img
+                        style={{ width: "25%" }}
+                        src="https://static.wixstatic.com/media/75612e_7a5b17ce7add491cb81c2e43d8762f58~mv2.jpg/v1/fill/w_202,h_278,al_c,q_80,usm_0.66_1.00_0.01/TH%20logo.webp"
+                      />
+                      <p> Temasek Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_bb53dd7f9e0b4ca39bc6fd9ff47de689~mv2.jpg/v1/fill/w_127,h_124,al_c,q_80,usm_0.66_1.00_0.01/SH%20logo.webp" />
+                      <p> Sheares Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_ae210bf29d314e55a4b45690125682f3~mv2.png/v1/fill/w_99,h_109,al_c,q_80,usm_0.66_1.00_0.01/hall-crest-vector.webp" />
+                      <p> King Edward VII Hall</p>
+                      <p />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_008e77074a08483e87c5bdc12a28d648~mv2.jpg/v1/fill/w_121,h_113,al_c,q_80,usm_0.66_1.00_0.01/KR%20logo.webp" />
+                      <p> Kent Ridge Hall</p>
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                      <img src="https://static.wixstatic.com/media/75612e_0e7db723601d4b8ea7de9b44a12af805~mv2.png/v1/fill/w_122,h_122,al_c,q_80,usm_0.66_1.00_0.01/pgp.webp" />
+                      <p>Prince George's Park Residence</p>
+                    </Grid>
                   </Grid>
                 </Grid>
+                <Grid item xs={12} sm={3}>
+                  Sports Directors
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={3}>
-                Sports Directors
+              <Divider />
+            </Grid>
+            {/* Sports */}
+            <Grid item xs={true} sm={3}>
+              SPORTS
+            </Grid>
+            <Grid item xs={true} sm={5}>
+              <TransitionGroup>
+                <CSSTransition
+                  key={selectedSport._id}
+                  timeout={400}
+                  classNames="fade"
+                >
+                  <div style={{ position: "absolute" }}>
+                    <img style={{ height: "30vh" }} src={this.state.imgUrl} />
+                    <Typography> {selectedSport.name} </Typography>
+                    <Typography> {selectedSport.description} </Typography>
+                  </div>
+                </CSSTransition>
+              </TransitionGroup>
+            </Grid>
+            <Grid item xs={true} sm={3}>
+              <Grid container>
+                {sports.map(sport => {
+                  return (
+                    <Grid item xs={6}>
+                      <Button
+                        style={{
+                          backgroundColor: "transparent"
+                        }}
+                        disableTouchRipple="true"
+                        disableRipple="true"
+                        onClick={() => this.handleClick(sport)}
+                      >
+                        {sport.name}
+                      </Button>
+                    </Grid>
+                  );
+                })}
               </Grid>
             </Grid>
-            <Divider />
           </Grid>
-          {/* Sports */}
-          <Grid item xs={true} sm={3}>
-            SPORTS
-          </Grid>
-          <Grid item xs={true} sm={5}>
-            <TransitionGroup>
-              <CSSTransition
-                key={selectedSport._id}
-                timeout={400}
-                classNames="fade"
-              >
-                <div style={{ position: "absolute" }}>
-                  <img style={{ height: "30vh" }} src={this.state.imgUrl} />
-                  <Typography> {selectedSport.name} </Typography>
-                  <Typography> {selectedSport.description} </Typography>
-                </div>
-              </CSSTransition>
-            </TransitionGroup>
-          </Grid>
-          <Grid item xs={true} sm={3}>
-            <Grid container>
-              {sports.map(sport => {
-                return (
-                  <Grid item xs={6}>
-                    <Button
-                      style={{
-                        backgroundColor: "transparent"
-                      }}
-                      disableTouchRipple="true"
-                      disableRipple="true"
-                      onClick={() => this.handleClick(sport)}
-                    >
-                      {sport.name}
-                    </Button>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Grid>
-        </Grid>
+        </CSSTransition>
       </React.Fragment>
     );
   }

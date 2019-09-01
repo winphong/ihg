@@ -23,13 +23,15 @@ export default function Calendar({ schedules }) {
   const [startDate, setStartDate] = React.useState(new Date("5 Jan 2020"));
   const [weekNum, setWeekNum] = React.useState(-1);
 
+  const date = new Date(startDate);
+
   function handleBack(e) {
-    setStartDate(new Date(startDate.setDate(startDate.getDate() - 13)));
+    setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
     setWeekNum(weekNum - 1);
   }
 
   function handleNext(e) {
-    setStartDate(new Date(startDate.setDate(startDate.getDate() + 1)));
+    setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
     setWeekNum(weekNum + 1);
   }
 
@@ -38,7 +40,7 @@ export default function Calendar({ schedules }) {
       <Grid container>
         <Grid item xs={true} sm={1}>
           <IconButton
-            disabled={startDate <= new Date("5 Jan 2020")}
+            disabled={date <= new Date("5 Jan 2020")}
             onClick={handleBack}
           >
             <KeyboardArrowLeft />
@@ -50,25 +52,29 @@ export default function Calendar({ schedules }) {
         </Grid>
         <Grid item xs={true} sm={1}>
           <IconButton
-            disabled={startDate >= new Date("16 Feb 2020")}
+            disabled={date >= new Date("16 Feb 2020")}
             onClick={handleNext}
           >
             <KeyboardArrowRight />
           </IconButton>
         </Grid>
-        <Grid item xs={12} style={{ height: "100vh" }}>
+        <Grid
+          item
+          xs={12}
+          style={{ height: "100vh", border: "1px solid black" }}
+        >
           {/* <TransitionGroup>
             <CSSTransition key={weekNum} timeout={400} classNames="fade"> */}
           {/* Days row */}
           <Grid
             container
             style={{
-              width: "58.33%",
+              width: "57.7vw",
               position: "absolute"
             }}
           >
             {days.map((day, index) => {
-              if (index != 0) startDate.setDate(startDate.getDate() + 1);
+              if (index != 0) date.setDate(date.getDate() + 1);
               return (
                 <Grid key={day.num} item xs={true} sm={true}>
                   <div style={{ height: "5vh" }}>
@@ -76,7 +82,7 @@ export default function Calendar({ schedules }) {
                       <CSSTransition
                         key={weekNum}
                         timeout={400}
-                        classNames="slide"
+                        classNames="fade"
                       >
                         <div
                           style={{
@@ -84,12 +90,23 @@ export default function Calendar({ schedules }) {
                             position: "absolute"
                           }}
                         >
-                          <span>{dateformat(startDate, "dd/mm")}</span>
+                          <span>{dateformat(date, "dd/mm")}</span>
                         </div>
                       </CSSTransition>
                     </TransitionGroup>
                     <br />
-                    <span>{day.name}</span>
+                    <div
+                      style={{
+                        borderBottom: "1px solid black"
+                      }}
+                    />
+                    <div
+                      style={{
+                        borderBottom: "1px solid black"
+                      }}
+                    >
+                      <span>{day.name}</span>
+                    </div>
                   </div>
                   <TransitionGroup>
                     <CSSTransition
@@ -103,8 +120,8 @@ export default function Calendar({ schedules }) {
                             schedules.map((schedule, index) => {
                               const columnTime = new Date(schedule.startTime);
                               if (
-                                columnTime.getDate() === startDate.getDate() &&
-                                columnTime.getMonth() === startDate.getMonth()
+                                columnTime.getDate() === date.getDate() &&
+                                columnTime.getMonth() === date.getMonth()
                               ) {
                                 return (
                                   <tr key={schedule._id}>
@@ -123,8 +140,6 @@ export default function Calendar({ schedules }) {
               );
             })}
           </Grid>
-          {/* </CSSTransition>
-          </TransitionGroup> */}
         </Grid>
       </Grid>
     </Container>

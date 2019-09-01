@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import miscService from "../services/miscService";
 import { TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
   paper: {
@@ -63,90 +64,92 @@ class Contact extends Component {
 
     return (
       <React.Fragment>
-        <Grid container className={classes.container}>
-          <Grid item xs={12} sm={3} />
-          <Grid item xs={6}>
-            <Grid item xs={12}>
-              <p> Contact Us </p>
-            </Grid>
-            <form>
-              <Grid
-                container
-                spacing={1}
-                alignItems="center"
-                className={classes.container}
-              >
-                <Grid item xs={6}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    id="name"
-                    name="name"
-                    label="Name"
-                    margin="normal"
-                    fullWidth
-                    onChange={this.handleChange}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    id="email"
-                    name="email"
-                    label="Email"
-                    margin="normal"
-                    fullWidth
-                    onChange={this.handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    id="subject"
-                    name="subject"
-                    label="Subject"
-                    margin="normal"
-                    fullWidth
-                    onChange={this.handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    variant="outlined"
-                    required
-                    id="message"
-                    name="message"
-                    label="Message"
-                    margin="normal"
-                    fullWidth
-                    multiline
-                    onChange={this.handleChange}
-                    rows={5}
-                  />
-                </Grid>
-
-                <Grid item xs={2} className={classes.button}>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    size="small"
-                    onClick={this.handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Grid>
-                <Grid item xs={10} className={classes.button}>
-                  <Typography style={{ marginLeft: "1vw" }}>
-                    or email us @ ihgcovening@gmail.com{" "}
-                  </Typography>
-                </Grid>
+        <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
+          <Grid container className={classes.container}>
+            <Grid item xs={12} sm={3} />
+            <Grid item xs={6}>
+              <Grid item xs={12}>
+                <p> Contact Us </p>
               </Grid>
-            </form>
+              <form>
+                <Grid
+                  container
+                  spacing={1}
+                  alignItems="center"
+                  className={classes.container}
+                >
+                  <Grid item xs={6}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      id="name"
+                      name="name"
+                      label="Name"
+                      margin="normal"
+                      fullWidth
+                      onChange={this.handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      id="email"
+                      name="email"
+                      label="Email"
+                      margin="normal"
+                      fullWidth
+                      onChange={this.handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      id="subject"
+                      name="subject"
+                      label="Subject"
+                      margin="normal"
+                      fullWidth
+                      onChange={this.handleChange}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      variant="outlined"
+                      required
+                      id="message"
+                      name="message"
+                      label="Message"
+                      margin="normal"
+                      fullWidth
+                      multiline
+                      onChange={this.handleChange}
+                      rows={5}
+                    />
+                  </Grid>
+
+                  <Grid item xs={2} className={classes.button}>
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      size="small"
+                      onClick={this.handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                  <Grid item xs={10} className={classes.button}>
+                    <Typography style={{ marginLeft: "1vw" }}>
+                      or email us @ ihgcovening@gmail.com{" "}
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+            <Grid item xs={12} sm={3} />
           </Grid>
-          <Grid item xs={12} sm={3} />
-        </Grid>
+        </CSSTransition>
       </React.Fragment>
     );
   }
