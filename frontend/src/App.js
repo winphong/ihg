@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect, Switch, BrowserRouter } from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./components/navBar";
 import About from "./pages/about";
 import Contact from "./pages/contact";
@@ -13,21 +12,19 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <BrowserRouter>
-          <NavBar />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/schedule" component={Schedule} />
-            <Route path="/results" component={Results} />
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/admin" component={Contact} />
-            <Redirect from="/" exact to="/home" />
-            <Redirect to="not-found" />
-          </Switch>
-        </BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/home" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/schedule" component={Schedule} />
+          <Route path="/results" component={Results} />
+          <Route path="/gallery" component={Gallery} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/admin" component={Contact} />
+          <Redirect from="/" exact to="/home" />
+          <Redirect to="not-found" />
+        </Switch>
       </React.Fragment>
     );
   }
