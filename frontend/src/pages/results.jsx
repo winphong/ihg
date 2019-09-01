@@ -59,7 +59,6 @@ class Results extends Component {
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getAllSchedules();
     const { data: sports } = await sportService.getAllSports();
-    console.log(sports);
     this.setState({
       halls,
       schedules,
@@ -182,7 +181,7 @@ class Results extends Component {
                   {!byDate && (
                     <React.Fragment>
                       <Grid item xs={6}>
-                        {sports.length > 1 &&
+                        {sports.length >= 1 &&
                           sports.slice(0, 9).map(sport => {
                             return (
                               <p
@@ -201,7 +200,7 @@ class Results extends Component {
                           })}
                       </Grid>
                       <Grid item xs={6}>
-                        {sports.length > 1 &&
+                        {sports.length >= 1 &&
                           sports.slice(9).map(sport => {
                             return <p> {sport.name}</p>;
                           })}
