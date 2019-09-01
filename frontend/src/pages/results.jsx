@@ -36,6 +36,13 @@ const styles = theme => ({
     alignItems: "baseline",
     marginBottom: "3vh",
     backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+  },
+  headerRow: {
+    textAlign: "left",
+    margin: "1vh",
+    height: "4vh",
+    display: "flex",
+    alignItems: "center"
   }
 });
 
@@ -52,13 +59,13 @@ class Results extends Component {
     limit: 11,
     byDate: true,
     selectedSport: {},
-    sports: {}
+    sports: []
   };
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
-    const { data: schedules } = await scheduleService.getAllSchedules();
-    const { data: sports } = await sportService.getAllSports();
+    // const { data: schedules } = await scheduleService.getAllSchedules();
+    // const { data: sports } = await sportService.getAllSports();
     this.setState({
       halls,
       schedules,
@@ -168,16 +175,10 @@ class Results extends Component {
             </Grid>
             <Grid item xs={true} sm={1} />
           </Grid>
-          <Grid container spacing={0} className={classes.container}>
+          <Grid container spacing={0}>
             <Grid item xs={4}>
-              {/* About IHG */}
-              <Grid container spacing={0} className={classes.container}>
-                <Grid
-                  container
-                  spacing={0}
-                  className={classes.container}
-                  style={{ height: "50vh" }}
-                >
+              <Grid container spacing={0}>
+                <Grid container spacing={0} style={{ height: "50vh" }}>
                   {!byDate && (
                     <React.Fragment>
                       <Grid item xs={6}>
@@ -251,16 +252,7 @@ class Results extends Component {
                         }}
                       >
                         {!byDate && (
-                          <p
-                            style={{
-                              textAlign: "left",
-                              margin: "1vh",
-                              height: "5.1vh",
-                              // backgroundColor: "pink",
-                              display: "flex",
-                              alignItems: "center"
-                            }}
-                          >
+                          <p className={classes.headerRow}>
                             {selectedSport.name}
                           </p>
                         )}
@@ -277,16 +269,7 @@ class Results extends Component {
                               currentDate = schedule.startTime.substring(8, 10);
                               return (
                                 <div>
-                                  <p
-                                    style={{
-                                      textAlign: "left",
-                                      margin: "1vh",
-                                      height: "4vh",
-                                      // backgroundColor: "pink",
-                                      display: "flex",
-                                      alignItems: "center"
-                                    }}
-                                  >
+                                  <p className={classes.headerRow}>
                                     {dateformat(
                                       new Date(
                                         schedule.startTime
