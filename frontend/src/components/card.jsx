@@ -44,8 +44,6 @@ const useStyles = makeStyles({
     border: "0.05vh solid gold"
   },
   small: {
-    height: "27vh",
-    width: "26vw",
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
@@ -55,8 +53,6 @@ const useStyles = makeStyles({
     border: "0.05vh solid gold"
   },
   center: {
-    height: "27vh",
-    width: "26vw",
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",

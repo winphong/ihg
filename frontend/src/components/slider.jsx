@@ -55,32 +55,40 @@ export default function Slider({ schedules }) {
           <CSSTransition key={current} timeout={400} classNames="slide">
             <Grid
               container
-              spacing={0}
-              className={classes.container}
+              spacing={8}
               style={{
                 position: "absolute",
                 width: "84vw",
                 marginTop: "5vh"
               }}
             >
-              <Grid item xs={12} sm={4} className={classes.container}>
+              <Grid item xs={12} sm={4}>
                 {/* {previous  && ( */}
                 {schedules.length >= 3 && (
-                  <Card schedule={schedules[previous]} size="small" />
+                  <Card
+                    schedule={schedules[previous]}
+                    size="small"
+                    style={{ height: "27vh", width: "26vw" }}
+                  />
                 )}
                 {/* )} */}
               </Grid>
-              <Grid item xs={12} sm={4} className={classes.container}>
+              <Grid item xs={12} sm={4}>
                 <Card
                   schedule={schedules[current]}
                   center={true}
                   size="small"
+                  style={{ height: "27vh", width: "26vw" }}
                 />
               </Grid>
-              <Grid item xs={12} sm={4} className={classes.container}>
+              <Grid item xs={12} sm={4}>
                 {/* {next < schedules.length && ( */}
                 {schedules.length >= 3 && (
-                  <Card schedule={schedules[next]} size="small" />
+                  <Card
+                    schedule={schedules[next]}
+                    size="small"
+                    style={{ height: "27vh", width: "26vw" }}
+                  />
                 )}
                 {/* )} */}
               </Grid>

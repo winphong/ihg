@@ -281,7 +281,7 @@ class Results extends Component {
                                     style={{
                                       textAlign: "left",
                                       margin: "1vh",
-                                      height: "5.1vh",
+                                      height: "4vh",
                                       // backgroundColor: "pink",
                                       display: "flex",
                                       alignItems: "center"
@@ -293,7 +293,7 @@ class Results extends Component {
                                       ).toLocaleString("default", {
                                         timeZone: "Asia/Singapore"
                                       }),
-                                      "dd mmm"
+                                      "dd'th' mmm"
                                     )}
                                   </p>
                                   <ResultsTable schedule={schedule} />
