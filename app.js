@@ -11,6 +11,11 @@ require("./startup/routes")(app);
 app.use(express.static(path.join(__dirname, "images")));
 
 const port = process.env.PORT || config.get("port");
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
+
 const server = app.listen(port, () => {
   // winston.info(`Listening on port ${port}...`);
   console.log(`Listening on port ${port}...`);
