@@ -64,8 +64,8 @@ class Results extends Component {
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
-    // const { data: schedules } = await scheduleService.getAllSchedules();
-    // const { data: sports } = await sportService.getAllSports();
+    const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: sports } = await sportService.getAllSports();
     this.setState({
       halls,
       schedules,
