@@ -157,7 +157,8 @@ class Results extends Component {
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
-          <Grid container spacing={0} className={classes.barChart}>
+          {/* Standings */}
+          {/* <Grid container spacing={0} className={classes.barChart}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <p> Ranking as of {new Date().toLocaleDateString()}</p>
@@ -181,40 +182,40 @@ class Results extends Component {
               FEMALE
             </Grid>
             <Grid item xs={true} sm={1} />
-          </Grid>
+          </Grid> */}
           {/* Calendar */}
           <Grid container spacing={0}>
             <Grid item xs={4}>
               <Grid container spacing={0}>
                 <Grid container spacing={0} style={{ height: "50vh" }}>
                   {!byDate && (
-                    <React.Fragment>
-                      <Grid item xs={6}>
-                        {sports.length >= 1 &&
-                          sports.slice(0, 9).map(sport => {
-                            return (
-                              <p
-                                onClick={() => this.handleSortBySport(sport)}
-                                style={{
-                                  color:
-                                    selectedSport.name == sport.name
-                                      ? "black"
-                                      : "grey",
-                                  cursor: "pointer"
-                                }}
-                              >
-                                {sport.name}
-                              </p>
-                            );
-                          })}
-                      </Grid>
-                      <Grid item xs={6}>
-                        {sports.length >= 1 &&
-                          sports.slice(9).map(sport => {
-                            return <p> {sport.name}</p>;
-                          })}
-                      </Grid>
-                    </React.Fragment>
+                    <Grid item xs={6}>
+                      {sports.length >= 1 &&
+                        sports.slice(0, 9).map(sport => {
+                          return (
+                            <p
+                              onClick={() => this.handleSortBySport(sport)}
+                              style={{
+                                color:
+                                  selectedSport.name == sport.name
+                                    ? "black"
+                                    : "grey",
+                                cursor: "pointer"
+                              }}
+                            >
+                              {sport.name}
+                            </p>
+                          );
+                        })}
+                    </Grid>
+                  )}
+                  {!byDate && (
+                    <Grid item xs={6}>
+                      {sports.length >= 1 &&
+                        sports.slice(9).map(sport => {
+                          return <p> {sport.name}</p>;
+                        })}
+                    </Grid>
                   )}
                 </Grid>
 
