@@ -38,25 +38,24 @@ export default function ResultsTable({
                     "dd'th' mmm"
                   )}
                 </p>
-                <ResultRow schedule={schedule} />
-                {/* {schedule.stage == "Carnival" ? (
+                {/* <ResultRow schedule={schedule} /> */}
+                {schedule.stage == "Carnival" ? (
                   <ResultRowCarnival schedule={schedule} />
                 ) : (
                   <ResultRow schedule={schedule} />
-                )} */}
+                )}
                 <Divider />
               </div>
             );
           }
           return (
             <div>
-              <ResultRow schedule={schedule} />
-
-              {/* {schedule.stage == "Carnival" ? (
+              {/* <ResultRow schedule={schedule} /> */}
+              {schedule.stage == "Carnival" ? (
                 <ResultRowCarnival schedule={schedule} />
               ) : (
                 <ResultRow schedule={schedule} />
-              )} */}
+              )}
               <Divider />
             </div>
           );
