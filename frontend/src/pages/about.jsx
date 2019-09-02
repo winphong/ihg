@@ -10,7 +10,6 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import miscService from "../services/miscService";
 import path from "path";
 import "../App.css";
-import ResultsTable from "../components/resultsTable";
 
 const styles = theme => ({
   paper: {

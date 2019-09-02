@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import scheduleService from "../services/scheduleService";
 import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
-import ResultsCarnival from "../components/resultsCarnival";
+import SportsList from "../components/sportsList";
 import ResultBar from "../components/resultBar";
 import { Divider, Button } from "@material-ui/core";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
@@ -188,37 +188,10 @@ class Results extends Component {
             <Grid item xs={4}>
               <Grid container spacing={0}>
                 <Grid container spacing={0} style={{ height: "50vh" }}>
-                  {!byDate && (
-                    <Grid item xs={6}>
-                      {sports.length >= 1 &&
-                        sports.slice(0, 9).map(sport => {
-                          return (
-                            <p
-                              onClick={() => this.handleSortBySport(sport)}
-                              style={{
-                                color:
-                                  selectedSport.name == sport.name
-                                    ? "black"
-                                    : "grey",
-                                cursor: "pointer"
-                              }}
-                            >
-                              {sport.name}
-                            </p>
-                          );
-                        })}
-                    </Grid>
-                  )}
-                  {!byDate && (
-                    <Grid item xs={6}>
-                      {sports.length >= 1 &&
-                        sports.slice(9).map(sport => {
-                          return <p> {sport.name}</p>;
-                        })}
-                    </Grid>
+                  {!byDate && sports && (
+                    <SportsList sports={sports} selectedSport={selectedSport} />
                   )}
                 </Grid>
-
                 <Grid item xs={12}>
                   RESULTS
                 </Grid>
@@ -254,7 +227,22 @@ class Results extends Component {
                       timeout={400}
                       classNames="fade"
                     >
-                      <div
+                      {schedules && (
+                        <div
+                          style={{
+                            position: "absolute",
+                            width: "58.33%"
+                          }}
+                        >
+                          <ResultsTable
+                            schedules={schedules}
+                            selectedSport={selectedSport}
+                            byDate={byDate}
+                            limit={limit}
+                          />
+                        </div>
+                      )}
+                      {/* <div
                         style={{
                           position: "absolute",
                           width: "58.33%"
@@ -289,9 +277,9 @@ class Results extends Component {
                                     )}
                                   </p>
                                   {schedule.stage == "Carnival" ? (
-                                    <ResultsCarnival schedule={schedule} />
+                                    <ResultRowCarnival schedule={schedule} />
                                   ) : (
-                                    <ResultsTable schedule={schedule} />
+                                    <ResultRow schedule={schedule} />
                                   )}
                                   <Divider />
                                 </div>
@@ -300,16 +288,16 @@ class Results extends Component {
                             return (
                               <div>
                                 {schedule.stage == "Carnival" ? (
-                                  <ResultsCarnival schedule={schedule} />
+                                  <ResultRowCarnival schedule={schedule} />
                                 ) : (
-                                  <ResultsTable schedule={schedule} />
+                                  <ResultRow schedule={schedule} />
                                 )}
                                 <Divider />
                               </div>
                             );
                           }
                         })}
-                      </div>
+                      </div> */}
                     </CSSTransition>
                   </TransitionGroup>
                 </Grid>

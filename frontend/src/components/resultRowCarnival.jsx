@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 
-export default function ResultsCarnival({ schedule }) {
+export default function ResultRowCarnival({ schedule }) {
   const classes = useStyles();
 
   const sortedHall = schedule.hall[0].score

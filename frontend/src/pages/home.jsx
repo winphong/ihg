@@ -18,8 +18,7 @@ const styles = theme => ({
     // paddingBottom: theme.spacing(1),
     textAlign: "center",
     height: "50vh",
-    backgroundImage:
-      'url("https://images.wallpaperscraft.com/image/sports_people_bmx_bike_81258_1920x1200.jpg")'
+    backgroundImage: 'url("/home.jpg")'
     // margin: "0.5vh"
   },
   buttonColumn: {

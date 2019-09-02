@@ -2,116 +2,64 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
+import ResultRow from "../components/resultRow";
+import { Divider, Button } from "@material-ui/core";
+import ResultRowCarnival from "../components/resultRowCarnival";
 
-export default function ResultsTable({ schedule }) {
+export default function ResultsTable({
+  schedules,
+  selectedSport,
+  byDate,
+  limit
+}) {
   const classes = useStyles();
-  const hasScore =
-    schedule.hall[0].score >= 0 && schedule.hall[1].score >= 0 ? true : false;
-  const firstWinner = schedule.hall[0].score > schedule.hall[1].score;
+  let currentDate = "";
+
+  let lim = limit;
 
   return (
-    <Grid container className={classes.container}>
-      <Grid item xs={true} sm={3} style={{ textAlign: "left" }}>
-        <Grid container style={{ marginBottom: "0.5vh" }}>
-          <Grid
-            item
-            sm={2}
-            className={classes.bar}
-            style={{
-              backgroundColor: schedule.hall[0].colourCode,
-              border:
-                schedule.hall[0].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
-                  : ``
-            }}
-          />
-          <Grid
-            item
-            sm={2}
-            className={classes.bar}
-            style={{
-              backgroundColor: schedule.hall[1].colourCode,
-              border:
-                schedule.hall[1].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
-                  : ``
-            }}
-          />
-        </Grid>
-        <strong>
-          {schedule.sport} {schedule.stage}
-        </strong>
-      </Grid>
-      <Grid
-        item
-        xs={true}
-        sm={4}
-        style={{ marginTop: "1vh", textAlign: "left" }}
-      >
-        {dateformat(
-          new Date(schedule.startTime).toLocaleString("default", {
-            timeZone: "Asia/Singapore"
-          }),
-          "HHMM"
-        )}
-        h , {schedule.venue}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.winner
-              : classes.neutral
-            : classes.neutral
+    <div>
+      {!byDate && <p className={classes.headerRow}>{selectedSport.name}</p>}
+      {schedules.map((schedule, index) => {
+        if (index < lim) {
+          if (byDate && schedule.startTime.substring(8, 10) != currentDate) {
+            lim = lim - 1;
+            if (lim <= limit / 2) {
+              return;
+            }
+            currentDate = schedule.startTime.substring(8, 10);
+            return (
+              <div>
+                <p className={classes.headerRow}>
+                  {dateformat(
+                    new Date(schedule.startTime).toLocaleString("default", {
+                      timeZone: "Asia/Singapore"
+                    }),
+                    "dd'th' mmm"
+                  )}
+                </p>
+                {schedule.stage == "Carnival" ? (
+                  <ResultRowCarnival schedule={schedule} />
+                ) : (
+                  <ResultRow schedule={schedule} />
+                )}
+                <Divider />
+              </div>
+            );
+          }
+          return (
+            <div>
+              {schedule.stage == "Carnival" ? (
+                <ResultRowCarnival schedule={schedule} />
+              ) : (
+                <ResultRow schedule={schedule} />
+              )}
+              <Divider />
+            </div>
+          );
         }
-      >
-        {schedule.hall[0].name.split(" ")[0]}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.winner
-              : classes.neutral
-            : classes.neutral
-        }
-      >
-        {schedule.hall[0].score}
-      </Grid>
-      <Grid item sm={1} style={{ marginTop: "1vh" }}>
-        -
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.neutral
-              : classes.winner
-            : classes.neutral
-        }
-      >
-        {schedule.hall[1].score}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.neutral
-              : classes.winner
-            : classes.neutral
-        }
-      >
-        {schedule.hall[1].name.split(" ")[0]}
-      </Grid>
-    </Grid>
+      })}
+    </div>
   );
 }
 
