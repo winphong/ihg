@@ -74,11 +74,11 @@ class Results extends Component {
       originalSchedules: [...schedules]
     });
     console.log(schedules);
-    const { data: sports } = await sportService.getAllSports();
-    this.setState({
-      sports
-    });
-    console.log(sports);
+    // const { data: sports } = await sportService.getAllSports();
+    // this.setState({
+    //   sports
+    // });
+    // console.log(sports);
   }
 
   handleNext = limit => {
