@@ -64,8 +64,8 @@ class Results extends Component {
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
-    // const { data: schedules } = await scheduleService.getAllSchedules();
-    // const { data: sports } = await sportService.getAllSports();
+    const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: sports } = await sportService.getAllSports();
     this.setState({
       halls,
       schedules,
@@ -175,7 +175,8 @@ class Results extends Component {
             </Grid>
             <Grid item xs={true} sm={1} />
           </Grid>
-          <Grid container spacing={0}>
+          {/* Calendar */}
+          {/* <Grid container spacing={0}>
             <Grid item xs={4}>
               <Grid container spacing={0}>
                 <Grid container spacing={0} style={{ height: "50vh" }}>
@@ -346,7 +347,7 @@ class Results extends Component {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
         </React.Fragment>
       </CSSTransition>
     );

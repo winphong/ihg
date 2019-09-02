@@ -16,7 +16,10 @@ const styles = theme => ({
   paper: {
     // paddingTop: theme.spacing(1),
     // paddingBottom: theme.spacing(1),
-    textAlign: "center"
+    textAlign: "center",
+    height: "50vh",
+    backgroundImage:
+      'url("https://images.wallpaperscraft.com/image/sports_people_bmx_bike_81258_1920x1200.jpg")'
     // margin: "0.5vh"
   },
   buttonColumn: {
@@ -77,9 +80,7 @@ class Home extends Component {
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container>
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <img style={{ width: "100%" }} src={homeUrl} />
-              </Paper>
+              <Paper className={classes.paper}></Paper>
             </Grid>
             <Grid container style={{ height: "60vh" }}>
               <Grid item sm={3}>
