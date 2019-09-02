@@ -45,13 +45,7 @@ export default function ResultRowCarnival({ schedule }) {
         sm={4}
         style={{ marginTop: "1vh", textAlign: "left" }}
       >
-        {/* {dateformat(
-          new Date(schedule.startTime).toLocaleString("default", {
-            timeZone: "Asia/Singapore"
-          }),
-          "HHMM"
-        )} */}
-        {schedule.startTime} , {schedule.venue}
+        {dateformat(new Date(schedule.startTime), "HHMM'h'")}, {schedule.venue}
       </Grid>
       <Grid item sm={5}>
         <Grid container>

@@ -183,13 +183,13 @@ class Results extends Component {
             <Grid item xs={4}>
               <Grid container spacing={0}>
                 <div style={{ height: "50vh" }}>
-                  {/* {!byDate && sports && (
+                  {!byDate && sports && (
                     <SportsList
                       sports={sports}
                       selectedSport={selectedSport}
                       handleSortBySport={this.handleSortBySport}
                     />
-                  )} */}
+                  )}
                 </div>
                 <Grid item xs={12}>
                   RESULTS
