@@ -48,13 +48,13 @@ export default function ResultRow({ schedule }) {
         sm={4}
         style={{ marginTop: "1vh", textAlign: "left" }}
       >
-        {dateformat(
+        {/* {dateformat(
           new Date(schedule.startTime).toLocaleString("default", {
             timeZone: "Asia/Singapore"
           }),
           "HHMM"
-        )}
-        h , {schedule.venue}
+        )} */}
+        {schedule.startTime} , {schedule.venue}
       </Grid>
       <Grid
         item

@@ -31,12 +31,13 @@ export default function ResultsTable({
             return (
               <div>
                 <p className={classes.headerRow}>
-                  {dateformat(
+                  {/* {dateformat(
                     new Date(schedule.startTime).toLocaleString("default", {
                       timeZone: "Asia/Singapore"
                     }),
-                    "dd'th' mmm"
-                  )}
+                    "dd mmm"
+                  )} */}
+                  {schedule.startTime}
                 </p>
                 {/* <ResultRow schedule={schedule} /> */}
                 {schedule.stage == "Carnival" ? (

@@ -14,7 +14,6 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
-import dateformat from "dateformat";
 import "../App.css";
 
 const styles = theme => ({
