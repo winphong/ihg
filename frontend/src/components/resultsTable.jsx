@@ -19,7 +19,7 @@ export default function ResultsTable({
 
   return (
     <div>
-      {!byDate && <p className={classes.headerRow}>{selectedSport.name}</p>}
+      {/* {!byDate && <p className={classes.headerRow}>{selectedSport.name}</p>} */}
       {schedules.map((schedule, index) => {
         if (index < lim) {
           if (byDate && schedule.startTime.substring(8, 10) != currentDate) {
@@ -38,22 +38,25 @@ export default function ResultsTable({
                     "dd'th' mmm"
                   )}
                 </p>
-                {schedule.stage == "Carnival" ? (
+                <ResultRow schedule={schedule} />
+                {/* {schedule.stage == "Carnival" ? (
                   <ResultRowCarnival schedule={schedule} />
                 ) : (
                   <ResultRow schedule={schedule} />
-                )}
+                )} */}
                 <Divider />
               </div>
             );
           }
           return (
             <div>
-              {schedule.stage == "Carnival" ? (
+              <ResultRow schedule={schedule} />
+
+              {/* {schedule.stage == "Carnival" ? (
                 <ResultRowCarnival schedule={schedule} />
               ) : (
                 <ResultRow schedule={schedule} />
-              )}
+              )} */}
               <Divider />
             </div>
           );

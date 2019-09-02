@@ -221,13 +221,13 @@ class Results extends Component {
             <Grid item xs={7}>
               <Grid container style={{ height: "68vh" }}>
                 <Grid item xs={12}>
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={`${index}${byDate}${selectedSport.name}`}
-                      timeout={400}
-                      classNames="fade"
-                    >
-                      {schedules && (
+                  {schedules && (
+                    <TransitionGroup>
+                      <CSSTransition
+                        key={`${index}${byDate}${selectedSport.name}`}
+                        timeout={400}
+                        classNames="fade"
+                      >
                         <div
                           style={{
                             position: "absolute",
@@ -241,65 +241,9 @@ class Results extends Component {
                             limit={limit}
                           />
                         </div>
-                      )}
-                      {/* <div
-                        style={{
-                          position: "absolute",
-                          width: "58.33%"
-                        }}
-                      >
-                        {!byDate && (
-                          <p className={classes.headerRow}>
-                            {selectedSport.name}
-                          </p>
-                        )}
-                        {schedules.map((schedule, index) => {
-                          if (index < limit) {
-                            if (
-                              byDate &&
-                              schedule.startTime.substring(8, 10) != currentDate
-                            ) {
-                              limit = limit - 1;
-                              if (limit <= this.state.limit / 2) {
-                                return;
-                              }
-                              currentDate = schedule.startTime.substring(8, 10);
-                              return (
-                                <div>
-                                  <p className={classes.headerRow}>
-                                    {dateformat(
-                                      new Date(
-                                        schedule.startTime
-                                      ).toLocaleString("default", {
-                                        timeZone: "Asia/Singapore"
-                                      }),
-                                      "dd'th' mmm"
-                                    )}
-                                  </p>
-                                  {schedule.stage == "Carnival" ? (
-                                    <ResultRowCarnival schedule={schedule} />
-                                  ) : (
-                                    <ResultRow schedule={schedule} />
-                                  )}
-                                  <Divider />
-                                </div>
-                              );
-                            }
-                            return (
-                              <div>
-                                {schedule.stage == "Carnival" ? (
-                                  <ResultRowCarnival schedule={schedule} />
-                                ) : (
-                                  <ResultRow schedule={schedule} />
-                                )}
-                                <Divider />
-                              </div>
-                            );
-                          }
-                        })}
-                      </div> */}
-                    </CSSTransition>
-                  </TransitionGroup>
+                      </CSSTransition>
+                    </TransitionGroup>
+                  )}
                 </Grid>
               </Grid>
               <Grid container>
