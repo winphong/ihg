@@ -183,7 +183,7 @@ class Results extends Component {
             <Grid item xs={true} sm={1} />
           </Grid>
           {/* Calendar */}
-          {/* <Grid container spacing={0}>
+          <Grid container spacing={0}>
             <Grid item xs={4}>
               <Grid container spacing={0}>
                 <Grid container spacing={0} style={{ height: "50vh" }}>
@@ -354,7 +354,7 @@ class Results extends Component {
                 </Grid>
               </Grid>
             </Grid>
-          </Grid> */}
+          </Grid>
         </React.Fragment>
       </CSSTransition>
     );
