@@ -64,14 +64,21 @@ class Results extends Component {
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
+    this.setState({
+      halls
+    });
+    console.log(halls);
     const { data: schedules } = await scheduleService.getAllSchedules();
+    this.setState({
+      schedules,
+      originalSchedules: [...schedules]
+    });
+    console.log(schedules);
     const { data: sports } = await sportService.getAllSports();
     this.setState({
-      halls,
-      schedules,
-      originalSchedules: [...schedules],
       sports
     });
+    console.log(sports);
   }
 
   handleNext = limit => {
