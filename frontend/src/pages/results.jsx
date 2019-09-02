@@ -158,7 +158,7 @@ class Results extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           {/* Standings */}
-          {/* <Grid container spacing={0} className={classes.barChart}>
+          <Grid container spacing={0} className={classes.barChart}>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <p> Ranking as of {new Date().toLocaleDateString()}</p>
@@ -182,7 +182,7 @@ class Results extends Component {
               FEMALE
             </Grid>
             <Grid item xs={true} sm={1} />
-          </Grid> */}
+          </Grid>
           {/* Calendar */}
           <Grid container spacing={0}>
             <Grid item xs={4}>
