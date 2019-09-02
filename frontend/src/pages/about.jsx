@@ -81,7 +81,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "17vh",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -92,7 +92,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -103,7 +103,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -114,7 +114,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -125,7 +125,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -137,7 +137,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}
@@ -148,7 +148,7 @@ class About extends Component {
                     <Grid item xs={12} sm={3}>
                       <img
                         style={{
-                          width: "8vw",
+                          width: "8.5vw",
                           height: "17vh",
                           backgroundColor: "pink"
                         }}

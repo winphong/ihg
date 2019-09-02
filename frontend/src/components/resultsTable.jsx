@@ -31,8 +31,7 @@ export default function ResultsTable({
             return (
               <div>
                 <p className={classes.headerRow}>
-                  {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
-                  {schedule.venue}
+                  {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
                 </p>
                 {schedule.stage == "Carnival" ? (
                   <ResultRowCarnival schedule={schedule} />
