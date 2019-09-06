@@ -51,37 +51,49 @@ export default function Slider({ schedules }) {
               spacing={8}
               style={{
                 position: "absolute",
-                width: "83.5%",
-                marginTop: "-14vh"
+                width: "90%",
+                marginTop: "-9%"
               }}
             >
-              <Grid item xs={12} sm={4}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                style={{ height: "100%", width: "100%" }}
+              >
                 {/* {previous  && ( */}
                 {schedules.length >= 3 && (
-                  <Card
-                    schedule={schedules[previous]}
-                    size="small"
-                    style={{ height: "27vh", width: "26vw" }}
-                  />
+                  <Card schedule={schedules[previous]} size="small" />
                 )}
                 {/* )} */}
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                style={{
+                  height: "100%",
+                  width: "100%"
+                }}
+              >
                 <Card
                   schedule={schedules[current]}
                   center={true}
                   size="small"
-                  style={{ height: "27vh", width: "26vw" }}
                 />
               </Grid>
-              <Grid item xs={12} sm={4}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                style={{
+                  height: "100%",
+                  width: "100%"
+                }}
+              >
                 {/* {next < schedules.length && ( */}
                 {schedules.length >= 3 && (
-                  <Card
-                    schedule={schedules[next]}
-                    size="small"
-                    style={{ height: "27vh", width: "26vw" }}
-                  />
+                  <Card schedule={schedules[next]} size="small" />
                 )}
                 {/* )} */}
               </Grid>

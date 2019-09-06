@@ -99,7 +99,7 @@ class About extends Component {
                       <p> Sheares Hall</p>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                      <img className={classes.staticImage} src="/KE.png" />
+                      <img className={classes.staticImage} src="/KE7.png" />
                       <p> King Edward VII Hall</p>
                       <p />
                     </Grid>
@@ -140,7 +140,7 @@ class About extends Component {
                       <p> Sheares Hall</p>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                      <img className={classes.staticImage} src="/KE.png" />
+                      <img className={classes.staticImage} src="/KE7.png" />
                       <p> King Edward VII Hall</p>
                       <p />
                     </Grid>
@@ -172,7 +172,10 @@ class About extends Component {
                   classNames="fade"
                 >
                   <div style={{ position: "absolute" }}>
-                    <img style={{ height: "30vh" }} src={this.state.imgUrl} />
+                    <img
+                      style={{ height: "70%", weight: "70%" }}
+                      src={this.state.imgUrl}
+                    />
                     <Typography> {selectedSport.name} </Typography>
                     <Typography> {selectedSport.description} </Typography>
                   </div>

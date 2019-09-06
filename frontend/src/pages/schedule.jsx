@@ -22,11 +22,6 @@ const styles = theme => ({
   },
   container: {
     textAlign: "center"
-  },
-  bopes: {
-    textAlign: "center",
-    marginBottom: "3vh",
-    marginTop: "3vh"
   }
 });
 
@@ -60,13 +55,13 @@ class Schedule extends Component {
                 classNames="fade"
               >
                 <div
-                  className={classes.bopes}
                   style={{
                     height: "45vh",
                     backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`,
                     display: "flex",
                     alignItems: "center",
-                    textAlign: "center"
+                    textAlign: "center",
+                    backgroundColor: "pink"
                   }}
                 >
                   {schedules.length > 0 && <Slider schedules={schedules} />}

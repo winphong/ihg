@@ -26,7 +26,7 @@ const styles = theme => ({
     alignItems: "center",
     textAlign: "center",
     backgroundColor: "pink",
-    height: "100%"
+    height: "inherit"
   }
 });
 
@@ -81,11 +81,11 @@ class Home extends Component {
             <Grid item xs={12}>
               <Paper className={classes.paper}></Paper>
             </Grid>
-            <Grid container style={{ height: "60vh" }}>
+            <Grid container>
               <Grid item sm={3}>
                 UPCOMING GAMES
               </Grid>
-              <Grid item sm={"auto"}>
+              <Grid item sm={"auto"} style={{ height: "64vh" }}>
                 <div className={classes.buttonColumn}>
                   <IconButton onClick={this.handleBack} disabled={index === 0}>
                     <KeyboardArrowLeft />
@@ -98,20 +98,13 @@ class Home extends Component {
                     <Grid
                       container
                       spacing={1}
-                      style={{ position: "absolute", width: "57.8%" }}
+                      style={{ position: "absolute", width: "58.6%" }}
                     >
                       {schedulesToDisplay.map((e, index) => {
                         if (index < 4) {
                           return (
                             <Grid item xs={true} sm={6}>
-                              <div
-                                style={{
-                                  height: "27vh",
-                                  width: "28vw"
-                                }}
-                              >
-                                <Card schedule={e} size="big" />
-                              </div>
+                              <Card schedule={e} size="big" />
                             </Grid>
                           );
                         }

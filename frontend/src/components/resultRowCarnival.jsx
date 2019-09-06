@@ -17,7 +17,7 @@ export default function ResultRowCarnival({ schedule }) {
   return (
     <Grid container className={classes.container}>
       <Grid item xs={true} sm={3} style={{ textAlign: "left" }}>
-        <Grid container style={{ marginBottom: "0.5vh" }}>
+        <Grid container style={{ marginBottom: "1%" }}>
           {sortedHall.map(hall => {
             return (
               <Grid

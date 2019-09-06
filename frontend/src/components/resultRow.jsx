@@ -15,7 +15,7 @@ export default function ResultRow({ schedule }) {
         <Grid container style={{ marginBottom: "0.5vh" }}>
           <Grid
             item
-            sm={2}
+            sm={3}
             className={classes.bar}
             style={{
               backgroundColor: schedule.hall[0].colourCode,
@@ -27,7 +27,7 @@ export default function ResultRow({ schedule }) {
           />
           <Grid
             item
-            sm={2}
+            sm={3}
             className={classes.bar}
             style={{
               backgroundColor: schedule.hall[1].colourCode,

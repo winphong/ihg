@@ -15,13 +15,19 @@ export default function Card({ schedule, center, size }) {
     >
       <Grid container>
         <Grid item xs={true} sm={11 / 2}>
-          <img style={{ maxHeight: 150 }} src={schedule.hall[0].imgUrl} />
+          <img
+            style={{ width: "100%", height: "100%" }}
+            src={schedule.hall[0].imgUrl}
+          />
         </Grid>
         <Grid item xs={true} sm={1} className={classes.vs}>
-          <p>vs</p>
+          vs{" "}
         </Grid>
         <Grid item xs={true} sm={11 / 2}>
-          <img style={{ maxHeight: 150 }} src={schedule.hall[1].imgUrl} />
+          <img
+            style={{ width: "100%", height: "100%" }}
+            src={schedule.hall[1].imgUrl}
+          />
         </Grid>
       </Grid>
       <Grid container>
@@ -45,15 +51,19 @@ export default function Card({ schedule, center, size }) {
 const useStyles = makeStyles({
   big: {
     textAlign: "center",
-    margin: "1vh 0.5vw",
+    margin: "1% 0.5%",
     // backgroundColor: "beige",
-    padding: "0.5vh",
-    border: "0.05vh solid gold"
+    width: "100%",
+    height: "100%",
+    padding: "0.5%",
+    border: "1px solid gold"
   },
   small: {
     textAlign: "center",
     margin: "1vh 0.5vw",
     // backgroundColor: "beige",
+    width: "100%",
+    height: "100%",
     padding: "0.5vh",
     opacity: 0.3,
     transform: "scale(0.85)",
@@ -61,17 +71,17 @@ const useStyles = makeStyles({
   },
   center: {
     textAlign: "center",
-    margin: "1vh 0.5vw",
-    // backgroundColor: "beige",
-    padding: "1vh",
+    width: "100%",
+    height: "100%",
+    padding: "1%",
     transform: "scale(1.3)",
-    border: "0.05vh solid gold"
+    border: "1px solid gold"
   },
   vs: {
-    // word in the center
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "left"
+    textAlign: "center",
+    margin: "0 10%"
   }
 });
