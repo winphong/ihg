@@ -12,10 +12,10 @@ import path from "path";
 import "../App.css";
 
 const styles = theme => ({
-  paper: {
-    paddingTop: theme.spacing(3),
-    textAlign: "center",
-    margin: 5
+  title: {
+    fontSize: "1000%",
+    fontWeight: "900",
+    color: "#C8B06B"
   },
   buttonColumn: {
     textAlign: "center",
@@ -29,8 +29,8 @@ const styles = theme => ({
     backgroundColor: "transparent"
   },
   staticImage: {
-    width: "75%",
-    height: "75%"
+    width: "70%",
+    height: "80%"
   }
 });
 
@@ -66,13 +66,11 @@ class About extends Component {
     return (
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
-          <Grid container spacing={0}>
+          <Grid container spacing={0} style={{ textAlign: "center" }}>
             <Grid item xs={12}>
               {/* About IHG */}
-              <Paper className={classes.paper}>
-                About IHG <br />
-                Description...........
-              </Paper>
+              <Typography className={classes.title}>ABOUT IHG</Typography>{" "}
+              Description...........
             </Grid>
             {/* Hall of NUS */}
             <Grid item xs={12} className={classes.hall}>

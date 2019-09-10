@@ -68,13 +68,13 @@ export default function ScheduleBox({ schedule }) {
           </Grid>
         )}
         <Grid item xs={12} sm={5}>
-          {schedule.hall[0].name.split(" ")[0].substring(0, 1)}H
+          {schedule.hall[0].abbreviation}
         </Grid>
         <Grid item xs={12} sm={2}>
           vs
         </Grid>
         <Grid item xs={12} sm={5}>
-          {schedule.hall[1].name.split(" ")[0].substring(0, 1)}H
+          {schedule.hall[1].abbreviation}
         </Grid>
         <Grid item xs={12}>
           <Typography>{schedule.sport}</Typography>

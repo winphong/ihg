@@ -44,9 +44,7 @@ class Gallery extends Component {
         <React.Fragment>
           <Grid container spacing={0} className={classes.container}>
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <p> Ranking as of {new Date().toLocaleDateString()}</p>
-              </Paper>
+              <Paper className={classes.paper}></Paper>
             </Grid>
             {photos.map(photo => {
               return (

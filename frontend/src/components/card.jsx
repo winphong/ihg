@@ -41,7 +41,7 @@ export default function Card({ schedule, center, size }) {
       </Grid>
       <Grid item xs={12}>
         {schedule.sport} <br />
-        {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h',")}{" "}
+        {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h',")}
         {schedule.venue}
       </Grid>
     </Grid>

@@ -8,12 +8,13 @@ import scheduleService from "../services/scheduleService";
 import { BarChart, ResponsiveContainer } from "recharts";
 import { CSSTransition } from "react-transition-group";
 import Slider from "../components/slider";
+import { Typography } from "@material-ui/core";
 
 const styles = theme => ({
-  paper: {
-    paddingTop: theme.spacing(3),
-    textAlign: "center",
-    margin: 5
+  title: {
+    fontSize: "1000%",
+    fontWeight: "900",
+    color: "#C8B06B"
   },
   buttonColumn: {
     textAlign: "center",
@@ -33,7 +34,6 @@ class Schedule extends Component {
   async componentDidMount() {
     const { data: schedules } = await scheduleService.getAllSchedules();
     this.setState({ schedules });
-    console.log("clicked");
   }
 
   render() {
@@ -45,7 +45,7 @@ class Schedule extends Component {
         <React.Fragment>
           <Grid container spacing={0} className={classes.container}>
             <Grid item xs={12}>
-              <p className={classes.paper}>Today's games</p>
+              <Typography className={classes.title}>TODAY'S GAMES</Typography>
             </Grid>
             <Grid item xs={12}>
               <CSSTransition

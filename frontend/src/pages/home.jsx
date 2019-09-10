@@ -11,22 +11,27 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import miscService from "../services/miscService";
 import path from "path";
+import { Typography } from "@material-ui/core";
 
 const styles = theme => ({
-  paper: {
-    // paddingTop: theme.spacing(1),
-    // paddingBottom: theme.spacing(1),
-    textAlign: "center",
-    height: "50vh",
-    backgroundImage: 'url("/home.jpg")'
-    // margin: "0.5vh"
+  title: {
+    // 100% - 16px
+    fontSize: "1000%",
+    fontWeight: "900",
+    color: "#C8B06B"
+  },
+  subTitle: {
+    fontSize: "600%",
+    fontWeight: "900",
+    color: "#C8B06B"
   },
   buttonColumn: {
     display: "flex",
     alignItems: "center",
     textAlign: "center",
-    backgroundColor: "pink",
-    height: "inherit"
+    height: "100%",
+    padding: "15% 0"
+    // how to solve this?
   }
 });
 
@@ -74,28 +79,53 @@ class Home extends Component {
   render() {
     const { classes } = this.props;
     const { schedules, schedulesToDisplay, index, homeUrl } = this.state;
+
     return (
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}></Paper>
+            <Grid item xs={12} className={classes.paper}>
+              <Typography className={classes.title}>INTER-HALL</Typography>
+              <Typography
+                className={classes.title}
+                style={{
+                  lineHeight: "50%"
+                }}
+              >
+                GAMES
+              </Typography>
+              <Typography
+                className={classes.title}
+                style={{
+                  color: "black"
+                }}
+              >
+                19/20
+              </Typography>
             </Grid>
             <Grid container>
-              <Grid item sm={3}>
-                UPCOMING GAMES
+              <Grid
+                item
+                sm={3}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end"
+                }}
+              >
+                <Typography className={classes.subTitle}>
+                  UPCOMING GAMES
+                </Typography>
               </Grid>
-              <Grid item sm={"auto"} style={{ height: "64vh" }}>
-                <div className={classes.buttonColumn}>
-                  <IconButton onClick={this.handleBack} disabled={index === 0}>
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </div>
+              <Grid item sm={"auto"} className={classes.buttonColumn}>
+                <IconButton onClick={this.handleBack} disabled={index === 0}>
+                  <KeyboardArrowLeft />
+                </IconButton>
               </Grid>
               <Grid item sm={7}>
                 <TransitionGroup>
                   <CSSTransition key={index} timeout={400} classNames="fade">
                     <Grid
+                      id="inside"
                       container
                       spacing={1}
                       style={{ position: "absolute", width: "58.6%" }}
@@ -113,15 +143,13 @@ class Home extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               </Grid>
-              <Grid item sm={"auto"}>
-                <div className={classes.buttonColumn}>
-                  <IconButton
-                    onClick={this.handleNext}
-                    disabled={index >= schedules.length - 4}
-                  >
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </div>
+              <Grid item sm={"auto"} className={classes.buttonColumn}>
+                <IconButton
+                  onClick={this.handleNext}
+                  disabled={index >= schedules.length - 4}
+                >
+                  <KeyboardArrowRight />
+                </IconButton>
               </Grid>
             </Grid>
           </Grid>

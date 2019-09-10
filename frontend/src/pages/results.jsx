@@ -14,14 +14,20 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
+import { Typography } from "@material-ui/core";
+import dateformat from "dateformat";
 import "../App.css";
 
 const styles = theme => ({
-  paper: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    textAlign: "center",
-    margin: 5
+  title: {
+    fontSize: "700%",
+    fontWeight: "900",
+    color: "#C8B06B"
+  },
+  caption: {
+    fontSize: "300%",
+    fontWeight: "900",
+    color: "#C8B06B"
   },
   buttonColumn: {
     textAlign: "center",
@@ -33,8 +39,8 @@ const styles = theme => ({
     textAlign: "center",
     display: "flex",
     alignItems: "baseline",
-    marginBottom: "3vh",
-    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+    marginBottom: "3vh"
+    // backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
   },
   headerRow: {
     textAlign: "left",
@@ -147,7 +153,6 @@ class Results extends Component {
     } = this.state;
 
     let limit = this.state.limit;
-    let currentDate = "";
 
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
@@ -155,26 +160,26 @@ class Results extends Component {
           {/* Standings */}
           <Grid container spacing={0} className={classes.barChart}>
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <p> Ranking as of {new Date().toLocaleDateString()}</p>
-              </Paper>
+              <Typography className={classes.title}>
+                RANKING AS OF {dateformat(new Date(), "dd'th' mmm yyyy")}
+              </Typography>
             </Grid>
             <Grid item xs={true} sm={1} />
             <Grid item xs={true} sm={2}>
               <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
-              MALE
+              <Typography className={classes.caption}>MALE</Typography>
             </Grid>
             <Grid item xs={true} sm={1} />
 
             <Grid item xs={true} sm={4}>
               <ResultBar halls={halls} dataKey={"totalPoint"} barSize={10} />
-              OVERALL
+              <Typography className={classes.caption}>OVERALL</Typography>
             </Grid>
             <Grid item xs={true} sm={1} />
 
             <Grid item xs={true} sm={2}>
               <ResultBar halls={halls} dataKey={"femalePoint"} barSize={6} />
-              FEMALE
+              <Typography className={classes.caption}>FEMALE</Typography>
             </Grid>
             <Grid item xs={true} sm={1} />
           </Grid>
