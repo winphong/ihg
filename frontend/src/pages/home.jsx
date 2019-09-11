@@ -40,6 +40,7 @@ const styles = theme => ({
     textAlign: "center",
     height: "100%",
     padding: "15% 0"
+    // backgroundColor: "pink"
     // how to solve this?
   }
 });
@@ -112,7 +113,7 @@ class Home extends Component {
               <Grid
                 item
                 xs={true}
-                sm={4}
+                sm={isMobile ? 3 : 4}
                 style={{
                   display: "flex",
                   alignItems: "flex-end",
