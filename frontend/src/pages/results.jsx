@@ -20,9 +20,10 @@ import "../App.css";
 
 const styles = theme => ({
   title: {
-    fontSize: "700%",
+    fontSize: "1000%",
     fontWeight: "900",
-    color: "#C8B06B"
+    color: "#C8B06B",
+    lineHeight: "100%"
   },
   caption: {
     fontSize: "300%",
@@ -160,8 +161,16 @@ class Results extends Component {
           {/* Standings */}
           <Grid container spacing={0} className={classes.barChart}>
             <Grid item xs={12}>
-              <Typography className={classes.title}>
-                RANKING AS OF {dateformat(new Date(), "dd'th' mmm yyyy")}
+              <Typography className={classes.title}>RANKING</Typography>
+              <Typography
+                className={classes.title}
+                style={{
+                  color: "black",
+                  fontSize: "200%",
+                  fontStyle: "italic"
+                }}
+              >
+                {dateformat(new Date(), "dd'th' mmm yyyy")}
               </Typography>
             </Grid>
             <Grid item xs={true} sm={1} />

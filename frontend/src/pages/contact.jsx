@@ -8,15 +8,20 @@ import Button from "@material-ui/core/Button";
 import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
-  paper: {
-    display: "flex",
-    overflow: "auto",
-    flexDirection: "column",
-    alignItems: "center",
-    margin: theme.spacing(1),
-    padding: theme.spacing(2),
-    textAlign: "center"
+  title: {
+    fontSize: "1000%",
+    fontWeight: "900",
+    color: "#C8B06B"
   },
+  // paper: {
+  //   display: "flex",
+  //   overflow: "auto",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  //   margin: theme.spacing(1),
+  //   padding: theme.spacing(2),
+  //   textAlign: "center"
+  // },
   buttonColumn: {
     textAlign: "center",
     verticalAlign: "middle",
@@ -66,11 +71,11 @@ class Contact extends Component {
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container className={classes.container}>
-            <Grid item xs={12} sm={3} />
-            <Grid item xs={6}>
-              <Grid item xs={12}>
-                <p> Contact Us </p>
-              </Grid>
+            <Grid item xs={12}>
+              <Typography className={classes.title}> CONTACT US </Typography>
+            </Grid>
+            <Grid item xs={true} sm={3} />
+            <Grid item xs={true}>
               <form>
                 <Grid
                   container
@@ -147,7 +152,7 @@ class Contact extends Component {
                 </Grid>
               </form>
             </Grid>
-            <Grid item xs={12} sm={3} />
+            <Grid item xs={true} sm={3} />
           </Grid>
         </CSSTransition>
       </React.Fragment>
