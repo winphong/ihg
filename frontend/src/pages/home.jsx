@@ -29,7 +29,7 @@ const styles = theme => ({
     lineHeight: "100%"
   },
   mobileSubTitle: {
-    fontSize: "400%",
+    fontSize: "300%",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
@@ -115,7 +115,7 @@ class Home extends Component {
                 style={{
                   display: "flex",
                   alignItems: "flex-end",
-                  marginLeft: "2%"
+                  paddingLeft: "2%"
                 }}
               >
                 <Typography
