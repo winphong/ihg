@@ -127,7 +127,7 @@ class Home extends Component {
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={true} className={classes.buttonColumn}>
+              <Grid item xs={true} sm={0.5} className={classes.buttonColumn}>
                 <IconButton onClick={this.handleBack} disabled={index === 0}>
                   <KeyboardArrowLeft />
                 </IconButton>
@@ -154,7 +154,7 @@ class Home extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               </Grid>
-              <Grid item xs={true} className={classes.buttonColumn}>
+              <Grid item xs={true} sm={0.5} className={classes.buttonColumn}>
                 <IconButton
                   onClick={this.handleNext}
                   disabled={index >= schedules.length - 4}
