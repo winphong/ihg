@@ -11,19 +11,28 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import miscService from "../services/miscService";
 import path from "path";
-import { Typography } from "@material-ui/core";
+import cookie from "react-cookies";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   title: {
     // 100% - 16px
     fontSize: "1000%",
     fontWeight: "900",
-    color: "#C8B06B"
+    color: "#C8B06B",
+    lineHeight: "100%"
   },
   subTitle: {
     fontSize: "600%",
     fontWeight: "900",
-    color: "#C8B06B"
+    color: "#C8B06B",
+    lineHeight: "100%"
+  },
+  mobileSubTitle: {
+    fontSize: "400%",
+    fontWeight: "900",
+    color: "#C8B06B",
+    lineHeight: "100%"
   },
   buttonColumn: {
     display: "flex",
@@ -40,7 +49,8 @@ class Home extends Component {
     schedules: [],
     schedulesToDisplay: [],
     index: 0,
-    homeUrl: ""
+    homeUrl: "",
+    isMobile: ""
   };
 
   async componentDidMount() {
@@ -48,11 +58,13 @@ class Home extends Component {
     const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
     const file = new Blob([photo.data], { type: photo.data.type });
     const fileURL = URL.createObjectURL(file);
+    const isMobile = cookie.load("isMobileDevice");
 
     this.setState({
       schedules,
       schedulesToDisplay: schedules,
-      homeUrl: fileURL
+      homeUrl: fileURL,
+      isMobile
     });
   }
 
@@ -78,7 +90,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedules, schedulesToDisplay, index, homeUrl } = this.state;
+    const { schedules, schedulesToDisplay, index, isMobile } = this.state;
 
     return (
       <React.Fragment>
@@ -86,14 +98,7 @@ class Home extends Component {
           <Grid container>
             <Grid item xs={12} className={classes.paper}>
               <Typography className={classes.title}>INTER-HALL</Typography>
-              <Typography
-                className={classes.title}
-                style={{
-                  lineHeight: "50%"
-                }}
-              >
-                GAMES
-              </Typography>
+              <Typography className={classes.title}>GAMES</Typography>
               <Typography
                 className={classes.title}
                 style={{
@@ -106,13 +111,18 @@ class Home extends Component {
             <Grid container>
               <Grid
                 item
-                sm={3}
+                sm={4}
                 style={{
                   display: "flex",
-                  alignItems: "flex-end"
+                  alignItems: "flex-end",
+                  marginLeft: "2%"
                 }}
               >
-                <Typography className={classes.subTitle}>
+                <Typography
+                  className={
+                    isMobile ? classes.mobileSubTitle : classes.subTitle
+                  }
+                >
                   UPCOMING GAMES
                 </Typography>
               </Grid>
@@ -160,3 +170,5 @@ class Home extends Component {
 }
 
 export default withStyles(styles)(Home);
+
+// To force reload

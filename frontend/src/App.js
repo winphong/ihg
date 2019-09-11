@@ -7,9 +7,29 @@ import Gallery from "./pages/gallery";
 import Home from "./pages/home";
 import Results from "./pages/results";
 import Schedule from "./pages/schedule";
+import cookie from "react-cookies";
 
 class App extends Component {
+  detectmobile() {
+    if (
+      navigator.userAgent.match(/Android/i) ||
+      navigator.userAgent.match(/webOS/i) ||
+      navigator.userAgent.match(/iPhone/i) ||
+      navigator.userAgent.match(/iPad/i) ||
+      navigator.userAgent.match(/iPod/i) ||
+      navigator.userAgent.match(/BlackBerry/i) ||
+      navigator.userAgent.match(/Windows Phone/i)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
+    if (this.detectmobile() === true)
+      cookie.save("isMobileDevice", true, { path: "/" });
+
     return (
       <React.Fragment>
         <NavBar />
