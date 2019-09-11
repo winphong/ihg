@@ -111,6 +111,7 @@ class Home extends Component {
             <Grid container>
               <Grid
                 item
+                xs={true}
                 sm={4}
                 style={{
                   display: "flex",
@@ -126,12 +127,12 @@ class Home extends Component {
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item sm={"auto"} className={classes.buttonColumn}>
+              <Grid item xs={true} className={classes.buttonColumn}>
                 <IconButton onClick={this.handleBack} disabled={index === 0}>
                   <KeyboardArrowLeft />
                 </IconButton>
               </Grid>
-              <Grid item sm={7}>
+              <Grid item xs={true} sm={7}>
                 <TransitionGroup>
                   <CSSTransition key={index} timeout={400} classNames="fade">
                     <Grid
@@ -153,7 +154,7 @@ class Home extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               </Grid>
-              <Grid item sm={"auto"} className={classes.buttonColumn}>
+              <Grid item xs={true} className={classes.buttonColumn}>
                 <IconButton
                   onClick={this.handleNext}
                   disabled={index >= schedules.length - 4}
