@@ -55,17 +55,20 @@ class Home extends Component {
   };
 
   async componentDidMount() {
+    const isMobile = cookie.load("isMobileDevice");
+    this.setState({ isMobile });
+
+    console.log(window.screen.width);
+
     const { data: schedules } = await scheduleService.getAllSchedules();
     const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
     const file = new Blob([photo.data], { type: photo.data.type });
     const fileURL = URL.createObjectURL(file);
-    const isMobile = cookie.load("isMobileDevice");
 
     this.setState({
       schedules,
       schedulesToDisplay: schedules,
-      homeUrl: fileURL,
-      isMobile
+      homeUrl: fileURL
     });
   }
 
