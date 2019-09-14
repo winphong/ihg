@@ -17,23 +17,18 @@ import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   title: {
     // 100% - 16px
-    fontSize: "1000%",
+    fontSize: "200px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
   subTitle: {
-    fontSize: "600%",
+    fontSize: "100px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
-  mobileSubTitle: {
-    fontSize: "300%",
-    fontWeight: "900",
-    color: "#C8B06B",
-    lineHeight: "100%"
-  },
+
   buttonColumn: {
     display: "flex",
     alignItems: "center",
@@ -123,11 +118,7 @@ class Home extends Component {
                   paddingLeft: "2%"
                 }}
               >
-                <Typography
-                  className={
-                    isMobile ? classes.mobileSubTitle : classes.subTitle
-                  }
-                >
+                <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
