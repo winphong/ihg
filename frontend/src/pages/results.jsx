@@ -20,13 +20,13 @@ import "../App.css";
 
 const styles = theme => ({
   title: {
-    fontSize: "1000%",
+    fontSize: "50px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
   caption: {
-    fontSize: "300%",
+    fontSize: "25px",
     fontWeight: "900",
     color: "#C8B06B"
   },
@@ -159,20 +159,23 @@ class Results extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           {/* Standings */}
-          <Grid container spacing={0} className={classes.barChart}>
-            <Grid item xs={12}>
-              <Typography className={classes.title}>RANKING</Typography>
-              <Typography
-                className={classes.title}
-                style={{
-                  color: "black",
-                  fontSize: "200%",
-                  fontStyle: "italic"
-                }}
-              >
-                {dateformat(new Date(), "dd'th' mmm yyyy")}
-              </Typography>
-            </Grid>
+          <Typography className={classes.title}>RANKING</Typography>
+          <Typography
+            className={classes.title}
+            style={{
+              color: "black",
+              fontSize: "200%",
+              fontStyle: "italic"
+            }}
+          >
+            {dateformat(new Date(), "dd'th' mmm yyyy")}
+          </Typography>
+          <Grid
+            container
+            wrap="nowrap"
+            spacing={0}
+            className={classes.barChart}
+          >
             <Grid item xs={true} sm={1} />
             <Grid item xs={true} sm={2}>
               <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />

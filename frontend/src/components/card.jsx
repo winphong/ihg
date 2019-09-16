@@ -60,14 +60,14 @@ const useStyles = makeStyles({
   },
   small: {
     textAlign: "center",
-    margin: "1vh 0.5vw",
+    margin: "1% 0.5%",
     // backgroundColor: "beige",
     width: "100%",
     height: "100%",
-    padding: "0.5vh",
+    padding: "0.5%",
     opacity: 0.3,
     transform: "scale(0.85)",
-    border: "0.05vh solid gold"
+    border: "1px solid gold"
   },
   center: {
     textAlign: "center",

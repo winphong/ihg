@@ -32,7 +32,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <NavBar />
+        {/* <NavBar /> */}
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/home" component={Home} />
