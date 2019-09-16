@@ -14,16 +14,16 @@ export default function Card({ schedule, center, size }) {
       }
     >
       <Grid container>
-        <Grid item xs={true} sm={11 / 2}>
+        <Grid item xs={5}>
           <img
             style={{ width: "100%", height: "100%" }}
             src={schedule.hall[0].imgUrl}
           />
         </Grid>
-        <Grid item xs={true} sm={1} className={classes.vs}>
+        <Grid item xs={2} className={classes.vs}>
           vs{" "}
         </Grid>
-        <Grid item xs={true} sm={11 / 2}>
+        <Grid item xs={5}>
           <img
             style={{ width: "100%", height: "100%" }}
             src={schedule.hall[1].imgUrl}
@@ -31,11 +31,11 @@ export default function Card({ schedule, center, size }) {
         </Grid>
       </Grid>
       <Grid container>
-        <Grid item xs={true} sm={11 / 2}>
+        <Grid item xs={5}>
           <p> {schedule.hall[0].name} </p>
         </Grid>
-        <Grid item xs={true} sm={1} className={classes.vs}></Grid>
-        <Grid item xs={true} sm={11 / 2}>
+        <Grid item xs={2} className={classes.vs}></Grid>
+        <Grid item xs={5}>
           <p> {schedule.hall[1].name} </p>
         </Grid>
       </Grid>
@@ -81,7 +81,6 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center",
-    margin: "0 10%"
+    textAlign: "center"
   }
 });

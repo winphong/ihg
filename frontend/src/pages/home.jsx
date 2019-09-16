@@ -13,12 +13,11 @@ import miscService from "../services/miscService";
 import path from "path";
 import cookie from "react-cookies";
 import Typography from "@material-ui/core/Typography";
-import MediaQuery from "react-responsive";
 
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "60px"
+      fontSize: "40px"
     },
     // 100% - 16px
     fontSize: "100px",
@@ -30,22 +29,24 @@ const styles = theme => ({
     // "@media screen and (max-width: 1080px)": {
     // },
     [theme.breakpoints.down("md")]: {
-      fontSize: "40px"
+      fontSize: "30px"
     },
     fontSize: "80px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
+  cardContainer: {
+    [theme.breakpoints.down("sm")]: {
+      width: "84%"
+    },
+    position: "absolute",
+    width: "58.33%"
+  },
 
   buttonColumn: {
     display: "flex",
-    alignItems: "center",
-    textAlign: "center",
-    height: "100%",
-    padding: "15% 0"
-    // backgroundColor: "pink"
-    // how to solve this?
+    justifyContent: "space-evenly"
   }
 });
 
@@ -98,13 +99,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      schedules,
-      schedulesToDisplay,
-      index,
-      isMobile,
-      isSmall
-    } = this.state;
+    const { schedules, schedulesToDisplay, index } = this.state;
 
     return (
       <React.Fragment>
@@ -122,34 +117,32 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid container>
+            <Grid container className={classes}>
               <Grid
                 item
                 xs={12}
                 md={3}
                 style={{
                   display: "flex",
-                  alignItems: "flex-end",
-                  paddingLeft: "2%"
+                  alignItems: "flex-end"
                 }}
               >
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={2} md={1} className={classes.buttonColumn}>
+              <Grid item xs={1} md={1} className={classes.buttonColumn}>
                 <IconButton onClick={this.handleBack} disabled={index === 0}>
                   <KeyboardArrowLeft />
                 </IconButton>
               </Grid>
-              <Grid item xs={8} md={7}>
+              <Grid item xs={10} md={7} className={classes}>
                 <TransitionGroup>
                   <CSSTransition key={index} timeout={400} classNames="fade">
                     <Grid
-                      id="inside"
                       container
                       spacing={1}
-                      style={{ position: "absolute", width: "58.6%" }}
+                      className={classes.cardContainer}
                     >
                       {schedulesToDisplay.map((e, index) => {
                         if (index < 4) {
@@ -164,7 +157,7 @@ class Home extends Component {
                   </CSSTransition>
                 </TransitionGroup>
               </Grid>
-              <Grid item xs={2} md={1} className={classes.buttonColumn}>
+              <Grid item xs={1} md={1} className={classes.buttonColumn}>
                 <IconButton
                   onClick={this.handleNext}
                   disabled={index >= schedules.length - 4}
@@ -173,58 +166,6 @@ class Home extends Component {
                 </IconButton>
               </Grid>
             </Grid>
-            {/* <MediaQuery minWidth={320} maxWidth={1080}>
-              <Grid container>
-                <Grid
-                  item
-                  xs={12}
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    paddingLeft: "2%"
-                  }}
-                >
-                  <Typography className={classes.subTitle}>
-                    UPCOMING GAMES
-                  </Typography>
-                </Grid>
-                <Grid item xs={2} className={classes.buttonColumn}>
-                  <IconButton onClick={this.handleBack} disabled={index === 0}>
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </Grid>
-                <Grid item xs={8}>
-                  <TransitionGroup>
-                    <CSSTransition key={index} timeout={400} classNames="fade">
-                      <Grid
-                        id="inside"
-                        container
-                        spacing={1}
-                        style={{ position: "absolute", width: "58.6%" }}
-                      >
-                        {schedulesToDisplay.map((e, index) => {
-                          if (index < 4) {
-                            return (
-                              <Grid item xs={12} md={6}>
-                                <Card schedule={e} size="big" />
-                              </Grid>
-                            );
-                          }
-                        })}
-                      </Grid>
-                    </CSSTransition>
-                  </TransitionGroup>
-                </Grid>
-                <Grid item xs={2} className={classes.buttonColumn}>
-                  <IconButton
-                    onClick={this.handleNext}
-                    disabled={index >= schedules.length - 4}
-                  >
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </Grid>
-              </Grid>
-            </MediaQuery> */}
           </Grid>
         </CSSTransition>
       </React.Fragment>
