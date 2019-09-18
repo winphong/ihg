@@ -11,10 +11,15 @@ import miscService from "../services/miscService";
 import path from "path";
 import cookie from "react-cookies";
 import "../App.css";
+import MediaQuery from "react-responsive";
 
 const styles = theme => ({
   title: {
-    fontSize: "1000%",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "80px",
+      textAlign: "center"
+    },
+    fontSize: "150px",
     fontWeight: "900",
     color: "#C8B06B"
   },
@@ -76,37 +81,37 @@ class About extends Component {
             {/* Hall of NUS */}
             <Grid item xs={12} className={classes.hall}>
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={3}>
+                <Grid item xs={12} md={3}>
                   Hall of NUS
                 </Grid>
-                <Grid item xs={12} sm={9}>
+                <Grid item xs={12} md={9}>
                   <Grid container spacing={0}>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/RH.png" />
                       <p>Raffles Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/EH.png" />
                       <p>Eusoff Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/TH.png" />
                       <p> Temasek Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/SH.png" />
                       <p> Sheares Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KE7.png" />
                       <p> King Edward VII Hall</p>
                       <p />
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KR.png" />
                       <p> Kent Ridge Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/PGP.png" />
                       <p>Prince George's Park Residence</p>
                     </Grid>
@@ -119,51 +124,58 @@ class About extends Component {
             {/* Sports Director */}
             <Grid item xs={12} className={classes.hall}>
               <Grid container spacing={0}>
-                <Grid item xs={12} sm={9}>
+                <MediaQuery maxWidth={960}>
+                  <Grid item xs={12} md={3}>
+                    Sports Directors
+                  </Grid>
+                </MediaQuery>
+                <Grid item xs={12} md={9}>
                   <Grid container spacing={0}>
-                    <Grid item xs={12} sm={3} />
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12} md={3} />
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/RH.png" />
                       <p>Raffles Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/EH.png" />
                       <p>Eusoff Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/TH.png" />
                       <p> Temasek Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/SH.png" />
                       <p> Sheares Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KE7.png" />
                       <p> King Edward VII Hall</p>
                       <p />
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KR.png" />
                       <p> Kent Ridge Hall</p>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/PGP.png" />
                       <p>Prince George's Park Residence</p>
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                  Sports Directors
-                </Grid>
+                <MediaQuery minWidth={961}>
+                  <Grid item xs={12} md={3}>
+                    Sports Directors
+                  </Grid>
+                </MediaQuery>
               </Grid>
               <Divider />
             </Grid>
             {/* Sports */}
-            <Grid item xs={true} sm={3}>
+            <Grid item xs={12} md={3}>
               SPORTS
             </Grid>
-            <Grid item xs={true} sm={5}>
+            <Grid item xs={5} md={4}>
               <TransitionGroup>
                 <CSSTransition
                   key={selectedSport._id}
@@ -172,7 +184,7 @@ class About extends Component {
                 >
                   <div style={{ position: "absolute" }}>
                     <img
-                      style={{ height: "70%", weight: "70%" }}
+                      style={{ height: "70px", weight: "70px" }}
                       src={this.state.imgUrl}
                     />
                     <Typography> {selectedSport.name} </Typography>
@@ -181,7 +193,7 @@ class About extends Component {
                 </CSSTransition>
               </TransitionGroup>
             </Grid>
-            <Grid item xs={true} sm={3}>
+            <Grid item xs={7} md={5}>
               <Grid container>
                 {sports.map(sport => {
                   return (

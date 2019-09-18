@@ -106,7 +106,7 @@ export default function NavBar() {
             </IconButton>
           </MediaQuery>
           <MediaQuery maxWidth={960}>
-            <Button onClick={toggleDrawer("right", true)}>Open Right</Button>
+            <Button onClick={toggleDrawer("right", true)}>Menu</Button>
             <Drawer
               anchor="right"
               open={state.right}

@@ -12,6 +12,9 @@ import { Typography } from "@material-ui/core";
 
 const styles = theme => ({
   title: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "40px"
+    },
     fontSize: "1000%",
     fontWeight: "900",
     color: "#C8B06B"
@@ -78,13 +81,13 @@ class Schedule extends Component {
               height: "100vh"
             }}
           >
-            <Grid item xs={true} sm={3}>
+            <Grid item xs={3} sm={3}>
               Blank
             </Grid>
-            <Grid item xs={true} sm={8}>
+            <Grid item xs={8} sm={8}>
               {schedules.length > 0 && <Calendar schedules={schedules} />}
             </Grid>
-            <Grid item xs={true} sm={1}>
+            <Grid item xs={1} sm={1}>
               Blank
             </Grid>
           </Grid>

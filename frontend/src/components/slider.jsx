@@ -38,12 +38,12 @@ export default function Slider({ schedules }) {
 
   return (
     <Grid container>
-      <Grid item xs={true} sm={1}>
+      <Grid item xs={1} sm={1}>
         <IconButton onClick={handleBack} disabled={schedules.length == 1}>
           <KeyboardArrowLeft />
         </IconButton>
       </Grid>
-      <Grid item xs={true} sm={10}>
+      <Grid item xs={10} sm={10}>
         <TransitionGroup>
           <CSSTransition key={current} timeout={400} classNames="slide">
             <Grid
@@ -57,7 +57,7 @@ export default function Slider({ schedules }) {
             >
               <Grid
                 item
-                xs={12}
+                xs={0}
                 sm={4}
                 style={{ height: "100%", width: "100%" }}
               >
@@ -69,7 +69,7 @@ export default function Slider({ schedules }) {
               </Grid>
               <Grid
                 item
-                xs={12}
+                xs={4}
                 sm={4}
                 style={{
                   height: "100%",
@@ -84,7 +84,7 @@ export default function Slider({ schedules }) {
               </Grid>
               <Grid
                 item
-                xs={12}
+                xs={0}
                 sm={4}
                 style={{
                   height: "100%",

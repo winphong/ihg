@@ -16,25 +16,30 @@ import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "40px"
     },
-    // 100% - 16px
     fontSize: "100px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
   subTitle: {
-    // "@media screen and (max-width: 1080px)": {
-    // },
-    [theme.breakpoints.down("md")]: {
-      fontSize: "30px"
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "30px",
+      textAlign: "center"
     },
     fontSize: "80px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
+  },
+  subTitleContainer: {
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      alignItems: "flex-end",
+      paddingTop: "28%"
+    }
   },
   cardContainer: {
     [theme.breakpoints.down("sm")]: {
@@ -43,8 +48,10 @@ const styles = theme => ({
     position: "absolute",
     width: "58.33%"
   },
-
   buttonColumn: {
+    [theme.breakpoints.down("sm")]: {
+      padding: "61% 0"
+    },
     display: "flex",
     justifyContent: "space-evenly"
   }
@@ -105,7 +112,7 @@ class Home extends Component {
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container>
-            <Grid item xs={12} className={classes.paper}>
+            <Grid item xs={12}>
               <Typography className={classes.title}>INTER-HALL</Typography>
               <Typography className={classes.title}>GAMES</Typography>
               <Typography
@@ -117,22 +124,18 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid container className={classes}>
-              <Grid
-                item
-                xs={12}
-                md={3}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-end"
-                }}
-              >
+            <Grid container>
+              <Grid item xs={12} md={3} className={classes.subTitleContainer}>
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
               <Grid item xs={1} md={1} className={classes.buttonColumn}>
-                <IconButton onClick={this.handleBack} disabled={index === 0}>
+                <IconButton
+                  onClick={this.handleBack}
+                  disabled={index === 0}
+                  style={{ padding: 0 }}
+                >
                   <KeyboardArrowLeft />
                 </IconButton>
               </Grid>
@@ -161,6 +164,7 @@ class Home extends Component {
                 <IconButton
                   onClick={this.handleNext}
                   disabled={index >= schedules.length - 4}
+                  style={{ padding: 0 }}
                 >
                   <KeyboardArrowRight />
                 </IconButton>
@@ -174,5 +178,3 @@ class Home extends Component {
 }
 
 export default withStyles(styles)(Home);
-
-// To force reload

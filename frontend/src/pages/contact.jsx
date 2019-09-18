@@ -9,6 +9,9 @@ import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
   title: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "40px"
+    },
     fontSize: "1000%",
     fontWeight: "900",
     color: "#C8B06B"
@@ -134,7 +137,7 @@ class Contact extends Component {
                     />
                   </Grid>
 
-                  <Grid item xs={2} className={classes.button}>
+                  <Grid item xs={4} className={classes.button}>
                     <Button
                       fullWidth
                       variant="contained"
@@ -144,7 +147,7 @@ class Contact extends Component {
                       Submit
                     </Button>
                   </Grid>
-                  <Grid item xs={10} className={classes.button}>
+                  <Grid item xs={8} className={classes.button}>
                     <Typography style={{ marginLeft: "1vw" }}>
                       or email us @ ihgcovening@gmail.com{" "}
                     </Typography>
