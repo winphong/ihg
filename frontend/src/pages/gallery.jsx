@@ -42,7 +42,7 @@ class Gallery extends Component {
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
-          <Grid container spacing={0} className={classes.container}>
+          <Grid container className={classes.container}>
             <Grid item xs={12}>
               <Paper className={classes.paper}></Paper>
             </Grid>

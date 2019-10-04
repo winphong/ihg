@@ -26,6 +26,20 @@ const styles = theme => ({
   },
   container: {
     textAlign: "center"
+  },
+  calendar: {
+    [theme.breakpoints.up("md")]: {
+      paddingRight: "3%"
+    },
+    [theme.breakpoints.down("md")]: {
+      margin: "0 1%"
+    }
+  },
+  slider: {
+    [theme.breakpoints.up("md")]: {
+      marginBottom: "5%",
+      backgroundColor: "pink"
+    }
   }
 });
 
@@ -44,55 +58,38 @@ class Schedule extends Component {
     const { schedules } = this.state;
 
     return (
-      <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
-        <React.Fragment>
-          <Grid container spacing={0} className={classes.container}>
-            <Grid item xs={12}>
-              <Typography className={classes.title}>TODAY'S GAMES</Typography>
-            </Grid>
-            <Grid item xs={12}>
-              <CSSTransition
-                in={true}
-                appear={true}
-                timeout={500}
-                classNames="fade"
-              >
-                <div
-                  style={{
-                    height: "45vh",
-                    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`,
-                    display: "flex",
-                    alignItems: "center",
-                    textAlign: "center",
-                    backgroundColor: "pink"
-                  }}
+      <Grid container className={classes.container}>
+        <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
+          <React.Fragment>
+            <Grid item container xs={12} className={classes.slider}>
+              <Grid item xs={12}>
+                <Typography className={classes.title}>TODAY'S GAMES</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <CSSTransition
+                  in={true}
+                  appear={true}
+                  timeout={500}
+                  classNames="slide"
                 >
-                  {schedules.length > 0 && <Slider schedules={schedules} />}
-                </div>
-              </CSSTransition>
+                  <div>
+                    {schedules.length > 0 && <Slider schedules={schedules} />}
+                  </div>
+                </CSSTransition>
+              </Grid>
             </Grid>
-          </Grid>
-          {/* Calendar */}
-          <Grid
-            container
-            spacing={0}
-            className={classes.container}
-            style={{
-              height: "100vh"
-            }}
-          >
-            <Grid item xs={3} sm={3}>
-              Blank
+            {/* Calendar */}
+            <Grid item container className={classes.container}>
+              <Grid item xs={0} md={3}>
+                Blank
+              </Grid>
+              <Grid item xs={12} md={9} className={classes.calendar}>
+                {schedules.length > 0 && <Calendar schedules={schedules} />}
+              </Grid>
             </Grid>
-            <Grid item xs={8} sm={8}>
-              {schedules.length > 0 && <Calendar schedules={schedules} />}
-            </Grid>
-            <Grid item xs={1} sm={1}>
-              Blank
-            </Grid>
-          </Grid>
-        </React.Fragment>
-      </CSSTransition>
+          </React.Fragment>
+        </CSSTransition>
+      </Grid>
     );
   }
 }

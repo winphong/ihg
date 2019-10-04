@@ -35,8 +35,12 @@ const styles = theme => ({
     backgroundColor: "transparent"
   },
   staticImage: {
-    width: "70%",
-    height: "80%"
+    width: "70%"
+  },
+  p: {
+    fontSize: "16px",
+    fontWeight: "500",
+    lineHeight: "100%"
   }
 });
 
@@ -72,7 +76,7 @@ class About extends Component {
     return (
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
-          <Grid container spacing={0} style={{ textAlign: "center" }}>
+          <Grid container style={{ textAlign: "center" }}>
             <Grid item xs={12}>
               {/* About IHG */}
               <Typography className={classes.title}>ABOUT IHG</Typography>{" "}
@@ -80,36 +84,36 @@ class About extends Component {
             </Grid>
             {/* Hall of NUS */}
             <Grid item xs={12} className={classes.hall}>
-              <Grid container spacing={0}>
+              <Grid container>
                 <Grid item xs={12} md={3}>
                   Hall of NUS
                 </Grid>
                 <Grid item xs={12} md={9}>
-                  <Grid container spacing={0}>
+                  <Grid container>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/RH.png" />
-                      <p>Raffles Hall</p>
+                      <p className={classes.p}>Raffles Hall</p>
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/EH.png" />
-                      <p>Eusoff Hall</p>
+                      <p className={classes.p}>Eusoff Hall</p>
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/TH.png" />
-                      <p> Temasek Hall</p>
+                      <p className={classes.p}> Temasek Hall</p>
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/SH.png" />
-                      <p> Sheares Hall</p>
+                      <p className={classes.p}> Sheares Hall</p>
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KE7.png" />
-                      <p> King Edward VII Hall</p>
+                      <p className={classes.p}> King Edward VII Hall</p>
                       <p />
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/KR.png" />
-                      <p> Kent Ridge Hall</p>
+                      <p className={classes.p}> Kent Ridge Hall</p>
                     </Grid>
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/PGP.png" />
@@ -123,14 +127,14 @@ class About extends Component {
 
             {/* Sports Director */}
             <Grid item xs={12} className={classes.hall}>
-              <Grid container spacing={0}>
+              <Grid container>
                 <MediaQuery maxWidth={960}>
                   <Grid item xs={12} md={3}>
                     Sports Directors
                   </Grid>
                 </MediaQuery>
                 <Grid item xs={12} md={9}>
-                  <Grid container spacing={0}>
+                  <Grid container>
                     <Grid item xs={12} md={3} />
                     <Grid item xs={6} md={3}>
                       <img className={classes.staticImage} src="/RH.png" />

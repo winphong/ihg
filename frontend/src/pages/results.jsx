@@ -40,7 +40,8 @@ const styles = theme => ({
     textAlign: "center",
     display: "flex",
     alignItems: "baseline",
-    marginBottom: "3vh"
+    marginBottom: "3vh",
+    backgroundColor: "grey"
     // backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
   },
   headerRow: {
@@ -170,12 +171,7 @@ class Results extends Component {
           >
             {dateformat(new Date(), "dd'th' mmm yyyy")}
           </Typography>
-          <Grid
-            container
-            wrap="nowrap"
-            spacing={0}
-            className={classes.barChart}
-          >
+          <Grid container wrap="nowrap" className={classes.barChart}>
             <Grid item xs={true} sm={1} />
             <Grid item xs={true} sm={2}>
               <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
@@ -196,9 +192,9 @@ class Results extends Component {
             <Grid item xs={true} sm={1} />
           </Grid>
           {/* Calendar */}
-          <Grid container spacing={0}>
+          <Grid container>
             <Grid item xs={4}>
-              <Grid container spacing={0}>
+              <Grid container>
                 <div style={{ height: "50vh" }}>
                   {!byDate && sports && (
                     <SportsList

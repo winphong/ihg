@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "../components/card";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
+import { useMediaQuery } from "react-responsive";
 
 export default function Slider({ schedules }) {
   const classes = useStyles();
@@ -36,61 +37,42 @@ export default function Slider({ schedules }) {
     setNext(nxt !== schedules.length - 1 ? nxt + 1 : 0);
   }
 
+  const hasSpace = useMediaQuery({ minDeviceWidth: 960 });
+
   return (
-    <Grid container>
+    <Grid container direction="row" justify="center" alignItems="center">
       <Grid item xs={1} sm={1}>
         <IconButton onClick={handleBack} disabled={schedules.length == 1}>
           <KeyboardArrowLeft />
         </IconButton>
       </Grid>
-      <Grid item xs={10} sm={10}>
+      <Grid item xs={10} sm={10} style={{ height: "300px" }}>
         <TransitionGroup>
           <CSSTransition key={current} timeout={400} classNames="slide">
             <Grid
               container
-              spacing={8}
+              spacing={hasSpace ? 8 : 0}
               style={{
                 position: "absolute",
-                width: "90%",
-                marginTop: "-9%"
+                width: "83.333%",
+                margin: "0px"
               }}
             >
-              <Grid
-                item
-                xs={0}
-                sm={4}
-                style={{ height: "100%", width: "100%" }}
-              >
+              <Grid className={classes.side} item md={4}>
                 {/* {previous  && ( */}
                 {schedules.length >= 3 && (
                   <Card schedule={schedules[previous]} size="small" />
                 )}
                 {/* )} */}
               </Grid>
-              <Grid
-                item
-                xs={4}
-                sm={4}
-                style={{
-                  height: "100%",
-                  width: "100%"
-                }}
-              >
+              <Grid item xs={12} md={4}>
                 <Card
                   schedule={schedules[current]}
                   center={true}
                   size="small"
                 />
               </Grid>
-              <Grid
-                item
-                xs={0}
-                sm={4}
-                style={{
-                  height: "100%",
-                  width: "100%"
-                }}
-              >
+              <Grid item className={classes.side} md={4}>
                 {/* {next < schedules.length && ( */}
                 {schedules.length >= 3 && (
                   <Card schedule={schedules[next]} size="small" />
@@ -101,8 +83,12 @@ export default function Slider({ schedules }) {
           </CSSTransition>
         </TransitionGroup>
       </Grid>
-      <Grid item xs={true} sm={1}>
-        <IconButton onClick={handleNext} disabled={schedules.length == 1}>
+      <Grid item xs={1} sm={1}>
+        <IconButton
+          onClick={handleNext}
+          disabled={schedules.length == 1}
+          style={{ padding: 0 }}
+        >
           <KeyboardArrowRight />
         </IconButton>
       </Grid>
@@ -110,4 +96,12 @@ export default function Slider({ schedules }) {
   );
 }
 
-const useStyles = makeStyles({});
+const styles = theme => ({
+  side: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
+  }
+});
+
+const useStyles = makeStyles(styles);

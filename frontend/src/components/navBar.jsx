@@ -6,17 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
-// import MenuIcon from "@material-ui/icons/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import MediaQuery from "react-responsive";
-
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 
 const useStyles = makeStyles({
   root: {
@@ -82,8 +77,12 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" color="inherit">
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            IHG 19/20
+          <Typography variant="h5" className={classes.title}>
+            <img
+              src="/Logo.png"
+              style={{ width: "60px", backgroundColor: "black" }}
+            ></img>
+            {"   "} IHG 19/20
           </Typography>
           <MediaQuery minWidth={961}>
             <IconButton color="inherit" to="/home" component={Link}>
@@ -106,7 +105,9 @@ export default function NavBar() {
             </IconButton>
           </MediaQuery>
           <MediaQuery maxWidth={960}>
-            <Button onClick={toggleDrawer("right", true)}>Menu</Button>
+            <Button onClick={toggleDrawer("right", true)}>
+              <MenuIcon />
+            </Button>
             <Drawer
               anchor="right"
               open={state.right}

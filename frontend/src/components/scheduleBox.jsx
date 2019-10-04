@@ -10,92 +10,89 @@ const colours = ["white", "green", "maroon", "blue", "yellow", "orange"];
 export default function ScheduleBox({ schedule }) {
   const classes = useStyles();
 
-  console.log(schedule);
-
   return (
-    <Container maxWidth="xl" className={classes.container}>
-      <Grid container>
-        {/* Carnival colour */}
-        <Grid container>
-          {schedule.stage === "Carnival" &&
-            colours.map(colour => {
-              return (
-                <Grid
-                  item
-                  xs={true}
-                  sm={true}
-                  className={classes.bar}
-                  style={{
-                    backgroundColor: colour,
-                    border: colour === "white" ? "0.005vh solid black" : ``
-                  }}
-                />
-              );
-            })}
-        </Grid>
-        {schedule.stage !== "Carnival" && (
-          <Grid container>
-            <Grid
-              item
-              xs={true}
-              sm={6}
-              className={classes.bar}
-              style={{
-                backgroundColor: schedule.hall[0].colourCode,
-                border:
-                  schedule.hall[0].colourCode === "#ffffff"
-                    ? "0.005vh solid black"
-                    : ``
-                // transform:
-                //   schedule.hall[0].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
-              }}
-            />
-            <Grid
-              item
-              xs={true}
-              sm={6}
-              className={classes.bar}
-              style={{
-                backgroundColor: schedule.hall[1].colourCode,
-                border:
-                  schedule.hall[1].colourCode === "#ffffff"
-                    ? "0.005vh solid black"
-                    : ``
-                // transform:
-                //   schedule.hall[1].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
-              }}
-            />
-          </Grid>
-        )}
-        <Grid item xs={12} sm={5}>
-          {schedule.hall[0].abbreviation}
-        </Grid>
-        <Grid item xs={12} sm={2}>
-          vs
-        </Grid>
-        <Grid item xs={12} sm={5}>
-          {schedule.hall[1].abbreviation}
-        </Grid>
-        <Grid item xs={12}>
-          <Typography>{schedule.sport}</Typography>
-          <Typography>
-            {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h'")}
-          </Typography>
-          <Typography>{schedule.venue}</Typography>
-        </Grid>
+    <Grid container className={classes.container}>
+      {/* Carnival colour */}
+      <Grid item container xs={12}>
+        {schedule.stage === "Carnival" &&
+          colours.map(colour => {
+            return (
+              <Grid
+                item
+                xs={true}
+                className={classes.bar}
+                style={{
+                  backgroundColor: colour,
+                  border: colour === "white" ? "0.005vh solid black" : ``
+                }}
+              />
+            );
+          })}
       </Grid>
-    </Container>
+      {schedule.stage !== "Carnival" && (
+        <Grid item container xs={12}>
+          <Grid
+            item
+            xs={6}
+            className={classes.bar}
+            style={{
+              backgroundColor: schedule.hall[0].colourCode,
+              border:
+                schedule.hall[0].colourCode === "#ffffff"
+                  ? "0.005vh solid black"
+                  : ``
+              // transform:
+              //   schedule.hall[0].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
+            }}
+          />
+          <Grid
+            item
+            xs={6}
+            className={classes.bar}
+            style={{
+              backgroundColor: schedule.hall[1].colourCode,
+              border:
+                schedule.hall[1].colourCode === "#ffffff"
+                  ? "0.005vh solid black"
+                  : ``
+              // transform:
+              //   schedule.hall[1].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
+            }}
+          />
+        </Grid>
+      )}
+      <Grid item xs={5}>
+        {schedule.hall[0].abbreviation}
+      </Grid>
+      <Grid item xs={2}>
+        vs
+      </Grid>
+      <Grid item xs={5}>
+        {schedule.hall[1].abbreviation}
+      </Grid>
+      <Grid item xs={12}>
+        <Typography>{schedule.sport}</Typography>
+        <Typography>
+          {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h'")}
+        </Typography>
+        <Typography>{schedule.venue}</Typography>
+      </Grid>
+    </Grid>
   );
 }
 
-const useStyles = makeStyles({
+const styles = theme => ({
   container: {
     textAlign: "center",
-    // backgroundColor: "beige",
     border: "0.005vh solid grey",
-    padding: 10
+    padding: "5%",
+    [theme.breakpoints.up("sm")]: {
+      width: "210px"
+    }
   },
   bar: {
-    height: "1vh"
+    height: "10px"
   }
 });
+
+const useStyles = makeStyles(styles);
