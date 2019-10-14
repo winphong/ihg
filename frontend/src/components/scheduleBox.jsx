@@ -87,7 +87,7 @@ const styles = theme => ({
     border: "0.005vh solid grey",
     padding: "5%",
     [theme.breakpoints.up("sm")]: {
-      width: "190px"
+      width: "100%"
     }
   },
   bar: {

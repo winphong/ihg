@@ -6,7 +6,7 @@ export default function Card({ sports, selectedSport, handleSortBySport }) {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container xs={12}>
       <Grid item xs={6}>
         {sports.length >= 1 &&
           sports.slice(0, 9).map(sport => {
@@ -26,7 +26,17 @@ export default function Card({ sports, selectedSport, handleSortBySport }) {
       <Grid item xs={6}>
         {sports.length >= 1 &&
           sports.slice(9).map(sport => {
-            return <p> {sport.name}</p>;
+            return (
+              <p
+                onClick={() => handleSortBySport(sport)}
+                style={{
+                  color: selectedSport.name == sport.name ? "black" : "grey",
+                  cursor: "pointer"
+                }}
+              >
+                {sport.name}
+              </p>
+            );
           })}
       </Grid>
     </Grid>

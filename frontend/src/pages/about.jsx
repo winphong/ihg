@@ -179,7 +179,12 @@ class About extends Component {
             <Grid item xs={12} md={3}>
               SPORTS
             </Grid>
-            <Grid item xs={5} md={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              style={{ textAlign: "left", height: "300px" }}
+            >
               <TransitionGroup>
                 <CSSTransition
                   key={selectedSport._id}
@@ -187,35 +192,30 @@ class About extends Component {
                   classNames="fade"
                 >
                   <div style={{ position: "absolute" }}>
-                    <img
-                      style={{ height: "70px", weight: "70px" }}
-                      src={this.state.imgUrl}
-                    />
+                    <img style={{ width: "150px" }} src={this.state.imgUrl} />
                     <Typography> {selectedSport.name} </Typography>
                     <Typography> {selectedSport.description} </Typography>
                   </div>
                 </CSSTransition>
               </TransitionGroup>
             </Grid>
-            <Grid item xs={7} md={5}>
-              <Grid container>
-                {sports.map(sport => {
-                  return (
-                    <Grid item xs={6}>
-                      <Button
-                        style={{
-                          backgroundColor: "transparent"
-                        }}
-                        disableTouchRipple="true"
-                        disableRipple="true"
-                        onClick={() => this.handleClick(sport)}
-                      >
-                        {sport.name}
-                      </Button>
-                    </Grid>
-                  );
-                })}
-              </Grid>
+            <Grid item container xs={12} md={5}>
+              {sports.map(sport => {
+                return (
+                  <Grid item xs={6}>
+                    <Button
+                      style={{
+                        backgroundColor: "transparent"
+                      }}
+                      disableTouchRipple="true"
+                      disableRipple="true"
+                      onClick={() => this.handleClick(sport)}
+                    >
+                      {sport.name}
+                    </Button>
+                  </Grid>
+                );
+              })}
             </Grid>
           </Grid>
         </CSSTransition>

@@ -73,16 +73,13 @@ class Results extends Component {
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: sports } = await sportService.getAllSports();
     this.setState({
       halls,
       schedules,
-      originalSchedules: [...schedules]
+      originalSchedules: [...schedules],
+      sports
     });
-    // const { data: sports } = await sportService.getAllSports();
-    // this.setState({
-    //   sports
-    // });
-    // console.log(sports);
   }
 
   handleNext = limit => {
@@ -125,11 +122,15 @@ class Results extends Component {
   handleSortBySport = sport => {
     arr = [];
     idx = 0;
+    console.log(this.state.sports[0]);
     // const schedules = [...this.state.originalSchedules].sort((a, b) => {
     //   return a.sport >= b.sport ? 1 : -1;
     // });
     const schedules = [...this.state.originalSchedules].filter(schedule => {
-      if (schedule.sport === (sport ? sport.name : this.state.sports[0].name)) {
+      if (
+        schedule.sport ===
+        (sport !== undefined ? sport.name : this.state.sports[0].name)
+      ) {
         return schedule;
       }
     });
@@ -193,10 +194,10 @@ class Results extends Component {
             </Grid>
             <Grid item xs={0} sm={1} />
           </Grid>
-          {/* Calendar */}
+          {/* Sort */}
           <Grid container xs={12}>
-            <Grid item xs={12} md={4}>
-              <Grid container>
+            <Grid item container xs={12} md={4}>
+              <Grid item xs={12}>
                 <div style={{ height: "50vh" }}>
                   {!byDate && sports && (
                     <SportsList
@@ -206,29 +207,29 @@ class Results extends Component {
                     />
                   )}
                 </div>
-                <Grid item xs={12}>
-                  RESULTS
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    style={{
-                      color: byDate ? "black" : "grey"
-                    }}
-                    onClick={this.handleSortByDate}
-                  >
-                    Sort by date
-                  </Button>
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    style={{
-                      color: !byDate ? "black" : "grey"
-                    }}
-                    onClick={() => this.handleSortBySport()}
-                  >
-                    Sort by sports
-                  </Button>
-                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                RESULTS
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  style={{
+                    color: byDate ? "black" : "grey"
+                  }}
+                  onClick={this.handleSortByDate}
+                >
+                  Sort by date
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  style={{
+                    color: !byDate ? "black" : "grey"
+                  }}
+                  onClick={() => this.handleSortBySport()}
+                >
+                  Sort by sports
+                </Button>
               </Grid>
             </Grid>
             {/* Result Table */}
