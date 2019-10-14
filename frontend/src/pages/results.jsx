@@ -17,13 +17,15 @@ import IconButton from "@material-ui/core/IconButton";
 import { Typography } from "@material-ui/core";
 import dateformat from "dateformat";
 import "../App.css";
+import MediaQuery from "react-responsive";
 
 const styles = theme => ({
   title: {
     fontSize: "50px",
     fontWeight: "900",
     color: "#C8B06B",
-    lineHeight: "100%"
+    lineHeight: "100%",
+    textAlign: "center"
   },
   caption: {
     fontSize: "25px",
@@ -33,8 +35,7 @@ const styles = theme => ({
   buttonColumn: {
     textAlign: "center",
     verticalAlign: "middle",
-    height: "100%",
-    backgroundColor: "pink"
+    height: "100%"
   },
   barChart: {
     textAlign: "center",
@@ -128,7 +129,7 @@ class Results extends Component {
     //   return a.sport >= b.sport ? 1 : -1;
     // });
     const schedules = [...this.state.originalSchedules].filter(schedule => {
-      if (schedule.sport == (sport ? sport.name : this.state.sports[0].name)) {
+      if (schedule.sport === (sport ? sport.name : this.state.sports[0].name)) {
         return schedule;
       }
     });
@@ -165,35 +166,36 @@ class Results extends Component {
             className={classes.title}
             style={{
               color: "black",
-              fontSize: "200%",
-              fontStyle: "italic"
+              fontSize: "100%",
+              fontStyle: "italic",
+              textAlign: "center"
             }}
           >
             {dateformat(new Date(), "dd'th' mmm yyyy")}
           </Typography>
-          <Grid container wrap="nowrap" className={classes.barChart}>
-            <Grid item xs={true} sm={1} />
-            <Grid item xs={true} sm={2}>
+          <Grid container className={classes.barChart}>
+            <Grid item xs={0} sm={1} />
+            <Grid item xs={12} sm={2}>
               <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
               <Typography className={classes.caption}>MALE</Typography>
             </Grid>
-            <Grid item xs={true} sm={1} />
+            <Grid item xs={0} sm={1} />
 
-            <Grid item xs={true} sm={4}>
+            <Grid item xs={12} sm={4}>
               <ResultBar halls={halls} dataKey={"totalPoint"} barSize={10} />
               <Typography className={classes.caption}>OVERALL</Typography>
             </Grid>
-            <Grid item xs={true} sm={1} />
+            <Grid item xs={0} sm={1} />
 
-            <Grid item xs={true} sm={2}>
+            <Grid item xs={12} sm={2}>
               <ResultBar halls={halls} dataKey={"femalePoint"} barSize={6} />
               <Typography className={classes.caption}>FEMALE</Typography>
             </Grid>
-            <Grid item xs={true} sm={1} />
+            <Grid item xs={0} sm={1} />
           </Grid>
           {/* Calendar */}
-          <Grid container>
-            <Grid item xs={4}>
+          <Grid container xs={12}>
+            <Grid item xs={12} md={4}>
               <Grid container>
                 <div style={{ height: "50vh" }}>
                   {!byDate && sports && (
@@ -229,17 +231,32 @@ class Results extends Component {
                 </Grid>
               </Grid>
             </Grid>
-
-            <Grid item xs={7}>
-              <Grid container style={{ height: "68vh" }}>
-                <Grid item xs={12}>
-                  {schedules && (
-                    <TransitionGroup>
-                      <CSSTransition
-                        key={`${index}${byDate}${selectedSport.name}`}
-                        timeout={400}
-                        classNames="fade"
-                      >
+            {/* Result Table */}
+            <Grid item container xs={12} md={7} style={{ height: "900px" }}>
+              {schedules && (
+                <TransitionGroup>
+                  <CSSTransition
+                    key={`${index}${byDate}${selectedSport.name}`}
+                    timeout={400}
+                    classNames="fade"
+                  >
+                    <div>
+                      <MediaQuery maxWidth={959}>
+                        <div
+                          style={{
+                            position: "absolute",
+                            width: "100%"
+                          }}
+                        >
+                          <ResultsTable
+                            schedules={schedules}
+                            selectedSport={selectedSport}
+                            byDate={byDate}
+                            limit={limit}
+                          />
+                        </div>
+                      </MediaQuery>
+                      <MediaQuery minWidth={960}>
                         <div
                           style={{
                             position: "absolute",
@@ -253,51 +270,48 @@ class Results extends Component {
                             limit={limit}
                           />
                         </div>
-                      </CSSTransition>
-                    </TransitionGroup>
-                  )}
-                </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item xs={true} sm={6}>
-                  <div
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "left"
-                    }}
-                  >
-                    <IconButton
-                      disabled={index === 0}
-                      onClick={this.handleBack}
-                    >
-                      <KeyboardArrowLeft />
-                    </IconButton>
-                  </div>
-                </Grid>
-                <Grid item xs={true} sm={6}>
-                  <div
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "flex-end"
-                    }}
-                  >
-                    <IconButton
-                      disabled={
-                        this.state.byDate
-                          ? index >= originalSchedules.length - this.state.limit
-                          : index >= originalSchedules.length - 5
-                      }
-                      onClick={() => {
-                        this.handleNext(limit);
-                      }}
-                    >
-                      <KeyboardArrowRight />
-                    </IconButton>
-                  </div>
-                </Grid>
-              </Grid>
+                      </MediaQuery>
+                    </div>
+                  </CSSTransition>
+                </TransitionGroup>
+              )}
+            </Grid>
+            {/* Back button */}
+            <Grid item xs={6}>
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "left"
+                }}
+              >
+                <IconButton disabled={index === 0} onClick={this.handleBack}>
+                  <KeyboardArrowLeft />
+                </IconButton>
+              </div>
+            </Grid>
+            {/* Next button */}
+            <Grid item xs={6}>
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "flex-end"
+                }}
+              >
+                <IconButton
+                  disabled={
+                    this.state.byDate
+                      ? index >= originalSchedules.length - this.state.limit
+                      : index >= originalSchedules.length - 5
+                  }
+                  onClick={() => {
+                    this.handleNext(limit);
+                  }}
+                >
+                  <KeyboardArrowRight />
+                </IconButton>
+              </div>
             </Grid>
           </Grid>
         </React.Fragment>

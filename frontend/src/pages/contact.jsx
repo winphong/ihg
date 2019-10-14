@@ -28,8 +28,7 @@ const styles = theme => ({
   buttonColumn: {
     textAlign: "center",
     verticalAlign: "middle",
-    height: "100%",
-    backgroundColor: "pink"
+    height: "100%"
   },
   container: {
     textAlign: "center"
@@ -77,8 +76,8 @@ class Contact extends Component {
             <Grid item xs={12}>
               <Typography className={classes.title}> CONTACT US </Typography>
             </Grid>
-            <Grid item xs={true} sm={3} />
-            <Grid item xs={true}>
+            <Grid item xs={1} md={3} />
+            <Grid item xs={10} md={6}>
               <form>
                 <Grid
                   container
@@ -148,14 +147,14 @@ class Contact extends Component {
                     </Button>
                   </Grid>
                   <Grid item xs={8} className={classes.button}>
-                    <Typography style={{ marginLeft: "1vw" }}>
+                    <Typography style={{ marginLeft: "5%" }}>
                       or email us @ ihgcovening@gmail.com{" "}
                     </Typography>
                   </Grid>
                 </Grid>
               </form>
             </Grid>
-            <Grid item xs={true} sm={3} />
+            <Grid item xs={1} md={3} />
           </Grid>
         </CSSTransition>
       </React.Fragment>

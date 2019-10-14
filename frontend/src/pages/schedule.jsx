@@ -37,8 +37,7 @@ const styles = theme => ({
   },
   slider: {
     [theme.breakpoints.up("md")]: {
-      marginBottom: "5%",
-      backgroundColor: "pink"
+      marginBottom: "5%"
     }
   }
 });

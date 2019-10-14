@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import Results from "./pages/results";
 import Schedule from "./pages/schedule";
 import cookie from "react-cookies";
+import Footer from "./components/footer";
 
 class App extends Component {
   detectmobile() {
@@ -45,6 +46,7 @@ class App extends Component {
           <Redirect from="/" exact to="/home" />
           <Redirect to="not-found" />
         </Switch>
+        <Footer />
       </React.Fragment>
     );
   }

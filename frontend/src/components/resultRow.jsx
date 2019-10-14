@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
+import { useMediaQuery } from "react-responsive";
 
 export default function ResultRow({ schedule }) {
   const classes = useStyles();
@@ -9,101 +10,132 @@ export default function ResultRow({ schedule }) {
     schedule.hall[0].score >= 0 && schedule.hall[1].score >= 0 ? true : false;
   const firstWinner = schedule.hall[0].score > schedule.hall[1].score;
 
+  const isLaptop = useMediaQuery({ minDeviceWidth: 960 });
+
   return (
     <Grid container className={classes.container}>
-      <Grid item xs={true} sm={3} style={{ textAlign: "left" }}>
-        <Grid container style={{ marginBottom: "0.5vh" }}>
-          <Grid
-            item
-            sm={3}
-            className={classes.bar}
-            style={{
-              backgroundColor: schedule.hall[0].colourCode,
-              border:
-                schedule.hall[0].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
-                  : ``
-            }}
-          />
-          <Grid
-            item
-            sm={3}
-            className={classes.bar}
-            style={{
-              backgroundColor: schedule.hall[1].colourCode,
-              border:
-                schedule.hall[1].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
-                  : ``
-            }}
-          />
+      <Grid
+        item
+        container
+        xs={8}
+        md={4}
+        style={{ textAlign: "left", marginLeft: "2%" }}
+      >
+        <Grid
+          item
+          xs={3}
+          md={2}
+          className={classes.bar}
+          style={{
+            backgroundColor: schedule.hall[0].colourCode,
+            border:
+              schedule.hall[0].colourCode === "#ffffff"
+                ? "0.005vh solid black"
+                : ``
+          }}
+        />
+        <Grid
+          item
+          xs={3}
+          md={2}
+          className={classes.bar}
+          style={{
+            backgroundColor: schedule.hall[1].colourCode,
+            border:
+              schedule.hall[1].colourCode === "#ffffff"
+                ? "0.005vh solid black"
+                : ``
+          }}
+        />
+      </Grid>
+
+      <Grid item container xs={12} style={{ textAlign: "center" }}>
+        {/* sports name */}
+        <Grid
+          item
+          xs={5}
+          md={3}
+          style={{ textAlign: "left", paddingLeft: "2%" }}
+        >
+          <strong>
+            {schedule.sport} {schedule.stage}
+          </strong>
         </Grid>
-        <strong>
-          {schedule.sport} {schedule.stage}
-        </strong>
-      </Grid>
-      <Grid
-        item
-        xs={true}
-        sm={4}
-        style={{ marginTop: "1vh", textAlign: "left" }}
-      >
-        {dateformat(new Date(schedule.startTime), "HHMM'h'")}, {schedule.venue}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.winner
+        {/* sports venue / timing */}
+        {isLaptop && (
+          <Grid item xs={4} style={{ textAlign: "left", paddingLeft: "2%" }}>
+            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+            {schedule.venue}
+          </Grid>
+        )}
+        {/* hall 1 */}
+        <Grid
+          item
+          xs={2}
+          md={1}
+          className={
+            hasScore
+              ? firstWinner
+                ? classes.winner
+                : classes.neutral
               : classes.neutral
-            : classes.neutral
-        }
-      >
-        {schedule.hall[0].name.split(" ")[0]}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.winner
+          }
+        >
+          {schedule.hall[0].abbreviation}
+        </Grid>
+        {/* score 1 */}
+        <Grid
+          item
+          xs={1}
+          className={
+            hasScore
+              ? firstWinner
+                ? classes.winner
+                : classes.neutral
               : classes.neutral
-            : classes.neutral
-        }
-      >
-        {schedule.hall[0].score}
-      </Grid>
-      <Grid item sm={1} style={{ marginTop: "1vh" }}>
-        -
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.neutral
-              : classes.winner
-            : classes.neutral
-        }
-      >
-        {schedule.hall[1].score}
-      </Grid>
-      <Grid
-        item
-        sm={1}
-        className={
-          hasScore
-            ? firstWinner
-              ? classes.neutral
-              : classes.winner
-            : classes.neutral
-        }
-      >
-        {schedule.hall[1].name.split(" ")[0]}
+          }
+        >
+          {schedule.hall[0].score}
+        </Grid>
+        {/* versus */}
+        <Grid item xs={1}>
+          -
+        </Grid>
+        {/* score 2 */}
+        <Grid
+          item
+          xs={1}
+          className={
+            hasScore
+              ? firstWinner
+                ? classes.neutral
+                : classes.winner
+              : classes.neutral
+          }
+        >
+          {schedule.hall[1].score}
+        </Grid>
+        {/* hall 2 */}
+        <Grid
+          item
+          xs={1}
+          md={1}
+          className={
+            hasScore
+              ? firstWinner
+                ? classes.neutral
+                : classes.winner
+              : classes.neutral
+          }
+        >
+          {schedule.hall[1].abbreviation}
+        </Grid>
+        {!isLaptop && (
+          <Grid item xs={12} style={{ textAlign: "left", paddingLeft: "2%" }}>
+            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+            {schedule.venue}
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );
@@ -111,21 +143,18 @@ export default function ResultRow({ schedule }) {
 
 const useStyles = makeStyles({
   container: {
-    textAlign: "center",
-    margin: "1vh",
-    height: "3.5vh"
+    textAlign: "center"
     // backgroundColor: "gold"
   },
   bar: {
-    height: "0.6vh"
+    height: "0.6vh",
+    margin: "1.5% 0"
   },
   winner: {
-    marginTop: "1vh",
     fontWeight: "bold"
     // backgroundColor: "pink"
   },
   neutral: {
-    marginTop: "1vh"
     // backgroundColor: "beige"
   }
 });

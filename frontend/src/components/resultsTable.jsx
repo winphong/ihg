@@ -21,19 +21,19 @@ export default function ResultsTable({
     <div>
       {!byDate && <p className={classes.headerRow}>{selectedSport.name}</p>}
       {schedules.map((schedule, index) => {
-        if (index < lim) {
+        if (index < limit) {
           if (byDate && schedule.startTime.substring(8, 10) != currentDate) {
-            lim = lim - 1;
             if (lim <= limit / 2) {
               return;
             }
+            lim = lim - 1;
             currentDate = schedule.startTime.substring(8, 10);
             return (
               <div>
                 <p className={classes.headerRow}>
                   {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
                 </p>
-                {schedule.stage == "Carnival" ? (
+                {schedule.stage === "Carnival" ? (
                   <ResultRowCarnival schedule={schedule} />
                 ) : (
                   <ResultRow schedule={schedule} />
@@ -44,7 +44,7 @@ export default function ResultsTable({
           }
           return (
             <div>
-              {schedule.stage == "Carnival" ? (
+              {schedule.stage === "Carnival" ? (
                 <ResultRowCarnival schedule={schedule} />
               ) : (
                 <ResultRow schedule={schedule} />

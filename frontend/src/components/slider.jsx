@@ -42,7 +42,7 @@ export default function Slider({ schedules }) {
   return (
     <Grid container direction="row" justify="center" alignItems="center">
       <Grid item xs={1} sm={1}>
-        <IconButton onClick={handleBack} disabled={schedules.length == 1}>
+        <IconButton onClick={handleBack} disabled={schedules.length === 1}>
           <KeyboardArrowLeft />
         </IconButton>
       </Grid>
@@ -86,7 +86,7 @@ export default function Slider({ schedules }) {
       <Grid item xs={1} sm={1}>
         <IconButton
           onClick={handleNext}
-          disabled={schedules.length == 1}
+          disabled={schedules.length === 1}
           style={{ padding: 0 }}
         >
           <KeyboardArrowRight />

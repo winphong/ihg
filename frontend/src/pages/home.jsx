@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "../components/card";
-import Button from "@material-ui/core/Button";
 import scheduleService from "../services/scheduleService";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
@@ -11,8 +9,8 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import miscService from "../services/miscService";
 import path from "path";
-import cookie from "react-cookies";
 import Typography from "@material-ui/core/Typography";
+import MediaQuery from "react-responsive";
 
 const styles = theme => ({
   title: {
@@ -62,16 +60,10 @@ class Home extends Component {
     schedules: [],
     schedulesToDisplay: [],
     index: 0,
-    homeUrl: "",
-    isMobile: ""
+    homeUrl: ""
   };
 
   async componentDidMount() {
-    const isMobile = cookie.load("isMobileDevice");
-    this.setState({ isMobile });
-
-    console.log(window.screen.width);
-
     const { data: schedules } = await scheduleService.getAllSchedules();
     const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
     const file = new Blob([photo.data], { type: photo.data.type });
@@ -84,29 +76,29 @@ class Home extends Component {
     });
   }
 
-  handleNext = () => {
-    const index = this.state.index + 4;
+  handleNext = num => {
+    const index = this.state.index + num;
     if (index >= this.state.schedules.length) return;
 
     const schedules = [...this.state.schedules];
-    const schedulesToDisplay = schedules.splice(index, index + 4);
+    const schedulesToDisplay = schedules.splice(index, index + num);
 
     this.setState({ schedulesToDisplay, index });
   };
 
-  handleBack = () => {
-    const index = this.state.index - 4;
+  handleBack = num => {
+    const index = this.state.index - num;
     if (index < 0) return;
 
     const schedules = [...this.state.schedules];
-    const schedulesToDisplay = schedules.splice(index, index + 4);
+    const schedulesToDisplay = schedules.splice(index, index + num);
 
     this.setState({ schedulesToDisplay, index });
   };
 
   render() {
     const { classes } = this.props;
-    const { schedules, schedulesToDisplay, index } = this.state;
+    const { schedules, schedulesToDisplay, index, notMobile } = this.state;
 
     return (
       <React.Fragment>
@@ -131,13 +123,24 @@ class Home extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={1} md={1} className={classes.buttonColumn}>
-                <IconButton
-                  onClick={this.handleBack}
-                  disabled={index === 0}
-                  style={{ padding: 0 }}
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
+                <MediaQuery minDeviceWidth={960}>
+                  <IconButton
+                    onClick={() => this.handleBack(4)}
+                    disabled={index === 0}
+                    style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowLeft />
+                  </IconButton>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={959}>
+                  <IconButton
+                    onClick={() => this.handleBack(2)}
+                    disabled={index === 0}
+                    style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowLeft />
+                  </IconButton>
+                </MediaQuery>
               </Grid>
               <Grid item xs={10} md={7} className={classes}>
                 <TransitionGroup>
@@ -147,27 +150,51 @@ class Home extends Component {
                       spacing={1}
                       className={classes.cardContainer}
                     >
-                      {schedulesToDisplay.map((e, index) => {
-                        if (index < 4) {
-                          return (
-                            <Grid item xs={12} md={6}>
-                              <Card schedule={e} size="big" />
-                            </Grid>
-                          );
-                        }
-                      })}
+                      <MediaQuery minDeviceWidth={960}>
+                        {schedulesToDisplay.map((e, index) => {
+                          if (index < 4) {
+                            return (
+                              <Grid item xs={12} md={6}>
+                                <Card schedule={e} size="big" />
+                              </Grid>
+                            );
+                          }
+                        })}
+                      </MediaQuery>
+                      <MediaQuery maxDeviceWidth={956}>
+                        {schedulesToDisplay.map((e, index) => {
+                          if (index < 2) {
+                            return (
+                              <Grid item xs={12} md={6}>
+                                <Card schedule={e} size="big" />
+                              </Grid>
+                            );
+                          }
+                        })}
+                      </MediaQuery>
                     </Grid>
                   </CSSTransition>
                 </TransitionGroup>
               </Grid>
               <Grid item xs={1} md={1} className={classes.buttonColumn}>
-                <IconButton
-                  onClick={this.handleNext}
-                  disabled={index >= schedules.length - 4}
-                  style={{ padding: 0 }}
-                >
-                  <KeyboardArrowRight />
-                </IconButton>
+                <MediaQuery minDeviceWidth={960}>
+                  <IconButton
+                    onClick={() => this.handleNext(4)}
+                    disabled={index >= schedules.length - 4}
+                    style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowRight />
+                  </IconButton>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={959}>
+                  <IconButton
+                    onClick={() => this.handleNext(2)}
+                    disabled={index >= schedules.length - 2}
+                    style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowRight />
+                  </IconButton>
+                </MediaQuery>
               </Grid>
             </Grid>
           </Grid>

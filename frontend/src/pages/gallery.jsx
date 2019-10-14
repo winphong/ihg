@@ -15,8 +15,7 @@ const styles = theme => ({
   buttonColumn: {
     textAlign: "center",
     verticalAlign: "middle",
-    height: "100%",
-    backgroundColor: "pink"
+    height: "100%"
   },
   container: {
     textAlign: "center"
@@ -48,8 +47,11 @@ class Gallery extends Component {
             </Grid>
             {photos.map(photo => {
               return (
-                <Grid item xs={true} sm={4}>
-                  <img src={photo.images.standard_resolution.url} />
+                <Grid item xs={12} md={4}>
+                  <img
+                    src={photo.images.standard_resolution.url}
+                    style={{ width: "100%" }}
+                  />
                 </Grid>
               );
             })}
