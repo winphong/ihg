@@ -98,7 +98,7 @@ export default function Calendar({ schedules }) {
             if (index != 0) date.setDate(date.getDate() + 1);
             return (
               <Grid item xs={true}>
-                <div style={{ height: "5vh" }}>
+                <div>
                   <TransitionGroup>
                     <CSSTransition
                       key={`${weekNum}${date}`}
@@ -127,7 +127,7 @@ export default function Calendar({ schedules }) {
                     )}
                   </div>
                 </div>
-                <table>
+                <table style={{ textAlign: "center" }}>
                   <TransitionGroup>
                     <CSSTransition
                       key={`${weekNum}${date}`}
@@ -173,7 +173,6 @@ const styles = theme => ({
   },
   table: {
     border: "1px solid ivory",
-    margin: -2,
     width: "100%"
   },
   dateRow: {

@@ -122,7 +122,6 @@ class Results extends Component {
   handleSortBySport = sport => {
     arr = [];
     idx = 0;
-    console.log(this.state.sports[0]);
     // const schedules = [...this.state.originalSchedules].sort((a, b) => {
     //   return a.sport >= b.sport ? 1 : -1;
     // });

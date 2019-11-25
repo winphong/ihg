@@ -25,7 +25,8 @@ const styles = theme => ({
     height: "100%"
   },
   container: {
-    textAlign: "center"
+    textAlign: "center",
+    minHeight: "700px"
   },
   calendar: {
     [theme.breakpoints.up("md")]: {
@@ -38,7 +39,8 @@ const styles = theme => ({
   slider: {
     [theme.breakpoints.up("md")]: {
       marginBottom: "5%"
-    }
+    },
+    minHeight: "400px"
   }
 });
 
@@ -79,8 +81,8 @@ class Schedule extends Component {
             </Grid>
             {/* Calendar */}
             <Grid item container className={classes.container}>
-              <Grid item xs={0} md={3}>
-                Blank
+              <Grid item md={3}>
+                Schedules
               </Grid>
               <Grid item xs={12} md={9} className={classes.calendar}>
                 {schedules.length > 0 && <Calendar schedules={schedules} />}
