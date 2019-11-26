@@ -16,15 +16,6 @@ const styles = theme => ({
     fontWeight: "900",
     color: "#C8B06B"
   },
-  // paper: {
-  //   display: "flex",
-  //   overflow: "auto",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   margin: theme.spacing(1),
-  //   padding: theme.spacing(2),
-  //   textAlign: "center"
-  // },
   buttonColumn: {
     textAlign: "center",
     verticalAlign: "middle",

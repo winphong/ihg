@@ -7,11 +7,11 @@ import { useMediaQuery } from "react-responsive";
 export default function ResultRowCarnival({ schedule }) {
   const classes = useStyles();
 
-  const sortedHall = schedule.hall[0].score
-    ? schedule.hall.sort((a, b) => {
+  const sortedHall = schedule.halls[0].score
+    ? schedule.halls.sort((a, b) => {
         return a.score >= b.score ? 1 : -1;
       })
-    : schedule.hall.sort((a, b) => {
+    : schedule.halls.sort((a, b) => {
         return a.name >= b.name ? 1 : -1;
       });
   const isLaptop = useMediaQuery({ minDeviceWidth: 960 });

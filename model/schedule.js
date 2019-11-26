@@ -8,7 +8,7 @@ const Schedule = mongoose.model(
       type: String,
       required: true
     },
-    hall: [
+    halls: [
       {
         name: {
           type: String,
@@ -51,7 +51,7 @@ const Schedule = mongoose.model(
     },
     stage: {
       type: String,
-      enum: ["Prelim", "Semi-Finals", "Finals", "Carnival"],
+      enum: ["Prelims", "Semi-Finals", "Finals", "Carnival"],
       required: true
     },
     group: {

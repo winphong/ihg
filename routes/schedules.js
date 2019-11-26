@@ -10,21 +10,29 @@ router.get("/", async (req, res) => {
   res.send(schedule);
 });
 
+router.get("/:id", async (req, res) => {
+  const schedule = await Schedule.findById(req.params.id);
+  if (!schedule) return res.status(400).send("Schedule not found!");
+  res.send(schedule);
+});
+
 // create new schedules
 router.post("/", async (req, res) => {
   let hall = [];
   Promise.all(
-    req.body.hall.map(async e => {
-      await Hall.findOne({ name: e }).then(resp => {
+    req.body.halls.map(async e => {
+      await Hall.findOne({ abbreviation: e }).then(resp => {
         hall.push(resp);
       });
     })
   )
     .then(async () => {
+      console.log(hall);
       hall = hall.map(e => {
         return _.pick(e, ["name", "imgUrl", "colourCode", "abbreviation"]);
       });
-      req.body.hall = hall;
+      req.body.halls = hall;
+      console.log(req.body);
       const schedule = new Schedule(req.body);
       await schedule.save();
       res.send(schedule);
@@ -39,7 +47,7 @@ router.put("/updateScore/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
   if (!schedule) return res.status(400).send("Schedule not found!");
 
-  schedule.hall = req.body.hall;
+  schedule.halls = req.body.halls;
   await schedule.save();
   res.send(schedule);
 });

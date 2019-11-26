@@ -127,7 +127,7 @@ export default function Calendar({ schedules }) {
                     )}
                   </div>
                 </div>
-                <table style={{ textAlign: "center" }}>
+                <table style={{ textAlign: "center", marginRight: "-100px" }}>
                   <TransitionGroup>
                     <CSSTransition
                       key={`${weekNum}${date}`}
@@ -172,19 +172,18 @@ const styles = theme => ({
     padding: 0
   },
   table: {
-    border: "1px solid ivory",
     width: "100%"
   },
   dateRow: {
     [theme.breakpoints.down("sm")]: {
-      width: "33%"
+      width: "32%"
     },
     position: "absolute",
     width: "10.2%"
   },
   column: {
     [theme.breakpoints.down("sm")]: {
-      width: "33%"
+      width: "32%"
     },
     position: "absolute",
     width: "10.2%"

@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   calendar: {
     [theme.breakpoints.up("md")]: {
-      paddingRight: "3%"
+      paddingRight: "2%"
     },
     [theme.breakpoints.down("md")]: {
       margin: "0 1%"

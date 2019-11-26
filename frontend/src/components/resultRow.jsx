@@ -7,8 +7,8 @@ import { useMediaQuery } from "react-responsive";
 export default function ResultRow({ schedule }) {
   const classes = useStyles();
   const hasScore =
-    schedule.hall[0].score >= 0 && schedule.hall[1].score >= 0 ? true : false;
-  const firstWinner = schedule.hall[0].score > schedule.hall[1].score;
+    schedule.halls[0].score >= 0 && schedule.halls[1].score >= 0 ? true : false;
+  const firstWinner = schedule.halls[0].score > schedule.halls[1].score;
 
   const isLaptop = useMediaQuery({ minDeviceWidth: 960 });
 
@@ -27,9 +27,9 @@ export default function ResultRow({ schedule }) {
           md={2}
           className={classes.bar}
           style={{
-            backgroundColor: schedule.hall[0].colourCode,
+            backgroundColor: schedule.halls[0].colourCode,
             border:
-              schedule.hall[0].colourCode === "#ffffff"
+              schedule.halls[0].colourCode === "#ffffff"
                 ? "0.005vh solid black"
                 : ``
           }}
@@ -40,9 +40,9 @@ export default function ResultRow({ schedule }) {
           md={2}
           className={classes.bar}
           style={{
-            backgroundColor: schedule.hall[1].colourCode,
+            backgroundColor: schedule.halls[1].colourCode,
             border:
-              schedule.hall[1].colourCode === "#ffffff"
+              schedule.halls[1].colourCode === "#ffffff"
                 ? "0.005vh solid black"
                 : ``
           }}
@@ -81,7 +81,7 @@ export default function ResultRow({ schedule }) {
               : classes.neutral
           }
         >
-          {schedule.hall[0].abbreviation}
+          {schedule.halls[0].abbreviation}
         </Grid>
         {/* score 1 */}
         <Grid
@@ -95,7 +95,7 @@ export default function ResultRow({ schedule }) {
               : classes.neutral
           }
         >
-          {schedule.hall[0].score}
+          {schedule.halls[0].score}
         </Grid>
         {/* versus */}
         <Grid item xs={1}>
@@ -113,7 +113,7 @@ export default function ResultRow({ schedule }) {
               : classes.neutral
           }
         >
-          {schedule.hall[1].score}
+          {schedule.halls[1].score}
         </Grid>
         {/* hall 2 */}
         <Grid
@@ -128,7 +128,7 @@ export default function ResultRow({ schedule }) {
               : classes.neutral
           }
         >
-          {schedule.hall[1].abbreviation}
+          {schedule.halls[1].abbreviation}
         </Grid>
         {!isLaptop && (
           <Grid item xs={12} style={{ textAlign: "left", paddingLeft: "2%" }}>

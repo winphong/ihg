@@ -15,23 +15,23 @@ export default function Card({ schedule, center, size }) {
     >
       <Grid container>
         <Grid item xs={5}>
-          <img style={{ width: "90%" }} src={schedule.hall[0].imgUrl} />
+          <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
         </Grid>
         <Grid item xs={2} className={classes.vs}></Grid>
         <Grid item xs={5}>
-          <img style={{ width: "90%" }} src={schedule.hall[1].imgUrl} />
+          <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
         </Grid>
       </Grid>
       <Grid container>
         <Grid item xs={5}>
           <span className={classes.hall}>
-            {schedule.hall[0].name.toUpperCase()}
+            {schedule.halls[0].name.toUpperCase()}
           </span>
         </Grid>
         <Grid item xs={2} className={classes.vs}></Grid>
         <Grid item xs={5}>
           <span className={classes.hall}>
-            {schedule.hall[1].name.toUpperCase()}
+            {schedule.halls[1].name.toUpperCase()}
           </span>
         </Grid>
       </Grid>
