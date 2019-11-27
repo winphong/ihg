@@ -4,6 +4,7 @@ const schedule = require("../routes/schedules");
 const hall = require("../routes/halls");
 const sport = require("../routes/sports");
 const enquiry = require("../routes/enquiries");
+const admin = require("../routes/admins");
 
 module.exports = function(app) {
   app.use(express.json());
@@ -12,6 +13,7 @@ module.exports = function(app) {
   app.use("/api/sport", sport);
   app.use("/api/enquiry", enquiry);
   app.use("/api/images", express.static("images"));
+  app.use("/api/admin", admin);
 
   app.use(error);
 };

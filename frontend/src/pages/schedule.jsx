@@ -9,6 +9,7 @@ import { BarChart, ResponsiveContainer } from "recharts";
 import { CSSTransition } from "react-transition-group";
 import Slider from "../components/slider";
 import { Typography } from "@material-ui/core";
+import miscService from "../services/miscService";
 
 const styles = theme => ({
   title: {
@@ -46,17 +47,20 @@ const styles = theme => ({
 
 class Schedule extends Component {
   state = {
-    schedules: []
+    schedules: [],
+    isAdmin: false
   };
 
   async componentDidMount() {
     const { data: schedules } = await scheduleService.getAllSchedules();
-    this.setState({ schedules });
+    const admin = await miscService.getCurrentAdmin();
+    const isAdmin = admin ? true : false;
+    this.setState({ schedules, isAdmin });
   }
 
   render() {
     const { classes } = this.props;
-    const { schedules } = this.state;
+    const { schedules, isAdmin } = this.state;
 
     return (
       <Grid container className={classes.container}>
@@ -85,7 +89,9 @@ class Schedule extends Component {
                 Schedules
               </Grid>
               <Grid item xs={12} md={9} className={classes.calendar}>
-                {schedules.length > 0 && <Calendar schedules={schedules} />}
+                {schedules.length > 0 && (
+                  <Calendar schedules={schedules} isAdmin={isAdmin} />
+                )}
               </Grid>
             </Grid>
           </React.Fragment>

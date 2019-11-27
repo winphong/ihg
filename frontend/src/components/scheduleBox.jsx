@@ -10,7 +10,7 @@ import { Info } from "@material-ui/icons";
 
 const colours = ["white", "green", "maroon", "blue", "yellow", "orange"];
 
-export default function ScheduleBox({ schedule }) {
+export default function ScheduleBox({ schedule, isAdmin }) {
   const classes = useStyles();
 
   return (
@@ -74,20 +74,22 @@ export default function ScheduleBox({ schedule }) {
         {schedule.halls[1].abbreviation}
       </Grid>
       <Grid item xs={12}>
-        <Link
-          style={{
-            color: "#0074d9",
-            cursor: "pointer",
-            textDecoration: "none"
-          }}
-          to={{
-            pathname: `/admin/score/${schedule._id}`,
-            data: schedule // your data array of objects
-          }}
-        >
-          <Typography>{schedule.sport}</Typography>
-        </Link>
-        <Link to={{}}></Link>
+        {isAdmin && (
+          <Link
+            style={{
+              color: "#0074d9",
+              cursor: "pointer",
+              textDecoration: "none"
+            }}
+            to={{
+              pathname: `/admin/score/${schedule._id}`,
+              data: schedule // your data array of objects
+            }}
+          >
+            <Typography>{schedule.sport}</Typography>
+          </Link>
+        )}
+        {!isAdmin && <Typography>{schedule.sport}</Typography>}
         <Typography>
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h'")}
         </Typography>

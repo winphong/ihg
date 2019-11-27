@@ -13,6 +13,8 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DayjsUtils from "@date-io/dayjs";
 import ScoreForm from "./pages/admin/scoreForm";
 import StandingForm from "./pages/admin/standingForm";
+import Login from "./pages/admin/login";
+import ProtectedRoute from "./components/protectedRoute";
 
 class App extends Component {
   // detectmobile() {
@@ -47,11 +49,21 @@ class App extends Component {
             <Route path="/results" component={Results} />
             <Route path="/gallery" component={Gallery} />
             <Route path="/contact" component={Contact} />
-            <Route path="/admin/schedule" component={ScheduleForm} />
-            <Route path="/admin/score/:id" component={ScoreForm} />
-            <Route path="/admin/standing" component={StandingForm} />
+            <Route path="/admin" exact component={Login} />
+            <ProtectedRoute
+              path="/admin/schedule"
+              exact
+              component={ScheduleForm}
+            />
+            <ProtectedRoute
+              path="/admin/schedule/:id"
+              component={ScheduleForm}
+            />
+            <ProtectedRoute path="/admin/score/:id" component={ScoreForm} />
+            <ProtectedRoute path="/admin/standing" component={StandingForm} />+
+            {/* <Route path="/not-found" component={NotFound} /> */}
             <Redirect from="/" exact to="/home" />
-            <Redirect to="not-found" />
+            <Redirect to="/not-found" />
           </Switch>
           <Footer />
         </React.Fragment>

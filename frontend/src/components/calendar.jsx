@@ -10,7 +10,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import { useMediaQuery } from "react-responsive";
 
-export default function Calendar({ schedules }) {
+export default function Calendar({ schedules, isAdmin }) {
   const classes = useStyles();
   const [days, setDay] = React.useState([
     { num: 7, name: "Sunday" },
@@ -45,6 +45,7 @@ export default function Calendar({ schedules }) {
   }
 
   function handleNext(isMobile) {
+    console.log(isMobile);
     if (isMobile) {
       setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
       current = current + 3;
@@ -68,7 +69,7 @@ export default function Calendar({ schedules }) {
       <Grid item xs={2}>
         <IconButton
           disabled={date <= new Date("5 Jan 2020")}
-          onClick={notMobile ? handleBack : () => handleBack(true)}
+          onClick={notMobile ? () => handleBack(false) : () => handleBack(true)}
         >
           <KeyboardArrowLeft />
         </IconButton>
@@ -79,7 +80,7 @@ export default function Calendar({ schedules }) {
       <Grid item xs={2}>
         <IconButton
           disabled={date >= new Date("16 Feb 2020")}
-          onClick={notMobile ? handleNext : () => handleNext(true)}
+          onClick={notMobile ? () => handleNext(false) : () => handleNext(true)}
         >
           <KeyboardArrowRight />
         </IconButton>
@@ -145,7 +146,10 @@ export default function Calendar({ schedules }) {
                               return (
                                 <tr key={schedule._id}>
                                   <td className={classes.table}>
-                                    <ScheduleBox schedule={schedule} />
+                                    <ScheduleBox
+                                      schedule={schedule}
+                                      isAdmin={isAdmin}
+                                    />
                                   </td>
                                 </tr>
                               );
