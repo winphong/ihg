@@ -39,15 +39,13 @@ class Contact extends Component {
     }
   };
 
-  async componentDidMount() {
-    let { data: enquiries } = await miscService.getAllEnquiries();
-    console.log(enquiries);
-  }
+  // async componentDidMount() {
+  //   let { data: enquiries } = await miscService.getAllEnquiries();
+  // }
 
   handleChange = ({ currentTarget: input }) => {
     const enquiry = { ...this.state.enquiry };
     enquiry[input.name] = input.value;
-    console.log(enquiry);
     this.setState({ enquiry });
   };
 
@@ -58,7 +56,6 @@ class Contact extends Component {
 
   render() {
     const { classes } = this.props;
-    const { photos } = this.state;
 
     return (
       <React.Fragment>

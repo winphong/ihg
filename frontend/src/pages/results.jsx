@@ -1,15 +1,14 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
 import hallService from "../services/hallService";
-import Container from "@material-ui/core/Container";
 import scheduleService from "../services/scheduleService";
 import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
 import SportsList from "../components/sportsList";
 import ResultBar from "../components/resultBar";
-import { Divider, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
@@ -18,10 +17,15 @@ import { Typography } from "@material-ui/core";
 import dateformat from "dateformat";
 import "../App.css";
 import MediaQuery from "react-responsive";
+import miscService from "../services/miscService";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = theme => ({
   title: {
-    fontSize: "50px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "40px"
+    },
+    fontSize: "1000%",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%",
@@ -67,18 +71,23 @@ class Results extends Component {
     limit: 11,
     byDate: true,
     selectedSport: {},
-    sports: []
+    sports: [],
+    isAdmin: false,
+    redirect: false
   };
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getAllSchedules();
     const { data: sports } = await sportService.getAllSports();
+    const admin = miscService.getCurrentAdmin();
+    const isAdmin = admin ? true : false;
     this.setState({
       halls,
       schedules,
       originalSchedules: [...schedules],
-      sports
+      sports,
+      isAdmin
     });
   }
 
@@ -143,6 +152,11 @@ class Results extends Component {
     });
   };
 
+  handleUpdateStanding = e => {
+    e.preventDefault();
+    this.setState({ redirect: true });
+  };
+
   render() {
     const { classes } = this.props;
     const {
@@ -152,8 +166,12 @@ class Results extends Component {
       originalSchedules,
       byDate,
       sports,
-      selectedSport
+      selectedSport,
+      isAdmin,
+      redirect
     } = this.state;
+
+    if (redirect) return <Redirect to="/admin/standing" />;
 
     let limit = this.state.limit;
 
@@ -161,18 +179,29 @@ class Results extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           {/* Standings */}
-          <Typography className={classes.title}>RANKING</Typography>
-          <Typography
-            className={classes.title}
-            style={{
-              color: "black",
-              fontSize: "100%",
-              fontStyle: "italic",
-              textAlign: "center"
-            }}
-          >
-            {dateformat(new Date(), "dd'th' mmm yyyy")}
-          </Typography>
+          <Grid container alignItems="center">
+            <Grid item xs={1} />
+            <Grid item xs={10}>
+              <Typography className={classes.title}>RANKING</Typography>
+              <Typography
+                className={classes.title}
+                style={{
+                  color: "black",
+                  fontSize: "300%",
+                  textAlign: "center"
+                }}
+              >
+                {dateformat(new Date(), "dd'th' mmm yyyy")}
+              </Typography>
+            </Grid>
+            <Grid item xs={1}>
+              {isAdmin && (
+                <IconButton onClick={this.handleUpdateStanding}>
+                  <EditRoundedIcon />
+                </IconButton>
+              )}
+            </Grid>
+          </Grid>
           <Grid container className={classes.barChart}>
             <Grid item xs={0} sm={1} />
             <Grid item xs={12} sm={2}>
@@ -253,6 +282,7 @@ class Results extends Component {
                             selectedSport={selectedSport}
                             byDate={byDate}
                             limit={limit}
+                            isAdmin={isAdmin}
                           />
                         </div>
                       </MediaQuery>
@@ -268,6 +298,7 @@ class Results extends Component {
                             selectedSport={selectedSport}
                             byDate={byDate}
                             limit={limit}
+                            isAdmin={isAdmin}
                           />
                         </div>
                       </MediaQuery>

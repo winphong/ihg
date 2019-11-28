@@ -18,7 +18,8 @@ const styles = theme => ({
     color: "#C8B06B"
   },
   container: {
-    textAlign: "center"
+    textAlign: "center",
+    height: "730px"
   },
   formControl: {
     marginTop: theme.spacing(1),
@@ -33,7 +34,6 @@ class StandingForm extends Component {
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
-    console.log(halls);
     this.setState({ halls });
   }
 
@@ -47,7 +47,8 @@ class StandingForm extends Component {
   };
 
   handleSubmit = async () => {
-    console.log(this.state.halls);
+    const response = await hallService.updateStandings(this.state.halls);
+    console.log(response);
   };
 
   render() {

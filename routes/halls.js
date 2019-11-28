@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { Hall, validate } = require("../model/hall");
+const _ = require("lodash");
 
 router.get("/", async (req, res) => {
-  const hall = await Hall.find();
+  const hall = await Hall.find().sort({ name: 1 });
   res.send(hall);
 });
 
@@ -15,16 +16,35 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
-  const { name, malePoint, femalePoint } = req.body;
-  const hall = await Hall.findOne({ name });
-  if (!hall) res.status(404).send("Hall doesn't exist!");
-
-  hall.malePoint = malePoint;
-  hall.femalePoint = femalePoint;
-  hall.totalPoint = malePoint + femalePoint;
-
-  await hall.save();
-  res.send(hall);
+  const halls = [];
+  await Promise.all(
+    req.body.map(async hall => {
+      const updateDetails = _.pick(hall, [
+        "malePoint",
+        "femalePoint",
+        "totalPoint"
+      ]);
+      await Hall.findByIdAndUpdate(
+        hall._id,
+        // All top level update keys which are not atomic operation names are treated as set operations:
+        { $set: updateDetails },
+        { new: true }
+      )
+        .then(async response => {
+          console.log("response", response);
+          halls.push(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    })
+  )
+    .then(() => {
+      res.send(halls);
+    })
+    .catch(error => {
+      res.status(404).send(error);
+    });
 });
 
 module.exports = router;

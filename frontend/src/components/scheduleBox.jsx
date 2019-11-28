@@ -82,7 +82,7 @@ export default function ScheduleBox({ schedule, isAdmin }) {
               textDecoration: "none"
             }}
             to={{
-              pathname: `/admin/score/${schedule._id}`,
+              pathname: `/admin/schedule/${schedule._id}`,
               data: schedule // your data array of objects
             }}
           >

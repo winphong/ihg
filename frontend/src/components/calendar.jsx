@@ -61,8 +61,6 @@ export default function Calendar({ schedules, isAdmin }) {
   }
 
   const notMobile = useMediaQuery({ minDeviceWidth: 960 });
-  console.log(notMobile);
-  console.log(mobileDays);
 
   return (
     <Grid container direction="row" justify="center" justifyContent="center">

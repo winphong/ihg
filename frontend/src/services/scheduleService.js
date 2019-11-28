@@ -18,6 +18,10 @@ function createSchedule(req) {
   return http.post(apiEndpoint, req);
 }
 
+function updateSchedule(id, req) {
+  return http.put(getUrl(id), req);
+}
+
 function updateScore(id, req) {
   return http.put(getUrl(`/updateScore/${id}`), req);
 }
@@ -26,5 +30,6 @@ export default {
   getSchedule,
   getAllSchedules,
   createSchedule,
-  updateScore
+  updateScore,
+  updateSchedule
 };

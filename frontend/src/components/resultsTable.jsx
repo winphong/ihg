@@ -10,7 +10,8 @@ export default function ResultsTable({
   schedules,
   selectedSport,
   byDate,
-  limit
+  limit,
+  isAdmin
 }) {
   const classes = useStyles();
   let currentDate = "";
@@ -34,9 +35,9 @@ export default function ResultsTable({
                   {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
                 </p>
                 {schedule.stage === "Carnival" ? (
-                  <ResultRowCarnival schedule={schedule} />
+                  <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
                 ) : (
-                  <ResultRow schedule={schedule} />
+                  <ResultRow schedule={schedule} isAdmin={isAdmin} />
                 )}
                 <Divider />
               </div>
@@ -45,9 +46,9 @@ export default function ResultsTable({
           return (
             <div>
               {schedule.stage === "Carnival" ? (
-                <ResultRowCarnival schedule={schedule} />
+                <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
               ) : (
-                <ResultRow schedule={schedule} />
+                <ResultRow schedule={schedule} isAdmin={isAdmin} />
               )}
               <Divider />
             </div>
@@ -58,23 +59,4 @@ export default function ResultsTable({
   );
 }
 
-const useStyles = makeStyles({
-  container: {
-    textAlign: "center",
-    margin: "1vh",
-    height: "3.5vh"
-    // backgroundColor: "gold"
-  },
-  bar: {
-    height: "0.6vh"
-  },
-  winner: {
-    marginTop: "1vh",
-    fontWeight: "bold"
-    // backgroundColor: "pink"
-  },
-  neutral: {
-    marginTop: "1vh"
-    // backgroundColor: "beige"
-  }
-});
+const useStyles = makeStyles({});

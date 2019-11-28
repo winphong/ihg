@@ -9,7 +9,6 @@ import sportService from "../services/sportService";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import miscService from "../services/miscService";
 import path from "path";
-import cookie from "react-cookies";
 import "../App.css";
 import MediaQuery from "react-responsive";
 
@@ -28,11 +27,8 @@ const styles = theme => ({
     verticalAlign: "middle",
     height: "100%"
   },
-  hall: {
-    margin: 20,
-    border: 1,
-    borderColor: "black",
-    backgroundColor: "transparent"
+  border: {
+    padding: "2%"
   },
   staticImage: {
     width: "70%"
@@ -41,6 +37,18 @@ const styles = theme => ({
     fontSize: "16px",
     fontWeight: "500",
     lineHeight: "100%"
+  },
+  subtitle: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "30px",
+      textAlign: "center"
+    },
+    textAlign: "left",
+    fontSize: "60px",
+    fontWeight: "900",
+    color: "#C8B06B",
+    lineHeight: "100%",
+    paddingBottom: "2%"
   }
 });
 
@@ -79,46 +87,51 @@ class About extends Component {
           <Grid container style={{ textAlign: "center" }}>
             <Grid item xs={12}>
               {/* About IHG */}
-              <Typography className={classes.title}>ABOUT IHG</Typography>{" "}
+              <Typography className={classes.title}>ABOUT IHG</Typography>
               Description...........
             </Grid>
             {/* Hall of NUS */}
-            <Grid item xs={12} className={classes.hall}>
-              <Grid container>
-                <Grid item xs={12} md={3}>
-                  Hall of NUS
-                </Grid>
-                <Grid item xs={12} md={9}>
-                  <Grid container>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/RH.png" />
-                      <p className={classes.p}>Raffles Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/EH.png" />
-                      <p className={classes.p}>Eusoff Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/TH.png" />
-                      <p className={classes.p}> Temasek Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/SH.png" />
-                      <p className={classes.p}> Sheares Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/KE7.png" />
-                      <p className={classes.p}> King Edward VII Hall</p>
-                      <p />
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/KR.png" />
-                      <p className={classes.p}> Kent Ridge Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/PGP.png" />
-                      <p>Prince George's Park Residence</p>
-                    </Grid>
+            <Grid
+              item
+              xs={12}
+              container
+              className={classes.border}
+              alignItems="flex-end"
+            >
+              <Grid item xs={12} md={3}>
+                <Typography className={classes.subtitle}>HALLS</Typography>
+                <Typography className={classes.subtitle}>OF NUS</Typography>
+              </Grid>
+              <Grid item xs={12} md={9}>
+                <Grid container>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/RH.png" />
+                    <p className={classes.p}>Raffles Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/EH.png" />
+                    <p className={classes.p}>Eusoff Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/TH.png" />
+                    <p className={classes.p}> Temasek Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/SH.png" />
+                    <p className={classes.p}> Sheares Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/KE7.png" />
+                    <p className={classes.p}> King Edward VII Hall</p>
+                    <p />
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/KR.png" />
+                    <p className={classes.p}> Kent Ridge Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/PGP.png" />
+                    <p>Prince George's Park Residence</p>
                   </Grid>
                 </Grid>
               </Grid>
@@ -126,96 +139,132 @@ class About extends Component {
             </Grid>
 
             {/* Sports Director */}
-            <Grid item xs={12} className={classes.hall}>
-              <Grid container>
-                <MediaQuery maxWidth={960}>
-                  <Grid item xs={12} md={3}>
-                    Sports Directors
+            <Grid item container xs={12} alignItems="flex-end">
+              <MediaQuery maxWidth={960}>
+                <Grid item xs={12} md={3}>
+                  Sports Directors
+                </Grid>
+              </MediaQuery>
+              <Grid item xs={12} md={9}>
+                <Grid container>
+                  <Grid item xs={12} md={3} />
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/RH.png" />
+                    <p>Raffles Hall</p>
                   </Grid>
-                </MediaQuery>
-                <Grid item xs={12} md={9}>
-                  <Grid container>
-                    <Grid item xs={12} md={3} />
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/RH.png" />
-                      <p>Raffles Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/EH.png" />
-                      <p>Eusoff Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/TH.png" />
-                      <p> Temasek Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/SH.png" />
-                      <p> Sheares Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/KE7.png" />
-                      <p> King Edward VII Hall</p>
-                      <p />
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/KR.png" />
-                      <p> Kent Ridge Hall</p>
-                    </Grid>
-                    <Grid item xs={6} md={3}>
-                      <img className={classes.staticImage} src="/PGP.png" />
-                      <p>Prince George's Park Residence</p>
-                    </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/EH.png" />
+                    <p>Eusoff Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/TH.png" />
+                    <p> Temasek Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/SH.png" />
+                    <p> Sheares Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/KE7.png" />
+                    <p> King Edward VII Hall</p>
+                    <p />
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/KR.png" />
+                    <p> Kent Ridge Hall</p>
+                  </Grid>
+                  <Grid item xs={6} md={3}>
+                    <img className={classes.staticImage} src="/PGP.png" />
+                    <p>Prince George's Park Residence</p>
                   </Grid>
                 </Grid>
-                <MediaQuery minWidth={961}>
-                  <Grid item xs={12} md={3}>
-                    Sports Directors
-                  </Grid>
-                </MediaQuery>
               </Grid>
+              <MediaQuery minWidth={961}>
+                <Grid item xs={12} md={3}>
+                  <Typography className={classes.subtitle}>
+                    SPORTS DIRECTORS
+                  </Typography>
+                </Grid>
+              </MediaQuery>
               <Divider />
             </Grid>
+
             {/* Sports */}
-            <Grid item xs={12} md={3}>
-              SPORTS
-            </Grid>
             <Grid
-              item
-              xs={12}
-              md={4}
-              style={{ textAlign: "left", height: "300px" }}
+              container
+              style={{ height: "500px" }}
+              className={classes.border}
             >
-              <TransitionGroup>
-                <CSSTransition
-                  key={selectedSport._id}
-                  timeout={400}
-                  classNames="fade"
-                >
-                  <div style={{ position: "absolute" }}>
-                    <img style={{ width: "150px" }} src={this.state.imgUrl} />
-                    <Typography> {selectedSport.name} </Typography>
-                    <Typography> {selectedSport.description} </Typography>
-                  </div>
-                </CSSTransition>
-              </TransitionGroup>
-            </Grid>
-            <Grid item container xs={12} md={5}>
-              {sports.map(sport => {
-                return (
-                  <Grid item xs={6}>
-                    <Button
+              <Grid
+                item
+                xs={12}
+                md={3}
+                style={{
+                  backgroundColor: "gold",
+                  display: "flex",
+                  alignItems: "flex-end"
+                }}
+              >
+                <Typography className={classes.subtitle}>SPORTS</Typography>
+              </Grid>
+              <Grid
+                container
+                item
+                xs={12}
+                md={4}
+                style={{
+                  textAlign: "left",
+                  backgroundColor: "pink"
+                }}
+              >
+                <TransitionGroup>
+                  <CSSTransition
+                    key={selectedSport._id}
+                    timeout={400}
+                    classNames="fade"
+                  >
+                    <div
                       style={{
-                        backgroundColor: "transparent"
+                        position: "absolute",
+                        margin: "2% 0 0 3%"
                       }}
-                      disableTouchRipple="true"
-                      disableRipple="true"
-                      onClick={() => this.handleClick(sport)}
                     >
-                      {sport.name}
-                    </Button>
-                  </Grid>
-                );
-              })}
+                      <img
+                        style={{ height: "250px" }}
+                        src={this.state.imgUrl}
+                      />
+                      <Typography style={{ margin: "3% 0" }}>
+                        {selectedSport.name}
+                      </Typography>
+                      <Typography> {selectedSport.description} </Typography>
+                    </div>
+                  </CSSTransition>
+                </TransitionGroup>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                md={5}
+                style={{ backgroundColor: "grey" }}
+              >
+                {sports.map(sport => {
+                  return (
+                    <Grid item xs={6}>
+                      <Button
+                        style={{
+                          backgroundColor: "transparent"
+                        }}
+                        disableTouchRipple="true"
+                        disableRipple="true"
+                        onClick={() => this.handleClick(sport)}
+                      >
+                        {sport.name}
+                      </Button>
+                    </Grid>
+                  );
+                })}
+              </Grid>
             </Grid>
           </Grid>
         </CSSTransition>

@@ -46,7 +46,7 @@ const sports = [
   "Badminton",
   "Basketball",
   "Floorball",
-  "Frisbee",
+  "Ultimate Frisbee",
   "Handball",
   "Netball",
   "Road Relay",
@@ -86,8 +86,17 @@ class ScheduleForm extends Component {
   };
 
   async componentDidMount() {
-    const halls = await hallService.getAllHalls();
-    this.setState({ halls: halls.data });
+    const { data: halls } = await hallService.getAllHalls();
+    const id = this.props.match.params.id;
+    var schedule = { ...this.state.schedule };
+    const checkbox = { ...this.state.checkbox };
+    if (id) {
+      schedule = (await scheduleService.getSchedule(id)).data;
+      schedule.halls.map(hall => {
+        checkbox[hall.abbreviation] = true;
+      });
+    }
+    this.setState({ halls, schedule, checkbox });
   }
 
   handleChange = ({ target: input }) => {
@@ -117,6 +126,7 @@ class ScheduleForm extends Component {
   handleSubmit = async () => {
     const schedule = { ...this.state.schedule };
     const checkbox = { ...this.state.checkbox };
+    const id = this.props.match.params.id;
     const arr = [];
     for (const key in checkbox) {
       if (checkbox.hasOwnProperty(key)) {
@@ -125,13 +135,13 @@ class ScheduleForm extends Component {
     }
     schedule.halls = arr;
     schedule.endTime = schedule.startTime;
-    await scheduleService.createSchedule(schedule);
+    if (id) await scheduleService.updateSchedule(id, schedule);
+    else await scheduleService.createSchedule(schedule);
   };
 
   render() {
     const { classes } = this.props;
-    const schedule = this.state.schedule;
-    const checkbox = this.state.checkbox;
+    const { schedule, checkbox, halls } = this.state;
 
     return (
       <React.Fragment>
@@ -186,7 +196,7 @@ class ScheduleForm extends Component {
                         Halls
                       </FormLabel>
                       <FormGroup>
-                        {this.state.halls.map(hall => {
+                        {halls.map(hall => {
                           return (
                             <FormControlLabel
                               control={
@@ -225,6 +235,7 @@ class ScheduleForm extends Component {
                         fullWidth
                         onChange={this.handleChange}
                         className={classes.formControl}
+                        value={schedule.venue}
                       />
                     </Grid>
 
@@ -235,7 +246,7 @@ class ScheduleForm extends Component {
                       >
                         <FormLabel>Gender</FormLabel>
                         <RadioGroup
-                          value={this.state.schedule.gender}
+                          value={schedule.gender}
                           onChange={this.handleRadioChange}
                         >
                           {["Male", "Female", "Mixed"].map(gender => {
@@ -268,9 +279,11 @@ class ScheduleForm extends Component {
                         input={<OutlinedInput />}
                       >
                         <MenuItem value=""></MenuItem>
-                        {["Prelims", "Semi-Finals", "Finals"].map(stage => {
-                          return <MenuItem value={stage}>{stage}</MenuItem>;
-                        })}
+                        {["Prelims", "Semi-Finals", "Finals", "Carnival"].map(
+                          stage => {
+                            return <MenuItem value={stage}>{stage}</MenuItem>;
+                          }
+                        )}
                       </Select>
                       {/* <FormHelperText>Auto width</FormHelperText> */}
                     </FormControl>

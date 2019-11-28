@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
-export default function ResultRowCarnival({ schedule }) {
+export default function ResultRowCarnival({ schedule, isAdmin }) {
   const classes = useStyles();
 
   const sortedHall = schedule.halls[0].score
@@ -29,6 +30,7 @@ export default function ResultRowCarnival({ schedule }) {
           return (
             <Grid
               item
+              key={hall.colourCode}
               xs={1}
               className={classes.bar}
               style={{
@@ -48,9 +50,27 @@ export default function ResultRowCarnival({ schedule }) {
           md={3}
           style={{ textAlign: "left", paddingLeft: "2%" }}
         >
-          <strong>
-            {schedule.sport} {schedule.stage}
-          </strong>
+          {isAdmin && (
+            <Link
+              style={{
+                color: "#0074d9",
+                cursor: "pointer",
+                textDecoration: "none"
+              }}
+              to={{
+                pathname: `/admin/score/${schedule._id}`
+              }}
+            >
+              <strong>
+                {schedule.sport} {schedule.stage}
+              </strong>
+            </Link>
+          )}
+          {!isAdmin && (
+            <strong>
+              {schedule.sport} {schedule.stage}
+            </strong>
+          )}
         </Grid>
         {isLaptop && (
           <Grid
@@ -66,11 +86,7 @@ export default function ResultRowCarnival({ schedule }) {
         <Grid item container xs={7} md={5} style={{ textAlign: "center" }}>
           {sortedHall.map((hall, index) => {
             return (
-              <Grid
-                item
-                xs={true}
-                // sm={12 / sortedHall.length}
-              >
+              <Grid item xs={true} key={index}>
                 <div
                   style={{
                     fontWeight: hall.score

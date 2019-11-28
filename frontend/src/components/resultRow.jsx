@@ -3,8 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
-export default function ResultRow({ schedule }) {
+export default function ResultRow({ schedule, isAdmin }) {
   const classes = useStyles();
   const hasScore =
     schedule.halls[0].score >= 0 && schedule.halls[1].score >= 0 ? true : false;
@@ -57,9 +58,27 @@ export default function ResultRow({ schedule }) {
           md={3}
           style={{ textAlign: "left", paddingLeft: "2%" }}
         >
-          <strong>
-            {schedule.sport} {schedule.stage}
-          </strong>
+          {isAdmin && (
+            <Link
+              style={{
+                color: "#0074d9",
+                cursor: "pointer",
+                textDecoration: "none"
+              }}
+              to={{
+                pathname: `/admin/score/${schedule._id}`
+              }}
+            >
+              <strong>
+                {schedule.sport} {schedule.stage}
+              </strong>
+            </Link>
+          )}
+          {!isAdmin && (
+            <strong>
+              {schedule.sport} {schedule.stage}
+            </strong>
+          )}
         </Grid>
         {/* sports venue / timing */}
         {isLaptop && (
@@ -143,18 +162,18 @@ export default function ResultRow({ schedule }) {
 
 const useStyles = makeStyles({
   container: {
-    textAlign: "center"
-    // backgroundColor: "gold"
+    textAlign: "center",
+    backgroundColor: "gold"
   },
   bar: {
-    height: "0.6vh",
+    height: "1%",
     margin: "1.5% 0"
   },
   winner: {
-    fontWeight: "bold"
-    // backgroundColor: "pink"
+    fontWeight: "bold",
+    backgroundColor: "pink"
   },
   neutral: {
-    // backgroundColor: "beige"
+    backgroundColor: "beige"
   }
 });

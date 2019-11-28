@@ -28,6 +28,15 @@ const useStyles = makeStyles({
   }
 });
 
+const selections = [
+  "HOME",
+  "ABOUT",
+  "SCHEDULE",
+  "RESULTS",
+  "GALLERY",
+  "CONTACT"
+];
+
 export default function NavBar() {
   const classes = useStyles();
 
@@ -45,7 +54,6 @@ export default function NavBar() {
     ) {
       return;
     }
-
     setState({ ...state, [side]: open });
   };
 
@@ -55,19 +63,17 @@ export default function NavBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {["HOME", "ABOUT", "SCHEDULE", "RESULTS", "GALLERY", "CONTACT"].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <Button
-                color="inherit"
-                to={`/${text.toLowerCase()}`}
-                component={Link}
-              >
-                {text}
-              </Button>
-            </ListItem>
-          )
-        )}
+        {selections.map((text, index) => (
+          <ListItem button key={text}>
+            <Button
+              color="inherit"
+              to={`/${text.toLowerCase()}`}
+              component={Link}
+            >
+              {text}
+            </Button>
+          </ListItem>
+        ))}
       </List>
       <Divider />
     </div>
@@ -85,24 +91,21 @@ export default function NavBar() {
             {"   "} IHG 19/20
           </Typography>
           <MediaQuery minWidth={961}>
-            <IconButton color="inherit" to="/home" component={Link}>
-              HOME
-            </IconButton>
-            <IconButton color="inherit" to="/about" component={Link}>
-              ABOUT
-            </IconButton>
-            <IconButton color="inherit" to="/schedule" component={Link}>
-              SCHEDULE
-            </IconButton>
-            <IconButton color="inherit" to="/results" component={Link}>
-              RESULTS
-            </IconButton>
-            <IconButton color="inherit" to="/gallery" component={Link}>
-              GALLERY
-            </IconButton>
-            <IconButton color="inherit" to="/contact" component={Link}>
-              CONTACT
-            </IconButton>
+            {selections.map(selection => {
+              return (
+                <IconButton
+                  style={{
+                    backgroundColor: "transparent"
+                  }}
+                  disableRipple={true}
+                  color="inherit"
+                  to={`/${selection.toLowerCase()}`}
+                  component={Link}
+                >
+                  {selection}
+                </IconButton>
+              );
+            })}
           </MediaQuery>
           <MediaQuery maxWidth={960}>
             <Button onClick={toggleDrawer("right", true)}>

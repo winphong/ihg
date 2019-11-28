@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
+import Typography from "@material-ui/core/Typography";
 
 export default function Card({ schedule, center, size }) {
   const classes = useStyles();
@@ -22,7 +23,7 @@ export default function Card({ schedule, center, size }) {
           <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
         </Grid>
       </Grid>
-      <Grid container>
+      <Grid container className={classes.hallContainer} alignItems="center">
         <Grid item xs={5}>
           <span className={classes.hall}>
             {schedule.halls[0].name.toUpperCase()}
@@ -36,13 +37,13 @@ export default function Card({ schedule, center, size }) {
         </Grid>
       </Grid>
       <Grid item xs={12}>
-        <br />
-        <span className={classes.sport}>{schedule.sport.toUpperCase()}</span>
-        <br />
-        <span className={classes.information}>
-          {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h',")}
+        <Typography className={classes.sport}>
+          {schedule.sport.toUpperCase()}
+        </Typography>
+        <Typography className={classes.information}>
+          {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
           {schedule.venue}
-        </span>
+        </Typography>
         <br />
       </Grid>
     </Grid>
@@ -56,8 +57,8 @@ const styles = theme => ({
     // backgroundColor: "beige",
     width: "100%",
     height: "100%",
-    padding: "0.5%"
-    // border: "1px solid gold"
+    padding: "0.5%",
+    border: "3px solid #C8B06B"
   },
   small: {
     textAlign: "center",
@@ -78,7 +79,7 @@ const styles = theme => ({
     transform: "scale(1.3)",
     // border: "1px solid gold",
     [theme.breakpoints.down("sm")]: {
-      transform: "scale(1)"
+      transform: "scale(0.9)"
     }
   },
   vs: {
@@ -88,26 +89,24 @@ const styles = theme => ({
     textAlign: "center"
   },
   sport: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "25px"
-    },
+    marginTop: "3%",
     fontSize: "25px",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
   },
   hall: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "20px"
-    },
     fontSize: "20px",
     fontWeight: "900",
     lineHeight: "100%"
   },
-  information: {
+  hallContainer: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "16px"
+      height: "80px"
     },
+    height: "50px"
+  },
+  information: {
     fontSize: "16px",
     color: "grey",
     lineHeight: "100%"

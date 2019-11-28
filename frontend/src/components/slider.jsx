@@ -15,21 +15,19 @@ export default function Slider({ schedules }) {
   );
   const [current, setCurrent] = useState(0);
   const [next, setNext] = useState(schedules.length > 1 ? 1 : 0);
-  const [margin, setMargin] = useState(
-    schedules.length >= 3 ? 3 : schedules.length
-  );
+  // const [margin, setMargin] = useState(
+  //   schedules.length >= 3 ? 3 : schedules.length
+  // );
 
   function handleBack() {
     const prev = previous;
     const curr = current;
-    const nxt = next;
     setPrevious(prev !== 0 ? prev - 1 : schedules.length - 1);
     setCurrent(prev);
     setNext(curr);
   }
 
   function handleNext() {
-    const prev = previous;
     const curr = current;
     const nxt = next;
     setPrevious(curr);
@@ -40,7 +38,7 @@ export default function Slider({ schedules }) {
   const hasSpace = useMediaQuery({ minDeviceWidth: 960 });
 
   return (
-    <Grid container direction="row" justify="center" alignItems="center">
+    <Grid container justify="center" alignItems="center">
       <Grid item xs={1} sm={1}>
         <IconButton onClick={handleBack} disabled={schedules.length === 1}>
           <KeyboardArrowLeft />
@@ -87,7 +85,7 @@ export default function Slider({ schedules }) {
         <IconButton
           onClick={handleNext}
           disabled={schedules.length === 1}
-          style={{ padding: 0 }}
+          className={classes.iconButton}
         >
           <KeyboardArrowRight />
         </IconButton>
@@ -100,6 +98,11 @@ const styles = theme => ({
   side: {
     [theme.breakpoints.down("sm")]: {
       display: "none"
+    }
+  },
+  iconButton: {
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: "-18px"
     }
   }
 });

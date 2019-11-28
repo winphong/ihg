@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "../components/card";
 import Calendar from "./../components/calendar";
 import scheduleService from "../services/scheduleService";
-import { BarChart, ResponsiveContainer } from "recharts";
 import { CSSTransition } from "react-transition-group";
-import Slider from "../components/slider";
 import { Typography } from "@material-ui/core";
+import Slider from "../components/slider";
 import miscService from "../services/miscService";
+import dateformat from "dateformat";
 
 const styles = theme => ({
   title: {
@@ -58,6 +56,10 @@ class Schedule extends Component {
     this.setState({ schedules, isAdmin });
   }
 
+  df = time => {
+    return dateformat(time, "dd mmm yyyy");
+  };
+
   render() {
     const { classes } = this.props;
     const { schedules, isAdmin } = this.state;
@@ -78,7 +80,17 @@ class Schedule extends Component {
                   classNames="slide"
                 >
                   <div>
-                    {schedules.length > 0 && <Slider schedules={schedules} />}
+                    {schedules.length > 0 && (
+                      <Slider
+                        schedules={schedules.filter(e => {
+                          return (
+                            this.df(e.startTime) ==
+                            this.df(new Date("6 Jan 2020"))
+                            // this.df(new Date())
+                          );
+                        })}
+                      />
+                    )}
                   </div>
                 </CSSTransition>
               </Grid>

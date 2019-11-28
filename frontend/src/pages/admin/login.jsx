@@ -7,6 +7,7 @@ import { TextField, Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import scheduleService from "../../services/scheduleService";
 import miscService from "../../services/miscService";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   title: {
@@ -60,6 +61,7 @@ class Login extends Component {
   render() {
     const { classes } = this.props;
     const { username, password } = this.state.credentials;
+    if (miscService.getCurrentAdmin()) return <Redirect to="/" />;
 
     return (
       <React.Fragment>

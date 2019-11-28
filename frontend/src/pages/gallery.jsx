@@ -30,7 +30,6 @@ class Gallery extends Component {
   async componentDidMount() {
     let { data: photos } = await miscService.getInstagramPhotos();
     photos = photos.data;
-    console.log(photos);
     this.setState({ photos });
   }
 

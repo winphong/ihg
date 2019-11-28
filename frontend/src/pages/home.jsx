@@ -98,7 +98,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedules, schedulesToDisplay, index, notMobile } = this.state;
+    const { schedules, schedulesToDisplay, index } = this.state;
 
     return (
       <React.Fragment>
