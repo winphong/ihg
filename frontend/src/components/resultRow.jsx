@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 export default function ResultRow({ schedule, isAdmin }) {
   const classes = useStyles();
@@ -15,17 +16,11 @@ export default function ResultRow({ schedule, isAdmin }) {
 
   return (
     <Grid container className={classes.container}>
-      <Grid
-        item
-        container
-        xs={8}
-        md={4}
-        style={{ textAlign: "left", marginLeft: "2%" }}
-      >
+      <Grid item container xs={8} md={4} className={classes.barContainer}>
         <Grid
           item
           xs={3}
-          md={2}
+          md={3}
           className={classes.bar}
           style={{
             backgroundColor: schedule.halls[0].colourCode,
@@ -38,7 +33,7 @@ export default function ResultRow({ schedule, isAdmin }) {
         <Grid
           item
           xs={3}
-          md={2}
+          md={3}
           className={classes.bar}
           style={{
             backgroundColor: schedule.halls[1].colourCode,
@@ -50,14 +45,9 @@ export default function ResultRow({ schedule, isAdmin }) {
         />
       </Grid>
 
-      <Grid item container xs={12} style={{ textAlign: "center" }}>
+      <Grid item container xs={12} className={classes.infoContainer}>
         {/* sports name */}
-        <Grid
-          item
-          xs={5}
-          md={3}
-          style={{ textAlign: "left", paddingLeft: "2%" }}
-        >
+        <Grid item xs={5} md={3} className={classes.nameContainer}>
           {isAdmin && (
             <Link
               style={{
@@ -69,22 +59,24 @@ export default function ResultRow({ schedule, isAdmin }) {
                 pathname: `/admin/score/${schedule._id}`
               }}
             >
-              <strong>
+              <Typography>
                 {schedule.sport} {schedule.stage}
-              </strong>
+              </Typography>
             </Link>
           )}
           {!isAdmin && (
-            <strong>
+            <Typography>
               {schedule.sport} {schedule.stage}
-            </strong>
+            </Typography>
           )}
         </Grid>
         {/* sports venue / timing */}
         {isLaptop && (
-          <Grid item xs={4} style={{ textAlign: "left", paddingLeft: "2%" }}>
-            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
-            {schedule.venue}
+          <Grid item xs={4}>
+            <Typography>
+              {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+              {schedule.venue}
+            </Typography>
           </Grid>
         )}
         {/* hall 1 */}
@@ -100,7 +92,9 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          {schedule.halls[0].abbreviation}
+          <Typography variant="bold">
+            {schedule.halls[0].abbreviation}
+          </Typography>
         </Grid>
         {/* score 1 */}
         <Grid
@@ -114,11 +108,11 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          {schedule.halls[0].score}
+          <Typography variant="bold">{schedule.halls[0].score}</Typography>
         </Grid>
         {/* versus */}
-        <Grid item xs={1}>
-          -
+        <Grid item xs={1} style={{ textAlign: "center" }}>
+          <Typography variant="bold"> - </Typography>
         </Grid>
         {/* score 2 */}
         <Grid
@@ -132,7 +126,7 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          {schedule.halls[1].score}
+          <Typography variant="bold">{schedule.halls[1].score}</Typography>
         </Grid>
         {/* hall 2 */}
         <Grid
@@ -147,10 +141,12 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          {schedule.halls[1].abbreviation}
+          <Typography variant="bold">
+            {schedule.halls[1].abbreviation}
+          </Typography>
         </Grid>
         {!isLaptop && (
-          <Grid item xs={12} style={{ textAlign: "left", paddingLeft: "2%" }}>
+          <Grid item xs={12} style={{ paddingLeft: "2%" }}>
             {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
             {schedule.venue}
           </Grid>
@@ -162,18 +158,27 @@ export default function ResultRow({ schedule, isAdmin }) {
 
 const useStyles = makeStyles({
   container: {
-    textAlign: "center",
     backgroundColor: "gold"
   },
+  infoContainer: {
+    margin: "1% 0"
+  },
+  nameContainer: {
+    paddingLeft: "2%"
+  },
+  barContainer: {
+    margin: "1% 0 0 2%"
+  },
   bar: {
-    height: "1%",
-    margin: "1.5% 0"
+    height: "10px"
   },
   winner: {
     fontWeight: "bold",
-    backgroundColor: "pink"
+    backgroundColor: "pink",
+    textAlign: "center"
   },
   neutral: {
-    backgroundColor: "beige"
+    backgroundColor: "beige",
+    textAlign: "center"
   }
 });

@@ -1,10 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import ResultRow from "../components/resultRow";
-import { Divider, Button } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 import ResultRowCarnival from "../components/resultRowCarnival";
+import Typography from "@material-ui/core/Typography";
 
 export default function ResultsTable({
   schedules,
@@ -31,9 +31,9 @@ export default function ResultsTable({
             currentDate = schedule.startTime.substring(8, 10);
             return (
               <div>
-                <p className={classes.headerRow}>
+                <Typography className={classes.date}>
                   {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
-                </p>
+                </Typography>
                 {schedule.stage === "Carnival" ? (
                   <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
                 ) : (
@@ -59,4 +59,6 @@ export default function ResultsTable({
   );
 }
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  date: { padding: "2%", backgroundColor: "cyan" }
+});

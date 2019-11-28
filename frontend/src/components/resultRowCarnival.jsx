@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
 export default function ResultRowCarnival({ schedule, isAdmin }) {
   const classes = useStyles();
@@ -19,19 +20,13 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
 
   return (
     <Grid container className={classes.container}>
-      <Grid
-        item
-        container
-        xs={7}
-        md={3}
-        style={{ textAlign: "left", marginLeft: "2%" }}
-      >
+      <Grid item container xs={4} md={2} className={classes.barContainer}>
         {sortedHall.map(hall => {
           return (
             <Grid
               item
               key={hall.colourCode}
-              xs={1}
+              xs={true}
               className={classes.bar}
               style={{
                 backgroundColor: hall.colourCode,
@@ -43,13 +38,14 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
         })}
       </Grid>
 
-      <Grid item container xs={12} style={{ textAlign: "center" }}>
-        <Grid
-          item
-          xs={5}
-          md={3}
-          style={{ textAlign: "left", paddingLeft: "2%" }}
-        >
+      <Grid
+        item
+        container
+        xs={12}
+        className={classes.infoContainer}
+        alignItems="center"
+      >
+        <Grid item xs={5} md={3} className={classes.nameContainer}>
           {isAdmin && (
             <Link
               style={{
@@ -61,26 +57,23 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
                 pathname: `/admin/score/${schedule._id}`
               }}
             >
-              <strong>
+              <Typography>
                 {schedule.sport} {schedule.stage}
-              </strong>
+              </Typography>
             </Link>
           )}
           {!isAdmin && (
-            <strong>
+            <Typography>
               {schedule.sport} {schedule.stage}
-            </strong>
+            </Typography>
           )}
         </Grid>
         {isLaptop && (
-          <Grid
-            item
-            xs={4}
-            md={4}
-            style={{ textAlign: "left", paddingLeft: "2%" }}
-          >
-            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
-            {schedule.venue}
+          <Grid item xs={4}>
+            <Typography>
+              {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+              {schedule.venue}
+            </Typography>
           </Grid>
         )}
         <Grid item container xs={7} md={5} style={{ textAlign: "center" }}>
@@ -125,20 +118,25 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
 
 const useStyles = makeStyles({
   container: {
-    textAlign: "center"
-    // backgroundColor: "gold"
+    backgroundColor: "pink"
+  },
+  infoContainer: {
+    margin: "1% 0"
+  },
+  nameContainer: {
+    paddingLeft: "2%"
+  },
+  barContainer: {
+    margin: "1% 0 0 2%"
   },
   bar: {
-    height: "0.6vh",
-    margin: "1.5% 0"
+    height: "10px"
   },
   winner: {
-    marginTop: "1vh",
-    fontWeight: "bold"
-    // backgroundColor: "pink"
+    fontWeight: "bold",
+    backgroundColor: "brown"
   },
   neutral: {
-    marginTop: "1vh"
-    // backgroundColor: "beige"
+    backgroundColor: "silver"
   }
 });
