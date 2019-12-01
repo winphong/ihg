@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import Typography from "@material-ui/core/Typography";
 
-export default function Card({ schedule, center, size }) {
+export default function Card({ schedule, center, size, index }) {
   const classes = useStyles();
 
   return (
@@ -14,31 +14,103 @@ export default function Card({ schedule, center, size }) {
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
     >
-      <Grid container>
-        <Grid item xs={5}>
-          <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
+      {schedule.halls.length === 2 && (
+        <Grid container>
+          <Grid item xs={5}>
+            <img
+              style={{ width: "90%", border: "1px solid black" }}
+              src={schedule.halls[0].imgUrl}
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.vs}></Grid>
+          <Grid item xs={5}>
+            <img
+              style={{ width: "90%", border: "1px solid black" }}
+              src={schedule.halls[1].imgUrl}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={2} className={classes.vs}></Grid>
-        <Grid item xs={5}>
-          <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
+      )}
+      {schedule.halls.length === 6 && (
+        <Grid container>
+          {schedule.halls.map(hall => {
+            return (
+              <Grid item xs={4}>
+                <img
+                  style={{ width: "60%", border: "1px solid black" }}
+                  src={hall.imgUrl}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
-      </Grid>
+      )}
+      {schedule.halls.length === 7 && (
+        <Grid container>
+          {schedule.halls.map((hall, index) => {
+            if (index < 4) {
+              return (
+                <Grid item xs={3}>
+                  <img
+                    style={{ width: "80%", border: "1px solid black" }}
+                    src={hall.imgUrl}
+                  />
+                </Grid>
+              );
+            } else if (index === 4) {
+              return (
+                <React.Fragment>
+                  <Grid item xs={4}>
+                    <img
+                      style={{
+                        width: "55%",
+                        border: "1px solid black",
+                        marginLeft: "46%"
+                      }}
+                      src={schedule.halls[4].imgUrl}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <img
+                      style={{ width: "55%", border: "1px solid black" }}
+                      src={schedule.halls[5].imgUrl}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
+                    <img
+                      style={{
+                        width: "55%",
+                        border: "1px solid black",
+                        marginLeft: "-46%"
+                      }}
+                      src={schedule.halls[6].imgUrl}
+                    />
+                  </Grid>
+                </React.Fragment>
+              );
+            }
+          })}
+        </Grid>
+      )}
       <Grid container className={classes.hallContainer} alignItems="center">
         <Grid item xs={5}>
-          <span className={classes.hall}>
+          <Typography className={classes.hall}>
             {schedule.halls[0].name.toUpperCase()}
-          </span>
+          </Typography>
         </Grid>
-        <Grid item xs={2} className={classes.vs}></Grid>
+        <Grid item xs={2} />
         <Grid item xs={5}>
-          <span className={classes.hall}>
+          <Typography className={classes.hall}>
             {schedule.halls[1].name.toUpperCase()}
-          </span>
+          </Typography>
         </Grid>
       </Grid>
       <Grid item xs={12}>
         <Typography className={classes.sport}>
           {schedule.sport.toUpperCase()}
+        </Typography>
+        <Typography className={classes.sport}>
+          {schedule.stage.toUpperCase()}
         </Typography>
         <Typography className={classes.information}>
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
@@ -54,11 +126,11 @@ const styles = theme => ({
   big: {
     textAlign: "center",
     margin: "1% 0.5%",
-    // backgroundColor: "beige",
     width: "100%",
     height: "100%",
-    padding: "0.5%",
-    border: "3px solid #C8B06B"
+    // backgroundColor: "beige",
+    // border: "3px solid #C8B06B",
+    padding: "2%"
   },
   small: {
     textAlign: "center",
@@ -89,15 +161,14 @@ const styles = theme => ({
     textAlign: "center"
   },
   sport: {
-    marginTop: "3%",
     fontSize: "25px",
-    fontWeight: "900",
-    color: "#C8B06B",
-    lineHeight: "100%"
+    fontWeight: "800",
+    lineHeight: "100%",
+    color: "#C8B06B"
   },
   hall: {
     fontSize: "20px",
-    fontWeight: "900",
+    fontWeight: "500",
     lineHeight: "100%"
   },
   hallContainer: {
@@ -109,7 +180,8 @@ const styles = theme => ({
   information: {
     fontSize: "16px",
     color: "grey",
-    lineHeight: "100%"
+    lineHeight: "100%",
+    marginTop: "2%"
   }
 });
 

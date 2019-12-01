@@ -47,25 +47,45 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
       >
         <Grid item xs={5} md={3} className={classes.nameContainer}>
           {isAdmin && (
-            <Link
-              style={{
-                color: "#0074d9",
-                cursor: "pointer",
-                textDecoration: "none"
-              }}
-              to={{
-                pathname: `/admin/score/${schedule._id}`
-              }}
-            >
+            <React.Fragment>
+              <Link
+                style={{
+                  color: "#0074d9",
+                  cursor: "pointer",
+                  textDecoration: "none"
+                }}
+                to={{
+                  pathname: `/admin/score/${schedule._id}`
+                }}
+              >
+                <Typography>
+                  {schedule.sport} {schedule.stage}
+                </Typography>
+              </Link>
+              {!isLaptop && (
+                <Grid item xs={12}>
+                  <Typography>
+                    {dateformat(new Date(schedule.startTime), "HHMM'h'")},
+                    {schedule.venue}
+                  </Typography>
+                </Grid>
+              )}
+            </React.Fragment>
+          )}
+          {!isAdmin && (
+            <React.Fragment>
               <Typography>
                 {schedule.sport} {schedule.stage}
               </Typography>
-            </Link>
-          )}
-          {!isAdmin && (
-            <Typography>
-              {schedule.sport} {schedule.stage}
-            </Typography>
+              {!isLaptop && (
+                <Grid item xs={12}>
+                  <Typography>
+                    {dateformat(new Date(schedule.startTime), "HHMM'h'")},
+                    {schedule.venue}
+                  </Typography>
+                </Grid>
+              )}
+            </React.Fragment>
           )}
         </Grid>
         {isLaptop && (
@@ -105,12 +125,6 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
             );
           })}
         </Grid>
-        {!isLaptop && (
-          <Grid item xs={12} style={{ textAlign: "left", paddingLeft: "2%" }}>
-            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
-            {schedule.venue}
-          </Grid>
-        )}
       </Grid>
     </Grid>
   );

@@ -23,13 +23,27 @@ import EditRoundedIcon from "@material-ui/icons/EditRounded";
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+      fontSize: "500%",
+      paddingTop: "5%"
     },
     fontSize: "1000%",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%",
+    textAlign: "center",
+    paddingTop: "1%"
+  },
+  currentDate: {
+    color: "black",
+    fontSize: "200%",
     textAlign: "center"
+  },
+  resultsTableContainer: {
+    position: "absolute",
+    width: "58.33%",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   caption: {
     fontSize: "25px",
@@ -59,7 +73,56 @@ const styles = theme => ({
 });
 
 let arr = []; // keep track of how many resultTable element in a page
-let idx = 0; // index pointer for arr
+let idx = 0; // index pointer for
+const CustomButton = ({
+  originalSchedules,
+  index,
+  limit,
+  handleBack,
+  handleNext,
+  stateLimit,
+  byDate
+}) => {
+  return (
+    <Grid container>
+      <Grid item xs={6}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "left"
+          }}
+        >
+          <IconButton disabled={index === 0} onClick={handleBack}>
+            <KeyboardArrowLeft />
+          </IconButton>
+        </div>
+      </Grid>
+      <Grid item xs={6}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "flex-end"
+          }}
+        >
+          <IconButton
+            disabled={
+              byDate
+                ? index >= originalSchedules.length - stateLimit
+                : index >= originalSchedules.length - 5
+            }
+            onClick={() => {
+              handleNext(limit);
+            }}
+          >
+            <KeyboardArrowRight />
+          </IconButton>
+        </div>
+      </Grid>
+    </Grid>
+  );
+};
 
 class Results extends Component {
   state = {
@@ -183,14 +246,7 @@ class Results extends Component {
             <Grid item xs={1} />
             <Grid item xs={10}>
               <Typography className={classes.title}>RANKING</Typography>
-              <Typography
-                className={classes.title}
-                style={{
-                  color: "black",
-                  fontSize: "300%",
-                  textAlign: "center"
-                }}
-              >
+              <Typography className={classes.currentDate}>
                 {dateformat(new Date(), "dd'th' mmm yyyy")}
               </Typography>
             </Grid>
@@ -269,81 +325,57 @@ class Results extends Component {
                     timeout={400}
                     classNames="fade"
                   >
-                    <div>
+                    <Grid
+                      item
+                      xs={12}
+                      className={classes.resultsTableContainer}
+                    >
                       <MediaQuery maxWidth={959}>
-                        <div
-                          style={{
-                            position: "absolute",
-                            width: "100%"
-                          }}
-                        >
-                          <ResultsTable
-                            schedules={schedules}
-                            selectedSport={selectedSport}
-                            byDate={byDate}
-                            limit={limit}
-                            isAdmin={isAdmin}
-                          />
-                        </div>
+                        <ResultsTable
+                          schedules={schedules}
+                          selectedSport={selectedSport}
+                          byDate={byDate}
+                          limit={limit}
+                          isAdmin={isAdmin}
+                        />
                       </MediaQuery>
                       <MediaQuery minWidth={960}>
-                        <div
-                          style={{
-                            position: "absolute",
-                            width: "58.33%"
-                          }}
-                        >
-                          <ResultsTable
-                            schedules={schedules}
-                            selectedSport={selectedSport}
-                            byDate={byDate}
-                            limit={limit}
-                            isAdmin={isAdmin}
-                          />
-                        </div>
+                        <ResultsTable
+                          schedules={schedules}
+                          selectedSport={selectedSport}
+                          byDate={byDate}
+                          limit={limit}
+                          isAdmin={isAdmin}
+                        />
                       </MediaQuery>
-                    </div>
+                      <MediaQuery minWidth={960}>
+                        <CustomButton
+                          originalSchedules={originalSchedules}
+                          index={index}
+                          limit={limit}
+                          stateLimit={this.state.limit}
+                          byDate={this.state.byDate}
+                          handleBack={this.handleBack}
+                          handleNext={this.handleNext}
+                        />
+                      </MediaQuery>
+                    </Grid>
                   </CSSTransition>
                 </TransitionGroup>
               )}
             </Grid>
             {/* Back button */}
-            <Grid item xs={6}>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "left"
-                }}
-              >
-                <IconButton disabled={index === 0} onClick={this.handleBack}>
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </div>
-            </Grid>
-            {/* Next button */}
-            <Grid item xs={6}>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "flex-end"
-                }}
-              >
-                <IconButton
-                  disabled={
-                    this.state.byDate
-                      ? index >= originalSchedules.length - this.state.limit
-                      : index >= originalSchedules.length - 5
-                  }
-                  onClick={() => {
-                    this.handleNext(limit);
-                  }}
-                >
-                  <KeyboardArrowRight />
-                </IconButton>
-              </div>
-            </Grid>
+            <MediaQuery maxWidth={959}>
+              <CustomButton
+                originalSchedules={originalSchedules}
+                index={index}
+                limit={limit}
+                stateLimit={this.state.limit}
+                byDate={this.state.byDate}
+                handleBack={this.handleBack}
+                handleNext={this.handleNext}
+              />
+            </MediaQuery>
           </Grid>
         </React.Fragment>
       </CSSTransition>

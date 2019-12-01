@@ -45,7 +45,6 @@ export default function Calendar({ schedules, isAdmin }) {
   }
 
   function handleNext(isMobile) {
-    console.log(isMobile);
     if (isMobile) {
       setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
       current = current + 3;
@@ -174,7 +173,7 @@ const styles = theme => ({
     padding: 0
   },
   table: {
-    width: "100%"
+    // width: "100%"
   },
   dateRow: {
     [theme.breakpoints.down("sm")]: {
@@ -188,7 +187,7 @@ const styles = theme => ({
       width: "32%"
     },
     position: "absolute",
-    width: "10.2%"
+    width: "13.5%"
   }
 });
 

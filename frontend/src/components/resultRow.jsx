@@ -147,7 +147,7 @@ export default function ResultRow({ schedule, isAdmin }) {
         </Grid>
         {!isLaptop && (
           <Grid item xs={12} style={{ paddingLeft: "2%" }}>
-            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+            {dateformat(new Date(schedule.startTime), "dd mmm',' HHMM'h'")},{" "}
             {schedule.venue}
           </Grid>
         )}

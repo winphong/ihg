@@ -20,8 +20,7 @@ const styles = theme => ({
   },
   buttonColumn: {
     textAlign: "center",
-    verticalAlign: "middle",
-    height: "100%"
+    verticalAlign: "middle"
   },
   container: {
     textAlign: "center",
@@ -29,7 +28,7 @@ const styles = theme => ({
   },
   calendar: {
     [theme.breakpoints.up("md")]: {
-      paddingRight: "2%"
+      padding: "0% 2%"
     },
     [theme.breakpoints.down("md")]: {
       margin: "0 1%"
@@ -84,7 +83,7 @@ class Schedule extends Component {
                       <Slider
                         schedules={schedules.filter(e => {
                           return (
-                            this.df(e.startTime) ==
+                            this.df(e.startTime) ===
                             this.df(new Date("6 Jan 2020"))
                             // this.df(new Date())
                           );
@@ -97,10 +96,10 @@ class Schedule extends Component {
             </Grid>
             {/* Calendar */}
             <Grid item container className={classes.container}>
-              <Grid item md={3}>
+              <Grid item xs={12}>
                 Schedules
               </Grid>
-              <Grid item xs={12} md={9} className={classes.calendar}>
+              <Grid item xs={12} className={classes.calendar}>
                 {schedules.length > 0 && (
                   <Calendar schedules={schedules} isAdmin={isAdmin} />
                 )}

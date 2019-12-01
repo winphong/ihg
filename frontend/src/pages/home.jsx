@@ -27,7 +27,7 @@ const styles = theme => ({
       fontSize: "30px",
       textAlign: "center"
     },
-    fontSize: "80px",
+    fontSize: "500%",
     fontWeight: "900",
     color: "#C8B06B",
     lineHeight: "100%"
@@ -145,21 +145,28 @@ class Home extends Component {
               <Grid item xs={10} md={7} className={classes}>
                 <TransitionGroup>
                   <CSSTransition key={index} timeout={400} classNames="fade">
-                    <Grid
-                      container
-                      spacing={1}
-                      className={classes.cardContainer}
-                    >
+                    <Grid container className={classes.cardContainer}>
                       <MediaQuery minDeviceWidth={960}>
-                        {schedulesToDisplay.map((e, index) => {
-                          if (index < 4) {
-                            return (
-                              <Grid item xs={12} md={6}>
-                                <Card schedule={e} size="big" />
-                              </Grid>
-                            );
-                          }
-                        })}
+                        <Grid item container xs={12}>
+                          {schedulesToDisplay.map((e, index) => {
+                            if (index < 4) {
+                              return (
+                                <React.Fragment>
+                                  <Grid item xs={5}>
+                                    <Card schedule={e} size="big" />
+                                  </Grid>
+                                  {index % 2 == 0 && (
+                                    <Grid
+                                      item
+                                      xs={2}
+                                      // style={{ backgroundColor: "pink" }}
+                                    />
+                                  )}
+                                </React.Fragment>
+                              );
+                            }
+                          })}
+                        </Grid>
                       </MediaQuery>
                       <MediaQuery maxDeviceWidth={956}>
                         {schedulesToDisplay.map((e, index) => {

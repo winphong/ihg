@@ -8,30 +8,40 @@ import dateformat from "dateformat";
 import IconButton from "@material-ui/core/IconButton";
 import { Info } from "@material-ui/icons";
 
-const colours = ["white", "green", "maroon", "blue", "yellow", "orange"];
-
 export default function ScheduleBox({ schedule, isAdmin }) {
   const classes = useStyles();
 
   return (
     <Grid container className={classes.container}>
       {/* Carnival colour */}
-      <Grid item container xs={12}>
-        {schedule.stage === "Carnival" &&
-          colours.map(colour => {
-            return (
-              <Grid
-                item
-                xs={true}
-                className={classes.bar}
-                style={{
-                  backgroundColor: colour,
-                  border: colour === "white" ? "0.005vh solid black" : ``
-                }}
-              />
-            );
-          })}
-      </Grid>
+      {schedule.stage === "Carnival" && (
+        <Grid item container xs={12}>
+          <Grid item container xs={12}>
+            {schedule.halls.map(({ colourCode }) => {
+              return (
+                <Grid
+                  item
+                  xs={true}
+                  className={classes.bar}
+                  style={{
+                    backgroundColor: colourCode,
+                    border: colourCode === "#ffffff" ? "1% solid black" : ``
+                  }}
+                />
+              );
+            })}
+          </Grid>
+          <Grid item container xs={12}>
+            {schedule.halls.map(hall => {
+              return (
+                <Grid item xs={true}>
+                  <Typography>{hall.abbreviation}</Typography>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+      )}
       {schedule.stage !== "Carnival" && (
         <Grid item container xs={12}>
           <Grid
@@ -42,7 +52,7 @@ export default function ScheduleBox({ schedule, isAdmin }) {
               backgroundColor: schedule.halls[0].colourCode,
               border:
                 schedule.halls[0].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
+                  ? "1% solid black"
                   : ``
               // transform:
               //   schedule.halls[0].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
@@ -56,23 +66,24 @@ export default function ScheduleBox({ schedule, isAdmin }) {
               backgroundColor: schedule.halls[1].colourCode,
               border:
                 schedule.halls[1].colourCode === "#ffffff"
-                  ? "0.005vh solid black"
+                  ? "1% solid black"
                   : ``
               // transform:
               //   schedule.halls[1].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
             }}
           />
+          <Grid item xs={5}>
+            <Typography>{schedule.halls[0].abbreviation}</Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography>vs</Typography>
+          </Grid>
+          <Grid item xs={5}>
+            <Typography>{schedule.halls[1].abbreviation}</Typography>
+          </Grid>
         </Grid>
       )}
-      <Grid item xs={5}>
-        {schedule.halls[0].abbreviation}
-      </Grid>
-      <Grid item xs={2}>
-        vs
-      </Grid>
-      <Grid item xs={5}>
-        {schedule.halls[1].abbreviation}
-      </Grid>
+
       <Grid item xs={12}>
         {isAdmin && (
           <Link
@@ -105,7 +116,7 @@ const styles = theme => ({
     border: "1px solid black",
     padding: "7%",
     [theme.breakpoints.up("sm")]: {
-      width: "100%"
+      // width: "100%"
     }
   },
   bar: {
