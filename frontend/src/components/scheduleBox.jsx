@@ -113,7 +113,9 @@ export default function ScheduleBox({ schedule, isAdmin }) {
 const styles = theme => ({
   container: {
     textAlign: "center",
-    border: "1px solid black",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    marginBottom: "10%",
     padding: "7%",
     [theme.breakpoints.up("sm")]: {
       // width: "100%"

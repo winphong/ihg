@@ -2,11 +2,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
+import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
 export default function Card({ schedule, center, size, index }) {
   const classes = useStyles();
-
+  console.log(index);
   return (
     <Grid
       container
@@ -17,17 +18,11 @@ export default function Card({ schedule, center, size, index }) {
       {schedule.halls.length === 2 && (
         <Grid container>
           <Grid item xs={5}>
-            <img
-              style={{ width: "90%", border: "1px solid black" }}
-              src={schedule.halls[0].imgUrl}
-            />
+            <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
           </Grid>
           <Grid item xs={2} className={classes.vs}></Grid>
           <Grid item xs={5}>
-            <img
-              style={{ width: "90%", border: "1px solid black" }}
-              src={schedule.halls[1].imgUrl}
-            />
+            <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
           </Grid>
         </Grid>
       )}
@@ -36,10 +31,7 @@ export default function Card({ schedule, center, size, index }) {
           {schedule.halls.map(hall => {
             return (
               <Grid item xs={4}>
-                <img
-                  style={{ width: "60%", border: "1px solid black" }}
-                  src={hall.imgUrl}
-                />
+                <img style={{ width: "60%" }} src={hall.imgUrl} />
               </Grid>
             );
           })}
@@ -51,10 +43,7 @@ export default function Card({ schedule, center, size, index }) {
             if (index < 4) {
               return (
                 <Grid item xs={3}>
-                  <img
-                    style={{ width: "80%", border: "1px solid black" }}
-                    src={hall.imgUrl}
-                  />
+                  <img style={{ width: "80%" }} src={hall.imgUrl} />
                 </Grid>
               );
             } else if (index === 4) {
@@ -64,7 +53,6 @@ export default function Card({ schedule, center, size, index }) {
                     <img
                       style={{
                         width: "55%",
-                        border: "1px solid black",
                         marginLeft: "46%"
                       }}
                       src={schedule.halls[4].imgUrl}
@@ -72,7 +60,7 @@ export default function Card({ schedule, center, size, index }) {
                   </Grid>
                   <Grid item xs={4}>
                     <img
-                      style={{ width: "55%", border: "1px solid black" }}
+                      style={{ width: "55%" }}
                       src={schedule.halls[5].imgUrl}
                     />
                   </Grid>
@@ -80,7 +68,6 @@ export default function Card({ schedule, center, size, index }) {
                     <img
                       style={{
                         width: "55%",
-                        border: "1px solid black",
                         marginLeft: "-46%"
                       }}
                       src={schedule.halls[6].imgUrl}
@@ -116,7 +103,7 @@ export default function Card({ schedule, center, size, index }) {
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
           {schedule.venue}
         </Typography>
-        <br />
+        {index < 2 && <Divider style={{ marginTop: "5%" }} />}
       </Grid>
     </Grid>
   );

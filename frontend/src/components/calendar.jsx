@@ -180,7 +180,7 @@ const styles = theme => ({
       width: "32%"
     },
     position: "absolute",
-    width: "10.2%"
+    width: "13.5%"
   },
   column: {
     [theme.breakpoints.down("sm")]: {

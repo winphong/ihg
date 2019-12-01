@@ -49,9 +49,9 @@ const styles = theme => ({
   buttonColumn: {
     [theme.breakpoints.down("sm")]: {
       padding: "61% 0"
-    },
-    display: "flex",
-    justifyContent: "space-evenly"
+    }
+    // display: "flex",
+    // justifyContent: "space-evenly"
   }
 });
 
@@ -117,11 +117,6 @@ class Home extends Component {
               </Typography>
             </Grid>
             <Grid container>
-              <Grid item xs={12} md={3} className={classes.subTitleContainer}>
-                <Typography className={classes.subTitle}>
-                  UPCOMING GAMES
-                </Typography>
-              </Grid>
               <Grid item xs={1} md={1} className={classes.buttonColumn}>
                 <MediaQuery minDeviceWidth={960}>
                   <IconButton
@@ -153,7 +148,11 @@ class Home extends Component {
                               return (
                                 <React.Fragment>
                                   <Grid item xs={5}>
-                                    <Card schedule={e} size="big" />
+                                    <Card
+                                      schedule={e}
+                                      size="big"
+                                      index={index}
+                                    />
                                   </Grid>
                                   {index % 2 == 0 && (
                                     <Grid
@@ -202,6 +201,11 @@ class Home extends Component {
                     <KeyboardArrowRight />
                   </IconButton>
                 </MediaQuery>
+              </Grid>
+              <Grid item xs={12} md={3} className={classes.subTitleContainer}>
+                <Typography className={classes.subTitle}>
+                  UPCOMING GAMES
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
