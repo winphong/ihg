@@ -143,9 +143,8 @@ class Home extends Component {
             // alignItems="center"
             style={{
               // backgroundColor: "pink",
-              height: "74vh",
-              padding: "0 3vh",
-              marginTop: "1vh"
+              height: "600px",
+              padding: "0 20px"
             }}
             xs={12}
           >
@@ -188,7 +187,7 @@ class Home extends Component {
                                 <Grid item xs={5}>
                                   <Card schedule={e} size="big" index={index} />
                                   {index < 2 && (
-                                    <Divider style={{ margin: "2vh 4vw" }} />
+                                    <Divider style={{ margin: "20px 60px" }} />
                                   )}
                                 </Grid>
                                 {index % 2 == 0 && (
