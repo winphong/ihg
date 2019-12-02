@@ -284,9 +284,9 @@ class Home extends Component {
             container
             xs={12}
             style={{
-              height: "70vh",
+              // height: "70vh",
               padding: "0 30px",
-              marginTop: "130px"
+              marginTop: "15vh"
               // backgroundColor: "pink"
             }}
             alignItems="flex-end"

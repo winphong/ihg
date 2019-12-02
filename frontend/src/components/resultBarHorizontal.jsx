@@ -15,7 +15,7 @@ export default function ResultBarHorizontal({ halls }) {
   const barSize = 10;
 
   return (
-    <ResponsiveContainer height={barSize * 50}>
+    <ResponsiveContainer height={barSize * 60}>
       <BarChart
         data={halls}
         barCategoryGap={0}
