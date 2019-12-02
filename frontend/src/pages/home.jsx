@@ -111,7 +111,7 @@ class Home extends Component {
             alignContent="center"
             // justify="center"
             xs={12}
-            style={{ height: "900px" }}
+            style={{ height: "95vh" }}
           >
             <Grid item xs={2} />
             <Grid item xs={7} style={{ zIndex: 1 }}>
