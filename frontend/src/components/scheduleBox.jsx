@@ -25,7 +25,10 @@ export default function ScheduleBox({ schedule, isAdmin }) {
                   className={classes.bar}
                   style={{
                     backgroundColor: colourCode,
-                    border: colourCode === "#ffffff" ? "1% solid black" : ``
+                    border:
+                      colourCode === "#ffffff"
+                        ? "0.05px solid #252527"
+                        : `0.05px solid ${colourCode}`
                   }}
                 />
               );
@@ -52,8 +55,8 @@ export default function ScheduleBox({ schedule, isAdmin }) {
               backgroundColor: schedule.halls[0].colourCode,
               border:
                 schedule.halls[0].colourCode === "#ffffff"
-                  ? "1% solid black"
-                  : ``
+                  ? "0.05px solid #252527"
+                  : `0.05px solid ${schedule.halls[0].colourCode}`
               // transform:
               //   schedule.halls[0].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
             }}
@@ -66,8 +69,8 @@ export default function ScheduleBox({ schedule, isAdmin }) {
               backgroundColor: schedule.halls[1].colourCode,
               border:
                 schedule.halls[1].colourCode === "#ffffff"
-                  ? "1% solid black"
-                  : ``
+                  ? "0.05px solid #252527"
+                  : `0.05px solid ${schedule.halls[1].colourCode}`
               // transform:
               //   schedule.halls[1].colourCode === "#ffffff" ? "scaleY(1.2)" : ""
             }}

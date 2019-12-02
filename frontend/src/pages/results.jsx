@@ -60,8 +60,8 @@ const styles = theme => ({
     display: "flex",
     alignItems: "baseline",
     marginBottom: "3vh",
-    backgroundColor: "grey"
-    // backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+    backgroundColor: "grey",
+    backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
   },
   headerRow: {
     textAlign: "left",

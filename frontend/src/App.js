@@ -15,6 +15,14 @@ import ScoreForm from "./pages/admin/scoreForm";
 import StandingForm from "./pages/admin/standingForm";
 import Login from "./pages/admin/login";
 import ProtectedRoute from "./components/protectedRoute";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: "Lato",
+    h1: { fontFamily: "TheNextFont" }
+  }
+});
 
 class App extends Component {
   // detectmobile() {
@@ -40,32 +48,34 @@ class App extends Component {
     return (
       <MuiPickersUtilsProvider utils={DayjsUtils}>
         <React.Fragment>
-          <NavBar />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/home" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/schedule" component={Schedule} />
-            <Route path="/results" component={Results} />
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/admin" exact component={Login} />
-            <ProtectedRoute
-              path="/admin/schedule"
-              exact
-              component={ScheduleForm}
-            />
-            <ProtectedRoute
-              path="/admin/schedule/:id"
-              component={ScheduleForm}
-            />
-            <ProtectedRoute path="/admin/score/:id" component={ScoreForm} />
-            <ProtectedRoute path="/admin/standing" component={StandingForm} />+
-            {/* <Route path="/not-found" component={NotFound} /> */}
-            <Redirect from="/" exact to="/home" />
-            <Redirect to="/not-found" />
-          </Switch>
-          <Footer />
+          <MuiThemeProvider theme={theme}>
+            <NavBar />
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/home" component={Home} />
+              <Route path="/about" component={About} />
+              <Route path="/schedule" component={Schedule} />
+              <Route path="/results" component={Results} />
+              <Route path="/gallery" component={Gallery} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/admin" exact component={Login} />
+              <ProtectedRoute
+                path="/admin/schedule"
+                exact
+                component={ScheduleForm}
+              />
+              <ProtectedRoute
+                path="/admin/schedule/:id"
+                component={ScheduleForm}
+              />
+              <ProtectedRoute path="/admin/score/:id" component={ScoreForm} />
+              <ProtectedRoute path="/admin/standing" component={StandingForm} />
+              +{/* <Route path="/not-found" component={NotFound} /> */}
+              <Redirect from="/" exact to="/home" />
+              <Redirect to="/not-found" />
+            </Switch>
+            <Footer />
+          </MuiThemeProvider>
         </React.Fragment>
       </MuiPickersUtilsProvider>
     );

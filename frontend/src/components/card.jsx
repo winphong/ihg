@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 export default function Card({ schedule, center, size, index }) {
   const classes = useStyles();
-  console.log(index);
+  console.log(schedule);
   return (
     <Grid
       container

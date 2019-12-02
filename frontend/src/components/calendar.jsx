@@ -9,6 +9,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import { useMediaQuery } from "react-responsive";
+import { borderColor } from "@material-ui/system";
 
 export default function Calendar({ schedules, isAdmin }) {
   const classes = useStyles();
@@ -87,8 +88,8 @@ export default function Calendar({ schedules, isAdmin }) {
         xs={12}
         style={{
           height: "1000px",
-          border: "1px solid black",
-          backgroundColor: "beige"
+          border: "1px solid black"
+          // backgroundColor: "beige"
         }}
       >
         <Grid container>

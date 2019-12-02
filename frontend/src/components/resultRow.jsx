@@ -26,7 +26,7 @@ export default function ResultRow({ schedule, isAdmin }) {
             backgroundColor: schedule.halls[0].colourCode,
             border:
               schedule.halls[0].colourCode === "#ffffff"
-                ? "0.005vh solid black"
+                ? "1px solid black"
                 : ``
           }}
         />
@@ -39,7 +39,7 @@ export default function ResultRow({ schedule, isAdmin }) {
             backgroundColor: schedule.halls[1].colourCode,
             border:
               schedule.halls[1].colourCode === "#ffffff"
-                ? "0.005vh solid black"
+                ? "1px solid black"
                 : ``
           }}
         />
