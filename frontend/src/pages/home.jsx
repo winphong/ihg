@@ -114,7 +114,7 @@ class Home extends Component {
             alignContent="center"
             // justify="center"
             xs={12}
-            style={{ height: "93vh" }}
+            style={{ height: "800px" }}
           >
             <Grid item xs={2} />
             <Grid item xs={7} style={{ zIndex: 1 }}>
@@ -143,7 +143,7 @@ class Home extends Component {
             // alignItems="center"
             style={{
               // backgroundColor: "pink",
-              height: "600px",
+              height: "660px",
               padding: "0 20px"
             }}
             xs={12}
@@ -187,7 +187,7 @@ class Home extends Component {
                                 <Grid item xs={5}>
                                   <Card schedule={e} size="big" index={index} />
                                   {index < 2 && (
-                                    <Divider style={{ margin: "20px 60px" }} />
+                                    <Divider style={{ margin: "30px 60px" }} />
                                   )}
                                 </Grid>
                                 {index % 2 == 0 && (
@@ -284,9 +284,10 @@ class Home extends Component {
             container
             xs={12}
             style={{
-              height: "80vh",
-              padding: "0 3vh",
-              marginTop: "18vh"
+              height: "700px",
+              padding: "0 30px",
+              marginTop: "130px"
+              // backgroundColor: "pink"
             }}
             alignItems="flex-end"
           >

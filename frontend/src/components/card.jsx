@@ -13,7 +13,7 @@ export default function Card({ schedule, center, size, index }) {
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
-      style={{ height: "280px" }}
+      style={{ height: "300px" }}
     >
       {schedule.halls.length === 2 && (
         <React.Fragment>
