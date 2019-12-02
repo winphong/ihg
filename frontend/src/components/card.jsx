@@ -2,35 +2,50 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
-import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
 export default function Card({ schedule, center, size, index }) {
   const classes = useStyles();
-  console.log(schedule);
+
   return (
     <Grid
       container
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
+      style={{ height: "35vh" }}
     >
       {schedule.halls.length === 2 && (
-        <Grid container>
-          <Grid item xs={5}>
-            <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
+        <React.Fragment>
+          <Grid container>
+            <Grid item xs={5}>
+              <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
+            </Grid>
+            <Grid item xs={2} className={classes.vs}></Grid>
+            <Grid item xs={5}>
+              <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
+            </Grid>
           </Grid>
-          <Grid item xs={2} className={classes.vs}></Grid>
-          <Grid item xs={5}>
-            <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
+          <Grid container className={classes.hallContainer} alignItems="center">
+            <Grid item xs={5}>
+              <Typography className={classes.hall}>
+                {schedule.halls[0].name.toUpperCase()}
+              </Typography>
+            </Grid>
+            <Grid item xs={2} />
+            <Grid item xs={5}>
+              <Typography className={classes.hall}>
+                {schedule.halls[1].name.toUpperCase()}
+              </Typography>
+            </Grid>
           </Grid>
-        </Grid>
+        </React.Fragment>
       )}
       {schedule.halls.length === 6 && (
         <Grid container>
-          {schedule.halls.map(hall => {
+          {schedule.halls.map((hall, index) => {
             return (
-              <Grid item xs={4}>
+              <Grid item xs={4} key={index}>
                 <img style={{ width: "60%" }} src={hall.imgUrl} />
               </Grid>
             );
@@ -42,13 +57,13 @@ export default function Card({ schedule, center, size, index }) {
           {schedule.halls.map((hall, index) => {
             if (index < 4) {
               return (
-                <Grid item xs={3}>
+                <Grid item xs={3} key={index}>
                   <img style={{ width: "80%" }} src={hall.imgUrl} />
                 </Grid>
               );
             } else if (index === 4) {
               return (
-                <React.Fragment>
+                <React.Fragment key={index}>
                   <Grid item xs={4}>
                     <img
                       style={{
@@ -79,19 +94,19 @@ export default function Card({ schedule, center, size, index }) {
           })}
         </Grid>
       )}
-      <Grid container className={classes.hallContainer} alignItems="center">
-        <Grid item xs={5}>
-          <Typography className={classes.hall}>
-            {schedule.halls[0].name.toUpperCase()}
-          </Typography>
+      {schedule.halls.length > 2 && (
+        <Grid container className={classes.hallContainer} alignItems="center">
+          {schedule.halls.map((hall, index) => {
+            return (
+              <Grid item xs={true} key={index}>
+                <Typography className={classes.hall}>
+                  {hall.abbreviation}
+                </Typography>
+              </Grid>
+            );
+          })}
         </Grid>
-        <Grid item xs={2} />
-        <Grid item xs={5}>
-          <Typography className={classes.hall}>
-            {schedule.halls[1].name.toUpperCase()}
-          </Typography>
-        </Grid>
-      </Grid>
+      )}
       <Grid item xs={12}>
         <Typography className={classes.sport}>
           {schedule.sport.toUpperCase()}
@@ -103,7 +118,6 @@ export default function Card({ schedule, center, size, index }) {
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
           {schedule.venue}
         </Typography>
-        {index < 2 && <Divider style={{ marginTop: "5%" }} />}
       </Grid>
     </Grid>
   );
@@ -112,7 +126,7 @@ export default function Card({ schedule, center, size, index }) {
 const styles = theme => ({
   big: {
     textAlign: "center",
-    margin: "1% 0.5%",
+    // margin: "1% 0.5%",
     width: "100%",
     height: "100%",
     // backgroundColor: "beige",

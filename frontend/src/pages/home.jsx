@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "../components/card";
@@ -7,29 +8,28 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
-import miscService from "../services/miscService";
-import path from "path";
+import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import MediaQuery from "react-responsive";
+import hallService from "../services/hallService";
+import ResultBarHorizontal from "./../components/resultBarHorizontal";
+import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+      fontSize: "100%"
     },
-    fontSize: "1000%",
-    fontWeight: "100",
+    fontSize: "8.5vw",
     color: "#C8B06B",
-    lineHeight: "120%",
-    backgroundImage: "./home.jpg"
+    lineHeight: "120%"
   },
   subTitle: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "30px",
+      fontSize: "100%",
       textAlign: "center"
     },
-    fontSize: "500%",
-    fontWeight: "900",
+    fontSize: "4.4vw",
     color: "#C8B06B",
     lineHeight: "100%"
   },
@@ -45,16 +45,17 @@ const styles = theme => ({
       width: "84%"
     },
     position: "absolute",
-    width: "58.33%",
-    backgroundColor: "yellow"
+    width: "63.6vw"
+    // backgroundColor: "yellow"
   },
   buttonColumn: {
     [theme.breakpoints.down("sm")]: {
       // padding: "61% 0"
     },
-    // display: "flex",
-    // justifyContent: "space-evenly",
-    backgroundColor: "ivory"
+    height: "inherit",
+    display: "flex",
+    alignItems: "center"
+    // backgroundColor: "ivory"
   }
 });
 
@@ -62,19 +63,21 @@ class Home extends Component {
   state = {
     schedules: [],
     schedulesToDisplay: [],
-    index: 0,
-    homeUrl: ""
+    halls: [],
+    index: 0
   };
 
   async componentDidMount() {
     const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: halls } = await hallService.getAllHalls();
     // const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
     // const file = new Blob([photo.data], { type: photo.data.type });
     // const fileURL = URL.createObjectURL(file);
 
     this.setState({
       schedules,
-      schedulesToDisplay: schedules
+      schedulesToDisplay: schedules,
+      halls
       // homeUrl: fileURL
     });
   }
@@ -101,7 +104,7 @@ class Home extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedules, schedulesToDisplay, index } = this.state;
+    const { schedules, schedulesToDisplay, index, halls } = this.state;
 
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
@@ -111,7 +114,7 @@ class Home extends Component {
             alignContent="center"
             // justify="center"
             xs={12}
-            style={{ height: "95vh" }}
+            style={{ height: "93vh" }}
           >
             <Grid item xs={2} />
             <Grid item xs={7} style={{ zIndex: 1 }}>
@@ -131,21 +134,26 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid item xs={3} style={{ marginLeft: "-34%", zIndex: 0 }}>
-              <img src="./home.jpg" width="190%" />
+            <Grid item xs={3} style={{ marginLeft: "-33vw", zIndex: 0 }}>
+              <img src="./home.jpg" width="750vw" style={{ opacity: "0.3" }} />
             </Grid>
           </Grid>
           <Grid
             container
-            alignItems="center"
-            style={{ backgroundColor: "pink" }}
+            // alignItems="center"
+            style={{
+              // backgroundColor: "pink",
+              height: "74vh",
+              padding: "0 3vh",
+              marginTop: "1vh"
+            }}
             xs={12}
           >
             <Grid
               item
               xs={true}
               className={classes.buttonColumn}
-              style={{ flexGrow: 0 }}
+              justify="flex-end"
             >
               <MediaQuery minDeviceWidth={960}>
                 <IconButton
@@ -166,7 +174,8 @@ class Home extends Component {
                 </IconButton>
               </MediaQuery>
             </Grid>
-            <Grid item xs={7} style={{ height: "565px" }}>
+            {/* Cards */}
+            <Grid item xs={8}>
               <TransitionGroup>
                 <CSSTransition key={index} timeout={400} classNames="fade">
                   <Grid container className={classes.cardContainer}>
@@ -175,9 +184,12 @@ class Home extends Component {
                         {schedulesToDisplay.map((e, index) => {
                           if (index < 4) {
                             return (
-                              <React.Fragment>
+                              <React.Fragment key={index}>
                                 <Grid item xs={5}>
                                   <Card schedule={e} size="big" index={index} />
+                                  {index < 2 && (
+                                    <Divider style={{ margin: "2vh 4vw" }} />
+                                  )}
                                 </Grid>
                                 {index % 2 == 0 && (
                                   <Grid
@@ -227,10 +239,89 @@ class Home extends Component {
                 </IconButton>
               </MediaQuery>
             </Grid>
-            <Grid item xs={3} className={classes.subTitleContainer}>
-              <Typography className={classes.subTitle}>
-                UPCOMING GAMES
+            <Grid
+              item
+              xs={3}
+              className={classes.subTitleContainer}
+              style={{
+                height: "inherit",
+                display: "flex",
+                alignItems: "flex-end",
+                textAlign: "right"
+              }}
+            >
+              <Grid item>
+                <Typography variant="h1" className={classes.subTitle}>
+                  UPCOMING GAMES
+                </Typography>
+                <Typography variant="h1" className={classes.subTitle}>
+                  UPCOMING GAMES
+                </Typography>
+                <Typography variant="h1" className={classes.subTitle}>
+                  UPCOMING GAMES
+                </Typography>
+                <Button
+                  fullWidth
+                  style={{
+                    backgroundColor: "#C8B06B",
+                    color: "white",
+                    width: "80%",
+                    height: "8vh",
+                    margin: "3vh 0"
+                  }}
+                  to={"/schedule"}
+                  component={Link}
+                >
+                  <Typography
+                    style={{ fontFamily: "TheNextFont", fontSize: "2vw" }}
+                  >
+                    VIEW SCHEDULE
+                  </Typography>
+                </Button>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            xs={12}
+            style={{
+              height: "80vh",
+              padding: "0 3vh",
+              marginTop: "18vh"
+            }}
+            alignItems="flex-end"
+          >
+            <Grid item xs={4}>
+              <Typography variant="h1" className={classes.subTitle}>
+                CURRENT STANDINGS
               </Typography>
+              <Typography variant="h1" className={classes.subTitle}>
+                CURRENT STANDINGS
+              </Typography>
+              <Typography variant="h1" className={classes.subTitle}>
+                CURRENT STANDINGS
+              </Typography>
+              <Button
+                fullWidth
+                style={{
+                  backgroundColor: "#C8B06B",
+                  color: "white",
+                  width: "55%",
+                  height: "8vh",
+                  margin: "3vh 0"
+                }}
+                to={"/results"}
+                component={Link}
+              >
+                <Typography
+                  style={{ fontFamily: "TheNextFont", fontSize: "2vw" }}
+                >
+                  VIEW RESULTS
+                </Typography>
+              </Button>
+            </Grid>
+            <Grid item xs={8}>
+              <ResultBarHorizontal halls={halls} />
             </Grid>
           </Grid>
         </Grid>

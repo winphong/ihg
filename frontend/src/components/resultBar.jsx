@@ -31,16 +31,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
         <XAxis dataKey="abbreviation" axisLine={false} tickLine={false} />
         <Bar dataKey={dataKey} label={renderCustomizedLabel} barSize={barSize}>
           {halls.map((entry, index) => {
-            return (
-              <Cell
-                key={index}
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 15
-                }}
-                fill={entry.colourCode}
-              />
-            );
+            return <Cell key={index} fill={entry.colourCode} />;
           })}
         </Bar>
       </BarChart>
