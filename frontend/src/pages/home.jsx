@@ -16,13 +16,44 @@ import ResultBarHorizontal from "./../components/resultBarHorizontal";
 import { Button } from "@material-ui/core";
 
 const styles = theme => ({
-  title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "100%"
+  banner: {
+    [theme.breakpoints.up("md")]: {
+      height: "90vh"
+      // fontSize: "100%"
     },
-    fontSize: "8.5vw",
+    [theme.breakpoints.down("md")]: {
+      // fontSize: "100%"
+      marginTop: "5vh",
+      backgroundColor: "grey"
+    }
+  },
+  bannerImageContainer: {
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "-33.5%",
+      zIndex: 0
+    },
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "-38%",
+      overflow: "hidden"
+    }
+  },
+  bannerImage: {
+    [theme.breakpoints.up("md")]: {
+      width: "200%"
+    },
+    [theme.breakpoints.down("md")]: {
+      display: "block",
+      height: "80vh",
+      marginLeft: "-250%"
+    }
+  },
+  title: {
+    [theme.breakpoints.up("md")]: {
+      fontSize: "8.5vw"
+    },
+    lineHeight: "120%",
     color: "#C8B06B",
-    lineHeight: "120%"
+    fontSize: "10vw"
   },
   subTitle: {
     [theme.breakpoints.down("sm")]: {
@@ -47,24 +78,41 @@ const styles = theme => ({
     // paddingTop: "28%"
     // }
   },
+  cardRowContainer: {
+    [theme.breakpoints.down("md")]: {
+      padding: "0 6vw"
+    },
+    [theme.breakpoints.up("md")]: {
+      height: "650px",
+      padding: "0 7vw",
+      marginTop: "10%"
+    }
+  },
   cardContainer: {
-    [theme.breakpoints.down("sm")]: {
-      width: "84%"
+    [theme.breakpoints.down("md")]: {
+      width: "73.33vw",
+      border: "1px solid black",
+      backgroundColor: "red",
+      zIndex: 100
     },
     position: "absolute",
     width: "63.6vw",
     height: "inherit"
-    // backgroundColor: "yellow"
   },
   buttonColumn: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       // padding: "61% 0"
+      backgroundColor: "pink",
+      height: "500px"
     },
-    height: "inherit",
+    [theme.breakpoints.up("md")]: {
+      // padding: "61% 0"
+      // backgroundColor: "ivory",
+      height: "inherit"
+    },
+    zIndex: 1,
     display: "flex",
-    alignItems: "center",
-    // backgroundColor: "ivory",
-    zIndex: 1000
+    alignItems: "center"
   }
 });
 
@@ -118,14 +166,15 @@ class Home extends Component {
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <Grid container>
+          {/* Banner container */}
           <Grid
             container
             alignItems="center"
             xs={12}
-            style={{ height: "90vh" }}
+            className={classes.banner}
           >
-            <Grid item xs={2} />
-            <Grid item xs={7} style={{ zIndex: 1 }}>
+            <Grid item xs={1} md={2} />
+            <Grid item xs={8} md={7} style={{ zIndex: 1 }}>
               <Typography variant="h1" className={classes.title}>
                 INTER-HALL
               </Typography>
@@ -142,88 +191,158 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid item xs={3} style={{ marginLeft: "-33.5%", zIndex: 0 }}>
-              <img src="./home.jpg" width="200%" />
+            <Grid item xs={4} md={3} className={classes.bannerImageContainer}>
+              <img src="./home.jpg" className={classes.bannerImage} />
             </Grid>
           </Grid>
-          <Grid
-            container
-            // alignItems="center"
-            style={{
-              // backgroundColor: "pink",
-              height: "650px",
-              padding: "0 7vw",
-              marginTop: "10%"
-            }}
-            xs={12}
-          >
-            <Grid
-              item
-              xs={true}
-              className={classes.buttonColumn}
-              justify="flex-end"
-            >
-              <MediaQuery minDeviceWidth={960}>
-                <IconButton
-                  onClick={() => this.handleBack(4)}
-                  disabled={index === 0}
-                  // style={{ padding: 0 }}
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </MediaQuery>
-              <MediaQuery maxDeviceWidth={959}>
-                <IconButton
-                  onClick={() => this.handleBack(2)}
-                  disabled={index === 0}
-                  // style={{ padding: 0 }}
-                >
-                  <KeyboardArrowLeft />
-                </IconButton>
-              </MediaQuery>
-            </Grid>
-            {/* Cards */}
-            <Grid item xs={7}>
-              <TransitionGroup>
-                <CSSTransition key={index} timeout={400} classNames="fade">
-                  <Grid container className={classes.cardContainer}>
-                    <MediaQuery minDeviceWidth={960}>
-                      <Grid
-                        item
-                        container
-                        xs={12}
-                        style={{ marginLeft: "-1.9vw" }}
-                      >
-                        {schedulesToDisplay.map((e, index) => {
-                          if (index < 4) {
-                            return (
-                              <React.Fragment key={index}>
-                                <Grid item xs={5}>
-                                  <Card schedule={e} size="big" index={index} />
-                                  {index < 2 && (
-                                    <Divider
-                                      style={{
-                                        margin: "15px 8vw 15px 8vw",
-                                        backgroundColor: "#C8B06B"
-                                      }}
+          {/* Card container */}
+          <MediaQuery minDeviceWidth={960}>
+            <Grid container className={classes.cardRowContainer} xs={12}>
+              <Grid
+                item
+                md={true}
+                className={classes.buttonColumn}
+                justify="flex-end"
+              >
+                <MediaQuery minDeviceWidth={960}>
+                  <IconButton
+                    onClick={() => this.handleBack(4)}
+                    disabled={index === 0}
+                    // style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowLeft />
+                  </IconButton>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={959}>
+                  <IconButton
+                    onClick={() => this.handleBack(2)}
+                    disabled={index === 0}
+                    // style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowLeft />
+                  </IconButton>
+                </MediaQuery>
+              </Grid>
+              {/* Cards */}
+              <Grid item md={7}>
+                <TransitionGroup>
+                  <CSSTransition key={index} timeout={400} classNames="fade">
+                    <Grid container className={classes.cardContainer}>
+                      <MediaQuery minDeviceWidth={960}>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                          style={{ marginLeft: "-1.9vw" }}
+                        >
+                          {schedulesToDisplay.map((e, index) => {
+                            if (index < 4) {
+                              return (
+                                <React.Fragment key={index}>
+                                  <Grid item xs={5}>
+                                    <Card
+                                      schedule={e}
+                                      size="big"
+                                      index={index}
                                     />
-                                  )}
-                                </Grid>
-                                {/* {index % 2 == 0 && (
+                                    {index < 2 && (
+                                      <Divider
+                                        style={{
+                                          margin: "15px 8vw 15px 8vw",
+                                          backgroundColor: "#C8B06B"
+                                        }}
+                                      />
+                                    )}
+                                  </Grid>
+                                  {/* {index % 2 == 0 && (
                                   <Grid
                                     item
                                     xs={1}
                                     style={{ backgroundColor: "pink" }}
                                   />
                                 )} */}
-                              </React.Fragment>
-                            );
-                          }
-                        })}
-                      </Grid>
-                    </MediaQuery>
-                    <MediaQuery maxDeviceWidth={956}>
-                      {schedulesToDisplay.map((e, index) => {
+                                </React.Fragment>
+                              );
+                            }
+                          })}
+                        </Grid>
+                      </MediaQuery>
+                    </Grid>
+                  </CSSTransition>
+                </TransitionGroup>
+              </Grid>
+              <Grid item md={true} className={classes.buttonColumn}>
+                <MediaQuery minDeviceWidth={960}>
+                  <IconButton
+                    onClick={() => this.handleNext(4)}
+                    disabled={index >= schedules.length - 4}
+                    // style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowRight />
+                  </IconButton>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={959}>
+                  <IconButton
+                    onClick={() => this.handleNext(2)}
+                    disabled={index >= schedules.length - 2}
+                    // style={{ padding: 0 }}
+                  >
+                    <KeyboardArrowRight />
+                  </IconButton>
+                </MediaQuery>
+              </Grid>
+              <Grid
+                item
+                md={3}
+                className={classes.subTitleContainer}
+                style={{
+                  height: "inherit",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  textAlign: "right"
+                }}
+              >
+                <Grid item>
+                  <Typography
+                    variant="h1"
+                    className={classes.subTitleTransparent}
+                  >
+                    UPCOMING GAMES
+                  </Typography>
+                  <Typography
+                    variant="h1"
+                    className={classes.subTitleTransparent}
+                  >
+                    UPCOMING GAMES
+                  </Typography>
+                  <Typography variant="h1" className={classes.subTitle}>
+                    UPCOMING GAMES
+                  </Typography>
+                  <Button
+                    fullWidth
+                    style={{
+                      backgroundColor: "#C8B06B",
+                      color: "white",
+                      width: "65%",
+                      padding: "3% 0",
+                      margin: "15px 0 40px 0"
+                    }}
+                    to={"/schedule"}
+                    component={Link}
+                  >
+                    <Typography
+                      style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
+                    >
+                      VIEW SCHEDULE
+                    </Typography>
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </MediaQuery>
+
+          <MediaQuery maxDeviceWidth={956}>
+            {/* {schedulesToDisplay.map((e, index) => {
                         if (index < 2) {
                           return (
                             <Grid item xs={12} md={6}>
@@ -231,80 +350,28 @@ class Home extends Component {
                             </Grid>
                           );
                         }
-                      })}
-                    </MediaQuery>
-                  </Grid>
-                </CSSTransition>
-              </TransitionGroup>
-            </Grid>
-            <Grid item xs={true} className={classes.buttonColumn}>
-              <MediaQuery minDeviceWidth={960}>
-                <IconButton
-                  onClick={() => this.handleNext(4)}
-                  disabled={index >= schedules.length - 4}
-                  // style={{ padding: 0 }}
-                >
-                  <KeyboardArrowRight />
-                </IconButton>
-              </MediaQuery>
-              <MediaQuery maxDeviceWidth={959}>
-                <IconButton
-                  onClick={() => this.handleNext(2)}
-                  disabled={index >= schedules.length - 2}
-                  // style={{ padding: 0 }}
-                >
-                  <KeyboardArrowRight />
-                </IconButton>
-              </MediaQuery>
-            </Grid>
-            <Grid
-              item
-              xs={3}
-              className={classes.subTitleContainer}
-              style={{
-                height: "inherit",
-                display: "flex",
-                alignItems: "flex-end",
-                textAlign: "right"
-              }}
-            >
-              <Grid item>
-                <Typography
-                  variant="h1"
-                  className={classes.subTitleTransparent}
-                >
-                  UPCOMING GAMES
-                </Typography>
-                <Typography
-                  variant="h1"
-                  className={classes.subTitleTransparent}
-                >
-                  UPCOMING GAMES
-                </Typography>
-                <Typography variant="h1" className={classes.subTitle}>
-                  UPCOMING GAMES
-                </Typography>
-                <Button
-                  fullWidth
-                  style={{
-                    backgroundColor: "#C8B06B",
-                    color: "white",
-                    width: "65%",
-                    padding: "3% 0",
-                    margin: "15px 0 40px 0"
-                  }}
-                  to={"/schedule"}
-                  component={Link}
-                >
-                  <Typography
-                    style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
-                  >
-                    VIEW SCHEDULE
-                  </Typography>
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
+                      })} */}
+            {schedulesToDisplay.length > 0 && (
+              <div
+                style={{
+                  display: "flex",
+                  overflowX: "scroll",
+                  width: "100%"
+                }}
+              >
+                {schedulesToDisplay.map((e, index) => {
+                  return (
+                    <Card
+                      schedule={e}
+                      size="big"
+                      index={index}
+                      scheduleSize={schedules.length}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </MediaQuery>
           <Grid
             container
             xs={12}

@@ -4,16 +4,22 @@ import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import Typography from "@material-ui/core/Typography";
 
-export default function Card({ schedule, center, size, index }) {
+export default function Card({ schedule, center, size, index, scheduleSize }) {
   const classes = useStyles();
 
+  console.log(index);
+  console.log(scheduleSize);
   return (
     <Grid
       container
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
-      style={{ height: "310px" }}
+      style={
+        {
+          // marginRight: index === scheduleSize - 1 ? "20%" : 0
+        }
+      }
     >
       {schedule.halls.length === 2 && (
         <React.Fragment style={{ backgroundColor: "purple", zIndex: 1000 }}>
@@ -46,7 +52,7 @@ export default function Card({ schedule, center, size, index }) {
           {schedule.halls.map((hall, index) => {
             return (
               <Grid item xs={4} key={index}>
-                <img style={{ width: "55%" }} src={hall.imgUrl} />
+                <img className={classes.sixHallImage} src={hall.imgUrl} />
               </Grid>
             );
           })}
@@ -58,7 +64,10 @@ export default function Card({ schedule, center, size, index }) {
             if (index < 4) {
               return (
                 <Grid item xs={3} key={index}>
-                  <img style={{ width: "70%" }} src={hall.imgUrl} />
+                  <img
+                    className={classes.sevenHallImageTop}
+                    src={hall.imgUrl}
+                  />
                 </Grid>
               );
             } else if (index === 4) {
@@ -67,24 +76,24 @@ export default function Card({ schedule, center, size, index }) {
                   <Grid item xs={4}>
                     <img
                       style={{
-                        width: "55%",
                         marginLeft: "46%"
                       }}
+                      className={classes.sevenHallImageBottom}
                       src={schedule.halls[4].imgUrl}
                     />
                   </Grid>
                   <Grid item xs={4}>
                     <img
-                      style={{ width: "50%" }}
+                      className={classes.sevenHallImageBottom}
                       src={schedule.halls[5].imgUrl}
                     />
                   </Grid>
                   <Grid item xs={4}>
                     <img
                       style={{
-                        width: "55%",
                         marginLeft: "-46%"
                       }}
+                      className={classes.sevenHallImageBottom}
                       src={schedule.halls[6].imgUrl}
                     />
                   </Grid>
@@ -123,7 +132,19 @@ export default function Card({ schedule, center, size, index }) {
 const styles = theme => ({
   big: {
     textAlign: "center",
-    transform: "scale(0.8)"
+    [theme.breakpoints.up("md")]: {
+      transform: "scale(0.8)",
+      height: "310px"
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      flexShrink: 0,
+      transform: "scale(0.8)",
+      // borderRadius: "10px",
+      // marginLeft: "10px"
+      backgroundColor: "yellow",
+      border: "1px solid black"
+    }
     // margin: "1% 0.5%",
     // width: "100%",
     // height: "100%",
@@ -144,12 +165,11 @@ const styles = theme => ({
   },
   center: {
     textAlign: "center",
-    width: "100%",
-    height: "100%",
+    height: "310px",
     padding: "1%",
     transform: "scale(1.3)",
     // border: "1px solid gold",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       transform: "scale(0.9)"
     }
   },
@@ -166,12 +186,15 @@ const styles = theme => ({
     fontFamily: "TheNextFont"
   },
   hall: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "5vw"
+    },
     fontSize: "1.3vw",
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },
   hallContainer: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       height: "80px"
     },
     height: "60px"
@@ -181,6 +204,18 @@ const styles = theme => ({
     color: "grey",
     lineHeight: "100%",
     marginTop: "2%"
+  },
+  sixHallImage: {
+    [theme.breakpoints.down("md")]: {},
+    width: "55%"
+  },
+  sevenHallImageBottom: {
+    [theme.breakpoints.down("md")]: {},
+    width: "70%"
+  },
+  sevenHallImageTop: {
+    [theme.breakpoints.down("md")]: {},
+    width: "70%"
   }
 });
 
