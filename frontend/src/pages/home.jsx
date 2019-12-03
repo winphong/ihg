@@ -152,7 +152,8 @@ class Home extends Component {
             style={{
               // backgroundColor: "pink",
               height: "520px",
-              padding: "0 7vw"
+              padding: "0 7vw",
+              marginTop: "10%"
             }}
             xs={12}
           >
@@ -289,8 +290,8 @@ class Home extends Component {
                     backgroundColor: "#C8B06B",
                     color: "white",
                     width: "65%",
-                    height: "6vh",
-                    margin: "1vh 0"
+                    padding: "3% 0",
+                    margin: "15px 0 20px 0"
                   }}
                   to={"/schedule"}
                   component={Link}
@@ -310,12 +311,12 @@ class Home extends Component {
             style={{
               // height: "70vh",
               padding: "0 7vw",
-              marginTop: "15vh"
+              marginTop: "10%"
               // backgroundColor: "pink"
             }}
             alignItems="flex-end"
           >
-            <Grid item xs={4}>
+            <Grid item xs={3}>
               <Typography variant="h1" className={classes.subTitleTransparent}>
                 CURRENT STANDINGS
               </Typography>
@@ -330,9 +331,9 @@ class Home extends Component {
                 style={{
                   backgroundColor: "#C8B06B",
                   color: "white",
-                  width: "45%",
-                  height: "6vh",
-                  margin: "1vh 0"
+                  width: "60%",
+                  padding: "3% 0",
+                  margin: "5% 0 6% 0"
                 }}
                 to={"/results"}
                 component={Link}

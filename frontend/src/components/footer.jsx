@@ -19,9 +19,7 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex",
-    flexDirection: "column",
-    minHeight: "100%",
+    backgroundColor: "brown",
     marginTop: theme.spacing(8)
   },
   footer: {
