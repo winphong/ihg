@@ -13,10 +13,10 @@ export default function Card({ schedule, center, size, index }) {
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
-      style={{ height: "300px" }}
+      style={{ height: "230px", transform: "scale(0.7)" }}
     >
       {schedule.halls.length === 2 && (
-        <React.Fragment>
+        <React.Fragment style={{ backgroundColor: "purple", zIndex: 1000 }}>
           <Grid container>
             <Grid item xs={5}>
               <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
@@ -46,7 +46,7 @@ export default function Card({ schedule, center, size, index }) {
           {schedule.halls.map((hall, index) => {
             return (
               <Grid item xs={4} key={index}>
-                <img style={{ width: "60%" }} src={hall.imgUrl} />
+                <img style={{ width: "55%" }} src={hall.imgUrl} />
               </Grid>
             );
           })}
@@ -58,7 +58,7 @@ export default function Card({ schedule, center, size, index }) {
             if (index < 4) {
               return (
                 <Grid item xs={3} key={index}>
-                  <img style={{ width: "80%" }} src={hall.imgUrl} />
+                  <img style={{ width: "70%" }} src={hall.imgUrl} />
                 </Grid>
               );
             } else if (index === 4) {
@@ -75,7 +75,7 @@ export default function Card({ schedule, center, size, index }) {
                   </Grid>
                   <Grid item xs={4}>
                     <img
-                      style={{ width: "55%" }}
+                      style={{ width: "50%" }}
                       src={schedule.halls[5].imgUrl}
                     />
                   </Grid>
@@ -109,10 +109,7 @@ export default function Card({ schedule, center, size, index }) {
       )}
       <Grid item xs={12}>
         <Typography className={classes.sport}>
-          {schedule.sport.toUpperCase()}
-        </Typography>
-        <Typography className={classes.sport}>
-          {schedule.stage.toUpperCase()}
+          {schedule.sport.toUpperCase()} {schedule.stage.toUpperCase()}
         </Typography>
         <Typography className={classes.information}>
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
@@ -125,13 +122,13 @@ export default function Card({ schedule, center, size, index }) {
 
 const styles = theme => ({
   big: {
-    textAlign: "center",
+    textAlign: "center"
     // margin: "1% 0.5%",
-    width: "100%",
-    height: "100%",
+    // width: "100%",
+    // height: "100%",
     // backgroundColor: "beige",
     // border: "3px solid #C8B06B",
-    padding: "2%"
+    // padding: "1vh"
   },
   small: {
     textAlign: "center",
@@ -163,20 +160,20 @@ const styles = theme => ({
   },
   sport: {
     fontSize: "25px",
-    fontWeight: "800",
     lineHeight: "100%",
-    color: "#C8B06B"
+    color: "#C8B06B",
+    fontFamily: "TheNextFont"
   },
   hall: {
-    fontSize: "20px",
-    fontWeight: "500",
-    lineHeight: "100%"
+    fontSize: "18px",
+    lineHeight: "100%",
+    fontFamily: "TheNextFont"
   },
   hallContainer: {
     [theme.breakpoints.down("sm")]: {
       height: "80px"
     },
-    height: "50px"
+    height: "60px"
   },
   information: {
     fontSize: "16px",

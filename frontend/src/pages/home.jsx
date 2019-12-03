@@ -29,9 +29,16 @@ const styles = theme => ({
       fontSize: "100%",
       textAlign: "center"
     },
-    fontSize: "4.4vw",
+    fontSize: "3.5vw",
     color: "#C8B06B",
-    lineHeight: "100%"
+    lineHeight: "120%"
+  },
+  subTitleTransparent: {
+    fontSize: "3.5vw",
+    color: "transparent",
+    "-webkit-text-stroke-width": "1px",
+    "-webkit-text-stroke-color": "#C8B06B",
+    lineHeight: "120%"
   },
   subTitleContainer: {
     // [theme.breakpoints.up("md")]: {
@@ -45,7 +52,8 @@ const styles = theme => ({
       width: "84%"
     },
     position: "absolute",
-    width: "63.6vw"
+    width: "63.6vw",
+    height: "inherit"
     // backgroundColor: "yellow"
   },
   buttonColumn: {
@@ -54,8 +62,9 @@ const styles = theme => ({
     },
     height: "inherit",
     display: "flex",
-    alignItems: "center"
-    // backgroundColor: "ivory"
+    alignItems: "center",
+    // backgroundColor: "ivory",
+    zIndex: 1000
   }
 });
 
@@ -111,10 +120,9 @@ class Home extends Component {
         <Grid container>
           <Grid
             container
-            alignContent="center"
-            // justify="center"
+            alignItems="center"
             xs={12}
-            style={{ height: "93vh" }}
+            style={{ height: "90vh" }}
           >
             <Grid item xs={2} />
             <Grid item xs={7} style={{ zIndex: 1 }}>
@@ -134,8 +142,8 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid item xs={3} style={{ marginLeft: "-33vw", zIndex: 0 }}>
-              <img src="./home.jpg" width="750vw" style={{ opacity: "0.3" }} />
+            <Grid item xs={3} style={{ marginLeft: "-33.5%", zIndex: 0 }}>
+              <img src="./home.jpg" width="200%" />
             </Grid>
           </Grid>
           <Grid
@@ -143,8 +151,8 @@ class Home extends Component {
             // alignItems="center"
             style={{
               // backgroundColor: "pink",
-              height: "660px",
-              padding: "0 20px"
+              height: "520px",
+              padding: "0 7vw"
             }}
             xs={12}
           >
@@ -174,12 +182,17 @@ class Home extends Component {
               </MediaQuery>
             </Grid>
             {/* Cards */}
-            <Grid item xs={8}>
+            <Grid item xs={7}>
               <TransitionGroup>
                 <CSSTransition key={index} timeout={400} classNames="fade">
                   <Grid container className={classes.cardContainer}>
                     <MediaQuery minDeviceWidth={960}>
-                      <Grid item container xs={12}>
+                      <Grid
+                        item
+                        container
+                        xs={12}
+                        style={{ marginLeft: "-1.9vw" }}
+                      >
                         {schedulesToDisplay.map((e, index) => {
                           if (index < 4) {
                             return (
@@ -187,16 +200,21 @@ class Home extends Component {
                                 <Grid item xs={5}>
                                   <Card schedule={e} size="big" index={index} />
                                   {index < 2 && (
-                                    <Divider style={{ margin: "30px 60px" }} />
+                                    <Divider
+                                      style={{
+                                        margin: "30px 60px 0 60px",
+                                        backgroundColor: "#C8B06B"
+                                      }}
+                                    />
                                   )}
                                 </Grid>
-                                {index % 2 == 0 && (
+                                {/* {index % 2 == 0 && (
                                   <Grid
                                     item
-                                    xs={2}
-                                    // style={{ backgroundColor: "pink" }}
+                                    xs={1}
+                                    style={{ backgroundColor: "pink" }}
                                   />
-                                )}
+                                )} */}
                               </React.Fragment>
                             );
                           }
@@ -250,10 +268,16 @@ class Home extends Component {
               }}
             >
               <Grid item>
-                <Typography variant="h1" className={classes.subTitle}>
+                <Typography
+                  variant="h1"
+                  className={classes.subTitleTransparent}
+                >
                   UPCOMING GAMES
                 </Typography>
-                <Typography variant="h1" className={classes.subTitle}>
+                <Typography
+                  variant="h1"
+                  className={classes.subTitleTransparent}
+                >
                   UPCOMING GAMES
                 </Typography>
                 <Typography variant="h1" className={classes.subTitle}>
@@ -264,15 +288,15 @@ class Home extends Component {
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    width: "80%",
-                    height: "8vh",
-                    margin: "3vh 0"
+                    width: "65%",
+                    height: "6vh",
+                    margin: "1vh 0"
                   }}
                   to={"/schedule"}
                   component={Link}
                 >
                   <Typography
-                    style={{ fontFamily: "TheNextFont", fontSize: "2vw" }}
+                    style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
                   >
                     VIEW SCHEDULE
                   </Typography>
@@ -285,17 +309,17 @@ class Home extends Component {
             xs={12}
             style={{
               // height: "70vh",
-              padding: "0 30px",
+              padding: "0 7vw",
               marginTop: "15vh"
               // backgroundColor: "pink"
             }}
             alignItems="flex-end"
           >
             <Grid item xs={4}>
-              <Typography variant="h1" className={classes.subTitle}>
+              <Typography variant="h1" className={classes.subTitleTransparent}>
                 CURRENT STANDINGS
               </Typography>
-              <Typography variant="h1" className={classes.subTitle}>
+              <Typography variant="h1" className={classes.subTitleTransparent}>
                 CURRENT STANDINGS
               </Typography>
               <Typography variant="h1" className={classes.subTitle}>
@@ -306,22 +330,26 @@ class Home extends Component {
                 style={{
                   backgroundColor: "#C8B06B",
                   color: "white",
-                  width: "55%",
-                  height: "8vh",
-                  margin: "3vh 0"
+                  width: "45%",
+                  height: "6vh",
+                  margin: "1vh 0"
                 }}
                 to={"/results"}
                 component={Link}
               >
                 <Typography
-                  style={{ fontFamily: "TheNextFont", fontSize: "2vw" }}
+                  style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
                 >
                   VIEW RESULTS
                 </Typography>
               </Button>
             </Grid>
             <Grid item xs={8}>
-              <ResultBarHorizontal halls={halls} />
+              <ResultBarHorizontal
+                halls={halls.filter(hall => {
+                  return hall.abbreviation != "PH";
+                })}
+              />
             </Grid>
           </Grid>
         </Grid>

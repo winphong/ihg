@@ -11,11 +11,10 @@ import {
 } from "recharts";
 
 export default function ResultBarHorizontal({ halls }) {
-  const classes = useStyles();
-  const barSize = 10;
+  const barSize = 20;
 
   return (
-    <ResponsiveContainer height={barSize * 60}>
+    <ResponsiveContainer height={barSize * 20}>
       <BarChart
         data={halls}
         barCategoryGap={0}
@@ -23,15 +22,15 @@ export default function ResultBarHorizontal({ halls }) {
         margin={{ right: 100 }}
       >
         <YAxis
-          dataKey="abbreviation"
+          dataKey="name"
           type="category"
           axisLine={false}
           tickLine={false}
-          fontSize={30}
+          fontSize={25}
           fontFamily="TheNextFont"
           textAnchor="end"
           dx={-10}
-          width={70}
+          width={335}
         />
         <XAxis
           hide
@@ -50,8 +49,8 @@ export default function ResultBarHorizontal({ halls }) {
             dataKey="totalPoint"
             position="right"
             fontSize={25}
-            fontFamily="TheNextFont"
             fill="#958F87"
+            fontWeight={900}
             // fillOpacity={0.2}
             strokeWidth={0}
           />
