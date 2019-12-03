@@ -13,7 +13,7 @@ export default function Card({ schedule, center, size, index }) {
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
-      style={{ height: "230px", transform: "scale(0.7)" }}
+      style={{ height: "310px" }}
     >
       {schedule.halls.length === 2 && (
         <React.Fragment style={{ backgroundColor: "purple", zIndex: 1000 }}>
@@ -122,12 +122,13 @@ export default function Card({ schedule, center, size, index }) {
 
 const styles = theme => ({
   big: {
-    textAlign: "center"
+    textAlign: "center",
+    transform: "scale(0.8)"
     // margin: "1% 0.5%",
     // width: "100%",
     // height: "100%",
     // backgroundColor: "beige",
-    // border: "3px solid #C8B06B",
+    // border: "1px solid black"
     // padding: "1vh"
   },
   small: {
@@ -165,7 +166,7 @@ const styles = theme => ({
     fontFamily: "TheNextFont"
   },
   hall: {
-    fontSize: "18px",
+    fontSize: "1.3vw",
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },

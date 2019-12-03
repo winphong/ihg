@@ -151,7 +151,7 @@ class Home extends Component {
             // alignItems="center"
             style={{
               // backgroundColor: "pink",
-              height: "520px",
+              height: "650px",
               padding: "0 7vw",
               marginTop: "10%"
             }}
@@ -203,7 +203,7 @@ class Home extends Component {
                                   {index < 2 && (
                                     <Divider
                                       style={{
-                                        margin: "30px 60px 0 60px",
+                                        margin: "15px 8vw 15px 8vw",
                                         backgroundColor: "#C8B06B"
                                       }}
                                     />
@@ -291,7 +291,7 @@ class Home extends Component {
                     color: "white",
                     width: "65%",
                     padding: "3% 0",
-                    margin: "15px 0 20px 0"
+                    margin: "15px 0 40px 0"
                   }}
                   to={"/schedule"}
                   component={Link}
@@ -346,11 +346,7 @@ class Home extends Component {
               </Button>
             </Grid>
             <Grid item xs={8}>
-              <ResultBarHorizontal
-                halls={halls.filter(hall => {
-                  return hall.abbreviation != "PH";
-                })}
-              />
+              <ResultBarHorizontal halls={halls} />
             </Grid>
           </Grid>
         </Grid>
