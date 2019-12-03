@@ -51,16 +51,17 @@ export default function Footer() {
           <Copyright />
         </Container> */}
         <Grid container>
-          <Grid item xs={1} />
-          <Grid item container xs={5}>
-            <Grid item xs={2}>
+          <Grid item xs={0} md={1} />
+          {/* Conveninv */}
+          <Grid item container xs={6} md={5}>
+            <Grid item xs={2} md={2}>
               <img
                 src="./logo.png"
                 width="100%"
                 style={{ marginTop: "-3vh" }}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} md={8}>
               <Typography className={classes.title}>
                 IHG Convening 19/20
               </Typography>
@@ -72,7 +73,8 @@ export default function Footer() {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item xs={5}>
+          {/* Raffles Hall */}
+          <Grid item xs={6} md={5}>
             <Typography className={classes.title}>NUS Raffles Hall</Typography>
             <Typography className={classes.subTitle}>
               19 Kent Ridge Crescent
@@ -82,7 +84,8 @@ export default function Footer() {
             </Typography>
             <Typography className={classes.subTitle}>+65 6516 2078</Typography>
           </Grid>
-          <Grid item xs={1}>
+          {/* Back to top */}
+          <Grid item xs={12} md={1}>
             <Button
               onClick={() => {
                 window.scrollTo(0, 0);

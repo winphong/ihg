@@ -23,8 +23,8 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("md")]: {
       // fontSize: "100%"
-      marginTop: "5vh",
-      backgroundColor: "grey"
+      // backgroundColor: "grey",
+      marginTop: "1vh"
     }
   },
   bannerImageContainer: {
@@ -43,7 +43,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("md")]: {
       display: "block",
-      height: "80vh",
+      height: "90vh",
       marginLeft: "-250%"
     }
   },
@@ -339,83 +339,84 @@ class Home extends Component {
                 </Grid>
               </Grid>
             </Grid>
-          </MediaQuery>
-
-          <MediaQuery maxDeviceWidth={956}>
-            {/* {schedulesToDisplay.map((e, index) => {
-                        if (index < 2) {
-                          return (
-                            <Grid item xs={12} md={6}>
-                              <Card schedule={e} size="big" />
-                            </Grid>
-                          );
-                        }
-                      })} */}
-            {schedulesToDisplay.length > 0 && (
-              <div
-                style={{
-                  display: "flex",
-                  overflowX: "scroll",
-                  width: "100%"
-                }}
-              >
-                {schedulesToDisplay.map((e, index) => {
-                  return (
-                    <Card
-                      schedule={e}
-                      size="big"
-                      index={index}
-                      scheduleSize={schedules.length}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </MediaQuery>
-          <Grid
-            container
-            xs={12}
-            style={{
-              // height: "70vh",
-              padding: "0 7vw",
-              marginTop: "10%"
-              // backgroundColor: "pink"
-            }}
-            alignItems="flex-end"
-          >
-            <Grid item xs={3}>
-              <Typography variant="h1" className={classes.subTitleTransparent}>
-                CURRENT STANDINGS
-              </Typography>
-              <Typography variant="h1" className={classes.subTitleTransparent}>
-                CURRENT STANDINGS
-              </Typography>
-              <Typography variant="h1" className={classes.subTitle}>
-                CURRENT STANDINGS
-              </Typography>
-              <Button
-                fullWidth
-                style={{
-                  backgroundColor: "#C8B06B",
-                  color: "white",
-                  width: "60%",
-                  padding: "3% 0",
-                  margin: "5% 0 6% 0"
-                }}
-                to={"/results"}
-                component={Link}
-              >
+            <Grid
+              container
+              xs={12}
+              style={{
+                // height: "70vh",
+                padding: "0 7vw",
+                marginTop: "10%"
+                // backgroundColor: "pink"
+              }}
+              alignItems="flex-end"
+            >
+              <Grid item xs={3}>
                 <Typography
-                  style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
+                  variant="h1"
+                  className={classes.subTitleTransparent}
                 >
-                  VIEW RESULTS
+                  CURRENT STANDINGS
                 </Typography>
-              </Button>
+                <Typography
+                  variant="h1"
+                  className={classes.subTitleTransparent}
+                >
+                  CURRENT STANDINGS
+                </Typography>
+                <Typography variant="h1" className={classes.subTitle}>
+                  CURRENT STANDINGS
+                </Typography>
+                <Button
+                  fullWidth
+                  style={{
+                    backgroundColor: "#C8B06B",
+                    color: "white",
+                    width: "60%",
+                    padding: "3% 0",
+                    margin: "5% 0 6% 0"
+                  }}
+                  to={"/results"}
+                  component={Link}
+                >
+                  <Typography
+                    style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
+                  >
+                    VIEW RESULTS
+                  </Typography>
+                </Button>
+              </Grid>
+              <Grid item xs={8}>
+                <ResultBarHorizontal halls={halls} />
+              </Grid>
             </Grid>
-            <Grid item xs={8}>
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={956}>
+            <Grid container xs={12}>
+              {schedulesToDisplay.length > 0 && (
+                <div
+                  style={{
+                    display: "flex",
+                    overflowX: "scroll",
+                    width: "100%"
+                  }}
+                >
+                  {schedulesToDisplay.map((e, index) => {
+                    return (
+                      <Card
+                        schedule={e}
+                        size="big"
+                        index={index}
+                        scheduleSize={schedules.length}
+                      />
+                    );
+                  })}
+                </div>
+              )}
+            </Grid>
+            <Grid container xs={12}>
               <ResultBarHorizontal halls={halls} />
             </Grid>
-          </Grid>
+          </MediaQuery>
         </Grid>
       </CSSTransition>
     );

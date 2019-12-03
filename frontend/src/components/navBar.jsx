@@ -83,6 +83,18 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" color="inherit">
         <Toolbar>
+          <MediaQuery maxWidth={959}>
+            <Button onClick={toggleDrawer("left", true)}>
+              <MenuIcon />
+            </Button>
+            <Drawer
+              anchor="left"
+              open={state.left}
+              onClose={toggleDrawer("left", false)}
+            >
+              {sideList("left")}
+            </Drawer>
+          </MediaQuery>
           <Typography variant="h5" className={classes.title}>
             <img
               src="/Logo.png"
@@ -90,7 +102,7 @@ export default function NavBar() {
             ></img>
             {"   "} IHG 19/20
           </Typography>
-          <MediaQuery minWidth={961}>
+          <MediaQuery minWidth={960}>
             {selections.map(selection => {
               return (
                 <IconButton
@@ -106,18 +118,6 @@ export default function NavBar() {
                 </IconButton>
               );
             })}
-          </MediaQuery>
-          <MediaQuery maxWidth={960}>
-            <Button onClick={toggleDrawer("right", true)}>
-              <MenuIcon />
-            </Button>
-            <Drawer
-              anchor="right"
-              open={state.right}
-              onClose={toggleDrawer("right", false)}
-            >
-              {sideList("right")}
-            </Drawer>
           </MediaQuery>
         </Toolbar>
       </AppBar>
