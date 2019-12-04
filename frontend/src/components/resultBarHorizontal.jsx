@@ -9,10 +9,12 @@ import {
   YAxis,
   LabelList
 } from "recharts";
-import { useMediaQuery } from "react-responsive";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export default function ResultBarHorizontal({ halls }) {
-  const isMobile = useMediaQuery({ query: "(max-device-width: 959px)" });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <React.Fragment>
@@ -64,56 +66,6 @@ export default function ResultBarHorizontal({ halls }) {
           </Bar>
         </BarChart>
       </ResponsiveContainer>
-      {/* {!isMobile && (
-        <ResponsiveContainer height={600}>
-          <BarChart
-            data={halls}
-            barCategoryGap={0}
-            layout="vertical"
-            margin={{ right: 100 }}
-          >
-            <YAxis
-              dataKey="name"
-              type="category"
-              axisLine={false}
-              tickLine={false}
-              fontSize={25}
-              fontFamily="TheNextFont"
-              tick={{ fill: "black" }}
-              textAnchor="start"
-              dx={-350}
-              width={400}
-            />
-            <XAxis
-              hide
-              dataKey="totalPoint"
-              type="number"
-              axisLine={false}
-              tickLine={false}
-            />
-            <Bar dataKey="totalPoint" barSize={15}>
-              <LabelList
-                dataKey="totalPoint"
-                position="right"
-                fontSize={25}
-                fill="#958F87"
-                fontWeight={900}
-                strokeWidth={0}
-              />
-
-              {halls.map(({ colourCode }, index) => {
-                return (
-                  <Cell
-                    key={index}
-                    fill={colourCode}
-                    stroke={colourCode === "#ffffff" ? "#252527" : ""}
-                  />
-                );
-              })}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      )} */}
     </React.Fragment>
   );
 }

@@ -1,14 +1,16 @@
 import React from "react";
 import dateformat from "dateformat";
 import Grid from "@material-ui/core/Grid";
-import { useMediaQuery } from "react-responsive";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 export default function Card({ schedule, center, size, index, scheduleSize }) {
   const classes = useStyles();
-  const shrink = useMediaQuery({ query: "(max-device-width: 959px)" });
-  console.log(shrink);
+  const theme = useTheme();
+  const shrink = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Grid
       container
@@ -144,7 +146,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("md")]: {
       width: "80%",
-      height: "40vh",
+      height: "35vh",
       flexShrink: 0
       // transform: "scale(0.8)",
       // borderRadius: "10px",
@@ -187,7 +189,10 @@ const styles = theme => ({
     textAlign: "center"
   },
   sport: {
-    fontSize: "25px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "3vh"
+    },
+    fontSize: "1.5vw",
     lineHeight: "100%",
     color: "#C8B06B",
     fontFamily: "TheNextFont"
@@ -195,7 +200,7 @@ const styles = theme => ({
   },
   hall: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "5vw"
+      fontSize: "2.5vh"
     },
     fontSize: "1.3vw",
     lineHeight: "100%",

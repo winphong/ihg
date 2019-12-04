@@ -56,16 +56,16 @@ const styles = theme => ({
     fontSize: "10vw"
   },
   subTitle: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "100%",
-      textAlign: "center"
+    [theme.breakpoints.down("md")]: {
+      fontSize: "6vw"
     },
     fontSize: "3.5vw",
     color: "#C8B06B",
-    lineHeight: "120%"
+    lineHeight: "120%",
+    fontFamily: "TheNextFont"
   },
   subTitleTransparent: {
-    fontSize: "3.5vw",
+    fontSize: "2.5vw",
     color: "transparent",
     "-webkit-text-stroke-width": "1px",
     "-webkit-text-stroke-color": "#C8B06B",
@@ -272,16 +272,14 @@ class Home extends Component {
                 </TransitionGroup>
               </Grid>
               <Grid item md={true} className={classes.buttonColumn}>
-                <MediaQuery minDeviceWidth={960}>
-                  <IconButton
-                    onClick={() => this.handleNext(4)}
-                    disabled={index >= schedules.length - 4}
-                    // style={{ padding: 0 }}
-                  >
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </MediaQuery>
-                <MediaQuery maxDeviceWidth={959}>
+                <IconButton
+                  onClick={() => this.handleNext(4)}
+                  disabled={index >= schedules.length - 4}
+                  // style={{ padding: 0 }}
+                >
+                  <KeyboardArrowRight />
+                </IconButton>
+                {/* <MediaQuery maxDeviceWidth={959}>
                   <IconButton
                     onClick={() => this.handleNext(2)}
                     disabled={index >= schedules.length - 2}
@@ -289,7 +287,7 @@ class Home extends Component {
                   >
                     <KeyboardArrowRight />
                   </IconButton>
-                </MediaQuery>
+                </MediaQuery> */}
               </Grid>
               <Grid
                 item
@@ -391,7 +389,39 @@ class Home extends Component {
             </Grid>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={956}>
-            <Grid container xs={12}>
+            <Grid
+              container
+              xs={12}
+              alignItems="center"
+              style={{ padding: "3vh 5vw" }}
+            >
+              <Grid item xs={9}>
+                <Typography className={classes.subTitle}>
+                  {" "}
+                  UPCOMING GAMES
+                </Typography>
+              </Grid>
+              <Grid item xs={3}>
+                <Button
+                  style={{ backgroundColor: "#C8B06B" }}
+                  fullWidth
+                  to={"/schedule"}
+                  component={Link}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "TheNextFont",
+                      fontSize: "2.3vw",
+                      color: "white"
+                    }}
+                  >
+                    VIEW SCHEDULE
+                  </Typography>
+                </Button>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12}>
               {schedulesToDisplay.length > 0 && (
                 <div
                   style={{
@@ -413,9 +443,44 @@ class Home extends Component {
                 </div>
               )}
             </Grid>
-            <Grid container xs={12}>
-              <ResultBarHorizontal halls={halls} />
+            <Grid
+              container
+              xs={12}
+              style={{ padding: "3vh 5vw" }}
+              alignItems="center"
+            >
+              <Grid item xs={9}>
+                <Typography className={classes.subTitle}>
+                  {" "}
+                  CURRENT STANDINGS
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={3}
+                style={{
+                  textAlign: "center"
+                }}
+              >
+                <Button
+                  style={{ backgroundColor: "#C8B06B" }}
+                  fullWidth
+                  to={"/results"}
+                  component={Link}
+                >
+                  <Typography
+                    style={{
+                      fontFamily: "TheNextFont",
+                      fontSize: "2.3vw",
+                      color: "white"
+                    }}
+                  >
+                    VIEW RESULT
+                  </Typography>
+                </Button>
+              </Grid>
             </Grid>
+            <ResultBarHorizontal halls={halls} />
           </MediaQuery>
         </Grid>
       </CSSTransition>

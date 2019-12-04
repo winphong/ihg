@@ -82,7 +82,7 @@ export default function NavBar() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="inherit">
-        <Toolbar>
+        <Toolbar disableGutters>
           <MediaQuery maxWidth={959}>
             <Button onClick={toggleDrawer("left", true)}>
               <MenuIcon />
