@@ -389,12 +389,7 @@ class Home extends Component {
             </Grid>
           </MediaQuery>
           <MediaQuery maxDeviceWidth={956}>
-            <Grid
-              container
-              xs={12}
-              alignItems="center"
-              style={{ padding: "3vh 5vw" }}
-            >
+            <Grid container xs={12} style={{ padding: "3vh 5vw" }}>
               <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   {" "}
@@ -403,7 +398,7 @@ class Home extends Component {
               </Grid>
               <Grid item xs={3}>
                 <Button
-                  style={{ backgroundColor: "#C8B06B" }}
+                  style={{ backgroundColor: "#C8B06B", padding: "6%" }}
                   fullWidth
                   to={"/schedule"}
                   component={Link}
@@ -411,7 +406,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "2.3vw",
+                      fontSize: "2vw",
                       color: "white"
                     }}
                   >
@@ -443,12 +438,7 @@ class Home extends Component {
                 </div>
               )}
             </Grid>
-            <Grid
-              container
-              xs={12}
-              style={{ padding: "3vh 5vw" }}
-              alignItems="center"
-            >
+            <Grid container xs={12} style={{ padding: "3vh 5vw" }}>
               <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   {" "}
@@ -463,7 +453,7 @@ class Home extends Component {
                 }}
               >
                 <Button
-                  style={{ backgroundColor: "#C8B06B" }}
+                  style={{ backgroundColor: "#C8B06B", padding: "6%" }}
                   fullWidth
                   to={"/results"}
                   component={Link}
@@ -471,7 +461,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "2.3vw",
+                      fontSize: "2vw",
                       color: "white"
                     }}
                   >

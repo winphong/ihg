@@ -30,7 +30,7 @@ export default function ResultsTable({
             lim = lim - 1;
             currentDate = schedule.startTime.substring(8, 10);
             return (
-              <div>
+              <div key={index}>
                 <Typography className={classes.date}>
                   {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
                 </Typography>
@@ -44,7 +44,7 @@ export default function ResultsTable({
             );
           }
           return (
-            <div>
+            <div key={index}>
               {schedule.stage === "Carnival" ? (
                 <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
               ) : (

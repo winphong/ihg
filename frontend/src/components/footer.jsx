@@ -111,7 +111,7 @@ export default function Footer() {
           <Grid item xs={12} md={2} className={classes.backToTop}>
             <Button
               onClick={() => {
-                window.scrollTo(0, 0);
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
               <KeyboardArrowUpIcon

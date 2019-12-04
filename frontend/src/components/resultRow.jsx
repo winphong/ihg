@@ -92,9 +92,7 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          <Typography variant="bold">
-            {schedule.halls[0].abbreviation}
-          </Typography>
+          <Typography>{schedule.halls[0].abbreviation}</Typography>
         </Grid>
         {/* score 1 */}
         <Grid
@@ -108,11 +106,11 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          <Typography variant="bold">{schedule.halls[0].score}</Typography>
+          <Typography>{schedule.halls[0].score}</Typography>
         </Grid>
         {/* versus */}
         <Grid item xs={1} style={{ textAlign: "center" }}>
-          <Typography variant="bold"> - </Typography>
+          <Typography> - </Typography>
         </Grid>
         {/* score 2 */}
         <Grid
@@ -126,7 +124,7 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          <Typography variant="bold">{schedule.halls[1].score}</Typography>
+          <Typography>{schedule.halls[1].score}</Typography>
         </Grid>
         {/* hall 2 */}
         <Grid
@@ -141,9 +139,7 @@ export default function ResultRow({ schedule, isAdmin }) {
               : classes.neutral
           }
         >
-          <Typography variant="bold">
-            {schedule.halls[1].abbreviation}
-          </Typography>
+          <Typography>{schedule.halls[1].abbreviation}</Typography>
         </Grid>
         {!isLaptop && (
           <Grid item xs={12} style={{ paddingLeft: "2%" }}>
