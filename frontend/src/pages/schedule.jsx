@@ -14,9 +14,8 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "40px"
     },
-    fontSize: "1000%",
-    fontWeight: "900",
-    color: "#C8B06B"
+    color: "#C8B06B",
+    fontSize: "1000%"
   },
   buttonColumn: {
     textAlign: "center",
@@ -24,11 +23,11 @@ const styles = theme => ({
   },
   container: {
     textAlign: "center",
-    minHeight: "700px"
+    minHeight: "50vmax"
   },
   calendar: {
     [theme.breakpoints.up("md")]: {
-      padding: "0% 2%"
+      // padding: "0% 2%"
     },
     [theme.breakpoints.down("md")]: {
       margin: "0 1%"
@@ -36,9 +35,8 @@ const styles = theme => ({
   },
   slider: {
     [theme.breakpoints.up("md")]: {
-      marginBottom: "5%"
-    },
-    minHeight: "400px"
+      margin: "5% 0"
+    }
   }
 });
 
@@ -67,10 +65,12 @@ class Schedule extends Component {
       <Grid container className={classes.container}>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <React.Fragment>
+            <Grid item xs={12}>
+              <Typography variant="h1" className={classes.title}>
+                TODAY'S GAMES
+              </Typography>
+            </Grid>
             <Grid item container xs={12} className={classes.slider}>
-              <Grid item xs={12}>
-                <Typography className={classes.title}>TODAY'S GAMES</Typography>
-              </Grid>
               <Grid item xs={12}>
                 <CSSTransition
                   in={true}
@@ -96,14 +96,13 @@ class Schedule extends Component {
             </Grid>
             {/* Calendar */}
             <Grid item container className={classes.container}>
-              <Grid item xs={12}>
-                Schedules
-              </Grid>
-              <Grid item xs={12} className={classes.calendar}>
+              <Grid item xs={1} />
+              <Grid item xs={10} className={classes.calendar}>
                 {schedules.length > 0 && (
                   <Calendar schedules={schedules} isAdmin={isAdmin} />
                 )}
               </Grid>
+              <Grid item xs={1} />
             </Grid>
           </React.Fragment>
         </CSSTransition>

@@ -41,13 +41,17 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
               alignItems="center"
             >
               <Grid item xs={5}>
-                <Typography className={classes.hall}>
+                <Typography
+                  className={center ? classes.hallCenter : classes.hall}
+                >
                   {schedule.halls[0].name.toUpperCase()}
                 </Typography>
               </Grid>
               <Grid item xs={2} />
               <Grid item xs={5}>
-                <Typography className={classes.hall}>
+                <Typography
+                  className={center ? classes.hallCenter : classes.hall}
+                >
                   {schedule.halls[1].name.toUpperCase()}
                 </Typography>
               </Grid>
@@ -115,7 +119,9 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
             {schedule.halls.map((hall, index) => {
               return (
                 <Grid item xs={true} key={index}>
-                  <Typography className={classes.hall}>
+                  <Typography
+                    className={center ? classes.hallCenter : classes.hall}
+                  >
                     {hall.abbreviation}
                   </Typography>
                 </Grid>
@@ -174,12 +180,13 @@ const styles = theme => ({
   },
   center: {
     textAlign: "center",
-    height: "310px",
+    height: "18vmax",
     padding: "1%",
     transform: "scale(1.3)",
     // border: "1px solid gold",
     [theme.breakpoints.down("md")]: {
-      transform: "scale(0.9)"
+      transform: "scale(0.9)",
+      height: "35vmax"
     }
   },
   vs: {
@@ -203,6 +210,14 @@ const styles = theme => ({
       fontSize: "2.5vh"
     },
     fontSize: "1.3vw",
+    lineHeight: "100%",
+    fontFamily: "TheNextFont"
+  },
+  hallCenter: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "2.5vh"
+    },
+    fontSize: "1vw",
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },

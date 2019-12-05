@@ -48,16 +48,8 @@ class Gallery extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           <Grid container>
-            <Grid
-              container
-              style={
-                {
-                  // backgroundImage: `url("./home.jpg")`,
-                  // opacity: 0.3,
-                  // zIndex: -1
-                }
-              }
-            >
+            {/* Top segment */}
+            <Grid container>
               <Grid item xs={12}>
                 <img
                   src="./home.jpg"
@@ -93,8 +85,8 @@ class Gallery extends Component {
                     item
                     xs={6}
                     style={{
-                      padding: "5%",
-                      height: "34vw"
+                      padding: "3.5vmax",
+                      height: "34vmax"
                     }}
                   >
                     {photos.length > 0 && (
@@ -134,9 +126,9 @@ class Gallery extends Component {
               </Grid>
               <Grid item xs={2} />
             </Grid>
+            {/* Bottom segment */}
             <Grid item xs={2} />
-
-            <Grid container xs={8}>
+            <Grid container xs={8} style={{ minHeight: "30vh" }}>
               {photos.splice(1, 9).map(photo => {
                 return (
                   <Grid
@@ -144,14 +136,19 @@ class Gallery extends Component {
                     xs={12}
                     md={4}
                     style={{
-                      padding: "2% 5%"
+                      padding: "2vmax 3vmax",
+                      display: "flex",
+                      justifyContent: "center"
                     }}
                   >
                     <img
+                      key={photo.images.standard_resolution.url}
                       src={photo.images.standard_resolution.url}
                       style={{
-                        width: "100%",
-                        height: "100%"
+                        width: "15vmax",
+                        height: "15vmax",
+                        // height: "100%",
+                        objectFit: "cover"
                       }}
                     />
                   </Grid>

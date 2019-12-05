@@ -20,7 +20,7 @@ import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 const theme = createMuiTheme({
   typography: {
     fontFamily: "Lato",
-    h1: { fontFamily: "TheNextFont" }
+    h1: { fontFamily: "TheNextFont", color: "#C8B06B" }
   }
 });
 

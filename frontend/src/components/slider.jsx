@@ -38,13 +38,18 @@ export default function Slider({ schedules }) {
   const hasSpace = useMediaQuery({ minDeviceWidth: 960 });
 
   return (
-    <Grid container justify="center" alignItems="center">
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      className={classes.sliderContainer}
+    >
       <Grid item xs={1} sm={1}>
         <IconButton onClick={handleBack} disabled={schedules.length === 1}>
           <KeyboardArrowLeft />
         </IconButton>
       </Grid>
-      <Grid item xs={10} sm={10} style={{ height: "300px" }}>
+      <Grid item xs={10} sm={10} className={classes.sliderContainer}>
         <TransitionGroup>
           <CSSTransition key={current} timeout={400} classNames="slide">
             <Grid
@@ -81,12 +86,8 @@ export default function Slider({ schedules }) {
           </CSSTransition>
         </TransitionGroup>
       </Grid>
-      <Grid item xs={1} sm={1}>
-        <IconButton
-          onClick={handleNext}
-          disabled={schedules.length === 1}
-          className={classes.iconButton}
-        >
+      <Grid item xs={1} sm={1} className={classes.iconButton}>
+        <IconButton onClick={handleNext} disabled={schedules.length === 1}>
           <KeyboardArrowRight />
         </IconButton>
       </Grid>
@@ -101,9 +102,21 @@ const styles = theme => ({
     }
   },
   iconButton: {
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: "-18px"
+    [theme.breakpoints.down("md")]: {
+      display: "flex"
+      // justifyContent: "flex-start",
+      // justifyItems: "flex-start"
+      // marginLeft: "-24px"
     }
+  },
+  sliderContainer: {
+    [theme.breakpoints.up("md")]: {
+      height: "22.5vmax"
+    },
+    [theme.breakpoints.down("md")]: {
+      height: "35vmax"
+    }
+    // backgroundColor: "pink"
   }
 });
 
