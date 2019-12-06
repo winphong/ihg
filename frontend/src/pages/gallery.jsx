@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import { withStyles } from "@material-ui/core/styles";
-import miscService from "../services/miscService";
-import { CSSTransition } from "react-transition-group";
-import { Typography } from "@material-ui/core";
 import Link from "@material-ui/core/Link";
+import { Typography } from "@material-ui/core";
+import miscService from "../services/miscService";
+import { withStyles } from "@material-ui/core/styles";
+import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
   paper: {
@@ -15,13 +14,14 @@ const styles = theme => ({
     margin: 5
   },
   banner: {
-    height: "41vw",
+    height: "45vmax",
     textAlign: "center"
   },
   title: {
     color: "#C8B06B",
-    marginTop: "1vw",
-    lineHeight: "120%"
+    marginTop: "1%",
+    lineHeight: "120%",
+    fontSize: "1000%"
   },
   caption: {
     color: "white",
@@ -48,19 +48,29 @@ class Gallery extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           <Grid container>
-            {/* Top segment */}
-            <Grid container>
-              <Grid item xs={12}>
-                <img
-                  src="./home.jpg"
-                  style={{
-                    position: "absolute",
-                    width: "100%",
-                    zIndex: -1,
-                    opacity: 0.3
-                  }}
-                />
-              </Grid>
+            <Grid
+              item
+              xs={12}
+              style={{
+                zIndex: 0
+              }}
+            >
+              <img
+                src="./home.jpg"
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  opacity: 0.3
+                }}
+              />
+            </Grid>
+            <Grid
+              container
+              style={{
+                zIndex: 1
+              }}
+            >
+              {/* Top segment */}
               <Grid item xs={2} />
               <Grid item container className={classes.banner} xs={8}>
                 <Grid item xs={12}>
@@ -80,13 +90,18 @@ class Gallery extends Component {
                     FOR MORE UPDATES
                   </Typography>
                 </Grid>
-                <Grid item container xs={12} alignItems="center">
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  alignItems="center"
+                  style={{ height: "33vmax" }}
+                >
                   <Grid
                     item
                     xs={6}
                     style={{
-                      padding: "3.5vmax",
-                      height: "34vmax"
+                      padding: "5%"
                     }}
                   >
                     {photos.length > 0 && (
@@ -128,7 +143,7 @@ class Gallery extends Component {
             </Grid>
             {/* Bottom segment */}
             <Grid item xs={2} />
-            <Grid container xs={8} style={{ minHeight: "30vh" }}>
+            <Grid container xs={8} style={{ minHeight: "30vh", zIndex: 1 }}>
               {photos.splice(1, 9).map(photo => {
                 return (
                   <Grid
@@ -136,9 +151,7 @@ class Gallery extends Component {
                     xs={12}
                     md={4}
                     style={{
-                      padding: "2vmax 3vmax",
-                      display: "flex",
-                      justifyContent: "center"
+                      padding: "3% 0 0 5%"
                     }}
                   >
                     <img

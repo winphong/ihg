@@ -47,7 +47,7 @@ class App extends Component {
 
     return (
       <MuiPickersUtilsProvider utils={DayjsUtils}>
-        <React.Fragment>
+        <div style={{ backgroundColor: "#F9FBFA" }}>
           <MuiThemeProvider theme={theme}>
             <NavBar />
             <Switch>
@@ -76,7 +76,7 @@ class App extends Component {
             </Switch>
             <Footer />
           </MuiThemeProvider>
-        </React.Fragment>
+        </div>
       </MuiPickersUtilsProvider>
     );
   }

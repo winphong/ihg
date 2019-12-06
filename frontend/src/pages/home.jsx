@@ -93,7 +93,7 @@ const styles = theme => ({
       width: "73.33vw",
       border: "1px solid black",
       backgroundColor: "red",
-      zIndex: 100
+      zIndex: 1
     },
     position: "absolute",
     width: "63.6vw",

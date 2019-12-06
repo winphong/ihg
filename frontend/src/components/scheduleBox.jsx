@@ -16,16 +16,13 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
       <Grid
         container
         style={{
-          position: "absolute",
-          height: "5vmax",
-          borderLeft: printLeftBorder ? 0 : "2.5px solid #C8B06B",
-          borderRight: "2.5px solid #C8B06B",
-          marginTop: "30%"
+          borderLeft: printLeftBorder ? 0 : "2.5px solid #C8B06B"
         }}
+        className={classes.border}
       ></Grid>
       <Grid container className={classes.container}>
-        <Grid item container xs={12}>
-          <Grid item container xs={12}>
+        <Grid item container md={12}>
+          <Grid item container md={12}>
             {schedule.halls.map(({ colourCode }) => {
               return (
                 <Grid
@@ -46,14 +43,14 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
           <Grid
             item
             container
-            xs={12}
+            md={12}
             className={classes.hallContainer}
             alignItems="center"
           >
             {size === 2 &&
               schedule.halls.map(hall => {
                 return (
-                  <Grid item xs={true}>
+                  <Grid item md={true}>
                     <Typography variant="h1" className={classes.hallDuo}>
                       {hall.abbreviation}
                     </Typography>
@@ -63,7 +60,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
             {size === 6 &&
               schedule.halls.map(hall => {
                 return (
-                  <Grid item xs={4}>
+                  <Grid item md={4}>
                     <Typography variant="h1" className={classes.hallCarnival}>
                       {hall.abbreviation}
                     </Typography>
@@ -74,7 +71,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               schedule.halls.map((hall, index) => {
                 if (index < 4) {
                   return (
-                    <Grid item xs={3}>
+                    <Grid item md={3}>
                       <Typography variant="h1" className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>
@@ -82,7 +79,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                   );
                 } else {
                   return (
-                    <Grid item xs={4}>
+                    <Grid item md={4}>
                       <Typography variant="h1" className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>
@@ -92,7 +89,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               })}
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item md={12}>
           {!isAdmin && (
             <Typography className={classes.sport}>
               {schedule.sport}{" "}
@@ -110,8 +107,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                 textDecoration: "none"
               }}
               to={{
-                pathname: `/admin/schedule/${schedule._id}`,
-                data: schedule // your data array of objects
+                pathname: `/admin/schedule/${schedule._id}`
               }}
             >
               <Typography
@@ -140,14 +136,27 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
 
 const styles = theme => ({
   container: {
-    textAlign: "center",
-    // border: "1px solid black",
-    // borderLeft: "1px solid #C8B06B",
-    marginTop: "5%",
-    padding: "10%",
     [theme.breakpoints.up("sm")]: {
-      // width: "100%"
-    }
+      marginTop: "5%"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "50vmin"
+    },
+    textAlign: "center",
+    // borderLeft: "1px solid #C8B06B",
+    padding: "10%",
+    backgroundColor: "transparent",
+    position: "relative",
+    zIndex: 2
+  },
+  border: {
+    [theme.breakpoints.up("md")]: {
+      position: "absolute",
+      height: "5vmax",
+      borderRight: "2.5px solid #C8B06B",
+      marginTop: "30%"
+    },
+    [theme.breakpoints.down("md")]: {}
   },
   bar: {
     height: "10px"

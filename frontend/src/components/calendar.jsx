@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ScheduleBox from "./scheduleBox";
@@ -8,7 +8,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import { useMediaQuery } from "react-responsive";
-import Divider from "@material-ui/core/Divider";
+import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 
 export default function Calendar({ schedules, isAdmin }) {
@@ -26,6 +26,7 @@ export default function Calendar({ schedules, isAdmin }) {
   const [weekNum, setWeekNum] = React.useState(-1);
   const [currentDay, setCurrentDay] = React.useState(3);
   const mobileDays = [currentDay - 3, currentDay - 2, currentDay - 1];
+  const [stay, setStay] = React.useState(false);
 
   let currentCount = 0;
   let previousCount = -1;
@@ -34,32 +35,48 @@ export default function Calendar({ schedules, isAdmin }) {
   let current = currentDay;
 
   function handleBack(isMobile) {
-    if (isMobile) {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() - 3)));
-      current = current - 3;
-      if (current <= 0) {
-        current = 7 - Math.abs(current);
+    try {
+      setStay(true);
+      if (isMobile) {
+        setStartDate(new Date(startDate.setDate(startDate.getDate() - 3)));
+        current = current - 3;
+        if (current <= 0) {
+          current = 7 - Math.abs(current);
+          setWeekNum(weekNum - 1);
+        }
+        setCurrentDay(current);
+      } else {
+        setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
         setWeekNum(weekNum - 1);
       }
-      setCurrentDay(current);
-    } else {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
-      setWeekNum(weekNum - 1);
+    } catch (ex) {
+    } finally {
+      setTimeout(() => setStay(false), 100);
+      // setStay(false);
     }
   }
+  // useEffect(() => {
+  //   setStay(true);
+  // }, setStay(false));
 
   function handleNext(isMobile) {
-    if (isMobile) {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
-      current = current + 3;
-      if (current > 7) {
-        current = current % 7;
+    try {
+      setStay(true);
+      if (isMobile) {
+        setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
+        current = current + 3;
+        if (current > 7) {
+          current = current % 7;
+          setWeekNum(weekNum + 1);
+        }
+        setCurrentDay(current);
+      } else {
+        setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
         setWeekNum(weekNum + 1);
       }
-      setCurrentDay(current);
-    } else {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
-      setWeekNum(weekNum + 1);
+    } catch (ex) {
+    } finally {
+      setTimeout(() => setStay(false), 100);
     }
   }
 
@@ -70,7 +87,8 @@ export default function Calendar({ schedules, isAdmin }) {
       <Grid container md={12} alignItems="center">
         <Grid
           item
-          xs={5}
+          xs={2}
+          md={5}
           style={{
             display: "flex",
             justifyContent: "flex-end"
@@ -78,21 +96,23 @@ export default function Calendar({ schedules, isAdmin }) {
         >
           <IconButton
             disabled={date <= new Date("5 Jan 2020")}
-            onClick={
-              notMobile ? () => handleBack(false) : () => handleBack(true)
-            }
+            onClick={() => handleBack(false)}
+            // onClick={
+            //   notMobile ? () => handleBack(false) : () => handleBack(true)
+            // }
           >
             <KeyboardArrowLeft />
           </IconButton>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={8} md={2}>
           <Typography variant="h1" className={classes.week}>
             Week {weekNum}
           </Typography>
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={2}
+          md={5}
           style={{
             display: "flex",
             justifyContent: "flex-start"
@@ -100,25 +120,109 @@ export default function Calendar({ schedules, isAdmin }) {
         >
           <IconButton
             disabled={date >= new Date("16 Feb 2020")}
-            onClick={
-              notMobile ? () => handleNext(false) : () => handleNext(true)
-            }
+            onClick={() => handleNext(false)}
           >
             <KeyboardArrowRight />
           </IconButton>
         </Grid>
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        style={{
-          minHeight: "100vmax"
-          // backgroundColor: "beige"
-        }}
-      >
-        <Grid container>
-          {(notMobile ? days : mobileDays).map((day, index) => {
+      <MediaQuery minWidth={960}>
+        <Grid
+          item
+          xs={12}
+          style={{
+            minHeight: "100vmax"
+            // backgroundColor: "beige"
+          }}
+        >
+          <Grid container>
+            {(notMobile ? days : mobileDays).map((day, index) => {
+              if (index !== 0) {
+                date.setDate(date.getDate() + 1);
+                previousCount = currentCount;
+              }
+              currentCount = 0;
+
+              return (
+                <Grid item xs={true}>
+                  <div>
+                    <TransitionGroup>
+                      <CSSTransition
+                        key={`${weekNum}${date}`}
+                        timeout={400}
+                        classNames="fade"
+                      >
+                        <div className={classes.dateRow}>
+                          <Typography className={classes.date}>
+                            {dateformat(date, "dd'th' mmm")}
+                          </Typography>
+                        </div>
+                      </CSSTransition>
+                    </TransitionGroup>
+                    <br />
+                    <div style={{ marginTop: "3%" }}>
+                      {notMobile && (
+                        <Typography className={classes.day}>
+                          {day.name}
+                        </Typography>
+                      )}
+                      {!notMobile && (
+                        <Typography className={classes.day}>
+                          {days[day < 0 ? 7 + day : day].name}
+                        </Typography>
+                      )}
+                    </div>
+                  </div>
+                  <TransitionGroup>
+                    <CSSTransition
+                      key={`${weekNum}${date}`}
+                      timeout={400}
+                      classNames="fade"
+                    >
+                      <Grid container xs={12} className={classes.column}>
+                        {schedules.length > 0 &&
+                          schedules.map(schedule => {
+                            const columnTime = new Date(schedule.startTime);
+                            if (
+                              columnTime.getDate() === date.getDate() &&
+                              columnTime.getMonth() === date.getMonth()
+                            ) {
+                              currentCount += 1;
+                              return (
+                                <Grid item xs={12}>
+                                  <ScheduleBox
+                                    schedule={schedule}
+                                    isAdmin={isAdmin}
+                                    printLeftBorder={
+                                      currentCount <= previousCount
+                                    }
+                                  />
+                                </Grid>
+                              );
+                            }
+                          })}
+                      </Grid>
+                    </CSSTransition>
+                  </TransitionGroup>
+                </Grid>
+              );
+            })}
+          </Grid>
+        </Grid>
+      </MediaQuery>
+      {/* ------------------------------------------------- */}
+      <MediaQuery maxWidth={959}>
+        <div
+          style={{
+            minHeight: "100vmax",
+            backgroundColor: "beige",
+            display: "flex",
+            overflowX: "scroll"
+          }}
+        >
+          {/* <Grid container> */}
+          {days.map((day, index) => {
             if (index !== 0) {
               date.setDate(date.getDate() + 1);
               previousCount = currentCount;
@@ -126,42 +230,39 @@ export default function Calendar({ schedules, isAdmin }) {
             currentCount = 0;
 
             return (
-              <Grid item xs={true}>
-                <div>
+              <div>
+                {stay && <div style={{ height: "42px" }}> </div>}
+                {!stay && (
                   <TransitionGroup>
                     <CSSTransition
                       key={`${weekNum}${date}`}
                       timeout={400}
                       classNames="fade"
                     >
-                      <div className={classes.dateRow}>
-                        <Typography className={classes.date}>
+                      <div
+                        className={classes.dateRow}
+                        // className={stay ? classes.absolute : classes.dateRow}
+                      >
+                        <Typography
+                        // className={classes.date}
+                        // className={stay ? classes.absoluteDate : classes.date}
+                        >
                           {dateformat(date, "dd'th' mmm")}
                         </Typography>
                       </div>
                     </CSSTransition>
                   </TransitionGroup>
-                  <br />
-                  <div style={{ marginTop: "3%" }}>
-                    {notMobile && (
-                      <Typography className={classes.day}>
-                        {day.name}
-                      </Typography>
-                    )}
-                    {!notMobile && (
-                      <Typography className={classes.day}>
-                        {days[day < 0 ? 7 + day : day].name}
-                      </Typography>
-                    )}
-                  </div>
-                </div>
+                )}
+                {!stay && (
+                  <Typography className={classes.day}>{day.name}</Typography>
+                )}
                 <TransitionGroup>
                   <CSSTransition
                     key={`${weekNum}${date}`}
                     timeout={400}
                     classNames="fade"
                   >
-                    <Grid container xs={12} className={classes.column}>
+                    <React.Fragment>
                       {schedules.length > 0 &&
                         schedules.map(schedule => {
                           const columnTime = new Date(schedule.startTime);
@@ -171,26 +272,22 @@ export default function Calendar({ schedules, isAdmin }) {
                           ) {
                             currentCount += 1;
                             return (
-                              <Grid item xs={12}>
-                                <ScheduleBox
-                                  schedule={schedule}
-                                  isAdmin={isAdmin}
-                                  printLeftBorder={
-                                    currentCount <= previousCount
-                                  }
-                                />
-                              </Grid>
+                              <ScheduleBox
+                                schedule={schedule}
+                                isAdmin={isAdmin}
+                                printLeftBorder={currentCount <= previousCount}
+                              />
                             );
                           }
                         })}
-                    </Grid>
+                    </React.Fragment>
                   </CSSTransition>
                 </TransitionGroup>
-              </Grid>
+              </div>
             );
           })}
-        </Grid>
-      </Grid>
+        </div>
+      </MediaQuery>
     </Grid>
   );
 }
@@ -202,23 +299,52 @@ const styles = theme => ({
     // backgroundColor: "grey",
     padding: 0
   },
-  table: {
-    // width: "100%"
+  absolute: {
+    position: "absolute",
+    backgroundColor: "pink",
+    display: "none"
+  },
+  absoluteDay: {
+    marginTop: "2px",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%",
+      width: "50vmin"
+    },
+    fontSize: "110%",
+    color: "#958F87",
+    fontStyle: "italic",
+    fontWeight: "bold"
+  },
+  absoluteDate: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%",
+      width: "50vmin"
+    },
+    fontWeight: "bold",
+    color: "#958F87",
+    position: "absolute"
   },
   date: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%",
+      width: "50vmin"
+    },
     fontWeight: "bold",
     fontSize: "150%",
     color: "#958F87"
   },
   dateRow: {
-    [theme.breakpoints.down("sm")]: {
-      // width: "32%"
+    [theme.breakpoints.down("md")]: {
+      width: "50vmin"
+      // width: "32%",
     },
-    position: "absolute",
-    width: `${(10 / 12 / 7) * 100}%`,
-    height: "100px"
+    width: `${(10 / 12 / 7) * 100}%`
   },
   day: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%",
+      width: "50vmin"
+    },
     fontSize: "110%",
     color: "#958F87",
     fontStyle: "italic",
@@ -233,9 +359,10 @@ const styles = theme => ({
     // backgroundColor: "pink"
   },
   week: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up("md")]: {
       fontSize: "250%"
-    }
+    },
+    fontSize: "150%"
   }
 });
 

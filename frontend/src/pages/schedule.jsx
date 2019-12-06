@@ -12,10 +12,11 @@ import dateformat from "dateformat";
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+      fontSize: "300%"
     },
     color: "#C8B06B",
-    fontSize: "1000%"
+    fontSize: "1000%",
+    marginTop: "1%"
   },
   buttonColumn: {
     textAlign: "center",
