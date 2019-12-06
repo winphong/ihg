@@ -240,7 +240,8 @@ export default function Calendar({ schedules, isAdmin }) {
                         <Typography
                           className={classes.date}
                           style={{
-                            position: stay ? "absolute" : null
+                            position: stay ? "absolute" : "static",
+                            display: stay ? "none" : "block"
                             // marginLeft: stay ? "17.6%" : "initial"
                           }}
                           // className={classes.absoluteDate}
@@ -301,7 +302,7 @@ const styles = theme => ({
     fontSize: "100%",
     fontWeight: "bold",
     color: "#958F87"
-    // backgroundColor: "pink"
+    // backgroundColor: "pink",
   },
   // absoluteDay: {
   //   marginTop: "2px",
