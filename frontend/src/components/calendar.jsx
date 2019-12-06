@@ -35,49 +35,37 @@ export default function Calendar({ schedules, isAdmin }) {
   let current = currentDay;
 
   function handleBack(isMobile) {
-    try {
-      setStay(true);
-      if (isMobile) {
-        setStartDate(new Date(startDate.setDate(startDate.getDate() - 3)));
-        current = current - 3;
-        if (current <= 0) {
-          current = 7 - Math.abs(current);
-          setWeekNum(weekNum - 1);
-        }
-        setCurrentDay(current);
-      } else {
-        setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
+    setStay(true);
+    if (isMobile) {
+      setStartDate(new Date(startDate.setDate(startDate.getDate() - 3)));
+      current = current - 3;
+      if (current <= 0) {
+        current = 7 - Math.abs(current);
         setWeekNum(weekNum - 1);
       }
-    } catch (ex) {
-    } finally {
-      setTimeout(() => setStay(false), 100);
-      // setStay(false);
+      setCurrentDay(current);
+    } else {
+      setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
+      setWeekNum(weekNum - 1);
     }
+    setTimeout(() => setStay(false), 200);
   }
-  // useEffect(() => {
-  //   setStay(true);
-  // }, setStay(false));
 
   function handleNext(isMobile) {
-    try {
-      setStay(true);
-      if (isMobile) {
-        setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
-        current = current + 3;
-        if (current > 7) {
-          current = current % 7;
-          setWeekNum(weekNum + 1);
-        }
-        setCurrentDay(current);
-      } else {
-        setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
+    setStay(true);
+    if (isMobile) {
+      setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
+      current = current + 3;
+      if (current > 7) {
+        current = current % 7;
         setWeekNum(weekNum + 1);
       }
-    } catch (ex) {
-    } finally {
-      setTimeout(() => setStay(false), 100);
+      setCurrentDay(current);
+    } else {
+      setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
+      setWeekNum(weekNum + 1);
     }
+    setTimeout(() => setStay(false), 200);
   }
 
   const notMobile = useMediaQuery({ minDeviceWidth: 960 });
@@ -231,31 +219,39 @@ export default function Calendar({ schedules, isAdmin }) {
 
             return (
               <div>
-                {stay && <div style={{ height: "42px" }}> </div>}
-                {!stay && (
+                <div style={{ height: "3%" }}>
+                  {stay && (
+                    <div
+                      style={{
+                        height: "7%",
+                        position: "absolute",
+                        backgroundColor: "pink",
+                        zIndex: 100
+                      }}
+                    ></div>
+                  )}
                   <TransitionGroup>
                     <CSSTransition
                       key={`${weekNum}${date}`}
                       timeout={400}
                       classNames="fade"
                     >
-                      <div
-                        className={classes.dateRow}
-                        // className={stay ? classes.absolute : classes.dateRow}
-                      >
+                      <div className={classes.dateRow}>
                         <Typography
-                        // className={classes.date}
-                        // className={stay ? classes.absoluteDate : classes.date}
+                          className={classes.date}
+                          style={{
+                            position: stay ? "absolute" : null
+                            // marginLeft: stay ? "17.6%" : "initial"
+                          }}
+                          // className={classes.absoluteDate}
                         >
                           {dateformat(date, "dd'th' mmm")}
                         </Typography>
                       </div>
                     </CSSTransition>
                   </TransitionGroup>
-                )}
-                {!stay && (
-                  <Typography className={classes.day}>{day.name}</Typography>
-                )}
+                </div>
+                <Typography className={classes.day}>{day.name}</Typography>
                 <TransitionGroup>
                   <CSSTransition
                     key={`${weekNum}${date}`}
@@ -299,31 +295,34 @@ const styles = theme => ({
     // backgroundColor: "grey",
     padding: 0
   },
-  absolute: {
-    position: "absolute",
-    backgroundColor: "pink",
-    display: "none"
-  },
-  absoluteDay: {
-    marginTop: "2px",
-    [theme.breakpoints.down("md")]: {
-      fontSize: "100%",
-      width: "50vmin"
-    },
-    fontSize: "110%",
-    color: "#958F87",
-    fontStyle: "italic",
-    fontWeight: "bold"
-  },
   absoluteDate: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "100%",
-      width: "50vmin"
-    },
+    position: "absolute",
+    marginLeft: "17.6%",
+    fontSize: "100%",
     fontWeight: "bold",
-    color: "#958F87",
-    position: "absolute"
+    color: "#958F87"
+    // backgroundColor: "pink"
   },
+  // absoluteDay: {
+  //   marginTop: "2px",
+  //   [theme.breakpoints.down("md")]: {
+  //     fontSize: "100%",
+  //     width: "50vmin"
+  //   },
+  //   fontSize: "110%",
+  //   color: "#958F87",
+  //   fontStyle: "italic",
+  //   fontWeight: "bold"
+  // },
+  // absoluteDate: {
+  //   [theme.breakpoints.down("md")]: {
+  //     fontSize: "100%",
+  //     width: "50vmin"
+  //   },
+  //   fontWeight: "bold",
+  //   color: "#958F87",
+  //   position: "absolute"
+  // },
   date: {
     [theme.breakpoints.down("md")]: {
       fontSize: "100%",
@@ -336,7 +335,9 @@ const styles = theme => ({
   dateRow: {
     [theme.breakpoints.down("md")]: {
       width: "50vmin"
-      // width: "32%",
+    },
+    [theme.breakpoints.up("md")]: {
+      position: "absolute"
     },
     width: `${(10 / 12 / 7) * 100}%`
   },

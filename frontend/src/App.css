@@ -86,26 +86,26 @@
   opacity: 0;
 }
 
-.example-enter {
-  opacity: 0.01;
-  width: 0px;
+/* enter */
+.blink-enter {
+  opacity: 0;
+  z-index: 1;
 }
-
-.example-enter.example-enter-active {
+.blink-enter.blink-enter-active {
   opacity: 1;
-  width: 100px;
-  transition: 700ms;
+  transition: opacity 100ms linear 100ms;
 }
 
-.example-leave {
+/* exit */
+.blink-exit {
   opacity: 1;
-  width: 100px;
 }
-
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  width: 0px;
-  transition: 700ms;
+.blink-exit.blink-exit-active {
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+.blink-exit-done {
+  opacity: 0;
 }
 
 @keyframes App-logo-spin {

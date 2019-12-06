@@ -3,24 +3,41 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
 import dateformat from "dateformat";
-import IconButton from "@material-ui/core/IconButton";
-import Divider from "@material-ui/core/Divider";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
 
 export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
   const classes = useStyles();
+  const theme = useTheme();
+
   const size = schedule.halls.length;
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <React.Fragment>
-      <Grid
-        container
-        style={{
-          borderLeft: printLeftBorder ? 0 : "2.5px solid #C8B06B"
-        }}
-        className={classes.border}
-      ></Grid>
+      {!isMobile && (
+        <div
+          style={{
+            borderLeft: printLeftBorder ? 0 : "2.5px solid #C8B06B"
+          }}
+          className={classes.border}
+        />
+      )}
       <Grid container className={classes.container}>
+        {isMobile && (
+          <div
+            style={{
+              // borderLeft: printLeftBorder ? 0 : "2.5px solid black",
+              borderRight: "2.5px solid black",
+              height: "10vmax",
+              marginTop: "15%",
+              marginLeft: "-10%"
+
+              // marginLeft: "-1.8%"
+            }}
+          />
+        )}
         <Grid item container md={12}>
           <Grid item container md={12}>
             {schedule.halls.map(({ colourCode }) => {
@@ -89,6 +106,18 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               })}
           </Grid>
         </Grid>
+        {isMobile && (
+          <div
+            style={{
+              // borderLeft: printLeftBorder ? 0 : "2.5px solid black",
+              borderRight: "2.5px solid black",
+              height: "10vmax",
+              marginTop: "15%",
+              marginLeft: "-10%"
+              // marginLeft: "-1.8%"
+            }}
+          />
+        )}
         <Grid item md={12}>
           {!isAdmin && (
             <Typography className={classes.sport}>
@@ -141,20 +170,22 @@ const styles = theme => ({
     },
     [theme.breakpoints.down("sm")]: {
       width: "50vmin"
+      // borderLeft: "2.5px solid #C8B06B",
+      // borderRight: "2.5px solid #C8B06B"
     },
     textAlign: "center",
-    // borderLeft: "1px solid #C8B06B",
     padding: "10%",
-    backgroundColor: "transparent",
-    position: "relative",
-    zIndex: 2
+    backgroundColor: "transparent"
+    // position: "relative",
+    // zIndex: 2
   },
   border: {
     [theme.breakpoints.up("md")]: {
       position: "absolute",
       height: "5vmax",
       borderRight: "2.5px solid #C8B06B",
-      marginTop: "30%"
+      marginTop: "30%",
+      width: "100%"
     },
     [theme.breakpoints.down("md")]: {}
   },
