@@ -6,7 +6,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
-import { useMediaQuery } from "react-responsive";
+import MediaQuery, { useMediaQuery } from "react-responsive";
 
 export default function Slider({ schedules }) {
   const classes = useStyles();
@@ -44,53 +44,79 @@ export default function Slider({ schedules }) {
       alignItems="center"
       className={classes.sliderContainer}
     >
-      <Grid item xs={1} sm={1}>
-        <IconButton onClick={handleBack} disabled={schedules.length === 1}>
-          <KeyboardArrowLeft />
-        </IconButton>
-      </Grid>
-      <Grid item xs={10} sm={10} className={classes.sliderContainer}>
-        <TransitionGroup>
-          <CSSTransition key={current} timeout={400} classNames="slide">
-            <Grid
-              container
-              spacing={hasSpace ? 8 : 0}
-              style={{
-                position: "absolute",
-                width: "83.333%",
-                margin: "0px"
-              }}
-            >
-              <Grid className={classes.side} item md={4}>
-                {/* {previous  && ( */}
-                {schedules.length >= 3 && (
-                  <Card schedule={schedules[previous]} size="small" />
-                )}
-                {/* )} */}
+      <MediaQuery minWidth={960}>
+        <Grid item xs={1} sm={1}>
+          <IconButton onClick={handleBack} disabled={schedules.length === 1}>
+            <KeyboardArrowLeft />
+          </IconButton>
+        </Grid>
+        <Grid item xs={10} sm={10} className={classes.sliderContainer}>
+          <TransitionGroup>
+            <CSSTransition key={current} timeout={400} classNames="slide">
+              <Grid
+                container
+                spacing={hasSpace ? 8 : 0}
+                style={{
+                  position: "absolute",
+                  width: "83.333%",
+                  margin: "0px"
+                }}
+              >
+                <Grid className={classes.side} item md={4}>
+                  {/* {previous  && ( */}
+                  {schedules.length >= 3 && (
+                    <Card schedule={schedules[previous]} size="small" />
+                  )}
+                  {/* )} */}
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Card
+                    schedule={schedules[current]}
+                    center={true}
+                    size="small"
+                  />
+                </Grid>
+                <Grid item className={classes.side} md={4}>
+                  {/* {next < schedules.length && ( */}
+                  {schedules.length >= 3 && (
+                    <Card schedule={schedules[next]} size="small" />
+                  )}
+                  {/* )} */}
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={4}>
+            </CSSTransition>
+          </TransitionGroup>
+        </Grid>
+        <Grid item xs={1} sm={1} className={classes.iconButton}>
+          <IconButton onClick={handleNext} disabled={schedules.length === 1}>
+            <KeyboardArrowRight />
+          </IconButton>
+        </Grid>
+      </MediaQuery>
+      <MediaQuery maxWidth={959}>
+        {schedules.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              overflowX: "scroll",
+              width: "100%",
+              margin: "5% 0"
+              // backgroundColor: "pink"
+            }}
+          >
+            {schedules.map((e, index) => {
+              return (
                 <Card
-                  schedule={schedules[current]}
-                  center={true}
-                  size="small"
+                  schedule={e}
+                  size="big"
+                  index={index}
+                  scheduleSize={schedules.length}
                 />
-              </Grid>
-              <Grid item className={classes.side} md={4}>
-                {/* {next < schedules.length && ( */}
-                {schedules.length >= 3 && (
-                  <Card schedule={schedules[next]} size="small" />
-                )}
-                {/* )} */}
-              </Grid>
-            </Grid>
-          </CSSTransition>
-        </TransitionGroup>
-      </Grid>
-      <Grid item xs={1} sm={1} className={classes.iconButton}>
-        <IconButton onClick={handleNext} disabled={schedules.length === 1}>
-          <KeyboardArrowRight />
-        </IconButton>
-      </Grid>
+              );
+            })}
+          </div>
+        )}
+      </MediaQuery>
     </Grid>
   );
 }
@@ -114,7 +140,7 @@ const styles = theme => ({
       height: "22.5vmax"
     },
     [theme.breakpoints.down("md")]: {
-      height: "35vmax"
+      height: "40vmax"
     }
     // backgroundColor: "pink"
   }

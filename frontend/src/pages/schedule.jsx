@@ -72,7 +72,7 @@ class Schedule extends Component {
               </Typography>
             </Grid>
             <Grid item container xs={12} className={classes.slider}>
-              <Grid item xs={12}>
+              <Grid item xs={12} style={{ height: "40vmax" }}>
                 <CSSTransition
                   in={true}
                   appear={true}

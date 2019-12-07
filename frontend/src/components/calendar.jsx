@@ -34,6 +34,8 @@ export default function Calendar({ schedules, isAdmin }) {
   const date = new Date(startDate);
   let current = currentDay;
 
+  const notMobile = useMediaQuery({ minDeviceWidth: 960 });
+
   function handleBack(isMobile) {
     setStay(true);
     if (isMobile) {
@@ -67,8 +69,6 @@ export default function Calendar({ schedules, isAdmin }) {
     }
     setTimeout(() => setStay(false), 200);
   }
-
-  const notMobile = useMediaQuery({ minDeviceWidth: 960 });
 
   return (
     <Grid container>
@@ -127,7 +127,7 @@ export default function Calendar({ schedules, isAdmin }) {
           <Grid container>
             {(notMobile ? days : mobileDays).map((day, index) => {
               if (index !== 0) {
-                date.setDate(date.getDate() + 1);
+                if (notMobile) date.setDate(date.getDate() + 1);
                 previousCount = currentCount;
               }
               currentCount = 0;
@@ -203,10 +203,11 @@ export default function Calendar({ schedules, isAdmin }) {
       <MediaQuery maxWidth={959}>
         <div
           style={{
-            minHeight: "100vmax",
-            backgroundColor: "beige",
+            height: "100vmax",
+            // backgroundColor: "beige",
             display: "flex",
-            overflowX: "scroll"
+            overflowX: "scroll",
+            overflowY: "scroll"
           }}
         >
           {/* <Grid container> */}
@@ -259,7 +260,11 @@ export default function Calendar({ schedules, isAdmin }) {
                     timeout={400}
                     classNames="fade"
                   >
-                    <React.Fragment>
+                    <div
+                    // style={{
+                    //   overflowY: "scroll"
+                    // }}
+                    >
                       {schedules.length > 0 &&
                         schedules.map(schedule => {
                           const columnTime = new Date(schedule.startTime);
@@ -269,15 +274,49 @@ export default function Calendar({ schedules, isAdmin }) {
                           ) {
                             currentCount += 1;
                             return (
-                              <ScheduleBox
-                                schedule={schedule}
-                                isAdmin={isAdmin}
-                                printLeftBorder={currentCount <= previousCount}
-                              />
+                              <Grid container>
+                                <Grid item xs={1}>
+                                  <div
+                                    style={{
+                                      borderLeft: "2.5px solid #C8B06B",
+                                      // borderRight: "2.5px solid red",
+                                      height: "10vmax",
+                                      marginTop: "300%",
+                                      marginLeft: "100%",
+                                      // marginLeft: "1.8%",
+                                      backgroundColor: "pink",
+                                      width: 0
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid item xs={10}>
+                                  <ScheduleBox
+                                    schedule={schedule}
+                                    isAdmin={isAdmin}
+                                    printLeftBorder={
+                                      currentCount <= previousCount
+                                    }
+                                  />
+                                </Grid>
+                                <Grid item xs={1}>
+                                  <div
+                                    style={{
+                                      // borderLeft: "2.5px solid black",
+                                      borderRight: "2.5px solid #C8B06B",
+                                      height: "10vmax",
+                                      marginTop: "300%",
+                                      marginLeft: "200%",
+                                      // marginLeft: "1.8%",
+                                      backgroundColor: "pink",
+                                      width: 0
+                                    }}
+                                  />
+                                </Grid>
+                              </Grid>
                             );
                           }
                         })}
-                    </React.Fragment>
+                    </div>
                   </CSSTransition>
                 </TransitionGroup>
               </div>

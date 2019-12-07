@@ -25,19 +25,6 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
         />
       )}
       <Grid container className={classes.container}>
-        {isMobile && (
-          <div
-            style={{
-              // borderLeft: printLeftBorder ? 0 : "2.5px solid black",
-              borderRight: "2.5px solid black",
-              height: "10vmax",
-              marginTop: "15%",
-              marginLeft: "-10%"
-
-              // marginLeft: "-1.8%"
-            }}
-          />
-        )}
         <Grid item container md={12}>
           <Grid item container md={12}>
             {schedule.halls.map(({ colourCode }) => {
@@ -65,19 +52,26 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
             alignItems="center"
           >
             {size === 2 &&
-              schedule.halls.map(hall => {
+              schedule.halls.map((hall, index) => {
                 return (
-                  <Grid item md={true}>
-                    <Typography variant="h1" className={classes.hallDuo}>
-                      {hall.abbreviation}
-                    </Typography>
-                  </Grid>
+                  <React.Fragment>
+                    <Grid item xs={5}>
+                      <Typography variant="h1" className={classes.hallDuo}>
+                        {hall.abbreviation}
+                      </Typography>
+                    </Grid>
+                    {index === 0 && (
+                      <Grid item xs={2}>
+                        vs
+                      </Grid>
+                    )}
+                  </React.Fragment>
                 );
               })}
             {size === 6 &&
               schedule.halls.map(hall => {
                 return (
-                  <Grid item md={4}>
+                  <Grid item xs={4}>
                     <Typography variant="h1" className={classes.hallCarnival}>
                       {hall.abbreviation}
                     </Typography>
@@ -88,7 +82,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               schedule.halls.map((hall, index) => {
                 if (index < 4) {
                   return (
-                    <Grid item md={3}>
+                    <Grid item xs={3}>
                       <Typography variant="h1" className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>
@@ -96,7 +90,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                   );
                 } else {
                   return (
-                    <Grid item md={4}>
+                    <Grid item xs={4}>
                       <Typography variant="h1" className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>
@@ -106,19 +100,8 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               })}
           </Grid>
         </Grid>
-        {isMobile && (
-          <div
-            style={{
-              // borderLeft: printLeftBorder ? 0 : "2.5px solid black",
-              borderRight: "2.5px solid black",
-              height: "10vmax",
-              marginTop: "15%",
-              marginLeft: "-10%"
-              // marginLeft: "-1.8%"
-            }}
-          />
-        )}
-        <Grid item md={12}>
+
+        <Grid item xs={12}>
           {!isAdmin && (
             <Typography className={classes.sport}>
               {schedule.sport}{" "}
