@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import Calendar from "./../components/calendar";
@@ -8,6 +9,8 @@ import { Typography } from "@material-ui/core";
 import Slider from "../components/slider";
 import miscService from "../services/miscService";
 import dateformat from "dateformat";
+import IconButton from "@material-ui/core/IconButton";
+import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 
 const styles = theme => ({
   title: {
@@ -36,7 +39,12 @@ const styles = theme => ({
   },
   slider: {
     [theme.breakpoints.up("md")]: {
-      margin: "5% 0"
+      margin: "5% 0",
+      height: "20vmax"
+    },
+    [theme.breakpoints.down("md")]: {
+      margin: "5% 0",
+      height: "40vmax"
     }
   }
 });
@@ -44,7 +52,8 @@ const styles = theme => ({
 class Schedule extends Component {
   state = {
     schedules: [],
-    isAdmin: false
+    isAdmin: false,
+    redirect: false
   };
 
   async componentDidMount() {
@@ -58,53 +67,76 @@ class Schedule extends Component {
     return dateformat(time, "dd mmm yyyy");
   };
 
+  handleCreateSchedule = e => {
+    e.preventDefault();
+    this.setState({ redirect: true });
+  };
+
   render() {
     const { classes } = this.props;
-    const { schedules, isAdmin } = this.state;
+    const { schedules, isAdmin, redirect } = this.state;
+
+    if (redirect) return <Redirect to="/admin/schedule" />;
 
     return (
       <Grid container className={classes.container}>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <React.Fragment>
-            <Grid item xs={12}>
-              <Typography variant="h1" className={classes.title}>
-                TODAY'S GAMES
-              </Typography>
-            </Grid>
-            <Grid item container xs={12} className={classes.slider}>
-              <Grid item xs={12} style={{ height: "40vmax" }}>
-                <CSSTransition
-                  in={true}
-                  appear={true}
-                  timeout={500}
-                  classNames="slide"
-                >
-                  <div>
-                    {schedules.length > 0 && (
-                      <Slider
-                        schedules={schedules.filter(e => {
-                          return (
-                            this.df(e.startTime) ===
-                            this.df(new Date("6 Jan 2020"))
-                            // this.df(new Date())
-                          );
-                        })}
-                      />
-                    )}
-                  </div>
-                </CSSTransition>
+            <Grid container xs={12} alignItems="center">
+              <Grid item md={1} />
+              <Grid item xs={12} md={10}>
+                <Typography variant="h1" className={classes.title}>
+                  TODAY'S GAMES
+                </Typography>
               </Grid>
-            </Grid>
-            {/* Calendar */}
-            <Grid item container className={classes.container}>
-              <Grid item xs={1} />
-              <Grid item xs={10} className={classes.calendar}>
-                {schedules.length > 0 && (
-                  <Calendar schedules={schedules} isAdmin={isAdmin} />
+              <Grid item md={1}>
+                {isAdmin && (
+                  <IconButton onClick={this.handleCreateSchedule}>
+                    <AddCircleRoundedIcon />
+                  </IconButton>
                 )}
               </Grid>
-              <Grid item xs={1} />
             </Grid>
+            <Grid item xs={12} className={classes.slider}>
+              <CSSTransition
+                in={true}
+                appear={true}
+                timeout={500}
+                classNames="fade"
+              >
+                <div>
+                  {schedules.length > 0 && (
+                    <Slider
+                      // schedules={schedules.filter(e => {
+                      //   return (
+                      //     this.df(e.startTime) ===
+                      //     this.df(new Date("6 Jan 2020"))
+                      //     // this.df(new Date())
+                      //   );
+                      // })}
+                      schedules={schedules}
+                    />
+                  )}
+                </div>
+              </CSSTransition>
+            </Grid>
+            {/* Calendar */}
+            <CSSTransition
+              in={true}
+              appear={true}
+              timeout={500}
+              classNames="fade"
+            >
+              <Grid item container className={classes.container}>
+                <Grid item xs={1} />
+                <Grid item xs={10} className={classes.calendar}>
+                  {schedules.length > 0 && (
+                    <Calendar schedules={schedules} isAdmin={isAdmin} />
+                  )}
+                </Grid>
+                <Grid item xs={1} />
+              </Grid>
+            </CSSTransition>
           </React.Fragment>
         </CSSTransition>
       </Grid>

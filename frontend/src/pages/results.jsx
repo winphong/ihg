@@ -8,47 +8,57 @@ import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
 import SportsList from "../components/sportsList";
 import ResultBar from "../components/resultBar";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
-import { Typography } from "@material-ui/core";
+import EditRoundedIcon from "@material-ui/icons/EditRounded";
+import Typography from "@material-ui/core/Typography";
 import dateformat from "dateformat";
 import "../App.css";
 import MediaQuery from "react-responsive";
 import miscService from "../services/miscService";
-import EditRoundedIcon from "@material-ui/icons/EditRounded";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "500%",
-      paddingTop: "5%"
+    [theme.breakpoints.down("md")]: {
+      fontSize: "400%"
     },
     fontSize: "1000%",
-    fontWeight: "900",
-    color: "#C8B06B",
-    lineHeight: "100%",
     textAlign: "center",
-    paddingTop: "1%"
+    marginTop: "1%"
   },
   currentDate: {
-    color: "black",
+    [theme.breakpoints.down("md")]: {
+      fontSize: "13 0%"
+    },
+    color: "#958F87",
     fontSize: "200%",
     textAlign: "center"
+  },
+  resultsTableSuperContainer: {
+    [theme.breakpoints.down("md")]: {
+      height: "110vmax"
+    },
+    height: "45vmax"
+    // backgroundColor: "pink"
   },
   resultsTableContainer: {
     position: "absolute",
     width: "58.33%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("md")]: {
       width: "100%"
     }
   },
-  caption: {
-    fontSize: "25px",
-    fontWeight: "900",
-    color: "#C8B06B"
+  barChartTitle: {
+    fontSize: "300%",
+    color: "#C8B06B",
+    fontFamily: "TheNextFont",
+    [theme.breakpoints.down("md")]: {
+      textAlign: "center",
+      fontSize: "200%"
+    }
   },
   buttonColumn: {
     textAlign: "center",
@@ -59,29 +69,39 @@ const styles = theme => ({
     textAlign: "center",
     display: "flex",
     alignItems: "baseline",
-    marginBottom: "3vh",
-    backgroundColor: "grey"
-    // backgroundImage: `url("https://images.wallpaperscraft.com/image/athlete_running_mountains_bw_117730_3840x2400.jpg")`
+    marginBottom: "3vh"
+    // backgroundColor: "grey"
   },
-  headerRow: {
-    textAlign: "left",
-    margin: "1vh",
-    height: "4vh",
-    display: "flex",
-    alignItems: "center"
+  subTitle: {
+    fontSize: "500%"
+  },
+  sortButton: {
+    [theme.breakpoints.up("md")]: {
+      marginTop: "1vmax",
+      fontSize: "200%"
+    },
+    cursor: "pointer",
+    fontSize: "100%"
+    // lineHeight: "150%",
+  },
+  sports: {
+    cursor: "pointer",
+    // backgroundColor: "pink",
+    fontSize: "120%",
+    padding: "0 3%",
+    flexShrink: 0
   }
 });
 
 let arr = []; // keep track of how many resultTable element in a page
 let idx = 0; // index pointer for
 const CustomButton = ({
-  originalSchedules,
+  schedules,
   index,
   limit,
   handleBack,
   handleNext,
-  stateLimit,
-  byDate
+  stateLimit
 }) => {
   return (
     <Grid container>
@@ -108,9 +128,10 @@ const CustomButton = ({
         >
           <IconButton
             disabled={
-              byDate
-                ? index >= originalSchedules.length - stateLimit
-                : index >= originalSchedules.length - 5
+              // byDate
+              //   ? index >= schedules.length - stateLimit
+              //   : index >= schedules.length - 5
+              index >= schedules.length - stateLimit
             }
             onClick={() => {
               handleNext(limit);
@@ -131,7 +152,7 @@ class Results extends Component {
     originalSchedules: [],
     originalSchedulesBySport: [],
     index: 0,
-    limit: 11,
+    limit: 8,
     byDate: true,
     selectedSport: {},
     sports: [],
@@ -145,6 +166,12 @@ class Results extends Component {
     const { data: sports } = await sportService.getAllSports();
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
+    const slider = document.querySelector(".slider");
+    // screen
+    const width = window.screen.width;
+    const padding = width * 0.03 * 4;
+    // if (slider) slider.scroll({ left: (1 / width) * 59000 });
+    if (slider) slider.scroll({ left: (840 / (280 + padding)) * 65 });
     this.setState({
       halls,
       schedules,
@@ -227,6 +254,7 @@ class Results extends Component {
       schedules,
       index,
       originalSchedules,
+      originalSchedulesBySport,
       byDate,
       sports,
       selectedSport,
@@ -243,14 +271,16 @@ class Results extends Component {
         <React.Fragment>
           {/* Standings */}
           <Grid container alignItems="center">
-            <Grid item xs={1} />
-            <Grid item xs={10}>
-              <Typography className={classes.title}>RANKING</Typography>
-              <Typography className={classes.currentDate}>
-                {dateformat(new Date(), "dd'th' mmm yyyy")}
+            <Grid item xs={2} md={1} />
+            <Grid item xs={8} md={10}>
+              <Typography variant="h1" className={classes.title}>
+                RANKING
               </Typography>
+              {/* <Typography className={classes.currentDate}>
+                {dateformat(new Date(), "dd'th' mmm yyyy")}
+              </Typography> */}
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2} md={1}>
               {isAdmin && (
                 <IconButton onClick={this.handleUpdateStanding}>
                   <EditRoundedIcon />
@@ -258,66 +288,229 @@ class Results extends Component {
               )}
             </Grid>
           </Grid>
-          <Grid container className={classes.barChart}>
-            <Grid item xs={0} sm={1} />
-            <Grid item xs={12} sm={2}>
-              <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
-              <Typography className={classes.caption}>MALE</Typography>
-            </Grid>
-            <Grid item xs={0} sm={1} />
-
-            <Grid item xs={12} sm={4}>
-              <ResultBar halls={halls} dataKey={"totalPoint"} barSize={10} />
-              <Typography className={classes.caption}>OVERALL</Typography>
-            </Grid>
-            <Grid item xs={0} sm={1} />
-
-            <Grid item xs={12} sm={2}>
-              <ResultBar halls={halls} dataKey={"femalePoint"} barSize={6} />
-              <Typography className={classes.caption}>FEMALE</Typography>
-            </Grid>
-            <Grid item xs={0} sm={1} />
-          </Grid>
-          {/* Sort */}
           <Grid container xs={12}>
-            <Grid item container xs={12} md={4}>
+            {/* --------------------------------- */}
+            <MediaQuery minWidth={960}>
+              <Grid item xs={1} />
+              <Grid item container className={classes.barChart} xs={10} md={12}>
+                <Grid item sm={1} />
+                <Grid item xs={12} sm={2}>
+                  <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
+                  <Typography className={classes.barChartTitle}>
+                    MALE
+                  </Typography>
+                </Grid>
+                <Grid item sm={1} />
+
+                <Grid item xs={12} sm={4}>
+                  <ResultBar
+                    halls={halls}
+                    dataKey={"totalPoint"}
+                    barSize={10}
+                  />
+                  <Typography className={classes.barChartTitle}>
+                    OVERALL
+                  </Typography>
+                </Grid>
+                <Grid item sm={1} />
+
+                <Grid item xs={12} sm={2}>
+                  <ResultBar
+                    halls={halls}
+                    dataKey={"femalePoint"}
+                    barSize={6}
+                  />
+                  <Typography className={classes.barChartTitle}>
+                    FEMALE
+                  </Typography>
+                </Grid>
+                <Grid item sm={1} />
+              </Grid>
+              <Grid item xs={1} />
+            </MediaQuery>
+            {/* --------------------------------- */}
+            {/* ********************************* */}
+            <MediaQuery maxWidth={959}>
               <Grid item xs={12}>
-                <div style={{ height: "50vh" }}>
-                  {!byDate && sports && (
-                    <SportsList
-                      sports={sports}
-                      selectedSport={selectedSport}
-                      handleSortBySport={this.handleSortBySport}
+                <div
+                  className={"slider"}
+                  style={{
+                    display: "flex",
+                    overflowX: "scroll",
+                    padding: "5% 0"
+                    // backgroundColor: "pink",
+                  }}
+                >
+                  <div style={{ padding: "0 3%", transform: "scale(0.8)" }}>
+                    <ResultBar
+                      halls={halls}
+                      dataKey={"malePoint"}
+                      barSize={7}
                     />
-                  )}
+                    <Typography className={classes.barChartTitle}>
+                      FEMALE
+                    </Typography>
+                  </div>
+                  <div style={{ padding: "0 3%" }}>
+                    <ResultBar
+                      halls={halls}
+                      dataKey={"totalPoint"}
+                      barSize={7}
+                    />
+                    <Typography className={classes.barChartTitle}>
+                      OVERALL
+                    </Typography>
+                  </div>
+
+                  <div style={{ padding: "0 3%", transform: "scale(0.8)" }}>
+                    <ResultBar
+                      halls={halls}
+                      dataKey={"femalePoint"}
+                      barSize={7}
+                    />
+                    <Typography className={classes.barChartTitle}>
+                      FEMALE
+                    </Typography>
+                  </div>
                 </div>
               </Grid>
-              <Grid item xs={12}>
-                RESULTS
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  style={{
-                    color: byDate ? "black" : "grey"
-                  }}
-                  onClick={this.handleSortByDate}
-                >
-                  Sort by date
-                </Button>
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  style={{
-                    color: !byDate ? "black" : "grey"
-                  }}
-                  onClick={() => this.handleSortBySport()}
-                >
-                  Sort by sports
-                </Button>
-              </Grid>
+            </MediaQuery>
+            {/* ********************************* */}
+          </Grid>
+
+          <Grid container xs={12}>
+            {/* Sort */}
+            <Grid item md={1} />
+            <Grid item container xs={12} md={3}>
+              {/* -------------------------------- */}
+              <MediaQuery minWidth={960}>
+                <Grid item xs={12}>
+                  <div style={{ height: "30vmax", backgroundColor: "yellow" }}>
+                    {!byDate && sports && (
+                      <CSSTransition
+                        in={true}
+                        appear={true}
+                        timeout={200}
+                        classNames="fast"
+                      >
+                        <SportsList
+                          sports={sports}
+                          selectedSport={selectedSport}
+                          handleSortBySport={this.handleSortBySport}
+                        />
+                      </CSSTransition>
+                    )}
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="h1" className={classes.subTitle}>
+                    RESULTS
+                  </Typography>
+                  <Typography
+                    className={classes.sortButton}
+                    variant="h1"
+                    style={{
+                      color: byDate ? "black" : "#D3DBD9"
+                    }}
+                    onClick={this.handleSortByDate}
+                  >
+                    BY DATE
+                  </Typography>
+                  <Typography
+                    className={classes.sortButton}
+                    variant="h1"
+                    onClick={this.handleSortBySport}
+                    style={{
+                      color: !byDate ? "black" : "#D3DBD9"
+                    }}
+                  >
+                    BY SPORTS
+                  </Typography>
+                </Grid>
+              </MediaQuery>
+              {/* -------------------------------- */}
+              {/* ******************************** */}
+              <MediaQuery maxWidth={959}>
+                <Grid container item xs={12}>
+                  <Grid item xs={5}>
+                    <Typography
+                      className={classes.sortButton}
+                      variant="h1"
+                      onClick={this.handleSortByDate}
+                      style={{
+                        color: byDate ? "black" : "#D3DBD9",
+                        textAlign: "right"
+                      }}
+                    >
+                      BY DATE
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <div
+                      style={{
+                        borderRight: "2px solid #C8B06B",
+                        width: "50%",
+                        // backgroundColor: "pink",
+                        height: "17px"
+                      }}
+                    />
+                  </Grid>
+
+                  <Grid item xs={5}>
+                    <Typography
+                      className={classes.sortButton}
+                      variant="h1"
+                      style={{
+                        color: !byDate ? "black" : "#D3DBD9"
+                      }}
+                      onClick={this.handleSortBySport}
+                    >
+                      BY SPORTS
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs={12} style={{ height: "7vmax" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        overflowX: "scroll",
+                        paddingTop: "5%",
+                        height: "7vmax"
+                        // backgroundColor: "pink"
+                      }}
+                    >
+                      {!byDate &&
+                        sports.map(sport => {
+                          return (
+                            <Typography
+                              className={classes.sports}
+                              onClick={() => this.handleSortBySport(sport)}
+                              variant="h1"
+                              style={{
+                                color:
+                                  selectedSport.name === sport.name
+                                    ? "#C8B06B"
+                                    : "#D3DBD9"
+                              }}
+                            >
+                              {sport.name}
+                            </Typography>
+                          );
+                        })}
+                    </div>
+                  </Grid>
+                </Grid>
+              </MediaQuery>
+              {/* ******************************** */}
             </Grid>
             {/* Result Table */}
-            <Grid item container xs={12} md={7} style={{ height: "900px" }}>
+            <Grid
+              item
+              container
+              xs={12}
+              md={7}
+              className={classes.resultsTableSuperContainer}
+            >
               {schedules && (
                 <TransitionGroup>
                   <CSSTransition
@@ -327,30 +520,19 @@ class Results extends Component {
                   >
                     <Grid
                       item
+                      container
                       xs={12}
                       className={classes.resultsTableContainer}
                     >
-                      <MediaQuery maxWidth={959}>
-                        <ResultsTable
-                          schedules={schedules}
-                          selectedSport={selectedSport}
-                          byDate={byDate}
-                          limit={limit}
-                          isAdmin={isAdmin}
-                        />
-                      </MediaQuery>
-                      <MediaQuery minWidth={960}>
-                        <ResultsTable
-                          schedules={schedules}
-                          selectedSport={selectedSport}
-                          byDate={byDate}
-                          limit={limit}
-                          isAdmin={isAdmin}
-                        />
-                      </MediaQuery>
-                      <MediaQuery minWidth={960}>
+                      {/* Button */}
+                      <Grid xs={1} md={0} />
+                      <Grid xs={10} md={12}>
                         <CustomButton
-                          originalSchedules={originalSchedules}
+                          schedules={
+                            byDate
+                              ? originalSchedules
+                              : originalSchedulesBySport
+                          }
                           index={index}
                           limit={limit}
                           stateLimit={this.state.limit}
@@ -358,24 +540,20 @@ class Results extends Component {
                           handleBack={this.handleBack}
                           handleNext={this.handleNext}
                         />
-                      </MediaQuery>
+                        <ResultsTable
+                          schedules={schedules}
+                          selectedSport={selectedSport}
+                          byDate={byDate}
+                          limit={limit}
+                          isAdmin={isAdmin}
+                        />
+                      </Grid>
+                      <Grid xs={1} md={0} />
                     </Grid>
                   </CSSTransition>
                 </TransitionGroup>
               )}
             </Grid>
-            {/* Back button */}
-            <MediaQuery maxWidth={959}>
-              <CustomButton
-                originalSchedules={originalSchedules}
-                index={index}
-                limit={limit}
-                stateLimit={this.state.limit}
-                byDate={this.state.byDate}
-                handleBack={this.handleBack}
-                handleNext={this.handleNext}
-              />
-            </MediaQuery>
           </Grid>
         </React.Fragment>
       </CSSTransition>

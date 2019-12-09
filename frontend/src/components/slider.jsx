@@ -10,19 +10,47 @@ import MediaQuery, { useMediaQuery } from "react-responsive";
 
 export default function Slider({ schedules }) {
   const classes = useStyles();
-  const [previous, setPrevious] = useState(
-    schedules.length > 1 ? schedules.length - 1 : 0
-  );
-  const [current, setCurrent] = useState(0);
-  const [next, setNext] = useState(schedules.length > 1 ? 1 : 0);
+
   // const [margin, setMargin] = useState(
   //   schedules.length >= 3 ? 3 : schedules.length
   // );
 
+  const weeks = [
+    new Date("5 Jan 2020"),
+    new Date("12 Jan 2020"),
+    new Date("19 Jan 2020"),
+    new Date("26 Jan 2020"),
+    new Date("2 Feb 2020"),
+    new Date("9 Feb 2020"),
+    new Date("16 Feb 2020")
+  ];
+
+  const currentDate = new Date();
+  let idx = 0;
+
+  weeks.map((week, index) => {
+    if (currentDate > week) idx = index;
+  });
+
+  const firstDay = weeks[idx];
+  const lastDay = new Date(weeks[idx]);
+  lastDay.setDate(lastDay.getDate() + 7);
+
+  const currentWeekSchedule = schedules.filter(schedule => {
+    const scheduleDate = new Date(schedule.startTime);
+    return scheduleDate >= firstDay && scheduleDate < lastDay;
+  });
+
+  const [previous, setPrevious] = useState(
+    currentWeekSchedule.length > 1 ? currentWeekSchedule.length - 1 : 0
+  );
+  const [current, setCurrent] = useState(0);
+  const [next, setNext] = useState(currentWeekSchedule.length > 1 ? 1 : 0);
+
   function handleBack() {
     const prev = previous;
     const curr = current;
-    setPrevious(prev !== 0 ? prev - 1 : schedules.length - 1);
+    setPrevious(prev !== 0 ? prev - 1 : currentWeekSchedule.length - 1);
     setCurrent(prev);
     setNext(curr);
   }
@@ -32,7 +60,7 @@ export default function Slider({ schedules }) {
     const nxt = next;
     setPrevious(curr);
     setCurrent(nxt);
-    setNext(nxt !== schedules.length - 1 ? nxt + 1 : 0);
+    setNext(nxt !== currentWeekSchedule.length - 1 ? nxt + 1 : 0);
   }
 
   const hasSpace = useMediaQuery({ minDeviceWidth: 960 });
@@ -46,7 +74,10 @@ export default function Slider({ schedules }) {
     >
       <MediaQuery minWidth={960}>
         <Grid item xs={1} sm={1}>
-          <IconButton onClick={handleBack} disabled={schedules.length === 1}>
+          <IconButton
+            onClick={handleBack}
+            disabled={currentWeekSchedule.length === 1}
+          >
             <KeyboardArrowLeft />
           </IconButton>
         </Grid>
@@ -64,22 +95,25 @@ export default function Slider({ schedules }) {
               >
                 <Grid className={classes.side} item md={4}>
                   {/* {previous  && ( */}
-                  {schedules.length >= 3 && (
-                    <Card schedule={schedules[previous]} size="small" />
+                  {currentWeekSchedule.length >= 3 && (
+                    <Card
+                      schedule={currentWeekSchedule[previous]}
+                      size="small"
+                    />
                   )}
                   {/* )} */}
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <Card
-                    schedule={schedules[current]}
+                    schedule={currentWeekSchedule[current]}
                     center={true}
                     size="small"
                   />
                 </Grid>
                 <Grid item className={classes.side} md={4}>
                   {/* {next < schedules.length && ( */}
-                  {schedules.length >= 3 && (
-                    <Card schedule={schedules[next]} size="small" />
+                  {currentWeekSchedule.length >= 3 && (
+                    <Card schedule={currentWeekSchedule[next]} size="small" />
                   )}
                   {/* )} */}
                 </Grid>
@@ -88,29 +122,34 @@ export default function Slider({ schedules }) {
           </TransitionGroup>
         </Grid>
         <Grid item xs={1} sm={1} className={classes.iconButton}>
-          <IconButton onClick={handleNext} disabled={schedules.length === 1}>
+          <IconButton
+            onClick={handleNext}
+            disabled={currentWeekSchedule.length === 1}
+          >
             <KeyboardArrowRight />
           </IconButton>
         </Grid>
       </MediaQuery>
       <MediaQuery maxWidth={959}>
-        {schedules.length > 0 && (
+        {currentWeekSchedule.length > 0 && (
           <div
             style={{
               display: "flex",
               overflowX: "scroll",
               width: "100%",
               margin: "5% 0"
+
+              // height: "50vmax"
               // backgroundColor: "pink"
             }}
           >
-            {schedules.map((e, index) => {
+            {currentWeekSchedule.map((e, index) => {
               return (
                 <Card
                   schedule={e}
                   size="big"
                   index={index}
-                  scheduleSize={schedules.length}
+                  // scheduleSize={schedules.length}
                 />
               );
             })}
@@ -142,6 +181,9 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       height: "40vmax"
     }
+    // [theme.breakpoints.between("sm", "md")]: {
+    //   height: "80vmax"
+    // }
     // backgroundColor: "pink"
   }
 });

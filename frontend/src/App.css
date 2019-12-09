@@ -87,26 +87,32 @@
 }
 
 /* enter */
-.blink-enter {
+.fast-appear {
+  opacity: 0;
+  z-index: 1;
+}
+.fast-appear.fast-appear-active {
+  opacity: 1;
+  transition: opacity 200ms linear;
+}
+
+/* exit */
+.fast-exit {
+  opacity: 1;
+}
+.fast-exit.fast-exit-active {
+  opacity: 0;
+  transition: opacity 200ms linear;
+}
+
+/* .blink-enter {
   opacity: 0;
   z-index: 1;
 }
 .blink-enter.blink-enter-active {
   opacity: 1;
   transition: opacity 100ms linear 100ms;
-}
-
-/* exit */
-.blink-exit {
-  opacity: 1;
-}
-.blink-exit.blink-exit-active {
-  opacity: 0;
-  transition: opacity 100ms linear;
-}
-.blink-exit-done {
-  opacity: 0;
-}
+} */
 
 @keyframes App-logo-spin {
   from {

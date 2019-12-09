@@ -1,10 +1,9 @@
 import React from "react";
 import dateformat from "dateformat";
 import Grid from "@material-ui/core/Grid";
-import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 export default function Card({ schedule, center, size, index, scheduleSize }) {
   const classes = useStyles();

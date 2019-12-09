@@ -19,25 +19,40 @@ export default function ResultsTable({
   let lim = limit;
 
   return (
-    <div>
-      {!byDate && <p className={classes.headerRow}>{selectedSport.name}</p>}
+    <React.Fragment>
+      {!byDate && (
+        <Typography className={classes.sportHeader}>
+          {selectedSport.name}
+        </Typography>
+      )}
       {schedules.map((schedule, index) => {
         if (index < limit) {
-          if (byDate && schedule.startTime.substring(8, 10) != currentDate) {
+          if (
+            byDate &&
+            dateformat(new Date(schedule.startTime), "dd mm") !== currentDate
+          ) {
             if (lim <= limit / 2) {
               return;
             }
             lim = lim - 1;
-            currentDate = schedule.startTime.substring(8, 10);
+            currentDate = dateformat(new Date(schedule.startTime), "dd mm");
             return (
               <div key={index}>
                 <Typography className={classes.date}>
                   {dateformat(new Date(schedule.startTime), "dd'th' mmm")}
                 </Typography>
                 {schedule.stage === "Carnival" ? (
-                  <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
+                  <ResultRowCarnival
+                    schedule={schedule}
+                    isAdmin={isAdmin}
+                    byDate={byDate}
+                  />
                 ) : (
-                  <ResultRow schedule={schedule} isAdmin={isAdmin} />
+                  <ResultRow
+                    schedule={schedule}
+                    isAdmin={isAdmin}
+                    byDate={byDate}
+                  />
                 )}
                 <Divider />
               </div>
@@ -46,19 +61,39 @@ export default function ResultsTable({
           return (
             <div key={index}>
               {schedule.stage === "Carnival" ? (
-                <ResultRowCarnival schedule={schedule} isAdmin={isAdmin} />
+                <ResultRowCarnival
+                  schedule={schedule}
+                  isAdmin={isAdmin}
+                  byDate={byDate}
+                />
               ) : (
-                <ResultRow schedule={schedule} isAdmin={isAdmin} />
+                <ResultRow
+                  schedule={schedule}
+                  isAdmin={isAdmin}
+                  byDate={byDate}
+                />
               )}
               <Divider />
             </div>
           );
         }
       })}
-    </div>
+    </React.Fragment>
   );
 }
 
 const useStyles = makeStyles({
-  date: { padding: "2%", backgroundColor: "cyan" }
+  sportHeader: {
+    // fontWeight: "bold",
+    padding: "1% 0 1% 2%",
+    fontFamily: "TheNextFont",
+    fontSize: "150%",
+    color: "#958F87"
+  },
+  date: {
+    padding: "1% 0 1% 2%",
+    // backgroundColor: "cyan",
+    color: "#958F87",
+    fontWeight: "bold"
+  }
 });

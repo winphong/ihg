@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 
-export default function ResultRowCarnival({ schedule, isAdmin }) {
+export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
   const classes = useStyles();
 
   const sortedHall = schedule.halls[0].score
@@ -17,6 +17,7 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
         return a.name >= b.name ? 1 : -1;
       });
   const isLaptop = useMediaQuery({ minDeviceWidth: 960 });
+  const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
 
   return (
     <Grid container className={classes.container}>
@@ -50,7 +51,6 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
             <React.Fragment>
               <Link
                 style={{
-                  color: "#0074d9",
                   cursor: "pointer",
                   textDecoration: "none"
                 }}
@@ -58,14 +58,19 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
                   pathname: `/admin/score/${schedule._id}`
                 }}
               >
-                <Typography>
+                <Typography
+                  className={classes.sport}
+                  style={{
+                    color: "#0074d9"
+                  }}
+                >
                   {schedule.sport} {schedule.stage}
                 </Typography>
               </Link>
               {!isLaptop && (
                 <Grid item xs={12}>
-                  <Typography>
-                    {dateformat(new Date(schedule.startTime), "HHMM'h'")},
+                  <Typography className={classes.information}>
+                    {dateformat(new Date(schedule.startTime), dateFormat)},
                     {schedule.venue}
                   </Typography>
                 </Grid>
@@ -74,12 +79,12 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
           )}
           {!isAdmin && (
             <React.Fragment>
-              <Typography>
+              <Typography className={classes.sport}>
                 {schedule.sport} {schedule.stage}
               </Typography>
               {!isLaptop && (
                 <Grid item xs={12}>
-                  <Typography>
+                  <Typography className={classes.information}>
                     {dateformat(new Date(schedule.startTime), "HHMM'h'")},
                     {schedule.venue}
                   </Typography>
@@ -90,7 +95,7 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
         </Grid>
         {isLaptop && (
           <Grid item xs={4}>
-            <Typography>
+            <Typography className={classes.information}>
               {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
               {schedule.venue}
             </Typography>
@@ -100,17 +105,12 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
           {sortedHall.map((hall, index) => {
             return (
               <Grid item xs={true} key={index}>
-                <div
-                  style={{
-                    fontWeight: hall.score
-                      ? index === 0
-                        ? "bold"
-                        : "normal"
-                      : "normal"
-                  }}
+                <Typography
+                  className={
+                    hall.score && index === 0 ? classes.winner : classes.neutral
+                  }
                 >
                   {hall.abbreviation}
-                  <br />
                   {hall.score && (
                     <div>
                       {hall.score}
@@ -120,7 +120,7 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
                       {index > 2 ? "th" : ""}
                     </div>
                   )}
-                </div>
+                </Typography>
               </Grid>
             );
           })}
@@ -130,9 +130,9 @@ export default function ResultRowCarnival({ schedule, isAdmin }) {
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
-    backgroundColor: "pink"
+    // backgroundColor: "pink"
   },
   infoContainer: {
     margin: "1% 0"
@@ -144,13 +144,40 @@ const useStyles = makeStyles({
     margin: "1% 0 0 2%"
   },
   bar: {
-    height: "10px"
+    height: "5px"
+  },
+  sport: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
+    fontWeight: "bold",
+    color: "#252527"
+  },
+  information: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
+    fontSize: "100%",
+    color: "#D3DBD9",
+    fontStyle: "italic"
+    // fontWeight: "bold"
   },
   winner: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
     fontWeight: "bold",
-    backgroundColor: "brown"
+    // backgroundColor: "brown",
+    textAlign: "center",
+    color: "#252527"
   },
   neutral: {
-    backgroundColor: "silver"
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
+    fontWeight: "bold",
+    // backgroundColor: "silver",
+    textAlign: "center",
+    color: "#958F87"
   }
-});
+}));

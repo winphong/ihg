@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 export default function Card({ sports, selectedSport, handleSortBySport }) {
   const classes = useStyles();
@@ -11,15 +12,17 @@ export default function Card({ sports, selectedSport, handleSortBySport }) {
         {sports.length >= 1 &&
           sports.slice(0, 9).map(sport => {
             return (
-              <p
+              <Typography
+                className={classes.sports}
                 onClick={() => handleSortBySport(sport)}
+                variant="h1"
                 style={{
-                  color: selectedSport.name == sport.name ? "black" : "grey",
-                  cursor: "pointer"
+                  color:
+                    selectedSport.name === sport.name ? "#958F87" : "#D3DBD9"
                 }}
               >
                 {sport.name}
-              </p>
+              </Typography>
             );
           })}
       </Grid>
@@ -27,15 +30,17 @@ export default function Card({ sports, selectedSport, handleSortBySport }) {
         {sports.length >= 1 &&
           sports.slice(9).map(sport => {
             return (
-              <p
+              <Typography
+                className={classes.sports}
                 onClick={() => handleSortBySport(sport)}
+                variant="h1"
                 style={{
-                  color: selectedSport.name == sport.name ? "black" : "grey",
-                  cursor: "pointer"
+                  color:
+                    selectedSport.name === sport.name ? "#958F87" : "#D3DBD9"
                 }}
               >
                 {sport.name}
-              </p>
+              </Typography>
             );
           })}
       </Grid>
@@ -43,4 +48,10 @@ export default function Card({ sports, selectedSport, handleSortBySport }) {
   );
 }
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  sports: {
+    cursor: "pointer",
+    fontSize: "140%",
+    marginBottom: "2vmax"
+  }
+});

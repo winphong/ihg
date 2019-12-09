@@ -49,6 +49,9 @@ const styles = theme => ({
     color: "#C8B06B",
     lineHeight: "100%",
     paddingBottom: "2%"
+  },
+  sport: {
+    fontSize: "150%"
   }
 });
 
@@ -226,7 +229,9 @@ class About extends Component {
                     <div
                       style={{
                         position: "absolute",
-                        margin: "2% 0 0 3%"
+                        margin: "2%",
+                        width: "28%",
+                        backgroundColor: "beige"
                       }}
                     >
                       <img
@@ -236,7 +241,16 @@ class About extends Component {
                       <Typography style={{ margin: "3% 0" }}>
                         {selectedSport.name}
                       </Typography>
-                      <Typography> {selectedSport.description} </Typography>
+                      <Typography
+                        style={{
+                          display: "flex",
+                          // width: "28%",
+                          backgroundColor: "ivory"
+                        }}
+                      >
+                        {" "}
+                        {selectedSport.description}{" "}
+                      </Typography>
                     </div>
                   </CSSTransition>
                 </TransitionGroup>
@@ -259,7 +273,18 @@ class About extends Component {
                         disableRipple="true"
                         onClick={() => this.handleClick(sport)}
                       >
-                        {sport.name}
+                        <Typography
+                          variant="h1"
+                          className={classes.sport}
+                          style={{
+                            color:
+                              sport.name === selectedSport.name
+                                ? "#252527"
+                                : "#958F87"
+                          }}
+                        >
+                          {sport.name}
+                        </Typography>
                       </Button>
                     </Grid>
                   );

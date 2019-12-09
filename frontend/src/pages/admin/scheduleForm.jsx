@@ -279,11 +279,16 @@ class ScheduleForm extends Component {
                         input={<OutlinedInput />}
                       >
                         <MenuItem value=""></MenuItem>
-                        {["Prelims", "Semi-Finals", "Finals", "Carnival"].map(
-                          stage => {
-                            return <MenuItem value={stage}>{stage}</MenuItem>;
-                          }
-                        )}
+                        {[
+                          "Group Stage A",
+                          "Group Stage B",
+                          "Semi 1",
+                          "Semi 2",
+                          "Finals",
+                          "Carnival"
+                        ].map(stage => {
+                          return <MenuItem value={stage}>{stage}</MenuItem>;
+                        })}
                       </Select>
                       {/* <FormHelperText>Auto width</FormHelperText> */}
                     </FormControl>

@@ -158,9 +158,9 @@ const styles = theme => ({
     },
     textAlign: "center",
     padding: "10%",
-    backgroundColor: "transparent"
-    // position: "relative",
-    // zIndex: 2
+    backgroundColor: "transparent",
+    position: "relative",
+    zIndex: 2
   },
   border: {
     [theme.breakpoints.up("md")]: {
