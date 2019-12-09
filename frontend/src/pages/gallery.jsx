@@ -7,25 +7,73 @@ import { withStyles } from "@material-ui/core/styles";
 import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
-  paper: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-    textAlign: "center",
-    margin: 5
+  // paper: {
+  //   paddingTop: theme.spacing(1),
+  //   paddingBottom: theme.spacing(1),
+  //   textAlign: "center",
+  //   margin: 5
+  // },
+  mainPhotoSuperContainer: {
+    [theme.breakpoints.up("md")]: {
+      height: "33vmax"
+    },
+    [theme.breakpoints.down("md")]: {
+      marginTop: "5%"
+    }
+  },
+  mainPhotoContainer: {
+    [theme.breakpoints.up("md")]: {
+      padding: "5%"
+    }
+    // backgroundColor: "beige"
+  },
+  mainPhoto: {
+    [theme.breakpoints.down("md")]: {
+      width: "16vmax",
+      height: "16vmax",
+      objectFit: "cover"
+    },
+    width: "100%"
+  },
+  photosContainer: {
+    [theme.breakpoints.up("md")]: {},
+    paddingTop: "3%",
+    // border: "1px solid black",
+    // backgroundColor: "pink",
+    display: "flex",
+    justifyContent: "center"
+  },
+  photos: {
+    [theme.breakpoints.up("md")]: {
+      width: "15vmax",
+      height: "15vmax"
+    },
+    width: "10vmax",
+    height: "10vmax",
+    objectFit: "cover"
   },
   banner: {
-    height: "45vmax",
+    [theme.breakpoints.up("md")]: {
+      height: "45vmax"
+    },
+
     textAlign: "center"
   },
   title: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "400%"
+    },
     color: "#C8B06B",
     marginTop: "1%",
     lineHeight: "120%",
     fontSize: "1000%"
   },
   caption: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
     color: "white",
-    fontSize: "1.5vw"
+    fontSize: "200%"
   }
 });
 
@@ -71,8 +119,8 @@ class Gallery extends Component {
               }}
             >
               {/* Top segment */}
-              <Grid item xs={2} />
-              <Grid item container className={classes.banner} xs={8}>
+              <Grid item xs={1} md={2} />
+              <Grid item container className={classes.banner} xs={10} md={8}>
                 <Grid item xs={12}>
                   <Typography variant="h1" className={classes.title}>
                     GALLERY
@@ -95,22 +143,13 @@ class Gallery extends Component {
                   container
                   xs={12}
                   alignItems="center"
-                  style={{ height: "33vmax" }}
+                  className={classes.mainPhotoSuperContainer}
                 >
-                  <Grid
-                    item
-                    xs={6}
-                    style={{
-                      padding: "5%"
-                    }}
-                  >
+                  <Grid item xs={6} className={classes.mainPhotoContainer}>
                     {photos.length > 0 && (
                       <img
                         src={photos[0].images.standard_resolution.url}
-                        style={{
-                          width: "100%"
-                          // height: "100%"
-                        }}
+                        className={classes.mainPhoto}
                       />
                     )}
                   </Grid>
@@ -139,36 +178,29 @@ class Gallery extends Component {
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item xs={2} />
+              <Grid item xs={1} md={2} />
             </Grid>
             {/* Bottom segment */}
-            <Grid item xs={2} />
-            <Grid container xs={8} style={{ minHeight: "30vh", zIndex: 1 }}>
+            <Grid item xs={1} md={2} />
+            <Grid
+              container
+              xs={10}
+              md={8}
+              style={{ minHeight: "30vmax", zIndex: 1 }}
+            >
               {photos.splice(1, 9).map(photo => {
                 return (
-                  <Grid
-                    item
-                    xs={12}
-                    md={4}
-                    style={{
-                      padding: "3% 0 0 5%"
-                    }}
-                  >
+                  <Grid item xs={4} md={4} className={classes.photosContainer}>
                     <img
                       key={photo.images.standard_resolution.url}
                       src={photo.images.standard_resolution.url}
-                      style={{
-                        width: "15vmax",
-                        height: "15vmax",
-                        // height: "100%",
-                        objectFit: "cover"
-                      }}
+                      className={classes.photos}
                     />
                   </Grid>
                 );
               })}
             </Grid>
-            <Grid item xs={2} />
+            <Grid item xs={1} md={2} />
           </Grid>
         </React.Fragment>
       </CSSTransition>

@@ -39,7 +39,7 @@ const styles = theme => ({
   },
   resultsTableSuperContainer: {
     [theme.breakpoints.down("md")]: {
-      height: "110vmax"
+      height: "80vmax"
     },
     height: "45vmax"
     // backgroundColor: "pink"
@@ -169,9 +169,16 @@ class Results extends Component {
     const slider = document.querySelector(".slider");
     // screen
     const width = window.screen.width;
-    const padding = width * 0.03 * 4;
-    // if (slider) slider.scroll({ left: (1 / width) * 59000 });
-    if (slider) slider.scroll({ left: (840 / (280 + padding)) * 65 });
+    const padding = width * 0.03;
+    // if (slider)
+    //   slider.scroll({
+    //     left: (((840 + padding) / (280 + padding)) * height) / 10
+    //   });
+    // if (slider)
+    //   slider.scroll({
+    //     // left: ((280 + padding) / (280 * 3 + 4 * padding)) * width
+    //     left: 280 - padding
+    //   });
     this.setState({
       halls,
       schedules,
@@ -341,16 +348,6 @@ class Results extends Component {
                     // backgroundColor: "pink",
                   }}
                 >
-                  <div style={{ padding: "0 3%", transform: "scale(0.8)" }}>
-                    <ResultBar
-                      halls={halls}
-                      dataKey={"malePoint"}
-                      barSize={7}
-                    />
-                    <Typography className={classes.barChartTitle}>
-                      FEMALE
-                    </Typography>
-                  </div>
                   <div style={{ padding: "0 3%" }}>
                     <ResultBar
                       halls={halls}
@@ -361,8 +358,29 @@ class Results extends Component {
                       OVERALL
                     </Typography>
                   </div>
-
-                  <div style={{ padding: "0 3%", transform: "scale(0.8)" }}>
+                  <div
+                    style={{
+                      padding: "0 3%"
+                      // transform: "scale(0.8)",
+                      // backgroundColor: "pink"
+                    }}
+                  >
+                    <ResultBar
+                      halls={halls}
+                      dataKey={"malePoint"}
+                      barSize={7}
+                    />
+                    <Typography className={classes.barChartTitle}>
+                      MALE
+                    </Typography>
+                  </div>
+                  <div
+                    style={{
+                      padding: "0 3%"
+                      // transform: "scale(0.8)",
+                      // backgroundColor: "pink",
+                    }}
+                  >
                     <ResultBar
                       halls={halls}
                       dataKey={"femalePoint"}
@@ -385,7 +403,12 @@ class Results extends Component {
               {/* -------------------------------- */}
               <MediaQuery minWidth={960}>
                 <Grid item xs={12}>
-                  <div style={{ height: "30vmax", backgroundColor: "yellow" }}>
+                  <div
+                    style={{
+                      height: "30vmax"
+                      //  backgroundColor: "yellow"
+                    }}
+                  >
                     {!byDate && sports && (
                       <CSSTransition
                         in={true}
@@ -525,7 +548,7 @@ class Results extends Component {
                       className={classes.resultsTableContainer}
                     >
                       {/* Button */}
-                      <Grid xs={1} md={0} />
+                      <Grid xs={1} md={false} />
                       <Grid xs={10} md={12}>
                         <CustomButton
                           schedules={
@@ -548,7 +571,7 @@ class Results extends Component {
                           isAdmin={isAdmin}
                         />
                       </Grid>
-                      <Grid xs={1} md={0} />
+                      <Grid xs={1} md={false} />
                     </Grid>
                   </CSSTransition>
                 </TransitionGroup>

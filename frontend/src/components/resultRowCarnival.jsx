@@ -148,14 +148,14 @@ const useStyles = makeStyles(theme => ({
   },
   sport: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     color: "#252527"
   },
   information: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontSize: "100%",
     color: "#D3DBD9",
@@ -164,7 +164,7 @@ const useStyles = makeStyles(theme => ({
   },
   winner: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     // backgroundColor: "brown",
@@ -173,7 +173,7 @@ const useStyles = makeStyles(theme => ({
   },
   neutral: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     // backgroundColor: "silver",

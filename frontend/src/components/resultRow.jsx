@@ -82,12 +82,20 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
             </Link>
           )}
           {!isAdmin && (
-            <Typography className={classes.sport}>
-              {schedule.sport} {schedule.stage}
+            <React.Fragment>
+              <Typography className={classes.sport}>
+                {schedule.sport} {schedule.stage}
+              </Typography>
+            </React.Fragment>
+          )}
+          {/* sports venue / timing */}
+          {!isLaptop && (
+            <Typography className={classes.information}>
+              {dateformat(new Date(schedule.startTime), dateFormat)},{" "}
+              {schedule.venue}
             </Typography>
           )}
         </Grid>
-        {/* sports venue / timing */}
         {isLaptop && (
           <Grid item xs={4}>
             <Typography className={classes.information}>
@@ -140,14 +148,14 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
             {schedule.halls[1].abbreviation}
           </Typography>
         </Grid>
-        {!isLaptop && (
+        {/* {!isLaptop && (
           <Grid item xs={12} style={{ paddingLeft: "2%" }}>
             <Typography className={classes.information}>
               {dateformat(new Date(schedule.startTime), dateFormat)},{" "}
               {schedule.venue}
             </Typography>
           </Grid>
-        )}
+        )} */}
       </Grid>
     </Grid>
   );
@@ -171,14 +179,14 @@ const useStyles = makeStyles(theme => ({
   },
   sport: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     color: "#252527"
   },
   information: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontSize: "100%",
     color: "#D3DBD9",
@@ -187,7 +195,7 @@ const useStyles = makeStyles(theme => ({
   },
   winner: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     // backgroundColor: "pink",
@@ -196,7 +204,7 @@ const useStyles = makeStyles(theme => ({
   },
   neutral: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "70%"
     },
     fontWeight: "bold",
     textAlign: "center",

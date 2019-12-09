@@ -62,7 +62,15 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                     </Grid>
                     {index === 0 && (
                       <Grid item xs={2}>
-                        vs
+                        <Typography
+                          style={{
+                            fontSize: "100%",
+                            color: "#958F87",
+                            fontStyle: "italic"
+                          }}
+                        >
+                          vs
+                        </Typography>
                       </Grid>
                     )}
                   </React.Fragment>
@@ -179,10 +187,14 @@ const styles = theme => ({
     minHeight: "50px"
   },
   hallDuo: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%"
+    },
     fontSize: "150%",
     color: "black"
   },
   hallCarnival: {
+    [theme.breakpoints.down("md")]: {},
     fontSize: "100%",
     color: "black"
   },

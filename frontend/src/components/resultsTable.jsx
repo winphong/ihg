@@ -82,7 +82,7 @@ export default function ResultsTable({
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   sportHeader: {
     // fontWeight: "bold",
     padding: "1% 0 1% 2%",
@@ -91,9 +91,12 @@ const useStyles = makeStyles({
     color: "#958F87"
   },
   date: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%"
+    },
     padding: "1% 0 1% 2%",
     // backgroundColor: "cyan",
     color: "#958F87",
     fontWeight: "bold"
   }
-});
+}));

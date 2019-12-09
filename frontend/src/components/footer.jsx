@@ -71,7 +71,7 @@ export default function Footer() {
           <Copyright />
         </Container> */}
         <Grid container>
-          <Grid item xs={0} md={1} />
+          <Grid item xs={false} md={1} />
           {/* Conveninv */}
           {/* <Grid item container xs={6} md={5}> */}
           <Grid item xs={2} md={1}>

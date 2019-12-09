@@ -406,7 +406,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "2vw",
+                      fontSize: "60%",
                       color: "white"
                     }}
                   >
@@ -461,7 +461,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "2vw",
+                      fontSize: "60%",
                       color: "white"
                     }}
                   >
