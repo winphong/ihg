@@ -9,12 +9,11 @@ import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+    [theme.breakpoints.down("md")]: {
+      fontSize: "350%"
     },
     fontSize: "1000%",
-    fontWeight: "900",
-    color: "#C8B06B"
+    marginTop: "1%"
   },
   buttonColumn: {
     textAlign: "center",
@@ -22,10 +21,33 @@ const styles = theme => ({
     height: "100%"
   },
   container: {
+    [theme.breakpoints.down("md")]: {
+      height: "70vh"
+    },
+    height: "90vh",
     textAlign: "center"
   },
   button: {
     textAlign: "left"
+  },
+  buttonText: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "200%"
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "300%"
+    },
+    color: "white"
+  },
+  contactInformation: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "100%"
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "200%"
+    },
+    fontStyle: "italic",
+    color: "#958F87"
   }
 });
 
@@ -51,7 +73,6 @@ class Contact extends Component {
 
   handleSubmit = async () => {
     const enquiry = await miscService.createNewEnquiry(this.state.enquiry);
-    console.log(enquiry);
   };
 
   render() {
@@ -62,17 +83,15 @@ class Contact extends Component {
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container className={classes.container}>
             <Grid item xs={12}>
-              <Typography className={classes.title}> CONTACT US </Typography>
+              <Typography variant="h1" className={classes.title}>
+                {" "}
+                CONTACT US{" "}
+              </Typography>
             </Grid>
             <Grid item xs={1} md={3} />
             <Grid item xs={10} md={6}>
               <form>
-                <Grid
-                  container
-                  spacing={1}
-                  alignItems="center"
-                  className={classes.container}
-                >
+                <Grid container spacing={1} alignItems="center">
                   <Grid item xs={6}>
                     <TextField
                       variant="outlined"
@@ -80,8 +99,9 @@ class Contact extends Component {
                       id="name"
                       name="name"
                       label="Name"
-                      margin="normal"
+                      margin={"normal"}
                       fullWidth
+                      size="small"
                       onChange={this.handleChange}
                     />
                   </Grid>
@@ -94,6 +114,7 @@ class Contact extends Component {
                       label="Email"
                       margin="normal"
                       fullWidth
+                      size="small"
                       onChange={this.handleChange}
                     />
                   </Grid>
@@ -106,6 +127,7 @@ class Contact extends Component {
                       label="Subject"
                       margin="normal"
                       fullWidth
+                      // size="small"
                       onChange={this.handleChange}
                     />
                   </Grid>
@@ -118,24 +140,27 @@ class Contact extends Component {
                       label="Message"
                       margin="normal"
                       fullWidth
+                      size="small"
                       multiline
                       onChange={this.handleChange}
                       rows={5}
                     />
                   </Grid>
 
-                  <Grid item xs={4} className={classes.button}>
+                  <Grid item xs={12}>
                     <Button
                       fullWidth
                       variant="contained"
-                      size="small"
                       onClick={this.handleSubmit}
+                      margin="normal"
                     >
-                      Submit
+                      <Typography variant="h1" className={classes.buttonText}>
+                        Submit
+                      </Typography>
                     </Button>
                   </Grid>
-                  <Grid item xs={8} className={classes.button}>
-                    <Typography style={{ marginLeft: "5%" }}>
+                  <Grid item xs={12}>
+                    <Typography className={classes.contactInformation}>
                       or email us @ ihgcovening@gmail.com{" "}
                     </Typography>
                   </Grid>

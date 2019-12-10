@@ -46,6 +46,11 @@ const styles = theme => ({
       margin: "5% 0",
       height: "40vmax"
     }
+  },
+  icon: {
+    [theme.breakpoints.down("md")]: {
+      marginLeft: "-80%"
+    }
   }
 });
 
@@ -83,15 +88,18 @@ class Schedule extends Component {
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <React.Fragment>
             <Grid container xs={12} alignItems="center">
-              <Grid item md={1} />
-              <Grid item xs={12} md={10}>
+              <Grid item xs={1} md={1} />
+              <Grid item xs={10} md={10}>
                 <Typography variant="h1" className={classes.title}>
-                  TODAY'S GAMES
+                  THIS WEEK'S GAMES
                 </Typography>
               </Grid>
-              <Grid item md={1}>
+              <Grid item xs={1} md={1}>
                 {isAdmin && (
-                  <IconButton onClick={this.handleCreateSchedule}>
+                  <IconButton
+                    className={classes.icon}
+                    onClick={this.handleCreateSchedule}
+                  >
                     <AddCircleRoundedIcon />
                   </IconButton>
                 )}

@@ -24,7 +24,6 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       // fontSize: "100%"
       // backgroundColor: "grey",
-      marginTop: "1vh"
     }
   },
   bannerImageContainer: {

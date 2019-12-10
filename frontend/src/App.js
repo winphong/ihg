@@ -25,21 +25,13 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  // detectmobile() {
-  //   if (
-  //     navigator.userAgent.match(/Android/i) ||
-  //     navigator.userAgent.match(/webOS/i) ||
-  //     navigator.userAgent.match(/iPhone/i) ||
-  //     navigator.userAgent.match(/iPad/i) ||
-  //     navigator.userAgent.match(/iPod/i) ||
-  //     navigator.userAgent.match(/BlackBerry/i) ||
-  //     navigator.userAgent.match(/Windows Phone/i)
-  //   ) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+  state = {
+    pathname: window.location.pathname
+  };
+
+  handleTabChange = pathname => {
+    this.setState({ pathname });
+  };
 
   render() {
     // if (this.detectmobile() === true)
@@ -49,7 +41,10 @@ class App extends Component {
       <MuiPickersUtilsProvider utils={DayjsUtils}>
         <div style={{ backgroundColor: "#F9FBFA" }}>
           <MuiThemeProvider theme={theme}>
-            <NavBar />
+            <NavBar
+              pathname={this.state.pathname}
+              handleTabChange={this.handleTabChange}
+            />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/home" component={Home} />

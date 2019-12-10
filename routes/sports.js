@@ -20,7 +20,12 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:sport", async (req, res) => {
-  const sport = await Sport.find({ name: req.params.sport });
+  const sport = await Sport.findOneAndUpdate(
+    { name: req.params.sport },
+    { description: req.body.description },
+    { new: true, useFindAndModify: true }
+  );
+  res.send(sport);
 });
 
 module.exports = router;

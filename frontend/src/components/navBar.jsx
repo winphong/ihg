@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
-import MediaQuery from "react-responsive";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
     // position: "fixed",
@@ -24,21 +24,40 @@ const useStyles = makeStyles({
     // marginBottom: 100
   },
   title: {
-    flexGrow: 1
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      fontSize: "200%"
+    },
+    // flexGrow: 1,
+    fontSize: "400%",
+    display: "flex",
+    alignItems: "center"
+  },
+  logo: {
+    [theme.breakpoints.down("md")]: {
+      width: "20%"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "10%",
+      marginLeft: "1%"
+    }
   }
-});
+}));
 
 const selections = [
-  "HOME",
-  "ABOUT",
-  "SCHEDULE",
-  "RESULTS",
-  "GALLERY",
-  "CONTACT"
+  "Home",
+  "About",
+  "Schedule",
+  "Results",
+  "Gallery",
+  "Contact"
 ];
 
-export default function NavBar() {
+export default function NavBar({ pathname, handleTabChange }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [state, setState] = React.useState({
     top: false,
@@ -63,14 +82,26 @@ export default function NavBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {selections.map((text, index) => (
-          <ListItem button key={text}>
+        {selections.map((selection, index) => (
+          <ListItem button key={selection}>
             <Button
               color="inherit"
-              to={`/${text.toLowerCase()}`}
+              to={`/${selection.toLowerCase()}`}
               component={Link}
+              disableRipple
+              onClick={() => handleTabChange(`/${selection.toLowerCase()}`)}
             >
-              {text}
+              <Typography
+                style={{
+                  color:
+                    pathname === `/${selection.toLowerCase()}`
+                      ? "#252527"
+                      : "#958F87",
+                  fontWeight: "bold"
+                }}
+              >
+                {selection}
+              </Typography>
             </Button>
           </ListItem>
         ))}
@@ -83,42 +114,47 @@ export default function NavBar() {
     <div className={classes.root}>
       <AppBar position="static" color="inherit">
         <Toolbar disableGutters>
-          <MediaQuery maxWidth={959}>
-            <Button onClick={toggleDrawer("left", true)}>
-              <MenuIcon />
-            </Button>
-            <Drawer
-              anchor="left"
-              open={state.left}
-              onClose={toggleDrawer("left", false)}
-            >
-              {sideList("left")}
-            </Drawer>
-          </MediaQuery>
-          <Typography variant="h5" className={classes.title}>
-            <img
-              src="/Logo.png"
-              style={{ width: "60px", backgroundColor: "black" }}
-            ></img>
-            {"   "} IHG 19/20
+          {/* Mobile */}
+          {isMobile && (
+            <React.Fragment>
+              <Button onClick={toggleDrawer("left", true)}>
+                <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
+              </Button>
+              <Drawer
+                anchor="left"
+                open={state.left}
+                onClose={toggleDrawer("left", false)}
+              >
+                {sideList("left")}
+              </Drawer>
+            </React.Fragment>
+          )}
+          <Typography variant="h1" className={classes.title} style={{}}>
+            <img src="/Logo.png" className={classes.logo} />
+            IHG
           </Typography>
-          <MediaQuery minWidth={960}>
-            {selections.map(selection => {
+          {isMobile && <Button disabled style={{ padding: 0 }}></Button>}
+          {/* Laptop */}
+          {!isMobile &&
+            selections.map(selection => {
+              const newPathname = `/${selection.toLowerCase()}`;
               return (
                 <IconButton
                   style={{
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
+                    color: pathname === newPathname ? "#252527" : "#958F87",
+                    fontWeight: "bold"
                   }}
-                  disableRipple={true}
+                  disableRipple
                   color="inherit"
-                  to={`/${selection.toLowerCase()}`}
+                  onClick={() => handleTabChange(newPathname)}
+                  to={newPathname}
                   component={Link}
                 >
                   {selection}
                 </IconButton>
               );
             })}
-          </MediaQuery>
         </Toolbar>
       </AppBar>
     </div>

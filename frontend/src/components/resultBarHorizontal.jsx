@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   BarChart,
   Bar,
@@ -9,7 +9,6 @@ import {
   YAxis,
   LabelList
 } from "recharts";
-import { useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 export default function ResultBarHorizontal({ halls }) {

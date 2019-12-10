@@ -10,7 +10,6 @@ import { useTheme } from "@material-ui/core/styles";
 export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
   const classes = useStyles();
   const theme = useTheme();
-
   const size = schedule.halls.length;
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 

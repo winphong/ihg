@@ -13,6 +13,22 @@ const styles = theme => ({
   //   textAlign: "center",
   //   margin: 5
   // },
+  title: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "400%"
+    },
+    color: "#C8B06B",
+    marginTop: "1%",
+    lineHeight: "120%",
+    fontSize: "1000%"
+  },
+  caption: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "90%"
+    },
+    color: "white",
+    fontSize: "200%"
+  },
   mainPhotoSuperContainer: {
     [theme.breakpoints.up("md")]: {
       height: "33vmax"
@@ -58,22 +74,6 @@ const styles = theme => ({
     },
 
     textAlign: "center"
-  },
-  title: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "400%"
-    },
-    color: "#C8B06B",
-    marginTop: "1%",
-    lineHeight: "120%",
-    fontSize: "1000%"
-  },
-  caption: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
-    },
-    color: "white",
-    fontSize: "200%"
   }
 });
 
