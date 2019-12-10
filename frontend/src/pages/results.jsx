@@ -8,14 +8,12 @@ import sportService from "../services/sportService";
 import ResultsTable from "../components/resultsTable";
 import SportsList from "../components/sportsList";
 import ResultBar from "../components/resultBar";
-import Button from "@material-ui/core/Button";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import Typography from "@material-ui/core/Typography";
-import dateformat from "dateformat";
 import "../App.css";
 import MediaQuery from "react-responsive";
 import miscService from "../services/miscService";
@@ -167,10 +165,9 @@ class Results extends Component {
     const { data: sports } = await sportService.getAllSports();
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
-    const slider = document.querySelector(".slider");
-    // screen
-    const width = window.screen.width;
-    const padding = width * 0.03;
+    // const slider = document.querySelector(".slider");
+    // const width = window.screen.width;
+    // const padding = width * 0.03;
     // if (slider)
     //   slider.scroll({
     //     left: (((840 + padding) / (280 + padding)) * height) / 10

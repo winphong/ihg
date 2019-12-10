@@ -5,6 +5,7 @@ import { Typography } from "@material-ui/core";
 import miscService from "../services/miscService";
 import { withStyles } from "@material-ui/core/styles";
 import { CSSTransition } from "react-transition-group";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   // paper: {
@@ -24,7 +25,7 @@ const styles = theme => ({
   },
   caption: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "90%"
+      fontSize: "80%"
     },
     color: "white",
     fontSize: "200%"
@@ -111,6 +112,7 @@ class Gallery extends Component {
                   width: "100%",
                   opacity: 0.3
                 }}
+                alt="home"
               />
             </Grid>
             <Grid
@@ -151,6 +153,12 @@ class Gallery extends Component {
                       <img
                         src={photos[0].images.standard_resolution.url}
                         className={classes.mainPhoto}
+                        style={{
+                          cursor: "pointer"
+                        }}
+                        onClick={() => {
+                          window.location = photos[0].link;
+                        }}
                       />
                     )}
                   </Grid>
@@ -196,6 +204,12 @@ class Gallery extends Component {
                       key={photo.images.standard_resolution.url}
                       src={photo.images.standard_resolution.url}
                       className={classes.photos}
+                      style={{
+                        cursor: "pointer"
+                      }}
+                      onClick={() => {
+                        window.location = photo.link;
+                      }}
                     />
                   </Grid>
                 );

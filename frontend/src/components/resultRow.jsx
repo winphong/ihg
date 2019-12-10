@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import dateformat from "dateformat";
 import { useMediaQuery } from "react-responsive";
@@ -8,7 +8,6 @@ import Typography from "@material-ui/core/Typography";
 
 export default function ResultRow({ schedule, isAdmin, byDate }) {
   const classes = useStyles();
-  const theme = useTheme();
 
   const hasScore =
     schedule.halls[0].score >= 0 &&
