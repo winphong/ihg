@@ -159,7 +159,8 @@ const styles = theme => ({
       marginTop: "5%"
     },
     [theme.breakpoints.down("sm")]: {
-      width: "50vmin"
+      width: "50vmin",
+      transform: "scale(0.9)"
       // borderLeft: "2.5px solid #C8B06B",
       // borderRight: "2.5px solid #C8B06B"
     },

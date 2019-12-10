@@ -26,8 +26,9 @@ const halls = [
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "300%",
-      textAlign: "center"
+      fontSize: "350%",
+      textAlign: "center",
+      marginTop: "3%"
     },
     fontSize: "1000%",
     color: "#C8B06B",
@@ -138,12 +139,8 @@ class About extends Component {
   }
 
   handleClick = async sport => {
-    const photo = await miscService.getSportsPhoto(
-      path.normalize(sport.imgUrl)
-    );
-    const file = new Blob([photo.data], { type: photo.data.type });
-    const fileURL = URL.createObjectURL(file);
-    this.setState({ imgUrl: fileURL, selectedSport: sport });
+    const imgUrl = `/sports/${sport.imgUrl}`;
+    this.setState({ imgUrl, selectedSport: sport });
   };
 
   render() {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import miscService from "../services/miscService";
@@ -10,7 +10,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 const useStyles = makeStyles(theme => ({
   title: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "350%"
+      fontSize: "350%",
+      marginTop: "3%"
     },
     fontSize: "1000%",
     marginTop: "1%"
@@ -77,8 +78,7 @@ export default function ResultsTable() {
         <Grid container className={classes.container}>
           <Grid item xs={12}>
             <Typography variant="h1" className={classes.title}>
-              {" "}
-              CONTACT US{" "}
+              CONTACT US
             </Typography>
           </Grid>
           <Grid item xs={1} md={3} />

@@ -1,11 +1,10 @@
 // update score form
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { TextField, Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
-import scheduleService from "../../services/scheduleService";
 import miscService from "../../services/miscService";
 import { Redirect } from "react-router-dom";
 

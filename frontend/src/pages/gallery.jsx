@@ -15,7 +15,7 @@ const styles = theme => ({
   // },
   title: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "400%"
+      fontSize: "350%"
     },
     color: "#C8B06B",
     marginTop: "1%",

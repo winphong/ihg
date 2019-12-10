@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { TextField, Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
-import scheduleService from "../../services/scheduleService";
 import hallService from "../../services/hallService";
 
 const styles = theme => ({

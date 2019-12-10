@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -11,7 +11,7 @@ import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import MediaQuery from "react-responsive";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,14 +24,15 @@ const useStyles = makeStyles(theme => ({
     // marginBottom: 100
   },
   title: {
+    [theme.breakpoints.up("md")]: {
+      fontSize: "300%"
+    },
     [theme.breakpoints.down("md")]: {
-      display: "flex",
-      justifyContent: "center",
-      fontSize: "200%"
+      justifyContent: "center"
     },
     // flexGrow: 1,
-    fontSize: "400%",
     display: "flex",
+    fontSize: "200%",
     alignItems: "center"
   },
   logo: {
@@ -56,8 +57,6 @@ const selections = [
 
 export default function NavBar({ pathname, handleTabChange }) {
   const classes = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [state, setState] = React.useState({
     top: false,
@@ -115,28 +114,28 @@ export default function NavBar({ pathname, handleTabChange }) {
       <AppBar position="static" color="inherit">
         <Toolbar disableGutters>
           {/* Mobile */}
-          {isMobile && (
-            <React.Fragment>
-              <Button onClick={toggleDrawer("left", true)}>
-                <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
-              </Button>
-              <Drawer
-                anchor="left"
-                open={state.left}
-                onClose={toggleDrawer("left", false)}
-              >
-                {sideList("left")}
-              </Drawer>
-            </React.Fragment>
-          )}
+          <MediaQuery maxWidth={959}>
+            <Button onClick={toggleDrawer("left", true)}>
+              <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
+            </Button>
+            <Drawer
+              anchor="left"
+              open={state.left}
+              onClose={toggleDrawer("left", false)}
+            >
+              {sideList("left")}
+            </Drawer>
+          </MediaQuery>
           <Typography variant="h1" className={classes.title} style={{}}>
             <img src="/Logo.png" className={classes.logo} />
             IHG
           </Typography>
-          {isMobile && <Button disabled style={{ padding: 0 }}></Button>}
+          <MediaQuery maxWidth={959}>
+            <Button disabled style={{ padding: 0 }}></Button>
+          </MediaQuery>
           {/* Laptop */}
-          {!isMobile &&
-            selections.map(selection => {
+          <MediaQuery minWidth={960}>
+            {selections.map(selection => {
               const newPathname = `/${selection.toLowerCase()}`;
               return (
                 <IconButton
@@ -155,6 +154,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                 </IconButton>
               );
             })}
+          </MediaQuery>
         </Toolbar>
       </AppBar>
     </div>

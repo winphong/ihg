@@ -15,7 +15,8 @@ import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "300%"
+      fontSize: "350%",
+      marginTop: "3%"
     },
     color: "#C8B06B",
     fontSize: "1000%",

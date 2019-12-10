@@ -23,7 +23,8 @@ import miscService from "../services/miscService";
 const styles = theme => ({
   title: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "400%"
+      fontSize: "350%",
+      marginTop: "3%"
     },
     fontSize: "1000%",
     textAlign: "center",

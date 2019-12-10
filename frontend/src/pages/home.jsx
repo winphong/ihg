@@ -91,8 +91,8 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       width: "73.33vw",
       border: "1px solid black",
-      backgroundColor: "red",
-      zIndex: 1
+      backgroundColor: "red"
+      // zIndex: 1
     },
     position: "absolute",
     width: "63.6vw",
@@ -109,7 +109,7 @@ const styles = theme => ({
       // backgroundColor: "ivory",
       height: "inherit"
     },
-    zIndex: 1,
+    zIndex: 2,
     display: "flex",
     alignItems: "center"
   }
@@ -203,24 +203,13 @@ class Home extends Component {
                 className={classes.buttonColumn}
                 justify="flex-end"
               >
-                <MediaQuery minDeviceWidth={960}>
-                  <IconButton
-                    onClick={() => this.handleBack(4)}
-                    disabled={index === 0}
-                    // style={{ padding: 0 }}
-                  >
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </MediaQuery>
-                <MediaQuery maxDeviceWidth={959}>
-                  <IconButton
-                    onClick={() => this.handleBack(2)}
-                    disabled={index === 0}
-                    // style={{ padding: 0 }}
-                  >
-                    <KeyboardArrowLeft />
-                  </IconButton>
-                </MediaQuery>
+                <IconButton
+                  onClick={() => this.handleBack(4)}
+                  disabled={index === 0}
+                  // style={{ padding: 0 }}
+                >
+                  <KeyboardArrowLeft />
+                </IconButton>
               </Grid>
               {/* Cards */}
               <Grid item md={7}>
@@ -412,7 +401,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "65%",
+                      fontSize: "60%",
                       color: "white"
                     }}
                   >
@@ -468,7 +457,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "65%",
+                      fontSize: "60%",
                       color: "white"
                     }}
                   >
