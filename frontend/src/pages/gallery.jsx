@@ -34,7 +34,8 @@ const styles = theme => ({
       height: "33vmax"
     },
     [theme.breakpoints.down("md")]: {
-      marginTop: "5%"
+      marginTop: "5%",
+      height: "20vmax"
     }
   },
   mainPhotoContainer: {
@@ -53,19 +54,19 @@ const styles = theme => ({
   },
   photosContainer: {
     [theme.breakpoints.up("md")]: {},
-    paddingTop: "3%",
     // border: "1px solid black",
     // backgroundColor: "pink",
+    paddingTop: "3%",
     display: "flex",
     justifyContent: "center"
   },
   photos: {
     [theme.breakpoints.up("md")]: {
-      width: "15vmax",
-      height: "15vmax"
+      width: "17vmax",
+      height: "17vmax"
     },
-    width: "10vmax",
-    height: "10vmax",
+    width: "13vmax",
+    height: "13vmax",
     objectFit: "cover"
   },
   banner: {
@@ -186,7 +187,7 @@ class Gallery extends Component {
               container
               xs={10}
               md={8}
-              style={{ minHeight: "30vmax", zIndex: 1 }}
+              style={{ minHeight: "50vmax", zIndex: 1 }}
             >
               {photos.splice(1, 9).map(photo => {
                 return (

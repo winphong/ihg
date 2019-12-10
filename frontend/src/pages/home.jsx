@@ -56,15 +56,15 @@ const styles = theme => ({
   },
   subTitle: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "6vw"
+      fontSize: "160%"
     },
-    fontSize: "3.5vw",
+    fontSize: "450%",
     color: "#C8B06B",
     lineHeight: "120%",
     fontFamily: "TheNextFont"
   },
   subTitleTransparent: {
-    fontSize: "2.5vw",
+    fontSize: "450%",
     color: "transparent",
     "-webkit-text-stroke-width": "1px",
     "-webkit-text-stroke-color": "#C8B06B",
@@ -378,7 +378,7 @@ class Home extends Component {
                   <Typography
                     style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
                   >
-                    VIEW RESULTS
+                    VIEW RESULT
                   </Typography>
                 </Button>
               </Grid>
@@ -395,7 +395,14 @@ class Home extends Component {
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid
+                item
+                xs={3}
+                style={{
+                  display: "flex",
+                  alignItems: "center"
+                }}
+              >
                 <Button
                   style={{ backgroundColor: "#C8B06B", padding: "6%" }}
                   fullWidth
@@ -405,7 +412,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "60%",
+                      fontSize: "65%",
                       color: "white"
                     }}
                   >
@@ -448,7 +455,8 @@ class Home extends Component {
                 item
                 xs={3}
                 style={{
-                  textAlign: "center"
+                  display: "flex",
+                  alignItems: "center"
                 }}
               >
                 <Button
@@ -460,7 +468,7 @@ class Home extends Component {
                   <Typography
                     style={{
                       fontFamily: "TheNextFont",
-                      fontSize: "60%",
+                      fontSize: "65%",
                       color: "white"
                     }}
                   >

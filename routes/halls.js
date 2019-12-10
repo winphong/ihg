@@ -31,7 +31,6 @@ router.put("/", async (req, res) => {
         { new: true }
       )
         .then(async response => {
-          console.log("response", response);
           halls.push(response);
         })
         .catch(error => {

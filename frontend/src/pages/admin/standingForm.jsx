@@ -48,7 +48,6 @@ class StandingForm extends Component {
 
   handleSubmit = async () => {
     const response = await hallService.updateStandings(this.state.halls);
-    console.log(response);
   };
 
   render() {

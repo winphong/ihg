@@ -19,6 +19,10 @@ const styles = theme => ({
     color: "#C8B06B"
   },
   container: {
+    [theme.breakpoints.down("sm")]: {
+      height: "60vh"
+    },
+    height: "70vh",
     textAlign: "center"
   },
   formControl: {
