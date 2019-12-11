@@ -91,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     color: "#958F87"
   },
   date: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
     },
     padding: "1% 0 1% 2%",

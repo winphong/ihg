@@ -17,37 +17,37 @@ import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   banner: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       height: "90vh"
       // fontSize: "100%"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       // fontSize: "100%"
       // backgroundColor: "grey",
     }
   },
   bannerImageContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       marginLeft: "-33.5%",
       zIndex: 0
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       marginLeft: "-38%",
       overflow: "hidden"
     }
   },
   bannerImage: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       width: "200%"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "block",
       height: "90vh",
       marginLeft: "-250%"
     }
   },
   title: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       fontSize: "8.5vw"
     },
     lineHeight: "120%",
@@ -55,7 +55,7 @@ const styles = theme => ({
     fontSize: "10vw"
   },
   subTitle: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "160%"
     },
     fontSize: "450%",
@@ -71,40 +71,45 @@ const styles = theme => ({
     lineHeight: "120%"
   },
   subTitleContainer: {
-    // [theme.breakpoints.up("md")]: {
+    // [theme.breakpoints.up("sm")]: {
     //   display: "flex",
     //   alignItems: "flex-end"
     // paddingTop: "28%"
     // }
   },
   cardRowContainer: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       padding: "0 6vw"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       height: "650px",
       padding: "0 7vw",
       marginTop: "10%"
     }
   },
   cardContainer: {
-    [theme.breakpoints.down("md")]: {
-      width: "73.33vw",
-      border: "1px solid black",
-      backgroundColor: "red"
+    [theme.breakpoints.only("sm")]: {
+      // height: "38vmax"
       // zIndex: 1
     },
-    position: "absolute",
-    width: "63.6vw",
-    height: "inherit"
+    [theme.breakpoints.down("md")]: {
+      display: "flex",
+      overflowX: "scroll",
+      width: "100%"
+    },
+    [theme.breakpoints.up("lg")]: {
+      position: "absolute",
+      width: "63.6vw"
+    }
+    // height: "inherit"
   },
   buttonColumn: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       // padding: "61% 0"
       backgroundColor: "pink",
       height: "500px"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       // padding: "61% 0"
       // backgroundColor: "ivory",
       height: "inherit"
@@ -195,7 +200,7 @@ class Home extends Component {
             </Grid>
           </Grid>
           {/* Card container */}
-          <MediaQuery minDeviceWidth={960}>
+          <MediaQuery minDeviceWidth={1280}>
             <Grid container className={classes.cardRowContainer} xs={12}>
               <Grid
                 item
@@ -216,45 +221,39 @@ class Home extends Component {
                 <TransitionGroup>
                   <CSSTransition key={index} timeout={400} classNames="fade">
                     <Grid container className={classes.cardContainer}>
-                      <MediaQuery minDeviceWidth={960}>
-                        <Grid
-                          item
-                          container
-                          xs={12}
-                          style={{ marginLeft: "-1.9vw" }}
-                        >
-                          {schedulesToDisplay.map((e, index) => {
-                            if (index < 4) {
-                              return (
-                                <React.Fragment key={index}>
-                                  <Grid item xs={5}>
-                                    <Card
-                                      schedule={e}
-                                      size="big"
-                                      index={index}
+                      <Grid
+                        item
+                        container
+                        xs={12}
+                        style={{ marginLeft: "-1.9vw" }}
+                      >
+                        {schedulesToDisplay.map((e, index) => {
+                          if (index < 4) {
+                            return (
+                              <React.Fragment key={index}>
+                                <Grid item xs={5}>
+                                  <Card schedule={e} size="big" index={index} />
+                                  {index < 2 && (
+                                    <Divider
+                                      style={{
+                                        margin: "15px 8vw 15px 8vw",
+                                        backgroundColor: "#C8B06B"
+                                      }}
                                     />
-                                    {index < 2 && (
-                                      <Divider
-                                        style={{
-                                          margin: "15px 8vw 15px 8vw",
-                                          backgroundColor: "#C8B06B"
-                                        }}
-                                      />
-                                    )}
-                                  </Grid>
-                                  {/* {index % 2 == 0 && (
+                                  )}
+                                </Grid>
+                                {/* {index % 2 == 0 && (
                                   <Grid
                                     item
                                     xs={1}
                                     style={{ backgroundColor: "pink" }}
                                   />
                                 )} */}
-                                </React.Fragment>
-                              );
-                            }
-                          })}
-                        </Grid>
-                      </MediaQuery>
+                              </React.Fragment>
+                            );
+                          }
+                        })}
+                      </Grid>
                     </Grid>
                   </CSSTransition>
                 </TransitionGroup>
@@ -267,15 +266,6 @@ class Home extends Component {
                 >
                   <KeyboardArrowRight />
                 </IconButton>
-                {/* <MediaQuery maxDeviceWidth={959}>
-                  <IconButton
-                    onClick={() => this.handleNext(2)}
-                    disabled={index >= schedules.length - 2}
-                    // style={{ padding: 0 }}
-                  >
-                    <KeyboardArrowRight />
-                  </IconButton>
-                </MediaQuery> */}
               </Grid>
               <Grid
                 item
@@ -336,7 +326,7 @@ class Home extends Component {
               }}
               alignItems="flex-end"
             >
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Typography
                   variant="h1"
                   className={classes.subTitleTransparent}
@@ -376,7 +366,8 @@ class Home extends Component {
               </Grid>
             </Grid>
           </MediaQuery>
-          <MediaQuery maxDeviceWidth={956}>
+          {/*  */}
+          <MediaQuery maxDeviceWidth={1279}>
             <Grid container xs={12} style={{ padding: "3vh 5vw" }}>
               <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
@@ -413,13 +404,7 @@ class Home extends Component {
 
             <Grid item xs={12}>
               {schedulesToDisplay.length > 0 && (
-                <div
-                  style={{
-                    display: "flex",
-                    overflowX: "scroll",
-                    width: "100%"
-                  }}
-                >
+                <div className={classes.cardContainer}>
                   {schedulesToDisplay.map((e, index) => {
                     return (
                       <Card

@@ -25,7 +25,7 @@ const halls = [
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "350%",
       textAlign: "center",
       marginTop: "3%"
@@ -35,7 +35,7 @@ const styles = theme => ({
     marginTop: "1%"
   },
   titleCaption: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "80%"
     },
     fontSize: "150%",
@@ -43,15 +43,15 @@ const styles = theme => ({
     lineHeight: "120%"
   },
   subtitleContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       paddingLeft: "4%"
     }
   },
   subtitle: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       paddingBottom: "5%"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "200%",
       textAlign: "center",
       marginBottom: "10%"
@@ -61,7 +61,7 @@ const styles = theme => ({
     // lineHeight: "100%",
   },
   border: {
-    [theme.breakpoints.down("md")]: {},
+    [theme.breakpoints.down("sm")]: {},
     // paddingLeft: "4%",
     marginTop: "10%"
   },
@@ -69,19 +69,19 @@ const styles = theme => ({
     width: "70%"
   },
   imageCaption: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
     },
     fontSize: "150%",
     color: "#252527"
   },
   sportsInformationContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       paddingLeft: "5%",
       display: "flex",
       flexDirection: "column"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "83.33%"
     },
     position: "absolute",
@@ -89,7 +89,7 @@ const styles = theme => ({
     // backgroundColor: "beige"
   },
   information: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "80%"
     },
     fontSize: "120%",
@@ -100,7 +100,7 @@ const styles = theme => ({
     marginTop: "10%"
   },
   transitionContainer: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       height: "50vmax"
       // display: "flex",
       // justifyContent: "center"
@@ -115,7 +115,7 @@ const styles = theme => ({
     flexShrink: 0
   },
   sportPhoto: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     },
     width: "80%"

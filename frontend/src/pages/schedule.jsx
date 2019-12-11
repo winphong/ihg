@@ -31,25 +31,25 @@ const styles = theme => ({
     minHeight: "50vmax"
   },
   calendar: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       // padding: "0% 2%"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       margin: "0 1%"
     }
   },
   slider: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       margin: "5% 0",
       height: "20vmax"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       margin: "5% 0",
       height: "40vmax"
     }
   },
   icon: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       marginLeft: "-80%"
     }
   }

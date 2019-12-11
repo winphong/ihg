@@ -9,7 +9,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
   title: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "350%",
       marginTop: "3%"
     },
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   },
   container: {
-    [theme.breakpoints.down("md")]: {},
+    [theme.breakpoints.down("sm")]: {},
     height: "90vh",
     textAlign: "center"
   },
@@ -30,19 +30,19 @@ const useStyles = makeStyles(theme => ({
     textAlign: "left"
   },
   buttonText: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "200%"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       fontSize: "300%"
     },
     color: "white"
   },
   contactInformation: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       fontSize: "200%"
     },
     fontStyle: "italic",
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 export default function ResultsTable() {
   const classes = useStyles();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [enquiry, setEnquiry] = React.useState({
     name: "",

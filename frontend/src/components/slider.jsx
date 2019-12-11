@@ -167,7 +167,7 @@ const styles = theme => ({
     }
   },
   iconButton: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       display: "flex"
       // justifyContent: "flex-start",
       // justifyItems: "flex-start"
@@ -175,13 +175,13 @@ const styles = theme => ({
     }
   },
   sliderContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       height: "22.5vmax"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       height: "40vmax"
     }
-    // [theme.breakpoints.between("sm", "md")]: {
+    // [theme.breakpoints.between("sm", "sm")]: {
     //   height: "80vmax"
     // }
     // backgroundColor: "pink"

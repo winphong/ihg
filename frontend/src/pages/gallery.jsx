@@ -15,7 +15,7 @@ const styles = theme => ({
   //   margin: 5
   // },
   title: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "350%"
     },
     color: "#C8B06B",
@@ -24,29 +24,29 @@ const styles = theme => ({
     fontSize: "1000%"
   },
   caption: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "80%"
     },
     color: "white",
     fontSize: "200%"
   },
   mainPhotoSuperContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       height: "33vmax"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       marginTop: "5%",
       height: "20vmax"
     }
   },
   mainPhotoContainer: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       padding: "5%"
     }
     // backgroundColor: "beige"
   },
   mainPhoto: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "16vmax",
       height: "16vmax",
       objectFit: "cover"
@@ -54,7 +54,7 @@ const styles = theme => ({
     width: "100%"
   },
   photosContainer: {
-    [theme.breakpoints.up("md")]: {},
+    [theme.breakpoints.up("sm")]: {},
     // border: "1px solid black",
     // backgroundColor: "pink",
     paddingTop: "3%",
@@ -62,7 +62,7 @@ const styles = theme => ({
     justifyContent: "center"
   },
   photos: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       width: "17vmax",
       height: "17vmax"
     },
@@ -71,7 +71,7 @@ const styles = theme => ({
     objectFit: "cover"
   },
   banner: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       height: "45vmax"
     },
 

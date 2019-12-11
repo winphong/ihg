@@ -20,7 +20,7 @@ import miscService from "../services/miscService";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "350%",
       marginTop: "3%"
     },
@@ -29,7 +29,7 @@ const styles = theme => ({
     marginTop: "1%"
   },
   currentDate: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "13 0%"
     },
     color: "#958F87",
@@ -37,7 +37,7 @@ const styles = theme => ({
     textAlign: "center"
   },
   resultsTableSuperContainer: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       height: "80vmax"
     },
     height: "45vmax"
@@ -46,7 +46,7 @@ const styles = theme => ({
   resultsTableContainer: {
     position: "absolute",
     width: "58.33%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -54,7 +54,7 @@ const styles = theme => ({
     fontSize: "300%",
     color: "#C8B06B",
     fontFamily: "TheNextFont",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: "200%"
     }
@@ -75,7 +75,7 @@ const styles = theme => ({
     fontSize: "500%"
   },
   sortButton: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       marginTop: "1vmax",
       fontSize: "200%"
     },
@@ -89,6 +89,21 @@ const styles = theme => ({
     fontSize: "120%",
     padding: "0 3%",
     flexShrink: 0
+  },
+  overall: {
+    [theme.breakpoints.up("sm")]: {
+      order: 2
+    }
+  },
+  male: {
+    [theme.breakpoints.up("sm")]: {
+      order: 1
+    }
+  },
+  female: {
+    [theme.breakpoints.up("sm")]: {
+      order: 3
+    }
   }
 });
 
@@ -338,7 +353,7 @@ class Results extends Component {
             <MediaQuery maxWidth={959}>
               <Grid item xs={12}>
                 <div
-                  className={"slider"}
+                  // className="slider"
                   style={{
                     display: "flex",
                     overflowX: "scroll",
@@ -346,7 +361,7 @@ class Results extends Component {
                     // backgroundColor: "pink",
                   }}
                 >
-                  <div style={{ padding: "0 3%" }}>
+                  <div className={classes.overall} style={{ padding: "0 3%" }}>
                     <ResultBar
                       halls={halls}
                       dataKey={"totalPoint"}
@@ -357,10 +372,12 @@ class Results extends Component {
                     </Typography>
                   </div>
                   <div
+                    className={classes.male}
                     style={{
                       padding: "0 3%"
                       // transform: "scale(0.8)",
                       // backgroundColor: "pink"
+                      // order: -1
                     }}
                   >
                     <ResultBar
@@ -373,6 +390,7 @@ class Results extends Component {
                     </Typography>
                   </div>
                   <div
+                    className={classes.female}
                     style={{
                       padding: "0 3%"
                       // transform: "scale(0.8)",

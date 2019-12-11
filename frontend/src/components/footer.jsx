@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(8)
   },
   footer: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       padding: theme.spacing(3)
     },
     padding: theme.spacing(5),
@@ -21,36 +21,57 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "black"
   },
   title: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "3vw"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "90%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "110%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "150%"
     },
     color: "#C8B06B",
     fontFamily: "TheNextFont"
   },
 
   subTitle: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "3vw"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "90%"
     },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "110%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "150%"
+    },
+    // [theme.breakpoints.between("sm", "lg")]: {
+    //   fontSize: "100%"
+    // },
     color: "white"
   },
   logo: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       marginTop: "-3vh"
     },
     marginTop: "-2vh"
   },
   backToTop: {
-    [theme.breakpoints.down("md")]: {
-      marginTop: "2vh"
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "2vmax"
     },
     display: "flex",
     justifyContent: "flex-end",
     alignItems: "flex-end"
   },
   backToTopText: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "3vw"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "90%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "110%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "150%"
     },
     color: "silver",
     fontFamily: "TheNextFont"
@@ -71,7 +92,7 @@ export default function Footer() {
           <Copyright />
         </Container> */}
         <Grid container>
-          <Grid item xs={false} md={1} />
+          {/* <Grid item xs={false} md={1} /> */}
           {/* Conveninv */}
           {/* <Grid item container xs={6} md={5}> */}
           <Grid item xs={2} md={1}>
@@ -108,7 +129,7 @@ export default function Footer() {
             <Typography className={classes.subTitle}>+65 6516 2078</Typography>
           </Grid>
           {/* Back to top */}
-          <Grid item xs={12} md={2} className={classes.backToTop}>
+          <Grid item xs={12} md={3} className={classes.backToTop}>
             <Button
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: "smooth" });

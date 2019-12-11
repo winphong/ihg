@@ -24,10 +24,10 @@ const useStyles = makeStyles(theme => ({
     // marginBottom: 100
   },
   title: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       fontSize: "300%"
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       justifyContent: "center"
     },
     // flexGrow: 1,
@@ -36,10 +36,10 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center"
   },
   logo: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "20%"
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       width: "10%",
       marginLeft: "1%"
     }

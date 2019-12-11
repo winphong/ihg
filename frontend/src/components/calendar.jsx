@@ -220,7 +220,7 @@ export default function Calendar({ schedules, isAdmin }) {
 
             return (
               <div>
-                <div style={{ height: "3%" }}>
+                <div style={{ height: "3%", marginLeft: "8%" }}>
                   {stay && (
                     <div
                       style={{
@@ -253,7 +253,14 @@ export default function Calendar({ schedules, isAdmin }) {
                     </CSSTransition>
                   </TransitionGroup>
                 </div>
-                <Typography className={classes.day}>{day.name}</Typography>
+                <Typography
+                  style={{
+                    marginLeft: "8%"
+                  }}
+                  className={classes.day}
+                >
+                  {day.name}
+                </Typography>
                 <TransitionGroup>
                   <CSSTransition
                     key={`${weekNum}${date}`}
@@ -261,9 +268,11 @@ export default function Calendar({ schedules, isAdmin }) {
                     classNames="fade"
                   >
                     <div
-                    // style={{
-                    //   overflowY: "scroll"
-                    // }}
+                      style={
+                        {
+                          // overflowY: "scroll"
+                        }
+                      }
                     >
                       {schedules.length > 0 &&
                         schedules.map(schedule => {
