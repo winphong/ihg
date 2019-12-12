@@ -63,7 +63,7 @@ export default function Slider({ schedules }) {
     setNext(nxt !== currentWeekSchedule.length - 1 ? nxt + 1 : 0);
   }
 
-  const hasSpace = useMediaQuery({ minDeviceWidth: 960 });
+  const hasSpace = useMediaQuery({ minDeviceWidth: 1280 });
 
   return (
     <Grid
@@ -72,7 +72,7 @@ export default function Slider({ schedules }) {
       alignItems="center"
       className={classes.sliderContainer}
     >
-      <MediaQuery minWidth={960}>
+      <MediaQuery minWidth={1280}>
         <Grid item xs={1} sm={1}>
           <IconButton
             onClick={handleBack}
@@ -130,14 +130,13 @@ export default function Slider({ schedules }) {
           </IconButton>
         </Grid>
       </MediaQuery>
-      <MediaQuery maxWidth={959}>
+      <MediaQuery maxWidth={1279}>
         {currentWeekSchedule.length > 0 && (
           <div
             style={{
               display: "flex",
               overflowX: "scroll",
-              width: "100%",
-              margin: "5% 0"
+              width: "100%"
 
               // height: "50vmax"
               // backgroundColor: "pink"
@@ -175,12 +174,14 @@ const styles = theme => ({
     }
   },
   sliderContainer: {
-    [theme.breakpoints.up("sm")]: {
-      height: "22.5vmax"
+    [theme.breakpoints.only("xs")]: {
+      height: "30vmax"
     },
-    [theme.breakpoints.down("sm")]: {
-      height: "40vmax"
-    }
+    [theme.breakpoints.up("lg")]: {
+      height: "20vmax"
+    },
+    height: "40vmax"
+
     // [theme.breakpoints.between("sm", "sm")]: {
     //   height: "80vmax"
     // }

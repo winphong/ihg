@@ -26,7 +26,7 @@ const styles = theme => ({
     },
     fontSize: "1000%",
     textAlign: "center",
-    marginTop: "1%"
+    marginTop: "6%"
   },
   currentDate: {
     [theme.breakpoints.down("sm")]: {

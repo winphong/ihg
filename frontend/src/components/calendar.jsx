@@ -35,6 +35,11 @@ export default function Calendar({ schedules, isAdmin }) {
   let current = currentDay;
 
   const notMobile = useMediaQuery({ minDeviceWidth: 960 });
+  const isIpad = useMediaQuery({
+    minWidth: 750,
+    maxWidth: 800,
+    orientation: "portrait"
+  });
 
   function handleBack(isMobile) {
     setStay(true);
@@ -143,7 +148,17 @@ export default function Calendar({ schedules, isAdmin }) {
                       >
                         <div className={classes.dateRow}>
                           <Typography className={classes.date}>
-                            {dateformat(date, "dd'th' mmm")}
+                            {(date.getDate() === 1 ||
+                              date.getDate() === 21 ||
+                              date.getDate() === 31) &&
+                              dateformat(date, "dd'st' mmm")}
+                            {(date.getDate() === 2 || date.getDate() === 22) &&
+                              dateformat(date, "dd'nd' mmm")}
+                            {(date.getDate() === 3 || date.getDate() === 23) &&
+                              dateformat(date, "dd'rd' mmm")}
+                            {![1, 2, 3, 21, 22, 23, 31].includes(
+                              date.getDate()
+                            ) && dateformat(date, "dd'th' mmm")}
                           </Typography>
                         </div>
                       </CSSTransition>
@@ -231,7 +246,7 @@ export default function Calendar({ schedules, isAdmin }) {
                       }}
                     ></div>
                   )}
-                  <TransitionGroup>
+                  <TransitionGroup style={{ width: isIpad ? "20vmax" : "" }}>
                     <CSSTransition
                       key={`${weekNum}${date}`}
                       timeout={400}
@@ -242,22 +257,34 @@ export default function Calendar({ schedules, isAdmin }) {
                           className={classes.date}
                           style={{
                             position: stay ? "absolute" : "static",
-                            display: stay ? "none" : "block"
-                            // marginLeft: stay ? "17.6%" : "initial"
+                            display: stay ? "none" : "block",
+                            // marginLeft: stay ? "17.6%" : "initial",
+                            width: isIpad ? "20vmax" : ""
                           }}
                           // className={classes.absoluteDate}
                         >
-                          {dateformat(date, "dd'th' mmm")}
+                          {(date.getDate() === 1 ||
+                            date.getDate() === 21 ||
+                            date.getDate() === 31) &&
+                            dateformat(date, "dd'st' mmm")}
+                          {(date.getDate() === 2 || date.getDate() === 22) &&
+                            dateformat(date, "dd'nd' mmm")}
+                          {(date.getDate() === 3 || date.getDate() === 23) &&
+                            dateformat(date, "dd'rd' mmm")}
+                          {![1, 2, 3, 21, 22, 23, 31].includes(
+                            date.getDate()
+                          ) && dateformat(date, "dd'th' mmm")}
                         </Typography>
                       </div>
                     </CSSTransition>
                   </TransitionGroup>
                 </div>
                 <Typography
-                  style={{
-                    marginLeft: "8%"
-                  }}
                   className={classes.day}
+                  style={{
+                    marginLeft: "8%",
+                    width: isIpad ? "20vmax" : ""
+                  }}
                 >
                   {day.name}
                 </Typography>
@@ -270,7 +297,7 @@ export default function Calendar({ schedules, isAdmin }) {
                     <div
                       style={
                         {
-                          // overflowY: "scroll"
+                          // overflowY: "scroll",
                         }
                       }
                     >
@@ -286,38 +313,40 @@ export default function Calendar({ schedules, isAdmin }) {
                               <Grid container>
                                 <Grid item xs={1}>
                                   <div
+                                    className={classes.border}
                                     style={{
                                       borderLeft: "2.5px solid #C8B06B",
-                                      // borderRight: "2.5px solid red",
-                                      height: "10vmax",
-                                      marginTop: "300%",
                                       marginLeft: "100%",
+                                      height: isIpad ? "7vmax" : "10vmax",
+                                      marginTop: isIpad ? "300%" : "350%"
+                                      // borderRight: "2.5px solid red",
                                       // marginLeft: "1.8%",
-                                      backgroundColor: "pink",
-                                      width: 0
+                                      // backgroundColor: "pink",
                                     }}
                                   />
                                 </Grid>
                                 <Grid item xs={10}>
-                                  <ScheduleBox
-                                    schedule={schedule}
-                                    isAdmin={isAdmin}
-                                    printLeftBorder={
-                                      currentCount <= previousCount
-                                    }
-                                  />
+                                  <div style={{ width: "110%" }}>
+                                    <ScheduleBox
+                                      schedule={schedule}
+                                      isAdmin={isAdmin}
+                                      printLeftBorder={
+                                        currentCount <= previousCount
+                                      }
+                                    />
+                                  </div>
                                 </Grid>
                                 <Grid item xs={1}>
                                   <div
+                                    className={classes.border}
                                     style={{
                                       // borderLeft: "2.5px solid black",
                                       borderRight: "2.5px solid #C8B06B",
-                                      height: "10vmax",
-                                      marginTop: "300%",
                                       marginLeft: "200%",
+                                      height: isIpad ? "7vmax" : "10vmax",
+                                      marginTop: isIpad ? "300%" : "350%"
                                       // marginLeft: "1.8%",
-                                      backgroundColor: "pink",
-                                      width: 0
+                                      // backgroundColor: "pink",
                                     }}
                                   />
                                 </Grid>
@@ -352,6 +381,13 @@ const styles = theme => ({
     color: "#958F87"
     // backgroundColor: "pink",
   },
+  border: {
+    [theme.breakpoints.only("xs")]: {
+      height: "9vmax",
+      marginTop: "350%"
+    },
+    width: 0
+  },
   // absoluteDay: {
   //   marginTop: "2px",
   //   [theme.breakpoints.down("md")]: {
@@ -373,7 +409,7 @@ const styles = theme => ({
   //   position: "absolute"
   // },
   date: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "100%",
       width: "50vmin"
     },
@@ -382,8 +418,8 @@ const styles = theme => ({
     color: "#958F87"
   },
   dateRow: {
-    [theme.breakpoints.down("md")]: {
-      width: "50vmin"
+    [theme.breakpoints.down("sm")]: {
+      width: "inherit"
     },
     [theme.breakpoints.up("md")]: {
       position: "absolute"
@@ -391,7 +427,7 @@ const styles = theme => ({
     width: `${(10 / 12 / 7) * 100}%`
   },
   day: {
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       fontSize: "100%",
       width: "50vmin"
     },
@@ -409,7 +445,7 @@ const styles = theme => ({
     // backgroundColor: "pink"
   },
   week: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       fontSize: "250%"
     },
     fontSize: "150%"

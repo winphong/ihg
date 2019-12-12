@@ -14,13 +14,17 @@ import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "350%",
-      marginTop: "3%"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%",
+      marginTop: "20%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "15%"
     },
     color: "#C8B06B",
     fontSize: "1000%",
-    marginTop: "1%"
+    marginTop: "6%"
   },
   buttonColumn: {
     textAlign: "center",
@@ -39,14 +43,27 @@ const styles = theme => ({
     }
   },
   slider: {
-    [theme.breakpoints.up("sm")]: {
-      margin: "5% 0",
-      height: "20vmax"
+    [theme.breakpoints.only("xs")]: {
+      height: "30vmax"
     },
-    [theme.breakpoints.down("sm")]: {
-      margin: "5% 0",
-      height: "40vmax"
-    }
+    // [theme.breakpoints.only("sm")]: {
+    //   height: "40vmax"
+    // },
+    // [theme.breakpoints.only("md")]: {
+    //   height: "40vmax"
+    // },
+    [theme.breakpoints.only("md")]: {
+      margin: "3% 0 5% 0"
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: "25vmax",
+      margin: "5% 0 3% 0"
+    },
+    height: "40vmax"
+    // [theme.breakpoints.up("sm")]: {
+    //   margin: "5% 0",
+    //   height: "20vmax"
+    // },
   },
   icon: {
     [theme.breakpoints.down("sm")]: {

@@ -11,10 +11,10 @@ const useStyles = makeStyles(theme => ({
   title: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "350%",
-      marginTop: "3%"
+      marginTop: "10%"
     },
     fontSize: "1000%",
-    marginTop: "1%"
+    marginTop: "6%"
   },
   buttonColumn: {
     textAlign: "center",

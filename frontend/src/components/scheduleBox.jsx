@@ -11,7 +11,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
   const classes = useStyles();
   const theme = useTheme();
   const size = schedule.halls.length;
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <React.Fragment>
@@ -155,18 +155,22 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
 
 const styles = theme => ({
   container: {
+    [theme.breakpoints.only("xs")]: {
+      width: "50vmin",
+      transform: "scale(0.9)"
+    },
     [theme.breakpoints.up("sm")]: {
       marginTop: "5%"
     },
-    [theme.breakpoints.down("sm")]: {
-      width: "50vmin",
-      transform: "scale(0.9)"
+    [theme.breakpoints.only("sm")]: {
+      transform: "scale(0.9)",
+      width: "inherit"
       // borderLeft: "2.5px solid #C8B06B",
       // borderRight: "2.5px solid #C8B06B"
     },
     textAlign: "center",
     padding: "10%",
-    backgroundColor: "transparent",
+    // backgroundColor: "pink",
     position: "relative",
     zIndex: 2
   },
@@ -175,10 +179,13 @@ const styles = theme => ({
       position: "absolute",
       height: "5vmax",
       borderRight: "2.5px solid #C8B06B",
-      marginTop: "30%",
+      marginTop: "25%",
       width: "100%"
     },
-    [theme.breakpoints.down("md")]: {}
+    [theme.breakpoints.down("md")]: {
+      marginTop: "40%",
+      height: "7vmax"
+    }
   },
   bar: {
     height: "10px"
@@ -199,12 +206,18 @@ const styles = theme => ({
     color: "black"
   },
   sport: {
+    [theme.breakpoints.only("md")]: {
+      fontSize: "95%"
+    },
     fontWeight: "bold",
     fontSize: "110%",
     lineHeight: "120%",
     color: "#958F87"
   },
   information: {
+    [theme.breakpoints.only("md")]: {
+      fontSize: "80%"
+    },
     fontStyle: "italic",
     fontSize: "90%",
     color: "#D3DBD9"

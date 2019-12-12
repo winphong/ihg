@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import { Typography } from "@material-ui/core";
 import sportService from "../services/sportService";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import miscService from "../services/miscService";
-import path from "path";
 import "../App.css";
 import SportsList from "../components/sportsList";
 import MediaQuery from "react-responsive";
@@ -25,14 +21,18 @@ const halls = [
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "350%",
-      textAlign: "center",
-      marginTop: "3%"
+      marginTop: "20%"
     },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "15%"
+    },
+    textAlign: "center",
     fontSize: "1000%",
     color: "#C8B06B",
-    marginTop: "1%"
+    marginTop: "6%"
   },
   titleCaption: {
     [theme.breakpoints.down("sm")]: {
@@ -43,21 +43,31 @@ const styles = theme => ({
     lineHeight: "120%"
   },
   subtitleContainer: {
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "4%"
+    // [theme.breakpoints.only("md")]: {
+    //   paddingLeft: "4%"
+    // },
+    [theme.breakpoints.up("lg")]: {
+      paddingLeft: "3%"
     }
   },
   subtitle: {
-    [theme.breakpoints.up("sm")]: {
-      paddingBottom: "5%"
+    [theme.breakpoints.only("xs")]: {
+      marginBottom: "10%",
+      fontSize: "200%"
     },
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "200%",
-      textAlign: "center",
-      marginBottom: "10%"
+    [theme.breakpoints.only("sm")]: {
+      marginBottom: "5%",
+      fontSize: "400%"
     },
-    textAlign: "left",
-    fontSize: "400%"
+    [theme.breakpoints.up("md")]: {
+      paddingBottom: "5%", // align subtitle up with hall logo
+      fontSize: "300%",
+      textAlign: "left"
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "380%"
+    },
+    textAlign: "center"
     // lineHeight: "100%",
   },
   border: {
@@ -68,36 +78,18 @@ const styles = theme => ({
   staticImage: {
     width: "70%"
   },
-  imageCaption: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "100%"
+  staticImageCaption: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "90%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "130%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "120%"
     },
     fontSize: "150%",
     color: "#252527"
-  },
-  sportsInformationContainer: {
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "5%",
-      display: "flex",
-      flexDirection: "column"
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "83.33%"
-    },
-    position: "absolute",
-    width: "50%"
-    // backgroundColor: "beige"
-  },
-  information: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "80%"
-    },
-    fontSize: "120%",
-    color: "#958F87",
-    fontWeight: "bold"
-  },
-  sportsContainer: {
-    marginTop: "10%"
   },
   transitionContainer: {
     [theme.breakpoints.down("sm")]: {
@@ -107,6 +99,15 @@ const styles = theme => ({
     },
     textAlign: "left"
   },
+  sportsContainer: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "10%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "5%"
+    },
+    marginTop: "10%"
+  },
   sports: {
     cursor: "pointer",
     // backgroundColor: "pink",
@@ -115,10 +116,41 @@ const styles = theme => ({
     flexShrink: 0
   },
   sportPhoto: {
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
+    // [theme.breakpoints.only("xs")]: {
+    //   width: "100%"
+    // },
+    // [theme.breakpoints.only("sm")]: {
+    //   width: "100%"
+    // },
+    // [theme.breakpoints.only("md")]: {
+    //   width: "100%"
+    // },
+    [theme.breakpoints.up("lg")]: {
+      width: "80%"
     },
-    width: "80%"
+    width: "100%"
+  },
+  sportsInformationContainer: {
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: "5%",
+      display: "flex",
+      flexDirection: "column",
+      width: "50%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      padding: "3% 10%"
+    },
+    width: "83.33%",
+    position: "absolute"
+    // backgroundColor: "beige"
+  },
+  information: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "80%"
+    },
+    fontSize: "120%",
+    color: "#958F87",
+    fontWeight: "bold"
   }
 });
 
@@ -200,7 +232,7 @@ class About extends Component {
                           />
                           <Typography
                             variant="h1"
-                            className={classes.imageCaption}
+                            className={classes.staticImageCaption}
                           >
                             {hall.name}
                           </Typography>
@@ -240,7 +272,7 @@ class About extends Component {
                           />
                           <Typography
                             variant="h1"
-                            className={classes.imageCaption}
+                            className={classes.staticImageCaption}
                           >
                             {hall.name}
                           </Typography>

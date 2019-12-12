@@ -15,11 +15,12 @@ import MediaQuery from "react-responsive";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1
-    // position: "fixed",
+    position: "fixed",
+    top: 0,
     // top: 0,
     // right: 0,
-    // width: "100%",
+    width: "100%",
+    zIndex: 1000
     // border: "3px solid #73AD21",
     // marginBottom: 100
   },

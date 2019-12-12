@@ -17,46 +17,67 @@ import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   banner: {
-    [theme.breakpoints.up("sm")]: {
-      height: "90vh"
+    [theme.breakpoints.up("lg")]: {
+      height: "60vmax"
       // fontSize: "100%"
     },
-    [theme.breakpoints.down("sm")]: {
-      // fontSize: "100%"
+    [theme.breakpoints.between("sm", "md")]: {
+      height: "40vmax",
+      marginTop: "10%"
       // backgroundColor: "grey",
     }
   },
   bannerImageContainer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.only("xs")]: {
+      marginLeft: "-38%",
+      overflow: "hidden"
+    },
+    // [theme.breakpoints.down("sm")]: {
+    // marginLeft: "-38%",
+    // overflow: "hidden"
+    // },
+    [theme.breakpoints.up("md")]: {
       marginLeft: "-33.5%",
       zIndex: 0
     },
-    [theme.breakpoints.down("sm")]: {
-      marginLeft: "-38%",
-      overflow: "hidden"
-    }
+    display: "block"
   },
   bannerImage: {
-    [theme.breakpoints.up("sm")]: {
-      width: "200%"
-    },
-    [theme.breakpoints.down("sm")]: {
-      display: "block",
-      height: "90vh",
+    [theme.breakpoints.only("xs")]: {
+      height: "95vmax",
       marginLeft: "-250%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "30vmax",
+      marginLeft: "-150%"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "200%"
     }
   },
   title: {
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "8.5vw"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%"
     },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "400%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "700%"
+    },
+    fontSize: "1000%",
     lineHeight: "120%",
-    color: "#C8B06B",
-    fontSize: "10vw"
+    color: "#C8B06B"
   },
   subTitle: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "160%"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "140%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "250%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "400%"
     },
     fontSize: "450%",
     color: "#C8B06B",
@@ -117,6 +138,19 @@ const styles = theme => ({
     zIndex: 2,
     display: "flex",
     alignItems: "center"
+  },
+  buttonText: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "60%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "100%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "150%"
+    },
+    fontFamily: "TheNextFont",
+    color: "white"
   }
 });
 
@@ -177,8 +211,8 @@ class Home extends Component {
             xs={12}
             className={classes.banner}
           >
-            <Grid item xs={1} md={2} />
-            <Grid item xs={8} md={7} style={{ zIndex: 1 }}>
+            <Grid item xs={1} sm={2} />
+            <Grid item xs={8} sm={7} style={{ zIndex: 1 }}>
               <Typography variant="h1" className={classes.title}>
                 INTER-HALL
               </Typography>
@@ -195,7 +229,7 @@ class Home extends Component {
                 19/20
               </Typography>
             </Grid>
-            <Grid item xs={4} md={3} className={classes.bannerImageContainer}>
+            <Grid item xs={4} sm={3} className={classes.bannerImageContainer}>
               <img src="./home.jpg" className={classes.bannerImage} />
             </Grid>
           </Grid>
@@ -389,13 +423,7 @@ class Home extends Component {
                   to={"/schedule"}
                   component={Link}
                 >
-                  <Typography
-                    style={{
-                      fontFamily: "TheNextFont",
-                      fontSize: "60%",
-                      color: "white"
-                    }}
-                  >
+                  <Typography className={classes.buttonText}>
                     VIEW SCHEDULE
                   </Typography>
                 </Button>
@@ -439,13 +467,7 @@ class Home extends Component {
                   to={"/results"}
                   component={Link}
                 >
-                  <Typography
-                    style={{
-                      fontFamily: "TheNextFont",
-                      fontSize: "60%",
-                      color: "white"
-                    }}
-                  >
+                  <Typography className={classes.buttonText}>
                     VIEW RESULT
                   </Typography>
                 </Button>

@@ -30,17 +30,13 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
           </Grid>
           <Grid container className={classes.hallContainer} alignItems="center">
             <Grid item xs={5}>
-              <Typography
-                className={center ? classes.hallCenter : classes.hall}
-              >
+              <Typography className={classes.hall}>
                 {schedule.halls[0].name.toUpperCase()}
               </Typography>
             </Grid>
             <Grid item xs={2} />
             <Grid item xs={5}>
-              <Typography
-                className={center ? classes.hallCenter : classes.hall}
-              >
+              <Typography className={classes.hall}>
                 {schedule.halls[1].name.toUpperCase()}
               </Typography>
             </Grid>
@@ -108,9 +104,7 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
           {schedule.halls.map((hall, index) => {
             return (
               <Grid item xs={true} key={index}>
-                <Typography
-                  className={center ? classes.hallCenter : classes.hall}
-                >
+                <Typography className={classes.hall}>
                   {hall.abbreviation}
                 </Typography>
               </Grid>
@@ -158,23 +152,23 @@ const styles = theme => ({
   small: {
     textAlign: "center",
     margin: "1% 0.5%",
-    // backgroundColor: "beige",
     width: "100%",
     height: "100%",
     padding: "0.5%",
     opacity: 0.3,
-    transform: "scale(0.85)"
+    transform: "scale(0.8)"
+    // backgroundColor: "pink",
     // border: "1px solid gold"
   },
   center: {
     textAlign: "center",
-    height: "18vmax",
+    // height: "18vmax",
     padding: "1%",
     transform: "scale(1.3)",
     // border: "1px solid gold",
     [theme.breakpoints.down("md")]: {
-      transform: "scale(0.9)",
-      height: "35vmax"
+      // transform: "scale(0.9)",
+      // height: "35vmax"
     }
   },
   vs: {
@@ -185,15 +179,15 @@ const styles = theme => ({
   },
   sport: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "130%"
+      fontSize: "120%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "160%"
+      fontSize: "150%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "300%"
+      fontSize: "250%"
     },
-    fontSize: "200%",
+    fontSize: "180%",
     lineHeight: "100%"
     // color: "#C8B06B",
     // fontFamily: "TheNextFont"
@@ -207,20 +201,20 @@ const styles = theme => ({
       fontSize: "130%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "200%"
+      fontSize: "170%"
     },
-    fontSize: "150%",
+    fontSize: "120%",
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },
-  hallCenter: {
-    [theme.breakpoints.down("md")]: {
-      fontSize: "2.5vh"
-    },
-    fontSize: "1vw",
-    lineHeight: "100%",
-    fontFamily: "TheNextFont"
-  },
+  // hallCenter: {
+  //   [theme.breakpoints.only("md")]: {
+  //     fontSize: "200%"
+  //   },
+  //   fontSize: "120%",
+  //   lineHeight: "100%",
+  //   fontFamily: "TheNextFont"
+  // },
   hallContainer: {
     [theme.breakpoints.down("sm")]: {
       height: "40px"
@@ -230,7 +224,7 @@ const styles = theme => ({
       height: "80px"
       // backgroundColor: "pink"
     },
-    height: "25px"
+    height: "60px"
   },
   information: {
     [theme.breakpoints.only("xs")]: {

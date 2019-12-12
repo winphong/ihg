@@ -16,12 +16,13 @@ const styles = theme => ({
   // },
   title: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "350%"
+      fontSize: "350%",
+      marginTop: "10%"
     },
     color: "#C8B06B",
-    marginTop: "1%",
     lineHeight: "120%",
-    fontSize: "1000%"
+    fontSize: "1000%",
+    marginTop: "6%"
   },
   caption: {
     [theme.breakpoints.down("sm")]: {

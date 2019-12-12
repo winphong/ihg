@@ -21,6 +21,20 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: "Lato",
     h1: { fontFamily: "TheNextFont", color: "#C8B06B" }
+  },
+  breakpoints: {
+    // Define custom breakpoint values.
+    // These will apply to Material-UI components that use responsive
+    // breakpoints, such as `Grid` and `Hidden`. You can also use the
+    // theme breakpoint functions `up`, `down`, and `between` to create
+    // media queries for these breakpoints
+    values: {
+      xs: 0,
+      sm: 500,
+      md: 960,
+      lg: 1280,
+      xl: 1920
+    }
   }
 });
 
