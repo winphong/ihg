@@ -17,16 +17,23 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
       : false;
   const firstWinner = schedule.halls[0].score > schedule.halls[1].score;
 
-  const isLaptop = useMediaQuery({ minDeviceWidth: 960 });
+  //  xs & sm
+  const isMobilePortrait = useMediaQuery({ minDeviceWidth: 500 });
   const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
 
   return (
     <Grid container className={classes.container}>
-      <Grid item container xs={8} md={4} className={classes.barContainer}>
+      <Grid
+        item
+        container
+        xs={8}
+        sm={4}
+        // md={4}
+        className={classes.barContainer}
+      >
         <Grid
           item
           xs={3}
-          md={3}
           className={classes.bar}
           style={{
             backgroundColor: schedule.halls[0].colourCode,
@@ -39,7 +46,6 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
         <Grid
           item
           xs={3}
-          md={3}
           className={classes.bar}
           style={{
             backgroundColor: schedule.halls[1].colourCode,
@@ -59,7 +65,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
         alignItems="center"
       >
         {/* sports name */}
-        <Grid item xs={6} md={3} className={classes.nameContainer}>
+        <Grid item xs={6} sm={4} md={3} className={classes.nameContainer}>
           {isAdmin && (
             <Link
               style={{
@@ -88,15 +94,16 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
             </React.Fragment>
           )}
           {/* sports venue / timing */}
-          {!isLaptop && (
+          {!isMobilePortrait && (
             <Typography className={classes.information}>
               {dateformat(new Date(schedule.startTime), dateFormat)},{" "}
               {schedule.venue}
             </Typography>
           )}
         </Grid>
-        {isLaptop && (
-          <Grid item xs={4}>
+        {/* sports venue / timing */}
+        {isMobilePortrait && (
+          <Grid item sm={3}>
             <Typography className={classes.information}>
               {dateformat(new Date(schedule.startTime), dateFormat)},{" "}
               {schedule.venue}
@@ -104,7 +111,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
           </Grid>
         )}
         {/* hall 1 */}
-        <Grid item xs={1} md={1}>
+        <Grid item xs={1} sm={1} md={1}>
           <Typography
             className={
               hasScore && firstWinner ? classes.winner : classes.neutral
@@ -138,7 +145,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
           </Typography>
         </Grid>
         {/* hall 2 */}
-        <Grid item xs={1} md={1}>
+        <Grid item xs={1} sm={1} md={1}>
           <Typography
             className={
               hasScore && !firstWinner ? classes.winner : classes.neutral
@@ -147,14 +154,6 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
             {schedule.halls[1].abbreviation}
           </Typography>
         </Grid>
-        {/* {!isLaptop && (
-          <Grid item xs={12} style={{ paddingLeft: "2%" }}>
-            <Typography className={classes.information}>
-              {dateformat(new Date(schedule.startTime), dateFormat)},{" "}
-              {schedule.venue}
-            </Typography>
-          </Grid>
-        )} */}
       </Grid>
     </Grid>
   );
@@ -177,15 +176,21 @@ const useStyles = makeStyles(theme => ({
     height: "5px"
   },
   sport: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     color: "#252527"
   },
   information: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontSize: "100%",
     color: "#D3DBD9",
@@ -193,8 +198,11 @@ const useStyles = makeStyles(theme => ({
     // fontWeight: "bold"
   },
   winner: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     // backgroundColor: "pink",
@@ -202,8 +210,11 @@ const useStyles = makeStyles(theme => ({
     color: "#252527"
   },
   neutral: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     textAlign: "center",

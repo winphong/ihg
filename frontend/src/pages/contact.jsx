@@ -9,12 +9,17 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles(theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "350%",
-      marginTop: "10%"
+      marginTop: "17%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "9%"
     },
     fontSize: "1000%",
-    marginTop: "6%"
+    marginTop: "6%",
+    marginBottom: "5%"
   },
   buttonColumn: {
     textAlign: "center",
@@ -23,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     [theme.breakpoints.down("sm")]: {},
-    height: "90vh",
+    // height: "90vh",
     textAlign: "center"
   },
   button: {
@@ -33,8 +38,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "200%"
     },
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "300%"
+    [theme.breakpoints.up("md")]: {
+      fontSize: "250%"
     },
     color: "white"
   },
@@ -42,15 +47,32 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
     },
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "200%"
+    [theme.breakpoints.up("md")]: {
+      fontSize: "150%"
     },
     fontStyle: "italic",
     color: "#958F87"
-  }
+  },
+  // CSS for TextField - start
+  cssOutlinedInput: {
+    "&$cssFocused $notchedOutline": {
+      color: "#C8B06B",
+      borderColor: `#C8B06B !important`
+    }
+  },
+  cssFocused: {},
+  notchedOutline: {},
+  label: {
+    "&$focusedLabel": {
+      color: "#C8B06B"
+    }
+  },
+  focusedLabel: {}
+  // CSS for TextField - end
 }));
 
 export default function ResultsTable() {
+  window.scrollTo({ top: 0 });
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -96,6 +118,19 @@ export default function ResultsTable() {
                     margin={isMobile ? "none" : "normal"}
                     size="small"
                     onChange={handleChange}
+                    InputProps={{
+                      classes: {
+                        root: classes.cssOutlinedInput,
+                        focused: classes.cssFocused,
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                    InputLabelProps={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focusedLabel
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -109,6 +144,19 @@ export default function ResultsTable() {
                     margin={isMobile ? "none" : "normal"}
                     size="small"
                     onChange={handleChange}
+                    InputProps={{
+                      classes: {
+                        root: classes.cssOutlinedInput,
+                        focused: classes.cssFocused,
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                    InputLabelProps={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focusedLabel
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -127,6 +175,19 @@ export default function ResultsTable() {
                     //   }
                     // }}
                     onChange={handleChange}
+                    InputProps={{
+                      classes: {
+                        root: classes.cssOutlinedInput,
+                        focused: classes.cssFocused,
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                    InputLabelProps={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focusedLabel
+                      }
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -142,6 +203,19 @@ export default function ResultsTable() {
                     onChange={handleChange}
                     multiline
                     rows={5}
+                    InputProps={{
+                      classes: {
+                        root: classes.cssOutlinedInput,
+                        focused: classes.cssFocused,
+                        notchedOutline: classes.notchedOutline
+                      }
+                    }}
+                    InputLabelProps={{
+                      classes: {
+                        root: classes.label,
+                        focused: classes.focusedLabel
+                      }
+                    }}
                   />
                 </Grid>
 
@@ -161,7 +235,7 @@ export default function ResultsTable() {
                 </Grid>
                 <Grid item xs={12}>
                   <Typography className={classes.contactInformation}>
-                    or email us @ ihgcovening@gmail.com{" "}
+                    or email us at ihgcovening@gmail.com
                   </Typography>
                 </Grid>
               </Grid>

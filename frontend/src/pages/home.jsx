@@ -65,6 +65,9 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "700%"
     },
+    [theme.breakpoints.only("lg")]: {
+      fontSize: "800%"
+    },
     fontSize: "1000%",
     lineHeight: "120%",
     color: "#C8B06B"
@@ -163,6 +166,7 @@ class Home extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo({ top: 0 });
     const { data: schedules } = await scheduleService.getAllSchedules();
     const { data: halls } = await hallService.getAllHalls();
     // const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));

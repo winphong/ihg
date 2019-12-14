@@ -27,7 +27,7 @@ const styles = theme => ({
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "15%"
+      marginTop: "11%"
     },
     textAlign: "center",
     fontSize: "1000%",
@@ -109,11 +109,13 @@ const styles = theme => ({
     marginTop: "10%"
   },
   sports: {
-    cursor: "pointer",
+    flexShrink: 0,
     // backgroundColor: "pink",
+    cursor: "pointer",
     fontSize: "120%",
-    padding: "0 3%",
-    flexShrink: 0
+    // padding: "1% 0",
+    fontFamily: "TheNextFont"
+    // minHeight: "auto"
   },
   sportPhoto: {
     // [theme.breakpoints.only("xs")]: {
@@ -162,12 +164,15 @@ class About extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo({ top: 0 });
     const { data: sports } = await sportService.getAllSports();
+    const imgUrl = `/sports/${sports[0].imgUrl}`;
+
     this.setState({
       sports,
-      selectedSport: sports[0]
+      selectedSport: sports[0],
+      imgUrl
     });
-    this.handleClick(sports[0]);
   }
 
   handleClick = async sport => {
@@ -332,9 +337,9 @@ class About extends Component {
                     style={{
                       display: "flex",
                       overflowX: "scroll",
-                      // paddingTop: "5%",
-                      height: "4vmax"
+                      paddingBottom: "3%"
                       // backgroundColor: "pink"
+                      // height: "4vmax"
                     }}
                   >
                     {sports.map(sport => {
@@ -342,8 +347,8 @@ class About extends Component {
                         <Typography
                           className={classes.sports}
                           onClick={() => this.handleClick(sport)}
-                          variant="h1"
                           style={{
+                            width: "150px",
                             color:
                               selectedSport.name === sport.name
                                 ? "#C8B06B"
@@ -362,11 +367,6 @@ class About extends Component {
                   xs={12}
                   md={8}
                   className={classes.transitionContainer}
-                  style={
-                    {
-                      // backgroundColor: "pink"
-                    }
-                  }
                 >
                   <TransitionGroup>
                     <CSSTransition
@@ -382,14 +382,7 @@ class About extends Component {
                         <Typography className={classes.information}>
                           {selectedSport.name}
                         </Typography>
-                        <Typography
-                          className={classes.information}
-                          style={
-                            {
-                              // backgroundColor: "ivory"
-                            }
-                          }
-                        >
+                        <Typography className={classes.information}>
                           {selectedSport.description}
                         </Typography>
                       </div>

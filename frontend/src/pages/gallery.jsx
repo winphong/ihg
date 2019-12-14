@@ -15,44 +15,77 @@ const styles = theme => ({
   //   margin: 5
   // },
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "350%",
-      marginTop: "10%"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%",
+      marginTop: "20%"
     },
-    color: "#C8B06B",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "9%"
+    },
     lineHeight: "120%",
     fontSize: "1000%",
     marginTop: "6%"
   },
   caption: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "80%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "110%"
     },
     color: "white",
     fontSize: "200%"
   },
-  mainPhotoSuperContainer: {
-    [theme.breakpoints.up("sm")]: {
-      height: "33vmax"
-    },
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "5%",
-      height: "20vmax"
-    }
-  },
+  // mainPhotoSuperContainer: {
+  //   [theme.breakpoints.only("xs")]: {
+  //     height: "20vmax"
+  //   },
+  //   [theme.breakpoints.only("sm")]: {
+  //     height: "25vmax"
+  //   },
+  //   [theme.breakpoints.only("md")]: {
+  //     height: "300px"
+  //   },
+  //   [theme.breakpoints.up("lg")]: {
+  //     height: "30vmax"
+  //   }
+  // },
   mainPhotoContainer: {
-    [theme.breakpoints.up("sm")]: {
-      padding: "5%"
-    }
-    // backgroundColor: "beige"
+    [theme.breakpoints.only("xs")]: {
+      height: "18vmax"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "25vmax"
+    },
+    [theme.breakpoints.only("md")]: {
+      height: "300px"
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: "30vmax"
+    },
+    objectFit: "cover",
+    margin: "5% 0"
   },
   mainPhoto: {
-    [theme.breakpoints.down("sm")]: {
-      width: "16vmax",
-      height: "16vmax",
-      objectFit: "cover"
+    [theme.breakpoints.only("xs")]: {
+      width: "18vmax",
+      height: "18vmax"
     },
-    width: "100%"
+    [theme.breakpoints.only("sm")]: {
+      width: "25vmax",
+      height: "25vmax"
+    },
+    [theme.breakpoints.only("md")]: {
+      width: "300px",
+      height: "300px"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "30vmax",
+      height: "30vmax"
+    },
+    objectFit: "cover"
+    // width: "100%"
   },
   photosContainer: {
     [theme.breakpoints.up("sm")]: {},
@@ -63,19 +96,23 @@ const styles = theme => ({
     justifyContent: "center"
   },
   photos: {
-    [theme.breakpoints.up("sm")]: {
-      width: "17vmax",
-      height: "17vmax"
+    [theme.breakpoints.only("sm")]: {
+      width: "18vmax",
+      height: "18vmax"
     },
-    width: "13vmax",
-    height: "13vmax",
+    [theme.breakpoints.only("md")]: {
+      width: "210px",
+      height: "210px"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "19vmax",
+      height: "19vmax"
+    },
+    width: "12vmax",
+    height: "12vmax",
     objectFit: "cover"
   },
   banner: {
-    [theme.breakpoints.up("sm")]: {
-      height: "45vmax"
-    },
-
     textAlign: "center"
   }
 });
@@ -86,6 +123,7 @@ class Gallery extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo({ top: 0 });
     let { data: photos } = await miscService.getInstagramPhotos();
     photos = photos.data;
     this.setState({ photos });
@@ -98,7 +136,8 @@ class Gallery extends Component {
     return (
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
-          <Grid container>
+          <Grid container xs={12}>
+            {/* Background image */}
             <Grid
               item
               xs={12}
@@ -116,83 +155,95 @@ class Gallery extends Component {
                 alt="home"
               />
             </Grid>
+            <Grid item xs={1} md={2} />
+            {/* Top segment */}
             <Grid
+              item
               container
+              className={classes.banner}
               style={{
                 zIndex: 1
               }}
+              xs={10}
+              md={8}
             >
-              {/* Top segment */}
-              <Grid item xs={1} md={2} />
-              <Grid item container className={classes.banner} xs={10} md={8}>
-                <Grid item xs={12}>
-                  <Typography variant="h1" className={classes.title}>
-                    GALLERY
-                  </Typography>
-                  <Typography variant="h1" className={classes.caption}>
-                    FOLLOW US{" "}
+              <Grid item xs={12}>
+                <Typography variant="h1" className={classes.title}>
+                  GALLERY
+                </Typography>
+                <Typography variant="h1" className={classes.caption}>
+                  FOLLOW US{" "}
+                  <Link
+                    href="https://www.instagram.com/ihgofficial"
+                    style={{
+                      color: "#C8B06B"
+                    }}
+                  >
+                    @IHGOFFICIAL
+                  </Link>{" "}
+                  FOR MORE UPDATES
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                alignItems="center"
+                // className={classes.mainPhotoSuperContainer}
+              >
+                <Grid item xs={6} className={classes.mainPhotoContainer}>
+                  {photos.length > 0 && (
+                    <img
+                      src={photos[0].images.standard_resolution.url}
+                      className={classes.mainPhoto}
+                      style={{
+                        cursor: "pointer"
+                      }}
+                      onClick={() => {
+                        window.location = photos[0].link;
+                      }}
+                    />
+                  )}
+                </Grid>
+                <Grid item xs={6} style={{ textAlign: "left" }}>
+                  <Typography>
                     <Link
                       href="https://www.instagram.com/ihgofficial"
+                      // className={classes.caption}
                       style={{
-                        color: "#C8B06B"
+                        color: "#C8B06B",
+                        // fontSize: "2vw",
+                        fontWeight: "bold"
                       }}
                     >
-                      @IHGOFFICIAL
-                    </Link>{" "}
-                    FOR MORE UPDATES
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  container
-                  xs={12}
-                  alignItems="center"
-                  className={classes.mainPhotoSuperContainer}
-                >
-                  <Grid item xs={6} className={classes.mainPhotoContainer}>
-                    {photos.length > 0 && (
-                      <img
-                        src={photos[0].images.standard_resolution.url}
-                        className={classes.mainPhoto}
+                      <Typography
+                        className={classes.caption}
                         style={{
-                          cursor: "pointer"
-                        }}
-                        onClick={() => {
-                          window.location = photos[0].link;
-                        }}
-                      />
-                    )}
-                  </Grid>
-                  <Grid item xs={6} style={{ textAlign: "left" }}>
-                    <Typography>
-                      <Link
-                        href="https://www.instagram.com/ihgofficial"
-                        style={{
-                          color: "#C8B06B",
-                          fontSize: "2vw",
-                          fontWeight: "bold"
+                          color: "#C8B06B"
                         }}
                       >
                         @ihgofficial
-                      </Link>
-                    </Typography>
-                    <Typography
-                      style={{
-                        fontSize: "2vw",
-                        fontWeight: "bold",
-                        color: "white"
-                      }}
-                    >
-                      Summary for yesterday and schedule for today!
-                    </Typography>
-                  </Grid>
+                      </Typography>
+                    </Link>
+                  </Typography>
+                  <Typography
+                    className={classes.caption}
+                    style={{
+                      // fontSize: "2vw",
+                      fontWeight: "bold",
+                      color: "white"
+                    }}
+                  >
+                    Summary for yesterday and schedule for today!
+                  </Typography>
                 </Grid>
               </Grid>
-              <Grid item xs={1} md={2} />
             </Grid>
-            {/* Bottom segment */}
             <Grid item xs={1} md={2} />
+            <Grid item xs={1} md={2} />
+            {/* Bottom segment */}
             <Grid
+              item
               container
               xs={10}
               md={8}

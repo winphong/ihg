@@ -1,12 +1,25 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BarChart, Bar, Cell, XAxis, ResponsiveContainer } from "recharts";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useMediaQuery } from "react-responsive";
 
 export default function ResultBar({ halls, dataKey, barSize }) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isScrollable = useMediaQuery({
+    maxWidth: 959
+  });
+  const isIphoneXLandscape = useMediaQuery({
+    minWidth: 810,
+    maxWidth: 820,
+    orientation: "landscape"
+  });
+  const isIpadPotrait = useMediaQuery({
+    minWidth: 760,
+    maxWidth: 770,
+    orientation: "portrait"
+  });
+
+  let width = barSize * 30;
+  // if (isIphoneXLandscape) width = barSize * 32;
+  // if (isIpadPotrait) width = barSize * 35;
 
   const renderCustomizedLabel = ({ x, y, fill, value }) => {
     return (
@@ -25,7 +38,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
 
   return (
     <React.Fragment>
-      {!isMobile && (
+      {!isScrollable && (
         <ResponsiveContainer height={barSize * 40}>
           <BarChart
             data={halls}
@@ -38,7 +51,8 @@ export default function ResultBar({ halls, dataKey, barSize }) {
               axisLine={false}
               tickLine={false}
               fontFamily={"TheNextFont"}
-              tick={{ fill: "white" }}
+              tick={{ fill: "grey" }}
+              interval={0}
             />
             <Bar
               dataKey={dataKey}
@@ -58,10 +72,10 @@ export default function ResultBar({ halls, dataKey, barSize }) {
           </BarChart>
         </ResponsiveContainer>
       )}
-      {isMobile && (
+      {isScrollable && (
         <BarChart
           height={barSize * 40}
-          width={barSize * 30}
+          width={width}
           data={halls}
           margin={{ top: 30 }}
           barCategoryGap="0"
@@ -72,7 +86,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
             axisLine={false}
             tickLine={false}
             fontFamily={"TheNextFont"}
-            tick={{ fill: "white" }}
+            tick={{ fill: "grey" }}
           />
           <Bar
             dataKey={dataKey}
@@ -94,5 +108,3 @@ export default function ResultBar({ halls, dataKey, barSize }) {
     </React.Fragment>
   );
 }
-
-const useStyles = makeStyles({});

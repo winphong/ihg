@@ -16,12 +16,19 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
     : schedule.halls.sort((a, b) => {
         return a.name >= b.name ? 1 : -1;
       });
-  const isLaptop = useMediaQuery({ minDeviceWidth: 960 });
+  const isMobilePortrait = useMediaQuery({ minDeviceWidth: 500 });
   const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
 
   return (
     <Grid container className={classes.container}>
-      <Grid item container xs={4} md={2} className={classes.barContainer}>
+      <Grid
+        item
+        container
+        xs={4}
+        sm={2}
+        // md={2}
+        className={classes.barContainer}
+      >
         {sortedHall.map(hall => {
           return (
             <Grid
@@ -46,7 +53,7 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
         className={classes.infoContainer}
         alignItems="center"
       >
-        <Grid item xs={5} md={3} className={classes.nameContainer}>
+        <Grid item xs={5} sm={4} md={3} className={classes.nameContainer}>
           {isAdmin && (
             <React.Fragment>
               <Link
@@ -67,7 +74,7 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                   {schedule.sport} {schedule.stage}
                 </Typography>
               </Link>
-              {!isLaptop && (
+              {!isMobilePortrait && (
                 <Grid item xs={12}>
                   <Typography className={classes.information}>
                     {dateformat(new Date(schedule.startTime), dateFormat)},
@@ -77,12 +84,13 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
               )}
             </React.Fragment>
           )}
+          {/* Admin */}
           {!isAdmin && (
             <React.Fragment>
               <Typography className={classes.sport}>
                 {schedule.sport} {schedule.stage}
               </Typography>
-              {!isLaptop && (
+              {!isMobilePortrait && (
                 <Grid item xs={12}>
                   <Typography className={classes.information}>
                     {dateformat(new Date(schedule.startTime), "HHMM'h'")},
@@ -93,15 +101,22 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
             </React.Fragment>
           )}
         </Grid>
-        {isLaptop && (
-          <Grid item xs={4}>
+        {isMobilePortrait && (
+          <Grid item xs={4} sm={3}>
             <Typography className={classes.information}>
               {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
               {schedule.venue}
             </Typography>
           </Grid>
         )}
-        <Grid item container xs={7} md={5} style={{ textAlign: "center" }}>
+        <Grid
+          item
+          container
+          xs={7}
+          sm={5}
+          md={5}
+          style={{ textAlign: "center" }}
+        >
           {sortedHall.map((hall, index) => {
             return (
               <Grid item xs={true} key={index}>
@@ -147,15 +162,21 @@ const useStyles = makeStyles(theme => ({
     height: "5px"
   },
   sport: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     color: "#252527"
   },
   information: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontSize: "100%",
     color: "#D3DBD9",
@@ -163,8 +184,11 @@ const useStyles = makeStyles(theme => ({
     // fontWeight: "bold"
   },
   winner: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     // backgroundColor: "brown",
@@ -172,8 +196,11 @@ const useStyles = makeStyles(theme => ({
     color: "#252527"
   },
   neutral: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "70%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "90%"
     },
     fontWeight: "bold",
     // backgroundColor: "silver",

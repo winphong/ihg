@@ -2,20 +2,21 @@ const express = require("express");
 const router = express.Router();
 const { Hall, validate } = require("../model/hall");
 const _ = require("lodash");
+const admin = require("../middleware/admin");
 
 router.get("/", async (req, res) => {
   const hall = await Hall.find().sort({ name: 1 });
   res.send(hall);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [admin], async (req, res) => {
   const hall = new Hall(req.body);
 
   await hall.save();
   res.send(hall);
 });
 
-router.put("/", async (req, res) => {
+router.put("/", [admin], async (req, res) => {
   const halls = [];
   await Promise.all(
     req.body.map(async hall => {

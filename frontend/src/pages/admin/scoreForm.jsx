@@ -9,12 +9,18 @@ import scheduleService from "../../services/scheduleService";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%",
+      marginTop: "20%"
     },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "11%"
+    },
+    color: "#C8B06B",
     fontSize: "1000%",
-    fontWeight: "900",
-    color: "#C8B06B"
+    marginTop: "6%",
+    marginBottom: "3%"
   },
   container: {
     textAlign: "center"
@@ -22,6 +28,16 @@ const styles = theme => ({
   formControl: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
+  },
+  buttonText: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "200%"
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "250%"
+    },
+    color: "white",
+    padding: "1% 0"
   }
 });
 
@@ -56,10 +72,13 @@ class ScoreForm extends Component {
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container className={classes.container}>
             <Grid item xs={12} className={{}}>
-              <Typography className={classes.title}> SCORE </Typography>
+              <Typography variant="h1" className={classes.title}>
+                {" "}
+                SCORE{" "}
+              </Typography>
             </Grid>
-            <Grid item xs={1} md={4} />
-            <Grid item xs={10} md={4}>
+            <Grid item xs={1} md={3} />
+            <Grid item xs={10} md={6}>
               <form>
                 <Grid container spacing={1} alignItems="center">
                   <Grid item xs={12}>
@@ -140,17 +159,21 @@ class ScoreForm extends Component {
                   <Grid item xs={12} className={classes.formControl}>
                     <Button
                       fullWidth
-                      color="primary"
                       variant="contained"
                       onClick={this.handleSubmit}
+                      style={{
+                        backgroundColor: "#C8B06B"
+                      }}
                     >
-                      UPDATE SCORE
+                      <Typography variant="h1" className={classes.buttonText}>
+                        UPDATE SCORE
+                      </Typography>
                     </Button>
                   </Grid>
                 </Grid>
               </form>
             </Grid>
-            <Grid item xs={1} md={4} />
+            <Grid item xs={1} md={3} />
           </Grid>
         </CSSTransition>
       </React.Fragment>

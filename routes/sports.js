@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { Sport, validate } = require("../model/sport");
+const admin = require("../middleware/admin");
 
 router.get("/", async (req, res) => {
   const sport = await Sport.find().sort({ name: 1 });
@@ -13,13 +14,13 @@ router.get("/:sport", async (req, res) => {
   res.send(sport);
 });
 
-router.post("/", async (req, res) => {
+router.post("/", [admin], async (req, res) => {
   const sport = new Sport(req.body);
   await sport.save();
   res.send(sport);
 });
 
-router.put("/:sport", async (req, res) => {
+router.put("/:sport", [admin], async (req, res) => {
   const sport = await Sport.findOneAndUpdate(
     { name: req.params.sport },
     { description: req.body.description },

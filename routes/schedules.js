@@ -3,6 +3,7 @@ const router = express.Router();
 const { Schedule, validate } = require("../model/schedule");
 const { Hall } = require("../model/hall");
 const _ = require("lodash");
+const admin = require("../middleware/admin");
 
 router.get("/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 // create new schedules
-router.post("/", async (req, res) => {
+router.post("/", [admin], async (req, res) => {
   let hall = [];
   Promise.all(
     req.body.halls.map(async e => {
@@ -40,7 +41,7 @@ router.post("/", async (req, res) => {
 });
 
 // update score
-router.put("/updateScore/:id", async (req, res) => {
+router.put("/updateScore/:id", [admin], async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
   if (!schedule) return res.status(400).send("Schedule not found!");
 
@@ -50,7 +51,7 @@ router.put("/updateScore/:id", async (req, res) => {
 });
 
 // update schedule
-router.put("/:id", async (req, res) => {
+router.put("/:id", [admin], async (req, res) => {
   let schedule = await Schedule.findById(req.params.id);
   if (!schedule) return res.status(400).send("Schedule not found!");
   let hall = [];

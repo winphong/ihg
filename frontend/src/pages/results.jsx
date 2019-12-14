@@ -17,15 +17,29 @@ import Typography from "@material-ui/core/Typography";
 import "../App.css";
 import MediaQuery from "react-responsive";
 import miscService from "../services/miscService";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "350%",
-      marginTop: "3%"
+      marginTop: "25%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "13%"
     },
     fontSize: "1000%",
     textAlign: "center",
+    marginTop: "6%"
+  },
+  buttonColumn: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "18%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "10%"
+    },
     marginTop: "6%"
   },
   currentDate: {
@@ -37,10 +51,19 @@ const styles = theme => ({
     textAlign: "center"
   },
   resultsTableSuperContainer: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       height: "80vmax"
     },
-    height: "45vmax"
+    [theme.breakpoints.only("sm")]: {
+      height: "90vmax"
+    }
+    // [theme.breakpoints.only("md")]: {
+    //   height: "70vmax"
+    // }
+    // [theme.breakpoints.only("md")]: {
+    //   height: "60vmax"
+    // },
+    // height: "45vmax"
     // backgroundColor: "pink"
   },
   resultsTableContainer: {
@@ -59,11 +82,7 @@ const styles = theme => ({
       fontSize: "200%"
     }
   },
-  buttonColumn: {
-    textAlign: "center",
-    verticalAlign: "middle",
-    height: "100%"
-  },
+
   barChart: {
     textAlign: "center",
     display: "flex",
@@ -72,6 +91,9 @@ const styles = theme => ({
     // backgroundColor: "grey"
   },
   subTitle: {
+    [theme.breakpoints.only("md")]: {
+      fontSize: "400%"
+    },
     fontSize: "500%"
   },
   sortButton: {
@@ -104,6 +126,26 @@ const styles = theme => ({
     [theme.breakpoints.up("sm")]: {
       order: 3
     }
+  },
+  divider: {
+    [theme.breakpoints.only("xs")]: {
+      height: "17px"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "45px"
+    },
+    borderRight: "2px solid #C8B06B",
+    width: "50%"
+  },
+  sportListContainer: {
+    [theme.breakpoints.down("md")]: {
+      height: "450px"
+    },
+    [theme.breakpoints.only("lg")]: {
+      height: "35vmax"
+    },
+    height: "30vmax"
+    //  backgroundColor: "yellow"
   }
 });
 
@@ -175,6 +217,7 @@ class Results extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo({ top: 0 });
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getAllSchedules();
     const { data: sports } = await sportService.getAllSports();
@@ -262,11 +305,6 @@ class Results extends Component {
     });
   };
 
-  handleUpdateStanding = e => {
-    e.preventDefault();
-    this.setState({ redirect: true });
-  };
-
   render() {
     const { classes } = this.props;
     const {
@@ -282,7 +320,15 @@ class Results extends Component {
       redirect
     } = this.state;
 
-    if (redirect) return <Redirect to="/admin/standing" />;
+    if (redirect)
+      return (
+        <Redirect
+          to={{
+            pathname: "/admin/standing",
+            state: { from: this.props.location }
+          }}
+        />
+      );
 
     let limit = this.state.limit;
 
@@ -300,9 +346,9 @@ class Results extends Component {
                 {dateformat(new Date(), "dd'th' mmm yyyy")}
               </Typography> */}
             </Grid>
-            <Grid item xs={2} md={1}>
+            <Grid item xs={2} md={1} className={classes.buttonColumn}>
               {isAdmin && (
-                <IconButton onClick={this.handleUpdateStanding}>
+                <IconButton to={"/admin/standing"} component={Link}>
                   <EditRoundedIcon />
                 </IconButton>
               )}
@@ -311,18 +357,16 @@ class Results extends Component {
           <Grid container xs={12}>
             {/* --------------------------------- */}
             <MediaQuery minWidth={960}>
-              <Grid item xs={1} />
-              <Grid item container className={classes.barChart} xs={10} md={12}>
+              <Grid item container className={classes.barChart} md={12}>
                 <Grid item sm={1} />
-                <Grid item xs={12} sm={2}>
+                <Grid item sm={2}>
                   <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
                   <Typography className={classes.barChartTitle}>
                     MALE
                   </Typography>
                 </Grid>
                 <Grid item sm={1} />
-
-                <Grid item xs={12} sm={4}>
+                <Grid item sm={4}>
                   <ResultBar
                     halls={halls}
                     dataKey={"totalPoint"}
@@ -333,8 +377,7 @@ class Results extends Component {
                   </Typography>
                 </Grid>
                 <Grid item sm={1} />
-
-                <Grid item xs={12} sm={2}>
+                <Grid item sm={2}>
                   <ResultBar
                     halls={halls}
                     dataKey={"femalePoint"}
@@ -346,7 +389,6 @@ class Results extends Component {
                 </Grid>
                 <Grid item sm={1} />
               </Grid>
-              <Grid item xs={1} />
             </MediaQuery>
             {/* --------------------------------- */}
             {/* ********************************* */}
@@ -419,12 +461,7 @@ class Results extends Component {
               {/* -------------------------------- */}
               <MediaQuery minWidth={960}>
                 <Grid item xs={12}>
-                  <div
-                    style={{
-                      height: "30vmax"
-                      //  backgroundColor: "yellow"
-                    }}
-                  >
+                  <div className={classes.sportListContainer}>
                     {!byDate && sports && (
                       <CSSTransition
                         in={true}
@@ -485,16 +522,8 @@ class Results extends Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={2}>
-                    <div
-                      style={{
-                        borderRight: "2px solid #C8B06B",
-                        width: "50%",
-                        // backgroundColor: "pink",
-                        height: "17px"
-                      }}
-                    />
+                    <div className={classes.divider} />
                   </Grid>
-
                   <Grid item xs={5}>
                     <Typography
                       className={classes.sortButton}
@@ -513,9 +542,7 @@ class Results extends Component {
                       style={{
                         display: "flex",
                         overflowX: "scroll",
-                        paddingTop: "5%",
-                        height: "7vmax"
-                        // backgroundColor: "pink"
+                        padding: "3% 0"
                       }}
                     >
                       {!byDate &&

@@ -11,6 +11,7 @@ import miscService from "../services/miscService";
 import dateformat from "dateformat";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
   title: {
@@ -20,15 +21,20 @@ const styles = theme => ({
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "15%"
+      marginTop: "11%"
     },
     color: "#C8B06B",
     fontSize: "1000%",
     marginTop: "6%"
   },
   buttonColumn: {
-    textAlign: "center",
-    verticalAlign: "middle"
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "10%"
+    },
+    marginTop: "6%"
   },
   container: {
     textAlign: "center",
@@ -66,7 +72,7 @@ const styles = theme => ({
     // },
   },
   icon: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       marginLeft: "-80%"
     }
   }
@@ -80,6 +86,7 @@ class Schedule extends Component {
   };
 
   async componentDidMount() {
+    window.scrollTo({ top: 0 });
     const { data: schedules } = await scheduleService.getAllSchedules();
     const admin = await miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
@@ -90,16 +97,9 @@ class Schedule extends Component {
     return dateformat(time, "dd mmm yyyy");
   };
 
-  handleCreateSchedule = e => {
-    e.preventDefault();
-    this.setState({ redirect: true });
-  };
-
   render() {
     const { classes } = this.props;
     const { schedules, isAdmin, redirect } = this.state;
-
-    if (redirect) return <Redirect to="/admin/schedule" />;
 
     return (
       <Grid container className={classes.container}>
@@ -112,11 +112,12 @@ class Schedule extends Component {
                   THIS WEEK'S GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={1} md={1}>
+              <Grid item xs={1} md={1} className={classes.buttonColumn}>
                 {isAdmin && (
                   <IconButton
                     className={classes.icon}
-                    onClick={this.handleCreateSchedule}
+                    to={"/admin/schedule"}
+                    component={Link}
                   >
                     <AddCircleRoundedIcon />
                   </IconButton>

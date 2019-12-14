@@ -17,10 +17,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     position: "fixed",
     top: 0,
-    // top: 0,
-    // right: 0,
     width: "100%",
     zIndex: 1000
+    // right: 0,
+    // top: 0,
     // border: "3px solid #73AD21",
     // marginBottom: 100
   },
@@ -43,7 +43,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: "10%",
       marginLeft: "1%"
-    }
+    },
+    display: "flex",
+    alignItems: "center"
   }
 }));
 
