@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
 import http from "./httpService";
 import cookie from "react-cookies";
+import axios from "axios";
 const tokenKey = "token";
 
 http.setJwt(getJwt());
@@ -14,11 +15,13 @@ function createNewEnquiry(enquiry) {
 }
 
 function getInstagramPhotos() {
-  return http.get(
+  // removing request header as instagram doesn't accept x-auth-token as request header
+  delete axios.defaults.headers.common["x-auth-token"];
+  return axios.get(
     "https://api.instagram.com/v1/users/self/media/recent/?access_token=4266605993.3124899.34fb563d2eba4265978964ad63c24cf2"
     // {
     //   headers: {
-    //     "Access-Control-Allow-Origin": "http://localhost:3000"
+    //     "x-auth-token": null
     //   }
     // }
   );
