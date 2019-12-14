@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import Calendar from "./../components/calendar";
@@ -17,11 +16,11 @@ const styles = theme => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "20%"
+      marginTop: "25%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "11%"
+      marginTop: "15%"
     },
     color: "#C8B06B",
     fontSize: "1000%",

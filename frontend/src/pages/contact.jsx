@@ -11,11 +11,11 @@ const useStyles = makeStyles(theme => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "350%",
-      marginTop: "17%"
+      marginTop: "25%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "9%"
+      marginTop: "15%"
     },
     fontSize: "1000%",
     marginTop: "6%",

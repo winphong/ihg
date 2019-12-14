@@ -3,6 +3,8 @@ import http from "./httpService";
 import cookie from "react-cookies";
 const tokenKey = "token";
 
+http.setJwt(getJwt());
+
 function getAllEnquiries() {
   return http.get(`/enquiry`);
 }
@@ -22,11 +24,11 @@ function getInstagramPhotos() {
   );
 }
 
-function getSportsPhoto(path) {
-  return http.get(`/images/${path}`, {
-    responseType: "blob"
-  });
-}
+// function getSportsPhoto(path) {
+//   return http.get(`/images/${path}`, {
+//     responseType: "blob"
+//   });
+// }
 
 async function login(credentials) {
   const { data: jwt } = await http.post(`/admin`, credentials);
@@ -46,11 +48,15 @@ function logout() {
   cookie.remove(tokenKey, { path: "/" });
 }
 
+function getJwt() {
+  return cookie.load(tokenKey);
+}
+
 export default {
   getAllEnquiries,
   createNewEnquiry,
   getInstagramPhotos,
-  getSportsPhoto,
+  // getSportsPhoto,
   login,
   getCurrentAdmin,
   logout

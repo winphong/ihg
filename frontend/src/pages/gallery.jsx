@@ -17,11 +17,11 @@ const styles = theme => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "20%"
+      marginTop: "25%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "9%"
+      marginTop: "15%"
     },
     lineHeight: "120%",
     fontSize: "1000%",
