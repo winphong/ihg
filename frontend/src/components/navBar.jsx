@@ -28,9 +28,10 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       fontSize: "300%"
     },
-
     display: "inline",
-    fontSize: "200%"
+    fontSize: "200%",
+    fontFamily: "TheNextFont",
+    color: "#C8B06B"
   },
   logo: {
     [theme.breakpoints.down("sm")]: {
@@ -39,9 +40,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       width: "10%",
       marginLeft: "1%"
-    },
-    display: "flex",
-    alignItems: "center"
+    }
+    // display: "flex",
+    // alignItems: "center"
   },
   iconContainer: {
     [theme.breakpoints.down("sm")]: {
@@ -141,9 +142,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                 display: "inline"
               }}
             />
-            <Typography variant="h1" className={classes.title}>
-              IHG
-            </Typography>
+            <Typography className={classes.title}>IHG</Typography>
           </div>
           <MediaQuery maxWidth={959}>
             <Button disabled style={{ padding: 0 }}></Button>
