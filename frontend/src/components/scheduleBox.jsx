@@ -137,7 +137,14 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                 } else {
                   return (
                     <Grid item xs={4}>
-                      <Typography variant="h1" className={classes.hallCarnival}>
+                      <Typography
+                        variant="h1"
+                        className={classes.hallCarnival}
+                        style={{
+                          marginLeft:
+                            index === 6 ? "-46%" : index !== 5 ? "46%" : ""
+                        }}
+                      >
                         {hall.abbreviation}
                       </Typography>
                     </Grid>

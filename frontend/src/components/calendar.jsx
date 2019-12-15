@@ -112,7 +112,7 @@ export default function Calendar({ schedules, isAdmin }) {
           }}
         >
           <IconButton
-            disabled={date >= new Date("16 Feb 2020")}
+            disabled={date >= new Date("9 Feb 2020")}
             onClick={() => handleNext(false)}
           >
             <KeyboardArrowRight />

@@ -12,6 +12,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import MediaQuery from "react-responsive";
+import { useMediaQuery } from "react-responsive";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,13 +26,7 @@ const useStyles = makeStyles(theme => ({
     // marginBottom: 100
   },
   title: {
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "300%"
-    },
-    display: "inline",
-    fontSize: "200%",
-    fontFamily: "TheNextFont",
-    color: "#C8B06B"
+    fontSize: "300%"
   },
   logo: {
     [theme.breakpoints.down("sm")]: {
@@ -65,6 +60,9 @@ const selections = [
 
 export default function NavBar({ pathname, handleTabChange }) {
   const classes = useStyles();
+  const showIHG = useMediaQuery({
+    minWidth: 1000
+  });
 
   const [state, setState] = React.useState({
     top: false,
@@ -138,11 +136,15 @@ export default function NavBar({ pathname, handleTabChange }) {
             <img
               src="/Logo.png"
               className={classes.logo}
-              style={{
-                display: "inline"
-              }}
+              // style={{
+              // display: "inline"
+              // }}
             />
-            <Typography className={classes.title}>IHG</Typography>
+            {showIHG && (
+              <Typography variant="h1" className={classes.title}>
+                IHG
+              </Typography>
+            )}
           </div>
           <MediaQuery maxWidth={959}>
             <Button disabled style={{ padding: 0 }}></Button>

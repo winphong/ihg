@@ -298,8 +298,8 @@ class ScheduleForm extends Component {
                       >
                         <MenuItem value=""></MenuItem>
                         {[
-                          "Group Stage A",
-                          "Group Stage B",
+                          "Group A",
+                          "Group B",
                           "Semi 1",
                           "Semi 2",
                           "Finals",
