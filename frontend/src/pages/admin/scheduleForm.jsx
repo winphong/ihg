@@ -19,6 +19,13 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import hallService from "../../services/hallService";
 import scheduleService from "../../services/scheduleService";
+//
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import green from "@material-ui/core/colors/green";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const styles = theme => ({
   title: {
@@ -55,6 +62,13 @@ const styles = theme => ({
     },
     color: "white",
     padding: "1% 0"
+  },
+  icon: {
+    fontSize: 20
+  },
+  message: {
+    display: "flex",
+    alignItems: "center"
   }
 });
 
@@ -98,7 +112,9 @@ class ScheduleForm extends Component {
       KE7: false,
       PGP: false
     },
-    halls: []
+    halls: [],
+    open: false,
+    success: false
   };
 
   async componentDidMount() {
@@ -151,13 +167,37 @@ class ScheduleForm extends Component {
     }
     schedule.halls = arr;
     schedule.endTime = schedule.startTime;
-    if (id) await scheduleService.updateSchedule(id, schedule);
-    else await scheduleService.createSchedule(schedule);
+    if (id)
+      await scheduleService
+        .updateSchedule(id, schedule)
+        .then(() => {
+          this.setState({ success: true });
+          this.handleOpen();
+        })
+        .catch(() => this.handleOpen());
+    else
+      await scheduleService
+        .createSchedule(schedule)
+        .then(() => {
+          this.setState({ success: true });
+          this.handleOpen();
+        })
+        .catch(() => this.handleOpen());
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+
+    if (this.state.success) window.history.back();
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
   };
 
   render() {
     const { classes } = this.props;
-    const { schedule, checkbox, halls } = this.state;
+    const { schedule, checkbox, halls, success } = this.state;
 
     return (
       <React.Fragment>
@@ -331,6 +371,42 @@ class ScheduleForm extends Component {
             <Grid item xs={1} md={3} />
           </Grid>
         </CSSTransition>
+        {/* Snackbar */}
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <SnackbarContent
+            style={{
+              backgroundColor: success ? green[600] : "#d32f2f"
+            }}
+            message={
+              <span id="client-snackbar" className={classes.message}>
+                {success
+                  ? "Succesfully updated!"
+                  : "An error has occured. Try again."}
+              </span>
+            }
+            action={[
+              <IconButton
+                key="close"
+                color="inherit"
+                onClick={this.handleClose}
+              >
+                {success ? (
+                  <CheckCircleIcon className={classes.icon} />
+                ) : (
+                  <ErrorIcon className={classes.icon} />
+                )}
+              </IconButton>
+            ]}
+          />
+        </Snackbar>
       </React.Fragment>
     );
   }

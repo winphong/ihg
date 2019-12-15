@@ -145,6 +145,19 @@ const styles = theme => ({
     },
     height: "30vmax"
     //  backgroundColor: "yellow"
+  },
+  week: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "180%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "210%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "250%"
+    },
+    fontSize: "300%",
+    textAlign: "center"
   }
 });
 
@@ -157,10 +170,17 @@ const CustomButton = ({
   limit,
   handleBack,
   handleNext,
-  weekNum
+  weekNum,
+  classes
 }) => {
   return (
-    <Grid container>
+    <Grid
+      container
+      style={{
+        display: "flex",
+        alignItems: "center"
+      }}
+    >
       <Grid item xs={4}>
         <div
           style={{
@@ -175,10 +195,7 @@ const CustomButton = ({
         </div>
       </Grid>
       <Grid itex xs={4}>
-        <Typography
-          variant="h1"
-          style={{ fontSize: "300%", textAlign: "center" }}
-        >
+        <Typography variant="h1" className={classes.week}>
           Week {weekNum}
         </Typography>
       </Grid>
@@ -656,6 +673,7 @@ class Results extends Component {
                             handleBack={this.handleBack}
                             handleNext={this.handleNext}
                             weekNum={weekNum}
+                            classes={classes}
                           />
                         </div>
                         <ResultsTable

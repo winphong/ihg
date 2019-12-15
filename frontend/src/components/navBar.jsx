@@ -13,6 +13,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import MediaQuery from "react-responsive";
 import { useMediaQuery } from "react-responsive";
+import auth from "../services/miscService";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -170,6 +171,21 @@ export default function NavBar({ pathname, handleTabChange }) {
                 </IconButton>
               );
             })}
+            {auth.getCurrentAdmin() && (
+              <IconButton
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#958F87",
+                  fontWeight: "bold"
+                }}
+                disableRipple
+                color="inherit"
+                to={"/logout"}
+                component={Link}
+              >
+                Logout
+              </IconButton>
+            )}
           </MediaQuery>
         </Toolbar>
       </AppBar>

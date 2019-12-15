@@ -6,6 +6,13 @@ import { withStyles } from "@material-ui/core/styles";
 import { TextField, Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import hallService from "../../services/hallService";
+//
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import green from "@material-ui/core/colors/green";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const styles = theme => ({
   title: {
@@ -44,13 +51,14 @@ const styles = theme => ({
 
 class StandingForm extends Component {
   state = {
-    halls: []
+    halls: [],
+    success: false
   };
 
   async componentDidMount() {
     const { data: halls } = await hallService.getAllHalls();
     this.setState({ halls });
-    console.log(this.props.location.state);
+    // console.log(this.props.location.state);
   }
 
   handleChange = ({ target: input }, index) => {
@@ -63,12 +71,28 @@ class StandingForm extends Component {
   };
 
   handleSubmit = async () => {
-    const response = await hallService.updateStandings(this.state.halls);
+    await hallService
+      .updateStandings(this.state.halls)
+      .then(() => {
+        this.setState({ success: true });
+        this.handleOpen();
+      })
+      .catch(() => this.handleOpen());
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+
+    if (this.state.success) window.history.back();
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
   };
 
   render() {
     const { classes } = this.props;
-    const halls = this.state.halls;
+    const { halls, success } = this.state;
 
     return (
       <React.Fragment>
@@ -178,6 +202,42 @@ class StandingForm extends Component {
             <Grid item xs={1} md={2} />
           </Grid>
         </CSSTransition>
+        {/* Snackbar */}
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <SnackbarContent
+            style={{
+              backgroundColor: success ? green[600] : "#d32f2f"
+            }}
+            message={
+              <span id="client-snackbar" className={classes.message}>
+                {success
+                  ? "Succesfully updated!"
+                  : "An error has occured. Try again."}
+              </span>
+            }
+            action={[
+              <IconButton
+                key="close"
+                color="inherit"
+                onClick={this.handleClose}
+              >
+                {success ? (
+                  <CheckCircleIcon className={classes.icon} />
+                ) : (
+                  <ErrorIcon className={classes.icon} />
+                )}
+              </IconButton>
+            ]}
+          />
+        </Snackbar>
       </React.Fragment>
     );
   }

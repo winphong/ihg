@@ -30,6 +30,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               schedule.halls.map(({ colourCode }) => {
                 return (
                   <Grid
+                    key={colourCode}
                     item
                     xs={true}
                     className={classes.bar}
@@ -44,9 +45,10 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                 );
               })}
             {schedule.halls.length === 0 &&
-              [0, 1].map(() => {
+              [0, 1].map(key => {
                 return (
                   <Grid
+                    key={key}
                     item
                     xs={true}
                     className={classes.bar}
@@ -67,7 +69,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
             {size === 2 &&
               schedule.halls.map((hall, index) => {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <Grid item xs={5}>
                       <Typography variant="h1" className={classes.hallDuo}>
                         {hall.abbreviation}
@@ -115,9 +117,9 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               </React.Fragment>
             )}
             {size === 6 &&
-              schedule.halls.map(hall => {
+              schedule.halls.map((hall, index) => {
                 return (
-                  <Grid item xs={4}>
+                  <Grid key={index} item xs={4}>
                     <Typography variant="h1" className={classes.hallCarnival}>
                       {hall.abbreviation}
                     </Typography>
@@ -128,7 +130,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               schedule.halls.map((hall, index) => {
                 if (index < 4) {
                   return (
-                    <Grid item xs={3}>
+                    <Grid key={index} item xs={3}>
                       <Typography variant="h1" className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>

@@ -167,7 +167,9 @@ class Home extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
-    const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: schedules } = await scheduleService.getUpcomingSchedules(
+      new Date()
+    );
     const { data: halls } = await hallService.getAllHalls();
     // const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
     // const file = new Blob([photo.data], { type: photo.data.type });

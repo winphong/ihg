@@ -10,6 +10,10 @@ function getSchedule(id) {
   return http.get(getUrl(id));
 }
 
+function getUpcomingSchedules(date) {
+  return http.get(getUrl(`upcomingSchedules/${date}`));
+}
+
 function getAllSchedules() {
   return http.get(apiEndpoint);
 }
@@ -23,11 +27,12 @@ function updateSchedule(id, req) {
 }
 
 function updateScore(id, req) {
-  return http.put(getUrl(`/updateScore/${id}`), req);
+  return http.put(getUrl(`updateScore/${id}`), req);
 }
 
 export default {
   getSchedule,
+  getUpcomingSchedules,
   getAllSchedules,
   createSchedule,
   updateScore,

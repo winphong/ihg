@@ -5,7 +5,6 @@ import { Typography } from "@material-ui/core";
 import miscService from "../services/miscService";
 import { withStyles } from "@material-ui/core/styles";
 import { CSSTransition } from "react-transition-group";
-import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   // paper: {

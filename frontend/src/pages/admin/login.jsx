@@ -7,6 +7,11 @@ import { TextField, Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import miscService from "../../services/miscService";
 import { Redirect } from "react-router-dom";
+//
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import IconButton from "@material-ui/core/IconButton";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const styles = theme => ({
   title: {
@@ -70,16 +75,27 @@ class Login extends Component {
       window.location = state ? state.from.pathname : "/";
     } catch (error) {
       if (error && error.status === 400) {
-        console.log(error.data);
+        // console.log(error.data);
+        this.handleOpen();
       } else {
-        console.log("Unexpected error");
+        // console.log("Unexpected error");
+        this.handleOpen();
       }
     }
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
   };
 
   render() {
     const { classes } = this.props;
     const { username, password } = this.state.credentials;
+    const { success } = this.state;
     if (miscService.getCurrentAdmin()) return <Redirect to="/" />;
 
     return (
@@ -142,6 +158,36 @@ class Login extends Component {
             <Grid item xs={1} md={4} />
           </Grid>
         </CSSTransition>
+        {/* Snackbar */}
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+        >
+          <SnackbarContent
+            style={{
+              backgroundColor: "#d32f2f"
+            }}
+            message={
+              <span id="client-snackbar" className={classes.message}>
+                Invalid username or password.
+              </span>
+            }
+            action={[
+              <IconButton
+                key="close"
+                color="inherit"
+                onClick={this.handleClose}
+              >
+                <ErrorIcon className={classes.icon} />
+              </IconButton>
+            ]}
+          />
+        </Snackbar>
       </React.Fragment>
     );
   }

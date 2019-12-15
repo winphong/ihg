@@ -11,13 +11,13 @@ const cnyStart = new Date("24 Jan 2020");
 const cnyEnd = new Date("28 Jan 2020");
 
 // get 2 days worth of schedules
-router.get("/upcomingSchedules", async (req, res) => {
-  let current = new Date("25 Jan 2020");
+router.get("/upcomingSchedules/:date", async (req, res) => {
+  let current = new Date(req.params.date);
   const firstDay = new Date("5 Jan 2020");
   if (current < firstDay) {
     current = firstDay;
   }
-  const next2days = new Date(current.toISOString().substr(0, 10));
+  const next2days = new Date(current);
   next2days.setDate(next2days.getDate() + 2);
 
   let schedules = await Schedule.find({

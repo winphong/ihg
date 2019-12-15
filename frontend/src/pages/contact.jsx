@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: "15%"
     },
     fontSize: "1000%",
-    marginTop: "6%",
+    marginTop: "5%",
     marginBottom: "5%"
   },
   buttonColumn: {

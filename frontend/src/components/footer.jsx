@@ -36,13 +36,13 @@ const useStyles = makeStyles(theme => ({
 
   subTitle: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "90%"
+      fontSize: "80%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "110%"
+      fontSize: "100%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "150%"
+      fontSize: "130%"
     },
     // [theme.breakpoints.between("sm", "lg")]: {
     //   fontSize: "100%"
@@ -102,12 +102,8 @@ export default function Footer() {
             <Typography className={classes.title}>
               IHG Convening 19/20
             </Typography>
-            <Typography className={classes.subTitle}>
-              Firstname Lastname
-            </Typography>
-            <Typography className={classes.subTitle}>
-              Firstname Lastname
-            </Typography>
+            <Typography className={classes.subTitle}>Tan Win Phong</Typography>
+            <Typography className={classes.subTitle}>Jennifer Lim</Typography>
           </Grid>
           {/* </Grid> */}
           {/* Raffles Hall */}

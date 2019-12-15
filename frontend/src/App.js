@@ -16,6 +16,7 @@ import StandingForm from "./pages/admin/standingForm";
 import Login from "./pages/admin/login";
 import ProtectedRoute from "./components/protectedRoute";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
+import Logout from "./components/logout";
 
 const theme = createMuiTheme({
   typography: {
@@ -68,6 +69,7 @@ class App extends Component {
               <Route path="/gallery" component={Gallery} />
               <Route path="/contact" component={Contact} />
               <Route path="/admin" exact component={Login} />
+              <Route path="/logout" exact component={Logout} />
               <ProtectedRoute
                 path="/admin/schedule"
                 exact
