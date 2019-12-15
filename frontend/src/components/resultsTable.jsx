@@ -5,6 +5,7 @@ import ResultRow from "../components/resultRow";
 import { Divider } from "@material-ui/core";
 import ResultRowCarnival from "../components/resultRowCarnival";
 import Typography from "@material-ui/core/Typography";
+import { useMediaQuery } from "react-responsive";
 
 export default function ResultsTable({
   schedules,
@@ -14,9 +15,13 @@ export default function ResultsTable({
   isAdmin
 }) {
   const classes = useStyles();
-  let currentDate = "";
+  const isIpadProPotrait = useMediaQuery({
+    minWidth: 1020,
+    maxWidth: 1030,
+    orientation: "portrait"
+  });
 
-  let lim = limit;
+  let currentDate = "";
 
   return (
     <React.Fragment>
@@ -25,16 +30,15 @@ export default function ResultsTable({
           {selectedSport.name}
         </Typography>
       )}
-      {schedules.map((schedule, index) => {
-        if (index < limit) {
+      <div
+        className={classes.scrollable}
+        style={{ height: isIpadProPotrait ? "40vmax" : "" }}
+      >
+        {schedules.map((schedule, index) => {
           if (
             byDate &&
             dateformat(new Date(schedule.startTime), "dd mm") !== currentDate
           ) {
-            if (lim <= limit / 2) {
-              return;
-            }
-            lim = lim - 1;
             currentDate = dateformat(new Date(schedule.startTime), "dd mm");
             const date = new Date(schedule.startTime);
             return (
@@ -86,8 +90,8 @@ export default function ResultsTable({
               <Divider />
             </div>
           );
-        }
-      })}
+        })}
+      </div>
     </React.Fragment>
   );
 }
@@ -108,5 +112,112 @@ const useStyles = makeStyles(theme => ({
     // backgroundColor: "cyan",
     color: "#958F87",
     fontWeight: "bold"
+  },
+  scrollable: {
+    [theme.breakpoints.only("xs")]: {
+      height: "70vmax"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "70vmax"
+    },
+    [theme.breakpoints.only("md")]: {
+      height: "50vmax"
+    },
+    [theme.breakpoints.only("lg")]: {
+      height: "43vmax"
+    },
+    [theme.breakpoints.only("xl")]: {
+      height: "40vmax"
+    },
+    // backgroundColor: "beige",
+    display: "flex",
+    overflowY: "scroll",
+    flexDirection: "column"
   }
 }));
+
+// export default function ResultsTable({
+//   schedules,
+//   selectedSport,
+//   byDate,
+//   limit,
+//   isAdmin
+// }) {
+//   const classes = useStyles();
+//   let currentDate = "";
+
+//   let lim = limit;
+
+//   return (
+//     <React.Fragment>
+//       {!byDate && (
+//         <Typography className={classes.sportHeader}>
+//           {selectedSport.name}
+//         </Typography>
+//       )}
+//       {schedules.map((schedule, index) => {
+//         if (index < limit) {
+//           if (
+//             byDate &&
+//             dateformat(new Date(schedule.startTime), "dd mm") !== currentDate
+//           ) {
+//             if (lim <= limit / 2) {
+//               return;
+//             }
+//             lim = lim - 1;
+//             currentDate = dateformat(new Date(schedule.startTime), "dd mm");
+//             const date = new Date(schedule.startTime);
+//             return (
+//               <div key={index}>
+//                 <Typography className={classes.date}>
+//                   {(date.getDate() === 1 ||
+//                     date.getDate() === 21 ||
+//                     date.getDate() === 31) &&
+//                     dateformat(date, "dd'st' mmm")}
+//                   {(date.getDate() === 2 || date.getDate() === 22) &&
+//                     dateformat(date, "dd'nd' mmm")}
+//                   {(date.getDate() === 3 || date.getDate() === 23) &&
+//                     dateformat(date, "dd'rd' mmm")}
+//                   {![1, 2, 3, 21, 22, 23, 31].includes(date.getDate()) &&
+//                     dateformat(date, "dd'th' mmm")}
+//                 </Typography>
+//                 {schedule.stage === "Carnival" ? (
+//                   <ResultRowCarnival
+//                     schedule={schedule}
+//                     isAdmin={isAdmin}
+//                     byDate={byDate}
+//                   />
+//                 ) : (
+//                   <ResultRow
+//                     schedule={schedule}
+//                     isAdmin={isAdmin}
+//                     byDate={byDate}
+//                   />
+//                 )}
+//                 <Divider />
+//               </div>
+//             );
+//           }
+//           return (
+//             <div key={index}>
+//               {schedule.stage === "Carnival" ? (
+//                 <ResultRowCarnival
+//                   schedule={schedule}
+//                   isAdmin={isAdmin}
+//                   byDate={byDate}
+//                 />
+//               ) : (
+//                 <ResultRow
+//                   schedule={schedule}
+//                   isAdmin={isAdmin}
+//                   byDate={byDate}
+//                 />
+//               )}
+//               <Divider />
+//             </div>
+//           );
+//         }
+//       })}
+//     </React.Fragment>
+//   );
+// }

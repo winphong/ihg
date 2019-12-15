@@ -81,7 +81,7 @@ class App extends Component {
               <ProtectedRoute path="/admin/standing" component={StandingForm} />
               +{/* <Route path="/not-found" component={NotFound} /> */}
               <Redirect from="/" exact to="/home" />
-              <Redirect to="/not-found" />
+              <Redirect to="/home" />
             </Switch>
             <Footer />
           </MuiThemeProvider>

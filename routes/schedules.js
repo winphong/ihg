@@ -4,12 +4,42 @@ const { Schedule, validate } = require("../model/schedule");
 const { Hall } = require("../model/hall");
 const _ = require("lodash");
 const admin = require("../middleware/admin");
+const dateformat = require;
 
+// constant
+const cnyStart = new Date("24 Jan 2020");
+const cnyEnd = new Date("28 Jan 2020");
+
+// get 2 days worth of schedules
+router.get("/upcomingSchedules", async (req, res) => {
+  let current = new Date("25 Jan 2020");
+  const firstDay = new Date("5 Jan 2020");
+  if (current < firstDay) {
+    current = firstDay;
+  }
+  const next2days = new Date(current.toISOString().substr(0, 10));
+  next2days.setDate(next2days.getDate() + 2);
+
+  let schedules = await Schedule.find({
+    startTime: { $gte: current, $lt: next2days }
+  }).sort({ startTime: 1 });
+
+  if (current >= cnyStart && current < cnyEnd) {
+    schedules = await Schedule.find({
+      startTime: { $gte: "28 Jan 2020", $lt: "30 Jan 2020" }
+    }).sort({ startTime: 1 });
+  }
+
+  res.send(schedules);
+});
+
+// get schedule by id
 router.get("/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
   if (!schedule) return res.status(400).send("Schedule not found!");
   res.send(schedule);
 });
+
 // get all schedules
 router.get("/", async (req, res) => {
   const schedule = await Schedule.find().sort({ startTime: 1 });

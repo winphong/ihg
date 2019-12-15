@@ -8,7 +8,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 export default function Card({ schedule, center, size, index, scheduleSize }) {
   const classes = useStyles();
   const theme = useTheme();
-  const shrink = useMediaQuery(theme.breakpoints.down("md"));
+  const hasHalls = schedule.halls.length > 0;
 
   return (
     <Grid
@@ -17,27 +17,39 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
     >
-      {schedule.halls.length === 2 && (
+      {schedule.halls.length <= 2 && (
         <React.Fragment>
           <Grid container>
             <Grid item xs={5}>
-              <img style={{ width: "90%" }} src={schedule.halls[0].imgUrl} />
+              <img
+                style={{
+                  width: "90%",
+                  border: hasHalls ? "" : "1px solid black"
+                }}
+                src={hasHalls ? schedule.halls[0].imgUrl : "./blank.png"}
+              />
             </Grid>
             <Grid item xs={2} className={classes.vs}></Grid>
             <Grid item xs={5}>
-              <img style={{ width: "90%" }} src={schedule.halls[1].imgUrl} />
+              <img
+                style={{
+                  width: "90%",
+                  border: hasHalls ? "" : "1px solid black"
+                }}
+                src={hasHalls ? schedule.halls[1].imgUrl : "./blank.png"}
+              />
             </Grid>
           </Grid>
           <Grid container className={classes.hallContainer} alignItems="center">
             <Grid item xs={5}>
               <Typography className={classes.hall}>
-                {schedule.halls[0].name.toUpperCase()}
+                {hasHalls ? schedule.halls[0].name.toUpperCase() : "TBA"}
               </Typography>
             </Grid>
             <Grid item xs={2} />
             <Grid item xs={5}>
               <Typography className={classes.hall}>
-                {schedule.halls[1].name.toUpperCase()}
+                {hasHalls ? schedule.halls[1].name.toUpperCase() : "TBA"}
               </Typography>
             </Grid>
           </Grid>

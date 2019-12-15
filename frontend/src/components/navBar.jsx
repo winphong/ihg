@@ -28,13 +28,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("sm")]: {
       fontSize: "300%"
     },
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center"
-    },
-    // flexGrow: 1,
-    display: "flex",
-    fontSize: "200%",
-    alignItems: "center"
+
+    display: "inline",
+    fontSize: "200%"
   },
   logo: {
     [theme.breakpoints.down("sm")]: {
@@ -46,6 +42,14 @@ const useStyles = makeStyles(theme => ({
     },
     display: "flex",
     alignItems: "center"
+  },
+  iconContainer: {
+    [theme.breakpoints.down("sm")]: {
+      justifyContent: "center"
+    },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "left"
   }
 }));
 
@@ -129,10 +133,18 @@ export default function NavBar({ pathname, handleTabChange }) {
               {sideList("left")}
             </Drawer>
           </MediaQuery>
-          <Typography variant="h1" className={classes.title} style={{}}>
-            <img src="/Logo.png" className={classes.logo} />
-            IHG
-          </Typography>
+          <div className={classes.iconContainer}>
+            <img
+              src="/Logo.png"
+              className={classes.logo}
+              style={{
+                display: "inline"
+              }}
+            />
+            <Typography variant="h1" className={classes.title}>
+              IHG
+            </Typography>
+          </div>
           <MediaQuery maxWidth={959}>
             <Button disabled style={{ padding: 0 }}></Button>
           </MediaQuery>

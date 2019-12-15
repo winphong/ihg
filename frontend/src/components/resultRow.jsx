@@ -8,16 +8,18 @@ import Typography from "@material-ui/core/Typography";
 
 export default function ResultRow({ schedule, isAdmin, byDate }) {
   const classes = useStyles();
+  const hasHalls = schedule.halls.length > 0;
 
   const hasScore =
+    hasHalls &&
     schedule.halls[0].score >= 0 &&
     schedule.halls[1].score >= 0 &&
     schedule.halls[0].score !== schedule.halls[1].score
       ? true
       : false;
-  const firstWinner = schedule.halls[0].score > schedule.halls[1].score;
+  const firstWinner =
+    hasHalls && schedule.halls[0].score > schedule.halls[1].score;
 
-  //  xs & sm
   const isMobilePortrait = useMediaQuery({ minDeviceWidth: 500 });
   const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
 
@@ -36,9 +38,11 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
           xs={3}
           className={classes.bar}
           style={{
-            backgroundColor: schedule.halls[0].colourCode,
+            backgroundColor: hasHalls
+              ? schedule.halls[0].colourCode
+              : "#C8B06B",
             border:
-              schedule.halls[0].colourCode === "#ffffff"
+              hasHalls && schedule.halls[0].colourCode === "#ffffff"
                 ? "1px solid black"
                 : ``
           }}
@@ -48,9 +52,11 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
           xs={3}
           className={classes.bar}
           style={{
-            backgroundColor: schedule.halls[1].colourCode,
+            backgroundColor: hasHalls
+              ? schedule.halls[1].colourCode
+              : "#C8B06B",
             border:
-              schedule.halls[1].colourCode === "#ffffff"
+              hasHalls && schedule.halls[1].colourCode === "#ffffff"
                 ? "1px solid black"
                 : ``
           }}
@@ -117,7 +123,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
               hasScore && firstWinner ? classes.winner : classes.neutral
             }
           >
-            {schedule.halls[0].abbreviation}
+            {hasHalls ? schedule.halls[0].abbreviation : "TBA"}
           </Typography>
         </Grid>
         {/* score 1 */}
@@ -127,7 +133,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
               hasScore && firstWinner ? classes.winner : classes.neutral
             }
           >
-            {schedule.halls[0].score}
+            {hasHalls ? schedule.halls[0].score : ""}
           </Typography>
         </Grid>
         {/* versus */}
@@ -141,7 +147,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
               hasScore && !firstWinner ? classes.winner : classes.neutral
             }
           >
-            {schedule.halls[1].score}
+            {hasHalls ? schedule.halls[1].score : ""}
           </Typography>
         </Grid>
         {/* hall 2 */}
@@ -151,7 +157,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
               hasScore && !firstWinner ? classes.winner : classes.neutral
             }
           >
-            {schedule.halls[1].abbreviation}
+            {hasHalls ? schedule.halls[1].abbreviation : "TBA"}
           </Typography>
         </Grid>
       </Grid>

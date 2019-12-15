@@ -26,22 +26,36 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
       <Grid container className={classes.container}>
         <Grid item container md={12}>
           <Grid item container md={12}>
-            {schedule.halls.map(({ colourCode }) => {
-              return (
-                <Grid
-                  item
-                  xs={true}
-                  className={classes.bar}
-                  style={{
-                    backgroundColor: colourCode,
-                    border:
-                      colourCode === "#ffffff"
-                        ? "0.05px solid #252527"
-                        : `0.05px solid ${colourCode}`
-                  }}
-                />
-              );
-            })}
+            {schedule.halls.length > 0 &&
+              schedule.halls.map(({ colourCode }) => {
+                return (
+                  <Grid
+                    item
+                    xs={true}
+                    className={classes.bar}
+                    style={{
+                      backgroundColor: colourCode,
+                      border:
+                        colourCode === "#ffffff"
+                          ? "0.05px solid #252527"
+                          : `0.05px solid ${colourCode}`
+                    }}
+                  />
+                );
+              })}
+            {schedule.halls.length === 0 &&
+              [0, 1].map(() => {
+                return (
+                  <Grid
+                    item
+                    xs={true}
+                    className={classes.bar}
+                    style={{
+                      backgroundColor: "#C8B06B"
+                    }}
+                  />
+                );
+              })}
           </Grid>
           <Grid
             item
@@ -75,6 +89,31 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                   </React.Fragment>
                 );
               })}
+            {schedule.halls.length < 2 && (
+              <React.Fragment>
+                <Grid item xs={5}>
+                  <Typography variant="h1" className={classes.hallDuo}>
+                    TBA
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography
+                    style={{
+                      fontSize: "100%",
+                      color: "#958F87",
+                      fontStyle: "italic"
+                    }}
+                  >
+                    vs
+                  </Typography>
+                </Grid>
+                <Grid item xs={5}>
+                  <Typography variant="h1" className={classes.hallDuo}>
+                    TBA
+                  </Typography>
+                </Grid>
+              </React.Fragment>
+            )}
             {size === 6 &&
               schedule.halls.map(hall => {
                 return (

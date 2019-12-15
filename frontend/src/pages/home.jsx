@@ -130,7 +130,7 @@ const styles = theme => ({
   buttonColumn: {
     [theme.breakpoints.down("sm")]: {
       // padding: "61% 0"
-      backgroundColor: "pink",
+      // backgroundColor: "pink",
       height: "500px"
     },
     [theme.breakpoints.up("sm")]: {

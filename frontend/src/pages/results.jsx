@@ -82,7 +82,6 @@ const styles = theme => ({
       fontSize: "200%"
     }
   },
-
   barChart: {
     textAlign: "center",
     display: "flex",
@@ -153,28 +152,16 @@ let arr = []; // keep track of how many resultTable element in a page
 let idx = 0; // index pointer for
 const CustomButton = ({
   schedules,
+  stateLimit,
   index,
   limit,
   handleBack,
   handleNext,
-  stateLimit
+  weekNum
 }) => {
   return (
     <Grid container>
-      <Grid item xs={6}>
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "left"
-          }}
-        >
-          <IconButton disabled={index === 0} onClick={handleBack}>
-            <KeyboardArrowLeft />
-          </IconButton>
-        </div>
-      </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <div
           style={{
             display: "flex",
@@ -182,12 +169,34 @@ const CustomButton = ({
             justifyContent: "flex-end"
           }}
         >
+          <IconButton disabled={weekNum === -1} onClick={handleBack}>
+            <KeyboardArrowLeft />
+          </IconButton>
+        </div>
+      </Grid>
+      <Grid itex xs={4}>
+        <Typography
+          variant="h1"
+          style={{ fontSize: "300%", textAlign: "center" }}
+        >
+          Week {weekNum}
+        </Typography>
+      </Grid>
+      <Grid item xs={4}>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "left"
+          }}
+        >
           <IconButton
             disabled={
               // byDate
               //   ? index >= schedules.length - stateLimit
               //   : index >= schedules.length - 5
-              index >= schedules.length - stateLimit
+              // index >= schedules.length - stateLimit
+              weekNum === 4
             }
             onClick={() => {
               handleNext(limit);
@@ -213,7 +222,9 @@ class Results extends Component {
     selectedSport: {},
     sports: [],
     isAdmin: false,
-    redirect: false
+    redirect: false,
+    startDate: new Date("5 Jan 2020"),
+    weekNum: -1
   };
 
   async componentDidMount() {
@@ -223,6 +234,7 @@ class Results extends Component {
     const { data: sports } = await sportService.getAllSports();
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
+
     // const slider = document.querySelector(".slider");
     // const width = window.screen.width;
     // const padding = width * 0.03;
@@ -244,34 +256,70 @@ class Results extends Component {
     });
   }
 
-  handleNext = limit => {
-    const index = this.state.index + limit;
-    if (index >= this.state.originalSchedules.length) return;
+  // handleNext = limit => {
+  //   const index = this.state.index + limit;
+  //   if (index >= this.state.originalSchedules.length) return;
 
-    const schedules = (this.state.byDate
-      ? [...this.state.originalSchedules]
-      : [...this.state.originalSchedulesBySport]
-    ).splice(index, index + this.state.limit);
+  //   const schedules = (this.state.byDate
+  //     ? [...this.state.originalSchedules]
+  //     : [...this.state.originalSchedulesBySport]
+  //   ).splice(index, index + this.state.limit);
 
-    if (arr[idx] === undefined) {
-      arr.push(this.state.limit - limit);
-    }
-    idx++;
+  //   if (arr[idx] === undefined) {
+  //     arr.push(this.state.limit - limit);
+  //   }
+  //   idx++;
 
-    this.setState({ schedules, index });
+  //   this.setState({ schedules, index });
+  // };
+
+  // handleBack = () => {
+  //   idx--;
+  //   const index = this.state.index - this.state.limit + arr[idx];
+  //   if (index < 0) return;
+
+  //   const schedules = (this.state.byDate
+  //     ? [...this.state.originalSchedules]
+  //     : [...this.state.originalSchedulesBySport]
+  //   ).splice(index, index + this.state.limit);
+
+  //   this.setState({ schedules, index });
+  // };
+
+  handleNext = () => {
+    const { startDate, weekNum, originalSchedules } = this.state;
+    const firstDayOfWeek = new Date(startDate);
+    firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 7);
+    const lastDay = new Date(firstDayOfWeek);
+    lastDay.setDate(lastDay.getDate() + 7);
+
+    const schedulesByWeek = originalSchedules.filter(schedule => {
+      const scheduleDate = new Date(schedule.startTime);
+      return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
+    });
+
+    this.setState({
+      startDate: firstDayOfWeek,
+      weekNum: weekNum + 1,
+      schedules: schedulesByWeek
+    });
   };
 
   handleBack = () => {
-    idx--;
-    const index = this.state.index - this.state.limit + arr[idx];
-    if (index < 0) return;
+    const { startDate, weekNum, schedules, originalSchedules } = this.state;
+    const firstDayOfWeek = new Date(startDate);
+    firstDayOfWeek.setDate(firstDayOfWeek.getDate() - 7);
 
-    const schedules = (this.state.byDate
-      ? [...this.state.originalSchedules]
-      : [...this.state.originalSchedulesBySport]
-    ).splice(index, index + this.state.limit);
+    const schedulesByWeek = originalSchedules.filter(schedule => {
+      const scheduleDate = new Date(schedule.startTime);
+      return scheduleDate >= firstDayOfWeek && scheduleDate < startDate;
+    });
 
-    this.setState({ schedules, index });
+    this.setState({
+      startDate: firstDayOfWeek,
+      weekNum: weekNum - 1,
+      schedules: schedulesByWeek
+    });
   };
 
   handleSortByDate = () => {
@@ -317,7 +365,8 @@ class Results extends Component {
       sports,
       selectedSport,
       isAdmin,
-      redirect
+      redirect,
+      weekNum
     } = this.state;
 
     if (redirect)
@@ -580,7 +629,7 @@ class Results extends Component {
               {schedules && (
                 <TransitionGroup>
                   <CSSTransition
-                    key={`${index}${byDate}${selectedSport.name}`}
+                    key={`${weekNum}${byDate}${selectedSport.name}`}
                     timeout={400}
                     classNames="fade"
                   >
@@ -593,19 +642,22 @@ class Results extends Component {
                       {/* Button */}
                       <Grid xs={1} md={false} />
                       <Grid xs={10} md={12}>
-                        <CustomButton
-                          schedules={
-                            byDate
-                              ? originalSchedules
-                              : originalSchedulesBySport
-                          }
-                          index={index}
-                          limit={limit}
-                          stateLimit={this.state.limit}
-                          byDate={this.state.byDate}
-                          handleBack={this.handleBack}
-                          handleNext={this.handleNext}
-                        />
+                        <div style={{ display: byDate ? "" : "none" }}>
+                          <CustomButton
+                            schedules={
+                              byDate
+                                ? originalSchedules
+                                : originalSchedulesBySport
+                            }
+                            index={index}
+                            limit={limit}
+                            stateLimit={limit}
+                            byDate={byDate}
+                            handleBack={this.handleBack}
+                            handleNext={this.handleNext}
+                            weekNum={weekNum}
+                          />
+                        </div>
                         <ResultsTable
                           schedules={schedules}
                           selectedSport={selectedSport}

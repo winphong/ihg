@@ -10,12 +10,18 @@ import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   title: {
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "40px"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%",
+      marginTop: "20%"
     },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "500%",
+      marginTop: "11%"
+    },
+    color: "#C8B06B",
     fontSize: "1000%",
-    fontWeight: "900",
-    color: "#C8B06B"
+    marginTop: "6%",
+    marginBottom: "3%"
   },
   container: {
     [theme.breakpoints.down("sm")]: {
@@ -27,6 +33,16 @@ const styles = theme => ({
   formControl: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1)
+  },
+  buttonText: {
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "200%"
+    },
+    [theme.breakpoints.up("md")]: {
+      fontSize: "250%"
+    },
+    color: "white",
+    padding: "1% 0"
   }
 });
 
@@ -71,7 +87,10 @@ class Login extends Component {
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container className={classes.container}>
             <Grid item xs={12} className={{}}>
-              <Typography className={classes.title}> LOGIN </Typography>
+              <Typography variant="h1" className={classes.title}>
+                {" "}
+                LOGIN{" "}
+              </Typography>
             </Grid>
             <Grid item xs={1} md={4} />
             <Grid item xs={10} md={4}>
@@ -106,11 +125,15 @@ class Login extends Component {
                     <Button
                       type="submit"
                       fullWidth
-                      color="primary"
                       variant="contained"
                       onClick={this.handleSubmit}
+                      style={{
+                        backgroundColor: "#C8B06B"
+                      }}
                     >
-                      LOGIN
+                      <Typography variant="h1" className={classes.buttonText}>
+                        Login
+                      </Typography>
                     </Button>
                   </Grid>
                 </Grid>
