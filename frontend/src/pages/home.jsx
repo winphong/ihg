@@ -17,22 +17,29 @@ import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   banner: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "8%",
+      height: "45vmax"
+    },
     height: "40vmax",
     marginTop: "5%",
     backgroundImage: "url('./headers/home.jpg')",
     backgroundSize: "cover"
   },
-  bannerImageContainer: {
-    [theme.breakpoints.only("xs")]: {
-      marginLeft: "-38%",
-      overflow: "hidden"
-    },
-    [theme.breakpoints.up("md")]: {
-      marginLeft: "-33.5%",
-      zIndex: 0
-    },
-    display: "block"
-  },
+  // bannerImageContainer: {
+  //   [theme.breakpoints.only("xs")]: {
+  //     marginLeft: "-38%",
+  //     overflow: "hidden"
+  //   },
+  //   [theme.breakpoints.up("md")]: {
+  //     marginLeft: "-33.5%",
+  //     zIndex: 0
+  //   },
+  //   display: "block"
+  // },
   bannerImage: {
     [theme.breakpoints.only("xs")]: {
       height: "95vmax",
@@ -98,7 +105,8 @@ const styles = theme => ({
     },
     [theme.breakpoints.up("sm")]: {
       height: "650px",
-      padding: "0 7vw",
+      paddingRight: "10vw",
+      // backgroundColor: "pink",
       marginTop: "10%"
     }
   },

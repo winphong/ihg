@@ -30,7 +30,12 @@ const useStyles = makeStyles(theme => ({
     fontSize: "300%"
   },
   logo: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
+      display: "flex",
+      justifyContent: "center",
+      width: "65%"
+    },
+    [theme.breakpoints.only("sm")]: {
       display: "flex",
       justifyContent: "center",
       width: "83.33333%"
@@ -131,7 +136,7 @@ export default function NavBar({ pathname, handleTabChange }) {
               src="/Logo.png"
               // className={classes.logo}
               style={{
-                height: "50px"
+                height: "30px"
               }}
             />
           </IconButton>

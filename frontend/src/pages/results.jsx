@@ -152,7 +152,7 @@ const styles = theme => ({
   },
   week: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "180%"
+      fontSize: "160%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "210%"
@@ -380,7 +380,7 @@ class Results extends Component {
       schedules: schedulesByWeek,
       byDate: true,
       index: 0,
-      startDate: new Date("% Jan 2020"),
+      startDate: firstDayOfWeek,
       weekNum: -1
     });
   };
