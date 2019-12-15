@@ -7,7 +7,12 @@ import dateformat from "dateformat";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 
-export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
+export default function ScheduleBox({
+  schedule,
+  isAdmin,
+  printLeftBorder,
+  index
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const size = schedule.halls.length;
@@ -18,7 +23,12 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
       {!isMobile && (
         <div
           style={{
-            borderLeft: printLeftBorder ? 0 : "2.5px solid #C8B06B"
+            borderLeft: printLeftBorder
+              ? 0
+              : index === 0
+              ? 0
+              : "1px solid #C8B06B",
+            borderRight: index === 6 ? 0 : "1px solid #C8B06B"
           }}
           className={classes.border}
         />
@@ -71,7 +81,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                 return (
                   <React.Fragment key={index}>
                     <Grid item xs={5}>
-                      <Typography variant="h1" className={classes.hallDuo}>
+                      <Typography className={classes.hallDuo}>
                         {hall.abbreviation}
                       </Typography>
                     </Grid>
@@ -80,8 +90,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                         <Typography
                           style={{
                             fontSize: "100%",
-                            color: "#958F87",
-                            fontStyle: "italic"
+                            color: "#958F87"
                           }}
                         >
                           vs
@@ -94,9 +103,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
             {schedule.halls.length < 2 && (
               <React.Fragment>
                 <Grid item xs={5}>
-                  <Typography variant="h1" className={classes.hallDuo}>
-                    TBA
-                  </Typography>
+                  <Typography className={classes.hallDuo}>TBA</Typography>
                 </Grid>
                 <Grid item xs={2}>
                   <Typography
@@ -110,9 +117,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                   </Typography>
                 </Grid>
                 <Grid item xs={5}>
-                  <Typography variant="h1" className={classes.hallDuo}>
-                    TBA
-                  </Typography>
+                  <Typography className={classes.hallDuo}>TBA</Typography>
                 </Grid>
               </React.Fragment>
             )}
@@ -120,7 +125,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
               schedule.halls.map((hall, index) => {
                 return (
                   <Grid key={index} item xs={4}>
-                    <Typography variant="h1" className={classes.hallCarnival}>
+                    <Typography className={classes.hallCarnival}>
                       {hall.abbreviation}
                     </Typography>
                   </Grid>
@@ -131,7 +136,7 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                 if (index < 4) {
                   return (
                     <Grid key={index} item xs={3}>
-                      <Typography variant="h1" className={classes.hallCarnival}>
+                      <Typography className={classes.hallCarnival}>
                         {hall.abbreviation}
                       </Typography>
                     </Grid>
@@ -140,7 +145,6 @@ export default function ScheduleBox({ schedule, isAdmin, printLeftBorder }) {
                   return (
                     <Grid item xs={4}>
                       <Typography
-                        variant="h1"
                         className={classes.hallCarnival}
                         style={{
                           marginLeft:
@@ -226,7 +230,6 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       position: "absolute",
       height: "5vmax",
-      borderRight: "2.5px solid #C8B06B",
       marginTop: "25%",
       width: "100%"
     },
@@ -236,7 +239,7 @@ const styles = theme => ({
     }
   },
   bar: {
-    height: "10px"
+    height: "8px"
   },
   hallContainer: {
     minHeight: "50px"
@@ -245,11 +248,13 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       fontSize: "100%"
     },
+    fontWeight: "bold",
     fontSize: "150%",
     color: "black"
   },
   hallCarnival: {
     [theme.breakpoints.down("md")]: {},
+    fontWeight: "bold",
     fontSize: "100%",
     color: "black"
   },
@@ -268,7 +273,7 @@ const styles = theme => ({
     },
     fontStyle: "italic",
     fontSize: "90%",
-    color: "#D3DBD9"
+    color: "#958F87"
   }
 });
 

@@ -17,25 +17,16 @@ import { Button } from "@material-ui/core";
 
 const styles = theme => ({
   banner: {
-    [theme.breakpoints.up("lg")]: {
-      height: "60vmax"
-      // fontSize: "100%"
-    },
-    [theme.breakpoints.between("sm", "md")]: {
-      height: "40vmax",
-      marginTop: "10%"
-      // backgroundColor: "grey",
-    }
+    height: "40vmax",
+    marginTop: "5%",
+    backgroundImage: "url('./headers/home.jpg')",
+    backgroundSize: "cover"
   },
   bannerImageContainer: {
     [theme.breakpoints.only("xs")]: {
       marginLeft: "-38%",
       overflow: "hidden"
     },
-    // [theme.breakpoints.down("sm")]: {
-    // marginLeft: "-38%",
-    // overflow: "hidden"
-    // },
     [theme.breakpoints.up("md")]: {
       marginLeft: "-33.5%",
       zIndex: 0
@@ -171,15 +162,11 @@ class Home extends Component {
       new Date()
     );
     const { data: halls } = await hallService.getAllHalls();
-    // const photo = await miscService.getSportsPhoto(path.normalize("home.jpg"));
-    // const file = new Blob([photo.data], { type: photo.data.type });
-    // const fileURL = URL.createObjectURL(file);
 
     this.setState({
       schedules,
       schedulesToDisplay: schedules,
       halls
-      // homeUrl: fileURL
     });
   }
 
@@ -229,14 +216,11 @@ class Home extends Component {
                 variant="h1"
                 className={classes.title}
                 style={{
-                  color: "black"
+                  color: "white"
                 }}
               >
                 19/20
               </Typography>
-            </Grid>
-            <Grid item xs={4} sm={3} className={classes.bannerImageContainer}>
-              <img src="./home.jpg" className={classes.bannerImage} />
             </Grid>
           </Grid>
           {/* Card container */}
@@ -339,7 +323,7 @@ class Home extends Component {
                     style={{
                       backgroundColor: "#C8B06B",
                       color: "white",
-                      width: "65%",
+                      width: "50%",
                       padding: "3% 0",
                       margin: "15px 0 40px 0"
                     }}
@@ -347,7 +331,7 @@ class Home extends Component {
                     component={Link}
                   >
                     <Typography
-                      style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
+                      style={{ fontFamily: "TheNextFont", fontSize: "100%" }}
                     >
                       VIEW SCHEDULE
                     </Typography>
@@ -387,7 +371,7 @@ class Home extends Component {
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    width: "60%",
+                    width: "40%",
                     padding: "3% 0",
                     margin: "5% 0 6% 0"
                   }}
@@ -395,7 +379,7 @@ class Home extends Component {
                   component={Link}
                 >
                   <Typography
-                    style={{ fontFamily: "TheNextFont", fontSize: "1.5vw" }}
+                    style={{ fontFamily: "TheNextFont", fontSize: "100%" }}
                   >
                     VIEW RESULT
                   </Typography>

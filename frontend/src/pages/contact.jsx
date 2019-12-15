@@ -17,8 +17,8 @@ const useStyles = makeStyles(theme => ({
       fontSize: "500%",
       marginTop: "15%"
     },
-    fontSize: "1000%",
-    marginTop: "5%",
+    fontSize: "700%",
+    marginTop: "6%",
     marginBottom: "5%"
   },
   buttonColumn: {
@@ -36,12 +36,13 @@ const useStyles = makeStyles(theme => ({
   },
   buttonText: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "200%"
+      fontSize: "130%"
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: "250%"
+      fontSize: "180%"
     },
-    color: "white"
+    color: "white",
+    padding: "1% 0"
   },
   contactInformation: {
     [theme.breakpoints.down("sm")]: {

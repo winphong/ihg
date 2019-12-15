@@ -77,7 +77,12 @@ export default function Calendar({ schedules, isAdmin }) {
 
   return (
     <Grid container>
-      <Grid container md={12} alignItems="center">
+      <Grid
+        container
+        md={12}
+        alignItems="center"
+        style={{ marginBottom: "2%" }}
+      >
         <Grid
           item
           xs={2}
@@ -200,6 +205,7 @@ export default function Calendar({ schedules, isAdmin }) {
                                     printLeftBorder={
                                       currentCount <= previousCount
                                     }
+                                    index={index}
                                   />
                                 </Grid>
                               );
@@ -315,11 +321,12 @@ export default function Calendar({ schedules, isAdmin }) {
                                   <div
                                     className={classes.border}
                                     style={{
-                                      borderLeft: "2.5px solid #C8B06B",
+                                      borderLeft:
+                                        index === 0 ? 0 : "1px solid #C8B06B",
                                       marginLeft: "100%",
                                       height: isIpad ? "7vmax" : "10vmax",
                                       marginTop: isIpad ? "300%" : "350%"
-                                      // borderRight: "2.5px solid red",
+                                      // borderRight: "1px solid red",
                                       // marginLeft: "1.8%",
                                       // backgroundColor: "pink",
                                     }}
@@ -333,6 +340,7 @@ export default function Calendar({ schedules, isAdmin }) {
                                       printLeftBorder={
                                         currentCount <= previousCount
                                       }
+                                      index={index}
                                     />
                                   </div>
                                 </Grid>
@@ -340,8 +348,9 @@ export default function Calendar({ schedules, isAdmin }) {
                                   <div
                                     className={classes.border}
                                     style={{
-                                      // borderLeft: "2.5px solid black",
-                                      borderRight: "2.5px solid #C8B06B",
+                                      // borderLeft: "1px solid black",
+                                      borderRight:
+                                        index === 6 ? 0 : "1px solid #C8B06B",
                                       marginLeft: "200%",
                                       height: isIpad ? "7vmax" : "10vmax",
                                       marginTop: isIpad ? "300%" : "350%"
@@ -433,8 +442,7 @@ const styles = theme => ({
     },
     fontSize: "110%",
     color: "#958F87",
-    fontStyle: "italic",
-    fontWeight: "bold"
+    fontStyle: "italic"
   },
   column: {
     [theme.breakpoints.down("sm")]: {

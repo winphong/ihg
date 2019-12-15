@@ -23,20 +23,20 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
             <Grid item xs={5}>
               <img
                 style={{
-                  width: "90%",
-                  border: hasHalls ? "" : "1px solid black"
+                  width: "90%"
+                  // border: hasHalls ? "" : "1px solid black"
                 }}
-                src={hasHalls ? schedule.halls[0].imgUrl : "./blank.png"}
+                src={hasHalls ? schedule.halls[0].imgUrl : "./Logo.png"}
               />
             </Grid>
             <Grid item xs={2} className={classes.vs}></Grid>
             <Grid item xs={5}>
               <img
                 style={{
-                  width: "90%",
-                  border: hasHalls ? "" : "1px solid black"
+                  width: "90%"
+                  // border: hasHalls ? "" : "1px solid black"
                 }}
-                src={hasHalls ? schedule.halls[1].imgUrl : "./blank.png"}
+                src={hasHalls ? schedule.halls[1].imgUrl : "./Logo.png"}
               />
             </Grid>
           </Grid>
@@ -215,7 +215,7 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "170%"
     },
-    fontSize: "120%",
+    fontSize: "140%",
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },
@@ -248,7 +248,7 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "180%"
     },
-    fontSize: "100%",
+    fontSize: "130%",
     color: "grey",
     lineHeight: "100%",
     marginTop: "1%"

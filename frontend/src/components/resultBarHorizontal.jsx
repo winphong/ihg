@@ -29,7 +29,7 @@ export default function ResultBarHorizontal({ halls }) {
             type={"category"}
             axisLine={false}
             tickLine={false}
-            fontSize={isMobile ? 15 : 25}
+            fontSize={isMobile ? 13 : 18}
             fontFamily={"TheNextFont"}
             tick={{ fill: "black" }}
             textAnchor={"end"}
@@ -47,10 +47,11 @@ export default function ResultBarHorizontal({ halls }) {
             <LabelList
               dataKey="totalPoint"
               position="right"
-              fontSize={isMobile ? 13 : 25}
+              fontSize={isMobile ? 11 : 16}
               fill="#958F87"
               fontWeight={900}
               strokeWidth={0}
+              dx={10}
             />
 
             {halls.map(({ colourCode }, index) => {

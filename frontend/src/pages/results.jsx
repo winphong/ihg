@@ -29,9 +29,9 @@ const styles = theme => ({
       fontSize: "500%",
       marginTop: "20%"
     },
-    fontSize: "1000%",
+    fontSize: "700%",
     textAlign: "center",
-    marginTop: "6%"
+    marginTop: "7%"
   },
   buttonColumn: {
     [theme.breakpoints.only("xs")]: {
@@ -74,13 +74,17 @@ const styles = theme => ({
     }
   },
   barChartTitle: {
-    fontSize: "300%",
-    color: "#C8B06B",
-    fontFamily: "TheNextFont",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
       fontSize: "200%"
-    }
+    },
+    fontSize: "300%",
+    color: "#C8B06B",
+    fontFamily: "TheNextFont",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "40px"
   },
   barChart: {
     textAlign: "center",
@@ -227,6 +231,8 @@ const CustomButton = ({
   );
 };
 
+let startDate;
+
 class Results extends Component {
   state = {
     halls: [],
@@ -252,6 +258,30 @@ class Results extends Component {
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
 
+    const firstDayOfWeek = new Date("5 Jan 2020");
+    const lastDay = new Date(firstDayOfWeek);
+    lastDay.setDate(lastDay.getDate() + 7);
+
+    const schedulesByWeek = schedules.filter(schedule => {
+      const scheduleDate = new Date(schedule.startTime);
+      return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
+    });
+    this.setState({
+      halls,
+      schedules: schedulesByWeek,
+      originalSchedules: [...schedules],
+      sports,
+      isAdmin
+    });
+    // const firstDayOfWeek = new Date(startDate);
+    // firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 7);
+    // const lastDay = new Date(firstDayOfWeek);
+    // lastDay.setDate(lastDay.getDate() + 7);
+    // const schedulesByWeek = originalSchedules.filter(schedule => {
+    //   const scheduleDate = new Date(schedule.startTime);
+    //   return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
+    // });
+
     // const slider = document.querySelector(".slider");
     // const width = window.screen.width;
     // const padding = width * 0.03;
@@ -264,13 +294,6 @@ class Results extends Component {
     //     // left: ((280 + padding) / (280 * 3 + 4 * padding)) * width
     //     left: 280 - padding
     //   });
-    this.setState({
-      halls,
-      schedules,
-      originalSchedules: [...schedules],
-      sports,
-      isAdmin
-    });
   }
 
   // handleNext = limit => {
@@ -323,7 +346,7 @@ class Results extends Component {
   };
 
   handleBack = () => {
-    const { startDate, weekNum, schedules, originalSchedules } = this.state;
+    const { startDate, weekNum, originalSchedules } = this.state;
     const firstDayOfWeek = new Date(startDate);
     firstDayOfWeek.setDate(firstDayOfWeek.getDate() - 7);
 
@@ -342,8 +365,24 @@ class Results extends Component {
   handleSortByDate = () => {
     arr = [];
     idx = 0;
-    const schedules = [...this.state.originalSchedules];
-    this.setState({ schedules, byDate: true, index: 0 });
+    // const schedules = [...this.state.originalSchedules];
+
+    const firstDayOfWeek = new Date("5 Jan 2020");
+    const lastDay = new Date(firstDayOfWeek);
+    lastDay.setDate(lastDay.getDate() + 7);
+
+    const schedulesByWeek = this.state.originalSchedules.filter(schedule => {
+      const scheduleDate = new Date(schedule.startTime);
+      return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
+    });
+
+    this.setState({
+      schedules: schedulesByWeek,
+      byDate: true,
+      index: 0,
+      startDate: new Date("% Jan 2020"),
+      weekNum: -1
+    });
   };
 
   handleSortBySport = sport => {
@@ -353,10 +392,7 @@ class Results extends Component {
     //   return a.sport >= b.sport ? 1 : -1;
     // });
     const schedules = [...this.state.originalSchedules].filter(schedule => {
-      if (
-        schedule.sport ===
-        (sport !== undefined ? sport.name : this.state.sports[0].name)
-      ) {
+      if (schedule.sport === sport.name) {
         return schedule;
       }
     });
@@ -366,7 +402,7 @@ class Results extends Component {
       originalSchedulesBySport: [...schedules],
       byDate: false,
       index: 0,
-      selectedSport: sport ? sport : this.state.sports[0]
+      selectedSport: sport
     });
   };
 
@@ -427,7 +463,10 @@ class Results extends Component {
                 <Grid item sm={1} />
                 <Grid item sm={2}>
                   <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
-                  <Typography className={classes.barChartTitle}>
+                  <Typography
+                    className={classes.barChartTitle}
+                    style={{ fontSize: "200%" }}
+                  >
                     MALE
                   </Typography>
                 </Grid>
@@ -449,7 +488,10 @@ class Results extends Component {
                     dataKey={"femalePoint"}
                     barSize={6}
                   />
-                  <Typography className={classes.barChartTitle}>
+                  <Typography
+                    className={classes.barChartTitle}
+                    style={{ fontSize: "200%" }}
+                  >
                     FEMALE
                   </Typography>
                 </Grid>
@@ -556,12 +598,12 @@ class Results extends Component {
                     }}
                     onClick={this.handleSortByDate}
                   >
-                    BY DATE
+                    BY WEEK
                   </Typography>
                   <Typography
                     className={classes.sortButton}
                     variant="h1"
-                    onClick={this.handleSortBySport}
+                    onClick={() => this.handleSortBySport(this.state.sports[0])}
                     style={{
                       color: !byDate ? "black" : "#D3DBD9"
                     }}
@@ -584,7 +626,7 @@ class Results extends Component {
                         textAlign: "right"
                       }}
                     >
-                      BY DATE
+                      BY WEEK
                     </Typography>
                   </Grid>
                   <Grid item xs={2}>

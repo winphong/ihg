@@ -42,7 +42,14 @@ export default function ResultsTable({
             currentDate = dateformat(new Date(schedule.startTime), "dd mm");
             const date = new Date(schedule.startTime);
             return (
-              <div key={index}>
+              <div
+                key={index}
+                style={
+                  {
+                    // WebkitScrollbar: { width: "0px", background: "transparent" } // optional: just make scrollbar invisible / }
+                  }
+                }
+              >
                 <Typography className={classes.date}>
                   {(date.getDate() === 1 ||
                     date.getDate() === 21 ||
@@ -108,7 +115,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
     },
-    padding: "1% 0 1% 2%",
+    padding: "3% 0 3% 2%",
     // backgroundColor: "cyan",
     color: "#958F87",
     fontWeight: "bold"

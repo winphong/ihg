@@ -17,10 +17,10 @@ import auth from "../services/miscService";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    position: "fixed",
-    top: 0,
-    width: "100%",
-    zIndex: 1000
+    // position: "fixed",
+    // top: 0,
+    // width: "100%",
+    // zIndex: 1000
     // right: 0,
     // top: 0,
     // border: "3px solid #73AD21",
@@ -31,22 +31,11 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     [theme.breakpoints.down("sm")]: {
-      width: "20%"
+      display: "flex",
+      justifyContent: "center",
+      width: "83.33333%"
     },
-    [theme.breakpoints.up("sm")]: {
-      width: "10%",
-      marginLeft: "1%"
-    }
-    // display: "flex",
-    // alignItems: "center"
-  },
-  iconContainer: {
-    [theme.breakpoints.down("sm")]: {
-      justifyContent: "center"
-    },
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "left"
+    backgroundColor: "transparent"
   }
 }));
 
@@ -61,9 +50,6 @@ const selections = [
 
 export default function NavBar({ pathname, handleTabChange }) {
   const classes = useStyles();
-  const showIHG = useMediaQuery({
-    minWidth: 1000
-  });
 
   const [state, setState] = React.useState({
     top: false,
@@ -118,7 +104,7 @@ export default function NavBar({ pathname, handleTabChange }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="inherit">
+      <AppBar color="inherit" style={{ boxShadow: "1px 1px 5px #aaaaaa" }}>
         <Toolbar disableGutters>
           {/* Mobile */}
           <MediaQuery maxWidth={959}>
@@ -133,59 +119,71 @@ export default function NavBar({ pathname, handleTabChange }) {
               {sideList("left")}
             </Drawer>
           </MediaQuery>
-          <div className={classes.iconContainer}>
+          <IconButton
+            className={classes.logo}
+            disableRipple
+            color="inherit"
+            onClick={() => handleTabChange("/home")}
+            to={"/home"}
+            component={Link}
+          >
             <img
               src="/Logo.png"
-              className={classes.logo}
-              // style={{
-              // display: "inline"
-              // }}
+              // className={classes.logo}
+              style={{
+                height: "50px"
+              }}
             />
-            {showIHG && (
-              <Typography variant="h1" className={classes.title}>
-                IHG
-              </Typography>
-            )}
-          </div>
+          </IconButton>
+          {/* 
           <MediaQuery maxWidth={959}>
             <Button disabled style={{ padding: 0 }}></Button>
-          </MediaQuery>
+          </MediaQuery> */}
+
           {/* Laptop */}
           <MediaQuery minWidth={960}>
-            {selections.map(selection => {
-              const newPathname = `/${selection.toLowerCase()}`;
-              return (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "flex-end"
+              }}
+            >
+              {selections.map(selection => {
+                const newPathname = `/${selection.toLowerCase()}`;
+                return (
+                  <IconButton
+                    style={{
+                      backgroundColor: "transparent",
+                      color: pathname === newPathname ? "#252527" : "#958F87",
+                      fontWeight: pathname === newPathname ? "bold" : "normal"
+                    }}
+                    disableRipple
+                    color="inherit"
+                    onClick={() => handleTabChange(newPathname)}
+                    to={newPathname}
+                    component={Link}
+                  >
+                    <Typography>{selection}</Typography>
+                  </IconButton>
+                );
+              })}
+              {auth.getCurrentAdmin() && (
                 <IconButton
                   style={{
                     backgroundColor: "transparent",
-                    color: pathname === newPathname ? "#252527" : "#958F87",
+                    color: "#958F87",
                     fontWeight: "bold"
                   }}
                   disableRipple
                   color="inherit"
-                  onClick={() => handleTabChange(newPathname)}
-                  to={newPathname}
+                  to={"/logout"}
                   component={Link}
                 >
-                  {selection}
+                  Logout
                 </IconButton>
-              );
-            })}
-            {auth.getCurrentAdmin() && (
-              <IconButton
-                style={{
-                  backgroundColor: "transparent",
-                  color: "#958F87",
-                  fontWeight: "bold"
-                }}
-                disableRipple
-                color="inherit"
-                to={"/logout"}
-                component={Link}
-              >
-                Logout
-              </IconButton>
-            )}
+              )}
+            </div>
           </MediaQuery>
         </Toolbar>
       </AppBar>

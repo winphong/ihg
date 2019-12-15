@@ -23,8 +23,8 @@ const styles = theme => ({
       marginTop: "15%"
     },
     color: "#C8B06B",
-    fontSize: "1000%",
-    marginTop: "6%"
+    fontSize: "700%",
+    marginTop: "7%"
   },
   buttonColumn: {
     [theme.breakpoints.only("xs")]: {
@@ -108,7 +108,7 @@ class Schedule extends Component {
               <Grid item xs={1} md={1} />
               <Grid item xs={10} md={10}>
                 <Typography variant="h1" className={classes.title}>
-                  THIS WEEK'S GAMES
+                  UPCOMING GAMES
                 </Typography>
               </Grid>
               <Grid item xs={1} md={1} className={classes.buttonColumn}>

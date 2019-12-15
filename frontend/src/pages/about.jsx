@@ -30,9 +30,9 @@ const styles = theme => ({
       marginTop: "15%"
     },
     textAlign: "center",
-    fontSize: "1000%",
+    fontSize: "700%",
     color: "#C8B06B",
-    marginTop: "6%"
+    marginTop: "7%"
   },
   titleCaption: {
     [theme.breakpoints.down("sm")]: {
@@ -73,7 +73,7 @@ const styles = theme => ({
   border: {
     [theme.breakpoints.down("sm")]: {},
     // paddingLeft: "4%",
-    marginTop: "10%"
+    marginTop: "15%"
   },
   staticImage: {
     width: "70%"
@@ -106,7 +106,7 @@ const styles = theme => ({
     [theme.breakpoints.only("sm")]: {
       marginTop: "5%"
     },
-    marginTop: "10%"
+    marginTop: "15%"
   },
   sports: {
     flexShrink: 0,
@@ -118,18 +118,6 @@ const styles = theme => ({
     // minHeight: "auto"
   },
   sportPhoto: {
-    // [theme.breakpoints.only("xs")]: {
-    //   width: "100%"
-    // },
-    // [theme.breakpoints.only("sm")]: {
-    //   width: "100%"
-    // },
-    // [theme.breakpoints.only("md")]: {
-    //   width: "100%"
-    // },
-    [theme.breakpoints.up("lg")]: {
-      width: "80%"
-    },
     width: "100%"
   },
   sportsInformationContainer: {
@@ -142,7 +130,7 @@ const styles = theme => ({
     [theme.breakpoints.only("sm")]: {
       padding: "3% 10%"
     },
-    width: "83.33%",
+    width: "63.33333%",
     position: "absolute"
     // backgroundColor: "beige"
   },
@@ -151,8 +139,8 @@ const styles = theme => ({
       fontSize: "80%"
     },
     fontSize: "120%",
-    color: "#958F87",
-    fontWeight: "bold"
+    color: "#252527"
+    // fontWeight: "bold"
   }
 });
 
@@ -204,12 +192,7 @@ class About extends Component {
                   Eget egestas purus viverra accumsan. Feugiat in fermentum
                   posuere urna nec tincidunt praesent semper feugiat. Ut tortor
                   pretium viverra suspendisse potenti nullam. Lacus suspendisse
-                  faucibus interdum posuere lorem ipsum dolor sit amet. Vitae
-                  ultricies leo integer malesuada nunc vel. Molestie ac feugiat
-                  sed lectus vestibulum. Metus aliquam eleifend mi in nulla
-                  posuere sollicitudin aliquam ultrices. Tincidunt praesent
-                  semper feugiat nibh sed pulvinar. Fringilla urna porttitor
-                  rhoncus dolor purus.
+                  faucibus interdum posuere lorem ipsum dolor sit amet.
                 </Typography>
               </Grid>
               {/* Hall of NUS */}
@@ -230,7 +213,12 @@ class About extends Component {
                     return (
                       <React.Fragment>
                         <Grid item xs={false} md={index === 3 ? 3 : false} />
-                        <Grid item xs={6} md={3}>
+                        <Grid
+                          item
+                          xs={6}
+                          md={3}
+                          style={{ marginBottom: index < 4 ? "5%" : 0 }}
+                        >
                           <img
                             className={classes.staticImage}
                             src={`/${hall.abbreviation}.png`}
@@ -270,7 +258,12 @@ class About extends Component {
                       <React.Fragment>
                         <Grid item xs={false} md={index === 3 ? 3 : false} />
 
-                        <Grid item xs={6} md={3}>
+                        <Grid
+                          item
+                          xs={6}
+                          md={3}
+                          style={{ marginBottom: index < 4 ? "5%" : 0 }}
+                        >
                           <img
                             className={classes.staticImage}
                             src={`/${hall.abbreviation}.png`}
@@ -379,9 +372,9 @@ class About extends Component {
                           className={classes.sportPhoto}
                           src={this.state.imgUrl}
                         />
-                        <Typography className={classes.information}>
+                        {/* <Typography className={classes.information}>
                           {selectedSport.name}
-                        </Typography>
+                        </Typography> */}
                         <Typography className={classes.information}>
                           {selectedSport.description}
                         </Typography>

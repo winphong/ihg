@@ -42,7 +42,7 @@ router.get("/:id", async (req, res) => {
 
 // get all schedules
 router.get("/", async (req, res) => {
-  const schedule = await Schedule.find().sort({ startTime: 1 });
+  const schedule = await Schedule.find().sort({ startTime: -1 });
   res.send(schedule);
 });
 
