@@ -6,6 +6,13 @@ import { TextField, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { CSSTransition } from "react-transition-group";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+//
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import IconButton from "@material-ui/core/IconButton";
+import green from "@material-ui/core/colors/green";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const useStyles = makeStyles(theme => ({
   title: {
@@ -76,7 +83,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ResultsTable() {
-  window.scrollTo({ top: 0 });
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" }, [null]);
+  });
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -87,6 +96,8 @@ export default function ResultsTable() {
     subject: "",
     message: ""
   });
+  const [open, setOpen] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
 
   function handleChange({ currentTarget: input }) {
     const newEnquiry = { ...enquiry };
@@ -95,7 +106,21 @@ export default function ResultsTable() {
   }
 
   async function handleSubmit() {
-    await miscService.createNewEnquiry(enquiry);
+    await miscService
+      .createNewEnquiry(enquiry)
+      .then(() => {
+        setSuccess(true);
+        handleOpen();
+      })
+      .catch(() => handleOpen());
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
+  function handleOpen() {
+    setOpen(true);
   }
 
   return (
@@ -248,6 +273,37 @@ export default function ResultsTable() {
           <Grid item xs={1} md={3} />
         </Grid>
       </CSSTransition>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left"
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: success ? green[600] : "#d32f2f"
+          }}
+          message={
+            <span id="client-snackbar" className={classes.message}>
+              {success
+                ? "Succesfully updated!"
+                : "An error has occured. Try again."}
+            </span>
+          }
+          action={[
+            <IconButton key="close" color="inherit" onClick={handleClose}>
+              {success ? (
+                <CheckCircleIcon className={classes.icon} />
+              ) : (
+                <ErrorIcon className={classes.icon} />
+              )}
+            </IconButton>
+          ]}
+        />
+      </Snackbar>
     </React.Fragment>
   );
 }

@@ -14,7 +14,11 @@ function getUpcomingSchedules(date) {
   return http.get(getUrl(`upcomingSchedules/${date}`));
 }
 
-function getAllSchedules() {
+function getAscendingSchedules() {
+  return http.get(getUrl("/asc"));
+}
+
+function getDescendingSchedules() {
   return http.get(apiEndpoint);
 }
 
@@ -33,7 +37,8 @@ function updateScore(id, req) {
 export default {
   getSchedule,
   getUpcomingSchedules,
-  getAllSchedules,
+  getAscendingSchedules,
+  getDescendingSchedules,
   createSchedule,
   updateScore,
   updateSchedule

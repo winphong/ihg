@@ -199,7 +199,7 @@ const useStyles = makeStyles(theme => ({
       fontSize: "90%"
     },
     fontSize: "100%",
-    color: "#D3DBD9",
+    color: "#958F87",
     fontStyle: "italic"
     // fontWeight: "bold"
   },

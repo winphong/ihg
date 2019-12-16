@@ -89,7 +89,7 @@ class Schedule extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
-    const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: schedules } = await scheduleService.getAscendingSchedules();
     const admin = await miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
     this.setState({ schedules, isAdmin });
@@ -101,7 +101,7 @@ class Schedule extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedules, isAdmin, redirect } = this.state;
+    const { schedules, isAdmin } = this.state;
 
     return (
       <Grid container className={classes.container}>

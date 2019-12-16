@@ -33,6 +33,11 @@ router.get("/upcomingSchedules/:date", async (req, res) => {
   res.send(schedules);
 });
 
+router.get("/asc", async (req, res) => {
+  const schedule = await Schedule.find().sort({ startTime: 1 });
+  res.send(schedule);
+});
+
 // get schedule by id
 router.get("/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);

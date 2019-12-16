@@ -12,7 +12,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import MediaQuery from "react-responsive";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 import auth from "../services/miscService";
 
 const useStyles = makeStyles(theme => ({
@@ -162,8 +162,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                   <IconButton
                     style={{
                       backgroundColor: "transparent",
-                      color: pathname === newPathname ? "#252527" : "#958F87",
-                      fontWeight: pathname === newPathname ? "bold" : "normal"
+                      color: pathname === newPathname ? "#252527" : "#958F87"
                     }}
                     disableRipple
                     color="inherit"
@@ -171,7 +170,13 @@ export default function NavBar({ pathname, handleTabChange }) {
                     to={newPathname}
                     component={Link}
                   >
-                    <Typography>{selection}</Typography>
+                    <Typography
+                      style={{
+                        fontWeight: pathname === newPathname ? 900 : ""
+                      }}
+                    >
+                      {selection}
+                    </Typography>
                   </IconButton>
                 );
               })}
@@ -190,7 +195,6 @@ export default function NavBar({ pathname, handleTabChange }) {
                   component={Link}
                 >
                   <Typography>Logout</Typography>
-                  Logout
                 </IconButton>
               )}
             </div>

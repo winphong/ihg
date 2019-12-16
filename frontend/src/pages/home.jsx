@@ -143,7 +143,7 @@ const styles = theme => ({
   },
   buttonText: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "60%"
+      fontSize: "59%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "100%"

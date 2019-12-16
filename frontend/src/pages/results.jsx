@@ -201,7 +201,7 @@ const CustomButton = ({
           </IconButton>
         </div>
       </Grid>
-      <Grid itex xs={4}>
+      <Grid item xs={4}>
         <Typography variant="h1" className={classes.week}>
           Week {weekNum}
         </Typography>
@@ -256,7 +256,7 @@ class Results extends Component {
   async componentDidMount() {
     window.scrollTo({ top: 0 });
     const { data: halls } = await hallService.getAllHalls();
-    const { data: schedules } = await scheduleService.getAllSchedules();
+    const { data: schedules } = await scheduleService.getDescendingSchedules();
     const { data: sports } = await sportService.getAllSports();
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
@@ -530,7 +530,9 @@ class Results extends Component {
                       padding: "0 3%"
                       // transform: "scale(0.8)",
                       // backgroundColor: "pink"
-                      // order: -1
+                      // order: -1,
+                      // borderLeft: "0.5px #958F87 solid",
+                      // borderRight: "0.5px #958F87 solid"
                     }}
                   >
                     <ResultBar

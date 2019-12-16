@@ -36,7 +36,7 @@ export default function Slider({ schedules }) {
   const lastDay = new Date(weeks[idx]);
   lastDay.setDate(lastDay.getDate() + 7);
 
-  const currentWeekSchedule = schedules.filter(schedule => {
+  let currentWeekSchedule = schedules.filter(schedule => {
     const scheduleDate = new Date(schedule.startTime);
     return scheduleDate >= firstDay && scheduleDate < lastDay;
   });
