@@ -40,6 +40,16 @@ export default function Calendar({ schedules, isAdmin }) {
     maxWidth: 800,
     orientation: "portrait"
   });
+  const isIpadLandscape = useMediaQuery({
+    minWidth: 1000,
+    maxWidth: 1100,
+    orientation: "landscape"
+  });
+
+  let height = "";
+  if (isIpadLandscape) {
+    height = "130vmax";
+  }
 
   function handleBack(isMobile) {
     setStay(true);
@@ -129,9 +139,10 @@ export default function Calendar({ schedules, isAdmin }) {
         <Grid
           item
           xs={12}
+          className={classes.schedulesTableContainer}
           style={{
-            minHeight: "100vmax"
-            // backgroundColor: "beige"
+            height: height,
+            backgroundColor: "beige"
           }}
         >
           <Grid container>
@@ -457,6 +468,10 @@ const styles = theme => ({
       fontSize: "250%"
     },
     fontSize: "150%"
+  },
+  schedulesTableContainer: {
+    height: "100vmax",
+    backgroundColor: "beige"
   }
 });
 

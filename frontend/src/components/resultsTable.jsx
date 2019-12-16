@@ -20,6 +20,15 @@ export default function ResultsTable({
     maxWidth: 1030,
     orientation: "portrait"
   });
+  const xxl = useMediaQuery({
+    minWidth: 1500
+  });
+  let height = "";
+  if (xxl) {
+    height = "36vmax";
+  } else if (isIpadProPotrait) {
+    height = "40vmax";
+  }
 
   let currentDate = "";
 
@@ -31,10 +40,7 @@ export default function ResultsTable({
         </Typography>
       )}
       <div style={{ overflow: "hidden" }}>
-        <div
-          className={classes.scrollable}
-          style={{ height: isIpadProPotrait ? "40vmax" : "" }}
-        >
+        <div className={classes.scrollable} style={{ height: height }}>
           {schedules.map((schedule, index) => {
             if (
               byDate &&
@@ -130,13 +136,13 @@ const useStyles = makeStyles(theme => ({
       height: "70vmax"
     },
     [theme.breakpoints.only("md")]: {
-      height: "47vmax"
+      height: "53vmax"
     },
     [theme.breakpoints.only("lg")]: {
       height: "43vmax"
     },
     [theme.breakpoints.only("xl")]: {
-      height: "55vh"
+      height: "40vmax"
     },
     // backgroundColor: "beige",
     display: "flex",
