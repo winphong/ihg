@@ -17,6 +17,9 @@ const useStyles = makeStyles(theme => ({
       fontSize: "500%",
       marginTop: "15%"
     },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "600%"
+    },
     fontSize: "700%",
     marginTop: "6%",
     marginBottom: "5%"

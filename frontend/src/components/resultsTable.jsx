@@ -39,7 +39,7 @@ export default function ResultsTable({
           {selectedSport.name}
         </Typography>
       )}
-      <div style={{ overflow: "hidden" }}>
+      <div className={classes.scrollableContainer}>
         <div className={classes.scrollable} style={{ height: height }}>
           {schedules.map((schedule, index) => {
             if (
@@ -149,6 +149,11 @@ const useStyles = makeStyles(theme => ({
     overflowY: "scroll",
     flexDirection: "column",
     marginRight: "-13px"
+  },
+  scrollableContainer: {
+    [theme.breakpoints.up("md")]: {
+      overflow: "hidden"
+    }
   }
 }));
 

@@ -22,6 +22,9 @@ const styles = theme => ({
       fontSize: "500%",
       marginTop: "15%"
     },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "600%"
+    },
     color: "#C8B06B",
     fontSize: "700%",
     marginTop: "7%"

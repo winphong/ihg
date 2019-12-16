@@ -140,10 +140,7 @@ export default function Calendar({ schedules, isAdmin }) {
           item
           xs={12}
           className={classes.schedulesTableContainer}
-          style={{
-            height: height,
-            backgroundColor: "beige"
-          }}
+          style={{ height: height }}
         >
           <Grid container>
             {(notMobile ? days : mobileDays).map((day, index) => {
@@ -470,8 +467,8 @@ const styles = theme => ({
     fontSize: "150%"
   },
   schedulesTableContainer: {
-    height: "100vmax",
-    backgroundColor: "beige"
+    height: "100vmax"
+    // backgroundColor: "beige"
   }
 });
 
