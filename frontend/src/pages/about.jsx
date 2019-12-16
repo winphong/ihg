@@ -125,14 +125,10 @@ const styles = theme => ({
       paddingLeft: "5%",
       display: "flex",
       flexDirection: "column",
-      width: "50%"
+      width: "55%"
     },
-    [theme.breakpoints.only("sm")]: {
-      padding: "3% 10%"
-    },
-    width: "63.33333%",
+    width: "83.33%",
     position: "absolute"
-    // backgroundColor: "beige"
   },
   information: {
     [theme.breakpoints.down("sm")]: {

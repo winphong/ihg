@@ -39,8 +39,7 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
       justifyContent: "center",
       width: "83.33333%"
-    },
-    backgroundColor: "transparent"
+    }
   }
 }));
 
@@ -113,7 +112,7 @@ export default function NavBar({ pathname, handleTabChange }) {
         <Toolbar disableGutters>
           {/* Mobile */}
           <MediaQuery maxWidth={959}>
-            <Button onClick={toggleDrawer("left", true)}>
+            <Button onClick={toggleDrawer("left", true)} disableRipple>
               <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
             </Button>
             <Drawer
@@ -131,6 +130,9 @@ export default function NavBar({ pathname, handleTabChange }) {
             onClick={() => handleTabChange("/home")}
             to={"/home"}
             component={Link}
+            style={{
+              backgroundColor: "transparent"
+            }}
           >
             <img
               src="/Logo.png"
@@ -181,10 +183,13 @@ export default function NavBar({ pathname, handleTabChange }) {
                     fontWeight: "bold"
                   }}
                   disableRipple
+                  disableTouchRipple
+                  disableFocusRipple
                   color="inherit"
                   to={"/logout"}
                   component={Link}
                 >
+                  <Typography>Logout</Typography>
                   Logout
                 </IconButton>
               )}

@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import MediaQuery from "react-responsive";
 import hallService from "../services/hallService";
 import ResultBarHorizontal from "./../components/resultBarHorizontal";
-import { Button } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
   banner: {
@@ -21,11 +21,11 @@ const styles = theme => ({
       marginTop: "15%"
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%",
-      height: "45vmax"
+      marginTop: "8%"
+      // height: "45vmax"
     },
-    height: "40vmax",
-    marginTop: "5%",
+    height: "45vmax",
+    marginTop: "4%",
     backgroundImage: "url('./headers/home.jpg')",
     backgroundSize: "cover"
   },
@@ -58,10 +58,10 @@ const styles = theme => ({
       fontSize: "300%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "400%"
+      fontSize: "450%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "700%"
+      fontSize: "650%"
     },
     [theme.breakpoints.only("lg")]: {
       fontSize: "800%"

@@ -30,38 +30,58 @@ export default function ResultsTable({
           {selectedSport.name}
         </Typography>
       )}
-      <div
-        className={classes.scrollable}
-        style={{ height: isIpadProPotrait ? "40vmax" : "" }}
-      >
-        {schedules.map((schedule, index) => {
-          if (
-            byDate &&
-            dateformat(new Date(schedule.startTime), "dd mm") !== currentDate
-          ) {
-            currentDate = dateformat(new Date(schedule.startTime), "dd mm");
-            const date = new Date(schedule.startTime);
-            return (
-              <div
-                key={index}
-                style={
-                  {
-                    // WebkitScrollbar: { width: "0px", background: "transparent" } // optional: just make scrollbar invisible / }
+      <div style={{ overflow: "hidden" }}>
+        <div
+          className={classes.scrollable}
+          style={{ height: isIpadProPotrait ? "40vmax" : "" }}
+        >
+          {schedules.map((schedule, index) => {
+            if (
+              byDate &&
+              dateformat(new Date(schedule.startTime), "dd mm") !== currentDate
+            ) {
+              currentDate = dateformat(new Date(schedule.startTime), "dd mm");
+              const date = new Date(schedule.startTime);
+              return (
+                <div
+                  key={index}
+                  style={
+                    {
+                      // WebkitScrollbar: { width: "0px", background: "transparent" } // optional: just make scrollbar invisible / }
+                    }
                   }
-                }
-              >
-                <Typography className={classes.date}>
-                  {(date.getDate() === 1 ||
-                    date.getDate() === 21 ||
-                    date.getDate() === 31) &&
-                    dateformat(date, "dd'st' mmm")}
-                  {(date.getDate() === 2 || date.getDate() === 22) &&
-                    dateformat(date, "dd'nd' mmm")}
-                  {(date.getDate() === 3 || date.getDate() === 23) &&
-                    dateformat(date, "dd'rd' mmm")}
-                  {![1, 2, 3, 21, 22, 23, 31].includes(date.getDate()) &&
-                    dateformat(date, "dd'th' mmm")}
-                </Typography>
+                >
+                  <Typography className={classes.date}>
+                    {(date.getDate() === 1 ||
+                      date.getDate() === 21 ||
+                      date.getDate() === 31) &&
+                      dateformat(date, "dd'st' mmm")}
+                    {(date.getDate() === 2 || date.getDate() === 22) &&
+                      dateformat(date, "dd'nd' mmm")}
+                    {(date.getDate() === 3 || date.getDate() === 23) &&
+                      dateformat(date, "dd'rd' mmm")}
+                    {![1, 2, 3, 21, 22, 23, 31].includes(date.getDate()) &&
+                      dateformat(date, "dd'th' mmm")}
+                  </Typography>
+                  {schedule.stage === "Carnival" ? (
+                    <ResultRowCarnival
+                      schedule={schedule}
+                      isAdmin={isAdmin}
+                      byDate={byDate}
+                    />
+                  ) : (
+                    <ResultRow
+                      schedule={schedule}
+                      isAdmin={isAdmin}
+                      byDate={byDate}
+                    />
+                  )}
+                  <Divider />
+                </div>
+              );
+            }
+            return (
+              <div key={index}>
                 {schedule.stage === "Carnival" ? (
                   <ResultRowCarnival
                     schedule={schedule}
@@ -78,26 +98,8 @@ export default function ResultsTable({
                 <Divider />
               </div>
             );
-          }
-          return (
-            <div key={index}>
-              {schedule.stage === "Carnival" ? (
-                <ResultRowCarnival
-                  schedule={schedule}
-                  isAdmin={isAdmin}
-                  byDate={byDate}
-                />
-              ) : (
-                <ResultRow
-                  schedule={schedule}
-                  isAdmin={isAdmin}
-                  byDate={byDate}
-                />
-              )}
-              <Divider />
-            </div>
-          );
-        })}
+          })}
+        </div>
       </div>
     </React.Fragment>
   );
@@ -128,18 +130,19 @@ const useStyles = makeStyles(theme => ({
       height: "70vmax"
     },
     [theme.breakpoints.only("md")]: {
-      height: "50vmax"
+      height: "47vmax"
     },
     [theme.breakpoints.only("lg")]: {
       height: "43vmax"
     },
     [theme.breakpoints.only("xl")]: {
-      height: "40vmax"
+      height: "55vh"
     },
     // backgroundColor: "beige",
     display: "flex",
     overflowY: "scroll",
-    flexDirection: "column"
+    flexDirection: "column",
+    marginRight: "-13px"
   }
 }));
 
