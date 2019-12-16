@@ -20,9 +20,14 @@ export default function ResultsTable({
     maxWidth: 1030,
     orientation: "portrait"
   });
-  const xxl = useMediaQuery({
-    minWidth: 1500
+  const xxl = useMediaQuery({ minWidth: 1500 });
+  const isLaptop = useMediaQuery({ minWidth: 1100 });
+  const isIpadProLandscape = useMediaQuery({
+    minWidth: 1360,
+    maxWidth: 1370,
+    orientation: "landscape"
   });
+
   let height = "";
   if (xxl) {
     height = "36vmax";
@@ -40,7 +45,13 @@ export default function ResultsTable({
         </Typography>
       )}
       <div className={classes.scrollableContainer}>
-        <div className={classes.scrollable} style={{ height: height }}>
+        <div
+          className={classes.scrollable}
+          style={{
+            height: height,
+            marginRight: isLaptop && !isIpadProLandscape ? "-13px" : ""
+          }}
+        >
           {schedules.map((schedule, index) => {
             if (
               byDate &&
@@ -144,11 +155,13 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.only("xl")]: {
       height: "40vmax"
     },
+    [theme.breakpoints.up("md")]: {
+      // marginRight: "-13px"
+    },
     // backgroundColor: "beige",
     display: "flex",
     overflowY: "scroll",
-    flexDirection: "column",
-    marginRight: "-13px"
+    flexDirection: "column"
   },
   scrollableContainer: {
     [theme.breakpoints.up("md")]: {
