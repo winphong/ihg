@@ -229,8 +229,8 @@ const styles = theme => ({
   border: {
     [theme.breakpoints.up("md")]: {
       position: "absolute",
-      height: "5vmax",
-      marginTop: "25%",
+      height: "5.5vmax",
+      marginTop: "35%",
       width: "100%"
     },
     [theme.breakpoints.down("md")]: {
@@ -273,7 +273,8 @@ const styles = theme => ({
     },
     fontStyle: "italic",
     fontSize: "90%",
-    color: "#958F87"
+    color: "#958F87",
+    minHeight: "35px"
   }
 });
 

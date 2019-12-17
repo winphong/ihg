@@ -284,7 +284,47 @@ class ScheduleForm extends Component {
                     </Grid>
 
                     <Grid item xs={12}>
-                      <TextField
+                      <FormControl
+                        variant="outlined"
+                        fullWidth
+                        className={classes.formControl}
+                      >
+                        <InputLabel className={classes.label} required>
+                          Venue
+                        </InputLabel>
+                        <Select
+                          onChange={this.handleChange}
+                          name="venue"
+                          value={schedule.venue}
+                          input={<OutlinedInput />}
+                        >
+                          <MenuItem value=""></MenuItem>
+                          {[
+                            "CLB Slope",
+                            "Handball Court 1",
+                            "Handball Court 2",
+                            "KE VII Hall",
+                            "MPSH 5",
+                            "MPSH 6",
+                            "Netball Court 1 & 2",
+                            "Netball Court 3 & 4",
+                            "USC Field 1",
+                            "USC Field 2",
+                            "USC Field 2 & 3",
+                            "USC Field 3",
+                            "USC Indoor Court",
+                            "USC Squash Court",
+                            "USC Swimming Pool",
+                            "USC Tennis Court",
+                            "USC Track & Grandstand",
+                            "UTSH 1",
+                            "UTSH 2"
+                          ].map(venue => {
+                            return <MenuItem value={venue}>{venue}</MenuItem>;
+                          })}
+                        </Select>
+                      </FormControl>
+                      {/* <TextField
                         variant="outlined"
                         required
                         name="venue"
@@ -294,7 +334,7 @@ class ScheduleForm extends Component {
                         onChange={this.handleChange}
                         className={classes.formControl}
                         value={schedule.venue}
-                      />
+                      /> */}
                     </Grid>
 
                     <Grid item xs={12}>

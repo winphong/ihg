@@ -40,16 +40,46 @@ export default function Calendar({ schedules, isAdmin }) {
     maxWidth: 800,
     orientation: "portrait"
   });
-  const isIpadLandscape = useMediaQuery({
-    minWidth: 1000,
-    maxWidth: 1100,
-    orientation: "landscape"
+  const md = useMediaQuery({
+    minWidth: 960,
+    maxWidth: 1060
+    // orientation: "landscape"
+  });
+  const mdplus = useMediaQuery({
+    minWidth: 1061,
+    maxWidth: 1220
+    // orientation: "landscape"
   });
 
-  let height = "";
-  if (isIpadLandscape) {
-    height = "130vmax";
-  }
+  let start = new Date("5 Jan 2020");
+  let end = new Date(start);
+  end.setDate(end.getDate() + 7);
+
+  let currentDate = "";
+  let count = 0;
+  let max = 0;
+  // const arr = ["11 Jan", "18 Jan", "25 Jan", "01 Feb", "08 Feb", "10 Feb"];
+  const arrayOfMaxSchedulePerWeek = [];
+
+  schedules.map((schedule, index) => {
+    if (currentDate !== dateformat(schedule.startTime, "ddmmm")) {
+      currentDate = dateformat(schedule.startTime, "ddmmm");
+      if (count > max) {
+        max = count;
+      }
+      if (new Date(schedule.startTime) >= end) {
+        start.setDate(start.getDate() + 7);
+        end.setDate(end.getDate() + 7);
+        arrayOfMaxSchedulePerWeek.push(max);
+        max = 0;
+      }
+      count = 0;
+    }
+    count++;
+    if (index === schedules.length - 1) {
+      arrayOfMaxSchedulePerWeek.push(count);
+    }
+  });
 
   function handleBack(isMobile) {
     setStay(true);
@@ -140,7 +170,11 @@ export default function Calendar({ schedules, isAdmin }) {
           item
           xs={12}
           className={classes.schedulesTableContainer}
-          style={{ height: height }}
+          style={{
+            height: `${arrayOfMaxSchedulePerWeek[weekNum + 1] *
+              (md ? 16 : mdplus ? 15 : 13) +
+              4}vw`
+          }}
         >
           <Grid container>
             {(notMobile ? days : mobileDays).map((day, index) => {
@@ -255,7 +289,7 @@ export default function Calendar({ schedules, isAdmin }) {
                       style={{
                         height: "7%",
                         position: "absolute",
-                        backgroundColor: "pink",
+                        // backgroundColor: "pink",
                         zIndex: 100
                       }}
                     ></div>
@@ -332,7 +366,7 @@ export default function Calendar({ schedules, isAdmin }) {
                                       borderLeft:
                                         index === 0 ? 0 : "1px solid #C8B06B",
                                       marginLeft: "100%",
-                                      height: isIpad ? "7vmax" : "10vmax",
+                                      height: isIpad ? "8vmax" : "10vmax",
                                       marginTop: isIpad ? "300%" : "350%"
                                       // borderRight: "1px solid red",
                                       // marginLeft: "1.8%",
@@ -360,7 +394,7 @@ export default function Calendar({ schedules, isAdmin }) {
                                       borderRight:
                                         index === 6 ? 0 : "1px solid #C8B06B",
                                       marginLeft: "200%",
-                                      height: isIpad ? "7vmax" : "10vmax",
+                                      height: isIpad ? "8vmax" : "10vmax",
                                       marginTop: isIpad ? "300%" : "350%"
                                       // marginLeft: "1.8%",
                                       // backgroundColor: "pink",
@@ -467,7 +501,7 @@ const styles = theme => ({
     fontSize: "150%"
   },
   schedulesTableContainer: {
-    height: "100vmax"
+    // minHeight: "120vmax"
     // backgroundColor: "beige"
   }
 });

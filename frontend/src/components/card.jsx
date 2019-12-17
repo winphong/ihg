@@ -128,7 +128,10 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
         <Typography variant="h1" className={classes.sport}>
           {schedule.sport.toUpperCase()} {schedule.stage.toUpperCase()}
         </Typography>
-        <Typography className={classes.information}>
+        <Typography
+          className={classes.information}
+          style={{ fontSize: size === "small" ? "100%" : "" }}
+        >
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
           {schedule.venue}
         </Typography>
