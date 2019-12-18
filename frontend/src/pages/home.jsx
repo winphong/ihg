@@ -156,7 +156,7 @@ const styles = theme => ({
     width: "100%",
     textAlign: "center",
     backgroundColor: "#C8B06B",
-    padding: "6% 0",
+    padding: "4% 0",
     textDecoration: "none",
     borderRadius: "3px"
   },
@@ -413,7 +413,12 @@ class Home extends Component {
           {/*  */}
           <MediaQuery maxDeviceWidth={1279}>
             <Grid container xs={12} style={{ padding: "3% 5%" }}>
-              <Grid item xs={9}>
+              <Grid
+                item
+                xs={9}
+                className={classes.buttonTextContainer}
+                style={{ justifyContent: "flex-start" }}
+              >
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
@@ -445,7 +450,12 @@ class Home extends Component {
               )}
             </Grid>
             <Grid container xs={12} style={{ padding: "3% 5%" }}>
-              <Grid item xs={9}>
+              <Grid
+                item
+                xs={9}
+                className={classes.buttonTextContainer}
+                style={{ justifyContent: "flex-start" }}
+              >
                 <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>

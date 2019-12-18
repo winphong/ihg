@@ -683,31 +683,32 @@ class Results extends Component {
                       </Typography>
                     </Grid>
                     <Grid item xs={2} />
-                    <Grid item xs={12} style={{ height: "7vmax" }}>
+                    <Grid item xs={12}>
                       <div
                         style={{
                           display: "flex",
                           overflowX: "scroll",
-                          padding: "3% 0"
+                          padding: "2% 0",
+                          margin: "1% 0",
+                          visibility: byDate ? "hidden" : ""
                         }}
                       >
-                        {!byDate &&
-                          sports.map(sport => {
-                            return (
-                              <Typography
-                                className={classes.sports}
-                                onClick={() => this.handleSortBySport(sport)}
-                                style={{
-                                  color:
-                                    selectedSport.name === sport.name
-                                      ? "#C8B06B"
-                                      : "#D3DBD9"
-                                }}
-                              >
-                                {sport.name}
-                              </Typography>
-                            );
-                          })}
+                        {sports.map(sport => {
+                          return (
+                            <Typography
+                              className={classes.sports}
+                              onClick={() => this.handleSortBySport(sport)}
+                              style={{
+                                color:
+                                  selectedSport.name === sport.name
+                                    ? "#C8B06B"
+                                    : "#D3DBD9"
+                              }}
+                            >
+                              {sport.name}
+                            </Typography>
+                          );
+                        })}
                       </div>
                     </Grid>
                   </Grid>
