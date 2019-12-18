@@ -157,6 +157,7 @@ const styles = theme => ({
     textAlign: "center",
     backgroundColor: "#C8B06B",
     padding: "4% 0",
+    marginTop: "-2%",
     textDecoration: "none",
     borderRadius: "3px"
   },
