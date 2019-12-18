@@ -166,7 +166,7 @@ class Home extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
-    this.props.handleTabChange(this.props.location.pathname);
+    this.props.handleTabChange("/home");
     const { data: schedules } = await scheduleService.getUpcomingSchedules(
       new Date()
     );
@@ -340,7 +340,7 @@ class Home extends Component {
                     component={Link}
                   >
                     <Typography
-                      style={{ fontFamily: "TheNextFont", fontSize: "100%" }}
+                      style={{ fontFamily: "TheNextFont", fontSize: "120%" }}
                     >
                       VIEW SCHEDULE
                     </Typography>
@@ -380,7 +380,7 @@ class Home extends Component {
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    width: "40%",
+                    width: "50%",
                     padding: "3% 0",
                     margin: "5% 0 6% 0"
                   }}
@@ -388,13 +388,13 @@ class Home extends Component {
                   component={Link}
                 >
                   <Typography
-                    style={{ fontFamily: "TheNextFont", fontSize: "100%" }}
+                    style={{ fontFamily: "TheNextFont", fontSize: "120%" }}
                   >
                     VIEW RESULT
                   </Typography>
                 </Button>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={8} style={{ marginLeft: "-5%" }}>
                 <ResultBarHorizontal halls={halls} />
               </Grid>
             </Grid>
@@ -411,10 +411,12 @@ class Home extends Component {
               <Grid
                 item
                 xs={3}
-                style={{
-                  display: "flex",
-                  alignItems: "center"
-                }}
+                style={
+                  {
+                    // display: "flex",
+                    // alignItems: "center"
+                  }
+                }
               >
                 <Button
                   style={{ backgroundColor: "#C8B06B", padding: "6%" }}
@@ -455,10 +457,12 @@ class Home extends Component {
               <Grid
                 item
                 xs={3}
-                style={{
-                  display: "flex",
-                  alignItems: "center"
-                }}
+                style={
+                  {
+                    // display: "flex",
+                    // alignItems: "center"
+                  }
+                }
               >
                 <Button
                   style={{ backgroundColor: "#C8B06B", padding: "6%" }}

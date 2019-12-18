@@ -18,6 +18,10 @@ function getAscendingSchedules() {
   return http.get(getUrl("/asc"));
 }
 
+function getDescendingSchedulesForAdmin() {
+  return http.get(getUrl("/admin"));
+}
+
 function getDescendingSchedules() {
   return http.get(apiEndpoint);
 }
@@ -38,6 +42,7 @@ export default {
   getSchedule,
   getUpcomingSchedules,
   getAscendingSchedules,
+  getDescendingSchedulesForAdmin,
   getDescendingSchedules,
   createSchedule,
   updateScore,

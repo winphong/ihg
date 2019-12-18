@@ -22,7 +22,7 @@ export default function ResultBarHorizontal({ halls }) {
           data={halls}
           barCategoryGap={0}
           layout="vertical"
-          margin={{ right: isMobile ? 50 : 100 }}
+          margin={{ right: 50 }}
         >
           <YAxis
             dataKey={isMobile ? "abbreviation" : "name"}

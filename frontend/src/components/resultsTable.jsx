@@ -52,6 +52,14 @@ export default function ResultsTable({
             marginRight: isLaptop && !isIpadProLandscape ? "-13px" : ""
           }}
         >
+          {schedules.length === 0 && (
+            <Typography
+              className={classes.noResult}
+              style={{ textAlign: byDate ? "center" : "left" }}
+            >
+              Results will be available soon
+            </Typography>
+          )}
           {schedules.map((schedule, index) => {
             if (
               byDate &&
@@ -130,6 +138,19 @@ const useStyles = makeStyles(theme => ({
     fontSize: "150%",
     color: "#958F87"
   },
+  noResult: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "100%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "120%"
+    },
+
+    padding: "1% 0 1% 2%",
+    fontSize: "150%",
+    fontStyle: "italic",
+    color: "#958F87"
+  },
   date: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "100%"
@@ -153,7 +174,7 @@ const useStyles = makeStyles(theme => ({
       height: "43vmax"
     },
     [theme.breakpoints.only("xl")]: {
-      height: "40vmax"
+      height: "39vmax"
     },
     [theme.breakpoints.up("md")]: {
       // marginRight: "-13px"

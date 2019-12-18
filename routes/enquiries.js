@@ -9,6 +9,11 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const enquiry = new Enquiry(req.body);
+  console.log(req.body);
+
+  console.log(enquiry);
+  const { error } = validate(req.body);
+  if (error) res.status(400).send(error.details[0].message);
 
   await enquiry.save();
   res.send(enquiry);

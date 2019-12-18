@@ -5,7 +5,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-export default function Card({ schedule, center, size, index, scheduleSize }) {
+export default function Card({ schedule, center, size }) {
   const classes = useStyles();
   const theme = useTheme();
   const hasHalls = schedule.halls.length > 0;
@@ -26,7 +26,7 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
                   width: "90%"
                   // border: hasHalls ? "" : "1px solid black"
                 }}
-                src={hasHalls ? schedule.halls[0].imgUrl : "./Logo.png"}
+                src={hasHalls ? schedule.halls[0].imgUrl : "./blank.png"}
               />
             </Grid>
             <Grid item xs={2} className={classes.vs}></Grid>
@@ -36,19 +36,23 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
                   width: "90%"
                   // border: hasHalls ? "" : "1px solid black"
                 }}
-                src={hasHalls ? schedule.halls[1].imgUrl : "./Logo.png"}
+                src={hasHalls ? schedule.halls[1].imgUrl : "./blank.png"}
               />
             </Grid>
           </Grid>
           <Grid container className={classes.hallContainer} alignItems="center">
             <Grid item xs={5}>
-              <Typography className={classes.hall}>
+              <Typography
+                className={size === "small" ? classes.hallSlider : classes.hall}
+              >
                 {hasHalls ? schedule.halls[0].name.toUpperCase() : "TBA"}
               </Typography>
             </Grid>
             <Grid item xs={2} />
             <Grid item xs={5}>
-              <Typography className={classes.hall}>
+              <Typography
+                className={size === "small" ? classes.hallSlider : classes.hall}
+              >
                 {hasHalls ? schedule.halls[1].name.toUpperCase() : "TBA"}
               </Typography>
             </Grid>
@@ -116,7 +120,11 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
           {schedule.halls.map((hall, index) => {
             return (
               <Grid item xs={true} key={index}>
-                <Typography className={classes.hall}>
+                <Typography
+                  className={
+                    size === "small" ? classes.hallSlider : classes.hall
+                  }
+                >
                   {hall.abbreviation}
                 </Typography>
               </Grid>
@@ -125,7 +133,10 @@ export default function Card({ schedule, center, size, index, scheduleSize }) {
         </Grid>
       )}
       <Grid item xs={12}>
-        <Typography variant="h1" className={classes.sport}>
+        <Typography
+          variant="h1"
+          className={size === "small" ? classes.sportSlider : classes.sport}
+        >
           {schedule.sport.toUpperCase()} {schedule.stage.toUpperCase()}
         </Typography>
         <Typography
@@ -192,22 +203,6 @@ const styles = theme => ({
     alignItems: "center",
     textAlign: "center"
   },
-  sport: {
-    [theme.breakpoints.only("xs")]: {
-      fontSize: "120%"
-    },
-    [theme.breakpoints.only("sm")]: {
-      fontSize: "150%"
-    },
-    [theme.breakpoints.only("md")]: {
-      fontSize: "250%"
-    },
-    fontSize: "180%",
-    lineHeight: "100%"
-    // color: "#C8B06B",
-    // fontFamily: "TheNextFont"
-    // backgroundColor: "purple"
-  },
   hall: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "100%"
@@ -222,22 +217,52 @@ const styles = theme => ({
     lineHeight: "100%",
     fontFamily: "TheNextFont"
   },
-  // hallCenter: {
-  //   [theme.breakpoints.only("md")]: {
-  //     fontSize: "200%"
-  //   },
-  //   fontSize: "120%",
-  //   lineHeight: "100%",
-  //   fontFamily: "TheNextFont"
-  // },
+  sport: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "120%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "150%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "250%"
+    },
+    fontSize: "180%",
+    lineHeight: "100%"
+  },
+  hallSlider: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "100%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "130%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "170%"
+    },
+    fontSize: "120%",
+    lineHeight: "100%",
+    fontFamily: "TheNextFont"
+  },
+  sportSlider: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "120%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "150%"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "250%"
+    },
+    fontSize: "170%",
+    lineHeight: "100%"
+  },
   hallContainer: {
     [theme.breakpoints.down("sm")]: {
       height: "40px"
-      // backgroundColor: "pink"
     },
     [theme.breakpoints.only("md")]: {
       height: "80px"
-      // backgroundColor: "pink"
     },
     height: "60px"
   },

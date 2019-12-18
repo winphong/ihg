@@ -10,13 +10,17 @@ import SportsList from "../components/sportsList";
 import MediaQuery from "react-responsive";
 
 const halls = [
-  { name: "Raffles Hall", abbreviation: "RH", director: "" },
-  { name: "Eusoff Hall", abbreviation: "EH", director: "" },
-  { name: "Temasek Hall", abbreviation: "TH", director: "" },
-  { name: "Sheares Hall", abbreviation: "SH", director: "" },
-  { name: "Kent Ridge Hall", abbreviation: "KR", director: "" },
-  { name: "King Edward VII Hall", abbreviation: "KE7", director: "" },
-  { name: "Prince George's Park Hall", abbreviation: "PH", director: "" }
+  { name: "Raffles Hall", abbreviation: "RH", director: "Kavin" },
+  { name: "Eusoff Hall", abbreviation: "EH", director: "Amos" },
+  { name: "Temasek Hall", abbreviation: "TH", director: "Aqil" },
+  { name: "Sheares Hall", abbreviation: "SH", director: "Dom" },
+  { name: "Kent Ridge Hall", abbreviation: "KR", director: "Ying Hao" },
+  { name: "King Edward VII Hall", abbreviation: "KE7", director: "Celine" },
+  {
+    name: "Prince George's Park Hall",
+    abbreviation: "PH",
+    director: "Anabelle"
+  }
 ];
 
 const styles = theme => ({
@@ -49,11 +53,49 @@ const styles = theme => ({
     // [theme.breakpoints.only("md")]: {
     //   paddingLeft: "4%"
     // },
-    [theme.breakpoints.up("lg")]: {
-      paddingLeft: "3%"
+    [theme.breakpoints.up("md")]: {
+      paddingLeft: "2%"
     }
   },
-  subtitle: {
+  director: {
+    [theme.breakpoints.only("xs")]: {
+      marginBottom: "10%",
+      fontSize: "200%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginBottom: "5%",
+      fontSize: "400%"
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingBottom: "10%", // align subtitle up with hall logo
+      fontSize: "350%",
+      textAlign: "right"
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "450%"
+    },
+    textAlign: "center"
+  },
+  hallOfNus: {
+    [theme.breakpoints.only("xs")]: {
+      marginBottom: "10%",
+      fontSize: "200%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginBottom: "5%",
+      fontSize: "400%"
+    },
+    [theme.breakpoints.up("md")]: {
+      paddingBottom: "15%", // align subtitle up with hall logo
+      fontSize: "350%",
+      textAlign: "left"
+    },
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "450%"
+    },
+    textAlign: "center"
+  },
+  sportList: {
     [theme.breakpoints.only("xs")]: {
       marginBottom: "10%",
       fontSize: "200%"
@@ -64,22 +106,24 @@ const styles = theme => ({
     },
     [theme.breakpoints.up("md")]: {
       paddingBottom: "5%", // align subtitle up with hall logo
-      fontSize: "300%",
+      fontSize: "350%",
       textAlign: "left"
     },
     [theme.breakpoints.up("lg")]: {
-      fontSize: "380%"
+      fontSize: "450%"
     },
     textAlign: "center"
-    // lineHeight: "100%",
   },
   border: {
     [theme.breakpoints.down("sm")]: {},
     // paddingLeft: "4%",
     marginTop: "15%"
   },
-  staticImage: {
-    width: "70%"
+  directorImage: {
+    width: "80%"
+  },
+  crestImage: {
+    width: "60%"
   },
   staticImageCaption: {
     [theme.breakpoints.only("xs")]: {
@@ -91,7 +135,7 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "120%"
     },
-    fontSize: "150%",
+    fontSize: "120%",
     color: "#252527"
   },
   transitionContainer: {
@@ -204,7 +248,7 @@ class About extends Component {
                 alignItems="flex-end"
               >
                 <Grid item xs={12} md={3} className={classes.subtitleContainer}>
-                  <Typography variant="h1" className={classes.subtitle}>
+                  <Typography variant="h1" className={classes.hallOfNus}>
                     HALLS OF NUS
                   </Typography>
                 </Grid>
@@ -213,14 +257,9 @@ class About extends Component {
                     return (
                       <React.Fragment>
                         <Grid item xs={false} md={index === 3 ? 3 : false} />
-                        <Grid
-                          item
-                          xs={6}
-                          md={3}
-                          style={{ marginBottom: index < 4 ? "5%" : 0 }}
-                        >
+                        <Grid item xs={6} md={3} style={{ marginBottom: "5%" }}>
                           <img
-                            className={classes.staticImage}
+                            className={classes.crestImage}
                             src={`/${hall.abbreviation}.png`}
                           />
                           <Typography
@@ -247,32 +286,27 @@ class About extends Component {
               >
                 <MediaQuery maxWidth={959}>
                   <Grid item xs={12} className={classes.subtitleContainer}>
-                    <Typography variant="h1" className={classes.subtitle}>
+                    <Typography variant="h1" className={classes.director}>
                       SPORTS DIRECTOR
                     </Typography>
                   </Grid>
                 </MediaQuery>
-                <Grid container item xs={12} md={9}>
+                <Grid container item xs={12} md={8}>
                   {halls.map((hall, index) => {
                     return (
                       <React.Fragment>
                         <Grid item xs={false} md={index === 3 ? 3 : false} />
 
-                        <Grid
-                          item
-                          xs={6}
-                          md={3}
-                          style={{ marginBottom: index < 4 ? "5%" : 0 }}
-                        >
+                        <Grid item xs={6} md={3} style={{ marginBottom: "5%" }}>
                           <img
-                            className={classes.staticImage}
-                            src={`/${hall.abbreviation}.png`}
+                            style={{ width: "80%" }}
+                            src={`/directors/${hall.director}.png`}
                           />
                           <Typography
                             variant="h1"
                             className={classes.staticImageCaption}
                           >
-                            {hall.name}
+                            {hall.abbreviation} - {hall.director}
                           </Typography>
                         </Grid>
                       </React.Fragment>
@@ -283,14 +317,10 @@ class About extends Component {
                   <Grid
                     item
                     xs={12}
-                    md={3}
+                    md={4}
                     className={classes.subtitleContainer}
                   >
-                    <Typography
-                      variant="h1"
-                      className={classes.subtitle}
-                      style={{ textAlign: "right" }}
-                    >
+                    <Typography variant="h1" className={classes.director}>
                       SPORTS DIRECTOR
                     </Typography>
                   </Grid>
@@ -321,7 +351,7 @@ class About extends Component {
                       handleSortBySport={this.handleClick}
                     />
                   </MediaQuery>
-                  <Typography variant="h1" className={classes.subtitle}>
+                  <Typography variant="h1" className={classes.sportList}>
                     SPORTS
                   </Typography>
                 </Grid>
@@ -341,7 +371,8 @@ class About extends Component {
                           className={classes.sports}
                           onClick={() => this.handleClick(sport)}
                           style={{
-                            width: "150px",
+                            // width: "150px",
+                            margin: "0 3%",
                             color:
                               selectedSport.name === sport.name
                                 ? "#C8B06B"

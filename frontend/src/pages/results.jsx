@@ -97,15 +97,25 @@ const styles = theme => ({
     // backgroundColor: "grey"
   },
   subTitle: {
-    [theme.breakpoints.only("md")]: {
-      fontSize: "400%"
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "200%"
     },
-    fontSize: "500%"
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "300%"
+    },
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center",
+      margin: "5% 0"
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "380%"
+    },
+    fontSize: "450%"
   },
   sortButton: {
     [theme.breakpoints.up("sm")]: {
       marginTop: "1vmax",
-      fontSize: "200%"
+      fontSize: "150%"
     },
     cursor: "pointer",
     fontSize: "100%"
@@ -115,7 +125,7 @@ const styles = theme => ({
     cursor: "pointer",
     // backgroundColor: "pink",
     fontSize: "120%",
-    padding: "0 3%",
+    margin: "0 3%",
     flexShrink: 0
   },
   overall: {
@@ -256,11 +266,13 @@ class Results extends Component {
   async componentDidMount() {
     window.scrollTo({ top: 0 });
     this.props.handleTabChange(this.props.location.pathname);
-    const { data: halls } = await hallService.getAllHalls();
-    const { data: schedules } = await scheduleService.getDescendingSchedules();
-    const { data: sports } = await sportService.getAllSports();
     const admin = miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
+    const { data: halls } = await hallService.getAllHalls();
+    const { data: schedules } = isAdmin
+      ? await scheduleService.getDescendingSchedulesForAdmin()
+      : await scheduleService.getDescendingSchedules();
+    const { data: sports } = await sportService.getAllSports();
 
     const firstDayOfWeek = new Date("5 Jan 2020");
     const lastDay = new Date(firstDayOfWeek);
@@ -277,6 +289,7 @@ class Results extends Component {
       sports,
       isAdmin
     });
+
     // const firstDayOfWeek = new Date(startDate);
     // firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 7);
     // const lastDay = new Date(firstDayOfWeek);
@@ -621,65 +634,78 @@ class Results extends Component {
               {/* -------------------------------- */}
               {/* ******************************** */}
               <MediaQuery maxWidth={959}>
-                <Grid container item xs={12}>
-                  <Grid item xs={5}>
-                    <Typography
-                      className={classes.sortButton}
-                      variant="h1"
-                      onClick={this.handleSortByDate}
-                      style={{
-                        color: byDate ? "black" : "#D3DBD9",
-                        textAlign: "right"
-                      }}
-                    >
-                      BY WEEK
+                <React.Fragment>
+                  <Grid item xs={1} />
+                  <Grid item xs={10}>
+                    <Typography variant="h1" className={classes.subTitle}>
+                      RESULTS
                     </Typography>
                   </Grid>
-                  <Grid item xs={2}>
-                    <div className={classes.divider} />
-                  </Grid>
-                  <Grid item xs={5}>
-                    <Typography
-                      className={classes.sortButton}
-                      variant="h1"
-                      style={{
-                        color: !byDate ? "black" : "#D3DBD9"
-                      }}
-                      onClick={this.handleSortBySport}
-                    >
-                      BY SPORTS
-                    </Typography>
-                  </Grid>
+                  <Grid item xs={1} />
 
-                  <Grid item xs={12} style={{ height: "7vmax" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        overflowX: "scroll",
-                        padding: "3% 0"
-                      }}
-                    >
-                      {!byDate &&
-                        sports.map(sport => {
-                          return (
-                            <Typography
-                              className={classes.sports}
-                              onClick={() => this.handleSortBySport(sport)}
-                              variant="h1"
-                              style={{
-                                color:
-                                  selectedSport.name === sport.name
-                                    ? "#C8B06B"
-                                    : "#D3DBD9"
-                              }}
-                            >
-                              {sport.name}
-                            </Typography>
-                          );
-                        })}
-                    </div>
+                  <Grid container item xs={12}>
+                    <Grid item xs={3} />
+                    <Grid item xs={3}>
+                      <Typography
+                        className={classes.sortButton}
+                        variant="h1"
+                        onClick={this.handleSortByDate}
+                        style={{
+                          color: byDate ? "black" : "#D3DBD9",
+                          textAlign: "right",
+                          paddingRight: "10%",
+                          borderRight: "2px solid #C8B06B"
+                        }}
+                      >
+                        BY WEEK
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography
+                        className={classes.sortButton}
+                        variant="h1"
+                        style={{
+                          color: !byDate ? "black" : "#D3DBD9",
+                          paddingLeft: "10%"
+                        }}
+                        onClick={() =>
+                          this.handleSortBySport(this.state.sports[0])
+                        }
+                      >
+                        BY SPORTS
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={3} />
+                    <Grid item xs={12} style={{ height: "7vmax" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          overflowX: "scroll",
+                          padding: "3% 0"
+                        }}
+                      >
+                        {!byDate &&
+                          sports.map(sport => {
+                            return (
+                              <Typography
+                                className={classes.sports}
+                                onClick={() => this.handleSortBySport(sport)}
+                                variant="h1"
+                                style={{
+                                  color:
+                                    selectedSport.name === sport.name
+                                      ? "#C8B06B"
+                                      : "#D3DBD9"
+                                }}
+                              >
+                                {sport.name}
+                              </Typography>
+                            );
+                          })}
+                      </div>
+                    </Grid>
                   </Grid>
-                </Grid>
+                </React.Fragment>
               </MediaQuery>
               {/* ******************************** */}
             </Grid>

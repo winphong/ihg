@@ -37,8 +37,10 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   },
   container: {
-    [theme.breakpoints.down("sm")]: {},
-    // height: "90vh",
+    [theme.breakpoints.only("md")]: {
+      height: "83vh"
+    },
+    height: "80vh",
     textAlign: "center"
   },
   button: {
@@ -99,6 +101,7 @@ export default function Contact({ handleTabChange, props }) {
   });
   const [open, setOpen] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
+  const [message, setMessage] = React.useState("");
 
   function handleChange({ currentTarget: input }) {
     const newEnquiry = { ...enquiry };
@@ -113,7 +116,10 @@ export default function Contact({ handleTabChange, props }) {
         setSuccess(true);
         handleOpen();
       })
-      .catch(() => handleOpen());
+      .catch(err => {
+        setMessage(err.data);
+        handleOpen();
+      });
   }
 
   function handleClose() {
@@ -289,9 +295,7 @@ export default function Contact({ handleTabChange, props }) {
           }}
           message={
             <span id="client-snackbar" className={classes.message}>
-              {success
-                ? "Succesfully updated!"
-                : "An error has occured. Try again."}
+              {success ? "Enquiry submitted!" : message}
             </span>
           }
           action={[

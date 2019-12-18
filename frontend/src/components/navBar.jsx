@@ -131,14 +131,15 @@ export default function NavBar({ pathname, handleTabChange }) {
             to={"/home"}
             component={Link}
             style={{
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
+              marginLeft: "1.5%"
             }}
           >
             <img
               src="/Logo.png"
               // className={classes.logo}
               style={{
-                height: "30px"
+                height: "45px"
               }}
             />
           </IconButton>
@@ -153,7 +154,8 @@ export default function NavBar({ pathname, handleTabChange }) {
               style={{
                 width: "100%",
                 display: "flex",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
+                marginRight: "3%"
               }}
             >
               {selections.map(selection => {

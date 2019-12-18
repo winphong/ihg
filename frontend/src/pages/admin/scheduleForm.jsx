@@ -430,7 +430,7 @@ class ScheduleForm extends Component {
             message={
               <span id="client-snackbar" className={classes.message}>
                 {success
-                  ? "Succesfully updated!"
+                  ? "Succesfully created / updated!"
                   : "An error has occured. Try again."}
               </span>
             }

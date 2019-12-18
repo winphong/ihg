@@ -4,7 +4,6 @@ const { Schedule, validate } = require("../model/schedule");
 const { Hall } = require("../model/hall");
 const _ = require("lodash");
 const admin = require("../middleware/admin");
-const dateformat = require;
 
 // constant
 const cnyStart = new Date("24 Jan 2020");
@@ -13,7 +12,7 @@ const cnyEnd = new Date("28 Jan 2020");
 // get 2 days worth of schedules
 router.get("/upcomingSchedules/:date", async (req, res) => {
   let current = new Date(req.params.date);
-  const firstDay = new Date("5 Jan 2020");
+  const firstDay = new Date("6 Jan 2020");
   if (current < firstDay) {
     current = firstDay;
   }
@@ -38,6 +37,12 @@ router.get("/asc", async (req, res) => {
   res.send(schedule);
 });
 
+// get all schedules for admin
+router.get("/admin", async (req, res) => {
+  const schedule = await Schedule.find({}).sort({ startTime: -1 });
+  res.send(schedule);
+});
+
 // get schedule by id
 router.get("/:id", async (req, res) => {
   const schedule = await Schedule.findById(req.params.id);
@@ -45,9 +50,11 @@ router.get("/:id", async (req, res) => {
   res.send(schedule);
 });
 
-// get all schedules
+// get all schedules that has score
 router.get("/", async (req, res) => {
-  const schedule = await Schedule.find().sort({ startTime: -1 });
+  const schedule = await Schedule.find({
+    halls: { $elemMatch: { score: { $gte: 0 } } }
+  }).sort({ startTime: -1 });
   res.send(schedule);
 });
 
