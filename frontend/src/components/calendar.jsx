@@ -11,6 +11,8 @@ import { useMediaQuery } from "react-responsive";
 import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 
+const arrayOfMaxSchedulePerWeek = [];
+
 export default function Calendar({ schedules, isAdmin }) {
   const classes = useStyles();
   const [days, setDay] = React.useState([
@@ -43,12 +45,10 @@ export default function Calendar({ schedules, isAdmin }) {
   const md = useMediaQuery({
     minWidth: 960,
     maxWidth: 1060
-    // orientation: "landscape"
   });
   const mdplus = useMediaQuery({
     minWidth: 1061,
     maxWidth: 1220
-    // orientation: "landscape"
   });
 
   let start = new Date("5 Jan 2020");
@@ -58,28 +58,28 @@ export default function Calendar({ schedules, isAdmin }) {
   let currentDate = "";
   let count = 0;
   let max = 0;
-  // const arr = ["11 Jan", "18 Jan", "25 Jan", "01 Feb", "08 Feb", "10 Feb"];
-  const arrayOfMaxSchedulePerWeek = [];
 
-  schedules.map((schedule, index) => {
-    if (currentDate !== dateformat(schedule.startTime, "ddmmm")) {
-      currentDate = dateformat(schedule.startTime, "ddmmm");
-      if (count > max) {
-        max = count;
+  if (arrayOfMaxSchedulePerWeek.length === 0) {
+    schedules.map((schedule, index) => {
+      if (currentDate !== dateformat(schedule.startTime, "ddmmm")) {
+        currentDate = dateformat(schedule.startTime, "ddmmm");
+        if (count > max) {
+          max = count;
+        }
+        if (new Date(schedule.startTime) >= end) {
+          start.setDate(start.getDate() + 7);
+          end.setDate(end.getDate() + 7);
+          arrayOfMaxSchedulePerWeek.push(max);
+          max = 0;
+        }
+        count = 0;
       }
-      if (new Date(schedule.startTime) >= end) {
-        start.setDate(start.getDate() + 7);
-        end.setDate(end.getDate() + 7);
-        arrayOfMaxSchedulePerWeek.push(max);
-        max = 0;
+      count++;
+      if (index === schedules.length - 1) {
+        arrayOfMaxSchedulePerWeek.push(count);
       }
-      count = 0;
-    }
-    count++;
-    if (index === schedules.length - 1) {
-      arrayOfMaxSchedulePerWeek.push(count);
-    }
-  });
+    });
+  }
 
   function handleBack(isMobile) {
     setStay(true);

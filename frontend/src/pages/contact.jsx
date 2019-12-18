@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import miscService from "../services/miscService";
@@ -83,9 +83,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function ResultsTable() {
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" }, [null]);
-  });
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

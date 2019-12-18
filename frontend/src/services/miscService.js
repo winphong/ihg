@@ -17,21 +17,10 @@ function createNewEnquiry(enquiry) {
 function getInstagramPhotos() {
   // removing request header as instagram doesn't accept x-auth-token as request header
   delete axios.defaults.headers.common["x-auth-token"];
-  return axios.get(
-    "https://api.instagram.com/v1/users/self/media/recent/?access_token=4266605993.3124899.34fb563d2eba4265978964ad63c24cf2"
-    // {
-    //   headers: {
-    //     "x-auth-token": null
-    //   }
-    // }
-  );
+  const response = axios.get(process.env.REACT_APP_INSTAGRAM_API_URL);
+  http.setJwt(getJwt());
+  return response;
 }
-
-// function getSportsPhoto(path) {
-//   return http.get(`/images/${path}`, {
-//     responseType: "blob"
-//   });
-// }
 
 async function login(credentials) {
   const { data: jwt } = await http.post(`/admin`, credentials);
