@@ -401,25 +401,15 @@ class Home extends Component {
           </MediaQuery>
           {/*  */}
           <MediaQuery maxDeviceWidth={1279}>
-            <Grid container xs={12} style={{ padding: "3vh 5vw" }}>
+            <Grid container xs={12} style={{ padding: "3% 5%" }}>
               <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
-                  {" "}
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={3}
-                style={
-                  {
-                    // display: "flex",
-                    // alignItems: "center"
-                  }
-                }
-              >
+              <Grid item xs={3}>
                 <Button
-                  style={{ backgroundColor: "#C8B06B", padding: "6%" }}
+                  style={{ backgroundColor: "#C8B06B", padding: "7% 0" }}
                   fullWidth
                   to={"/schedule"}
                   component={Link}
@@ -447,10 +437,9 @@ class Home extends Component {
                 </div>
               )}
             </Grid>
-            <Grid container xs={12} style={{ padding: "3vh 5vw" }}>
+            <Grid container xs={12} style={{ padding: "3% 5%" }}>
               <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
-                  {" "}
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
@@ -465,7 +454,7 @@ class Home extends Component {
                 }
               >
                 <Button
-                  style={{ backgroundColor: "#C8B06B", padding: "6%" }}
+                  style={{ backgroundColor: "#C8B06B", padding: "7% 0" }}
                   fullWidth
                   to={"/results"}
                   component={Link}

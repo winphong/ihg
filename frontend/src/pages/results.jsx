@@ -23,7 +23,7 @@ const styles = theme => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "350%",
-      marginTop: "30%"
+      marginTop: "31.5%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%",
@@ -644,8 +644,8 @@ class Results extends Component {
                   <Grid item xs={1} />
 
                   <Grid container item xs={12}>
-                    <Grid item xs={3} />
-                    <Grid item xs={3}>
+                    <Grid item xs={2} />
+                    <Grid item xs={4}>
                       <Typography
                         className={classes.sortButton}
                         variant="h1"
@@ -660,7 +660,7 @@ class Results extends Component {
                         BY WEEK
                       </Typography>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={4}>
                       <Typography
                         className={classes.sortButton}
                         variant="h1"
@@ -675,13 +675,13 @@ class Results extends Component {
                         BY SPORTS
                       </Typography>
                     </Grid>
-                    <Grid item xs={3} />
+                    <Grid item xs={2} />
                     <Grid item xs={12} style={{ height: "7vmax" }}>
                       <div
                         style={{
                           display: "flex",
                           overflowX: "scroll",
-                          padding: "3% 0"
+                          margin: "3% 0"
                         }}
                       >
                         {!byDate &&
