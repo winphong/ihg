@@ -157,11 +157,12 @@ const styles = theme => ({
   },
   sports: {
     flexShrink: 0,
-    // backgroundColor: "pink",
     cursor: "pointer",
     fontSize: "120%",
+    fontFamily: "TheNextFont",
+    margin: "0 3%"
+    // backgroundColor: "pink",
     // padding: "1% 0",
-    fontFamily: "TheNextFont"
     // minHeight: "auto"
   },
   sportPhoto: {
@@ -372,7 +373,6 @@ class About extends Component {
                           onClick={() => this.handleClick(sport)}
                           style={{
                             // width: "150px",
-                            margin: "0 3%",
                             color:
                               selectedSport.name === sport.name
                                 ? "#C8B06B"

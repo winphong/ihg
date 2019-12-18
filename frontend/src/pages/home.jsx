@@ -152,7 +152,18 @@ const styles = theme => ({
       fontSize: "150%"
     },
     fontFamily: "TheNextFont",
-    color: "white"
+    color: "white",
+    width: "100%",
+    textAlign: "center",
+    backgroundColor: "#C8B06B",
+    padding: "6% 0",
+    textDecoration: "none",
+    borderRadius: "3px"
+  },
+  buttonTextContainer: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });
 
@@ -407,20 +418,16 @@ class Home extends Component {
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
-                <Button
-                  style={{ backgroundColor: "#C8B06B", padding: "7% 0" }}
-                  fullWidth
+              <Grid item xs={3} className={classes.buttonTextContainer}>
+                <Typography
+                  className={classes.buttonText}
                   to={"/schedule"}
                   component={Link}
                 >
-                  <Typography className={classes.buttonText}>
-                    VIEW SCHEDULE
-                  </Typography>
-                </Button>
+                  VIEW SCHEDULE
+                </Typography>
               </Grid>
             </Grid>
-
             <Grid item xs={12}>
               {schedulesToDisplay.length > 0 && (
                 <div className={classes.cardContainer}>
@@ -443,26 +450,14 @@ class Home extends Component {
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={3}
-                style={
-                  {
-                    // display: "flex",
-                    // alignItems: "center"
-                  }
-                }
-              >
-                <Button
-                  style={{ backgroundColor: "#C8B06B", padding: "7% 0" }}
-                  fullWidth
+              <Grid item xs={3} className={classes.buttonTextContainer}>
+                <Typography
+                  className={classes.buttonText}
                   to={"/results"}
                   component={Link}
                 >
-                  <Typography className={classes.buttonText}>
-                    VIEW RESULT
-                  </Typography>
-                </Button>
+                  VIEW RESULT
+                </Typography>
               </Grid>
             </Grid>
             <ResultBarHorizontal halls={halls} />

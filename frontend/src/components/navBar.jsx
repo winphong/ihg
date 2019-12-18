@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
       display: "flex",
       justifyContent: "center",
       width: "83.33333%"
+    },
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "1.5%"
     }
   }
 }));
@@ -130,10 +133,7 @@ export default function NavBar({ pathname, handleTabChange }) {
             onClick={() => handleTabChange("/home")}
             to={"/home"}
             component={Link}
-            style={{
-              backgroundColor: "transparent",
-              marginLeft: "1.5%"
-            }}
+            style={{}}
           >
             <img
               src="/Logo.png"

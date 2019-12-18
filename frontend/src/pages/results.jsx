@@ -122,11 +122,11 @@ const styles = theme => ({
     // lineHeight: "150%",
   },
   sports: {
-    cursor: "pointer",
-    // backgroundColor: "pink",
+    flexShrink: 0,
     fontSize: "120%",
-    margin: "0 3%",
-    flexShrink: 0
+    cursor: "pointer",
+    fontFamily: "TheNextFont",
+    margin: "0 3%"
   },
   overall: {
     [theme.breakpoints.up("sm")]: {
@@ -643,7 +643,14 @@ class Results extends Component {
                   </Grid>
                   <Grid item xs={1} />
 
-                  <Grid container item xs={12}>
+                  <Grid
+                    container
+                    item
+                    xs={12}
+                    style={{
+                      visibility: sports.length === 0 ? "hidden" : ""
+                    }}
+                  >
                     <Grid item xs={2} />
                     <Grid item xs={4}>
                       <Typography
@@ -681,7 +688,7 @@ class Results extends Component {
                         style={{
                           display: "flex",
                           overflowX: "scroll",
-                          margin: "3% 0"
+                          padding: "3% 0"
                         }}
                       >
                         {!byDate &&
@@ -690,7 +697,6 @@ class Results extends Component {
                               <Typography
                                 className={classes.sports}
                                 onClick={() => this.handleSortBySport(sport)}
-                                variant="h1"
                                 style={{
                                   color:
                                     selectedSport.name === sport.name
