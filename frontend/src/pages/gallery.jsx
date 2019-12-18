@@ -127,6 +127,7 @@ class Gallery extends Component {
   async componentDidMount() {
     window.scrollTo({ top: 0 });
     let { data: photos } = await miscService.getInstagramPhotos();
+    console.log(photos);
     photos = photos.data;
     this.setState({ photos });
   }
@@ -196,13 +197,13 @@ class Gallery extends Component {
                 <Grid item xs={6} className={classes.mainPhotoContainer}>
                   {photos.length > 0 && (
                     <img
-                      src={photos[0].images.standard_resolution.url}
+                      src={photos[0].media_url}
                       className={classes.mainPhoto}
                       style={{
                         cursor: "pointer"
                       }}
                       onClick={() => {
-                        window.location = photos[0].link;
+                        window.location = photos[0].permalink;
                       }}
                     />
                   )}
@@ -255,14 +256,14 @@ class Gallery extends Component {
                 return (
                   <Grid item xs={4} md={4} className={classes.photosContainer}>
                     <img
-                      key={photo.images.standard_resolution.url}
-                      src={photo.images.standard_resolution.url}
+                      key={photo.media_url}
+                      src={photo.media_url}
                       className={classes.photos}
                       style={{
                         cursor: "pointer"
                       }}
                       onClick={() => {
-                        window.location = photo.link;
+                        window.location = photo.permalink;
                       }}
                     />
                   </Grid>
