@@ -152,6 +152,7 @@ class About extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
+    this.props.handleTabChange(this.props.location.pathname);
     const { data: sports } = await sportService.getAllSports();
     const imgUrl = `/sports/${sports[0].imgUrl}`;
 

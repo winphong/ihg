@@ -82,9 +82,10 @@ const useStyles = makeStyles(theme => ({
   // CSS for TextField - end
 }));
 
-export default function ResultsTable() {
+export default function Contact({ handleTabChange, props }) {
   useEffect(() => {
     window.scrollTo({ top: 0 });
+    handleTabChange(window.location.pathname);
   }, []);
   const classes = useStyles();
   const theme = useTheme();

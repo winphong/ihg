@@ -61,13 +61,49 @@ class App extends Component {
               handleTabChange={this.handleTabChange}
             />
             <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/home" component={Home} />
-              <Route path="/about" component={About} />
-              <Route path="/schedule" component={Schedule} />
-              <Route path="/results" component={Results} />
-              <Route path="/gallery" component={Gallery} />
-              <Route path="/contact" component={Contact} />
+              <Route
+                path="/"
+                exact
+                render={props => (
+                  <Home {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/home"
+                render={props => (
+                  <Home {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/about"
+                render={props => (
+                  <About {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/schedule"
+                render={props => (
+                  <Schedule {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/results"
+                render={props => (
+                  <Results {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/gallery"
+                render={props => (
+                  <Gallery {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
+              <Route
+                path="/contact"
+                render={props => (
+                  <Contact {...props} handleTabChange={this.handleTabChange} />
+                )}
+              />
               <Route path="/admin" exact component={Login} />
               <Route path="/logout" exact component={Logout} />
               <ProtectedRoute

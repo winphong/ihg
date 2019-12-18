@@ -71,6 +71,7 @@ router.post("/", [admin], async (req, res) => {
       res.send(schedule);
     })
     .catch(err => {
+      console.log(err);
       res.status(400).send(err.message);
     });
 });

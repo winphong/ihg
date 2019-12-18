@@ -51,7 +51,16 @@ const Schedule = mongoose.model(
     },
     stage: {
       type: String,
-      enum: ["Stage A", "Stage B", "Semi 1", "Semi 2", "Finals", "Carnival"],
+      enum: [
+        "Group A",
+        "Group B",
+        "Prelims",
+        "Semi 1",
+        "Semi 2",
+        "Finals",
+        "Carnival",
+        "Playoffs"
+      ],
       required: true
     }
   })

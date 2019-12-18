@@ -255,6 +255,7 @@ class Results extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
+    this.props.handleTabChange(this.props.location.pathname);
     const { data: halls } = await hallService.getAllHalls();
     const { data: schedules } = await scheduleService.getDescendingSchedules();
     const { data: sports } = await sportService.getAllSports();

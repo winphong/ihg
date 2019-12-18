@@ -88,6 +88,7 @@ class Schedule extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
+    this.props.handleTabChange(this.props.location.pathname);
     const { data: schedules } = await scheduleService.getAscendingSchedules();
     const admin = await miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;

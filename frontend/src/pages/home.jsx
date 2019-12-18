@@ -166,6 +166,7 @@ class Home extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
+    this.props.handleTabChange(this.props.location.pathname);
     const { data: schedules } = await scheduleService.getUpcomingSchedules(
       new Date()
     );

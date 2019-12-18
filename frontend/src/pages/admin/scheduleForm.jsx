@@ -380,10 +380,12 @@ class ScheduleForm extends Component {
                         {[
                           "Group A",
                           "Group B",
+                          "Prelims",
                           "Semi 1",
                           "Semi 2",
                           "Finals",
-                          "Carnival"
+                          "Carnival",
+                          "Playoffs"
                         ].map(stage => {
                           return <MenuItem value={stage}>{stage}</MenuItem>;
                         })}

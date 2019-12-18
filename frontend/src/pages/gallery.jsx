@@ -126,8 +126,8 @@ class Gallery extends Component {
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
+    this.props.handleTabChange(this.props.location.pathname);
     let { data: photos } = await miscService.getInstagramPhotos();
-    console.log(photos);
     photos = photos.data;
     this.setState({ photos });
   }
