@@ -143,6 +143,29 @@ const styles = theme => ({
     width: "12vmax",
     height: "12vmax",
     objectFit: "cover"
+  },
+  photoCaption: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "60%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "70%"
+    },
+    fontSize: "120%",
+    paddingRight: "15px",
+    display: "flex"
+  },
+  photoCaptionContainer: {
+    [theme.breakpoints.down("sm")]: {
+      height: "100px"
+    },
+    [theme.breakpoints.only("md")]: {
+      height: "250px"
+    },
+    [theme.breakpoints.up("lg")]: {},
+    marginRight: "-15px",
+    height: "300px",
+    overflowY: "auto"
   }
 });
 
@@ -236,7 +259,7 @@ class Gallery extends Component {
                     )}
                   </Grid>
                   <Grid item xs={6} style={{ textAlign: "left" }}>
-                    <Typography>
+                    {/* <Typography>
                       <Link
                         href="https://www.instagram.com/ihgofficial"
                         // className={classes.caption}
@@ -265,7 +288,19 @@ class Gallery extends Component {
                       }}
                     >
                       Summary for yesterday and schedule for today!
-                    </Typography>
+                    </Typography> */}
+                    <div style={{ overflow: "hidden" }}>
+                      <div className={classes.photoCaptionContainer}>
+                        <Typography
+                          className={classes.photoCaption}
+                          style={{
+                            color: "white"
+                          }}
+                        >
+                          {photos.length > 0 && photos[0].caption}
+                        </Typography>
+                      </div>
+                    </div>
                   </Grid>
                 </Grid>
               </Grid>

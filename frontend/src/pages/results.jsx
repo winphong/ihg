@@ -569,17 +569,7 @@ class Results extends Component {
                         OVERALL
                       </Typography>
                     </div>
-                    <div
-                      className={classes.male}
-                      style={{
-                        padding: "0 3%"
-                        // transform: "scale(0.8)",
-                        // backgroundColor: "pink"
-                        // order: -1,
-                        // borderLeft: "0.5px #958F87 solid",
-                        // borderRight: "0.5px #958F87 solid"
-                      }}
-                    >
+                    <div className={classes.male} style={{ padding: "0 3%" }}>
                       <ResultBar
                         halls={halls}
                         dataKey={"malePoint"}
@@ -589,14 +579,7 @@ class Results extends Component {
                         MALE
                       </Typography>
                     </div>
-                    <div
-                      className={classes.female}
-                      style={{
-                        padding: "0 3%"
-                        // transform: "scale(0.8)",
-                        // backgroundColor: "pink",
-                      }}
-                    >
+                    <div className={classes.female} style={{ padding: "0 3%" }}>
                       <ResultBar
                         halls={halls}
                         dataKey={"femalePoint"}
