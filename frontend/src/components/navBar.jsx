@@ -43,6 +43,12 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       marginLeft: "1.5%"
     }
+  },
+  logoSize: {
+    [theme.breakpoints.up("md")]: {
+      height: "45px"
+    },
+    height: "35px"
   }
 }));
 
@@ -135,13 +141,7 @@ export default function NavBar({ pathname, handleTabChange }) {
             component={Link}
             style={{}}
           >
-            <img
-              src="/Logo.png"
-              // className={classes.logo}
-              style={{
-                height: "45px"
-              }}
-            />
+            <img src="/Logo.png" className={classes.logoSize} />
           </IconButton>
           {/* 
           <MediaQuery maxWidth={959}>

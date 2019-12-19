@@ -152,19 +152,7 @@ const styles = theme => ({
       fontSize: "150%"
     },
     fontFamily: "TheNextFont",
-    color: "white",
-    width: "100%",
-    textAlign: "center",
-    backgroundColor: "#C8B06B",
-    padding: "4% 0",
-    marginTop: "-2%",
-    textDecoration: "none",
-    borderRadius: "3px"
-  },
-  buttonTextContainer: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    color: "white"
   }
 });
 
@@ -413,25 +401,47 @@ class Home extends Component {
           </MediaQuery>
           {/*  */}
           <MediaQuery maxDeviceWidth={1279}>
-            <Grid container xs={12} style={{ padding: "3% 5%" }}>
-              <Grid
-                item
-                xs={9}
-                className={classes.buttonTextContainer}
-                style={{ justifyContent: "flex-start" }}
-              >
+            <Grid
+              container
+              xs={12}
+              style={{ padding: "0 5%", height: "7vmax" }}
+              alignItems="center"
+            >
+              <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={3} className={classes.buttonTextContainer}>
-                <Typography
-                  className={classes.buttonText}
-                  to={"/schedule"}
-                  component={Link}
+              <Grid
+                item
+                xs={3}
+                // style={{
+                //   display: "flex",
+                //   alignItems: "center",
+                //   justifyContent: "center"
+                // }}
+              >
+                <div
+                  style={{
+                    display: "flex"
+                  }}
                 >
-                  VIEW SCHEDULE
-                </Typography>
+                  <Typography
+                    className={classes.buttonText}
+                    to={"/schedule"}
+                    component={Link}
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#C8B06B",
+                      padding: "6% 0",
+                      textDecoration: "none",
+                      borderRadius: "3px",
+                      textAlign: "center"
+                    }}
+                  >
+                    VIEW SCHEDULE
+                  </Typography>
+                </div>
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -450,25 +460,39 @@ class Home extends Component {
                 </div>
               )}
             </Grid>
-            <Grid container xs={12} style={{ padding: "3% 5%" }}>
-              <Grid
-                item
-                xs={9}
-                className={classes.buttonTextContainer}
-                style={{ justifyContent: "flex-start" }}
-              >
+            <Grid
+              container
+              xs={12}
+              style={{ padding: "0 5%", height: "7vmax" }}
+              alignItems="center"
+            >
+              <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
-              <Grid item xs={3} className={classes.buttonTextContainer}>
-                <Typography
-                  className={classes.buttonText}
-                  to={"/results"}
-                  component={Link}
+              <Grid item xs={3}>
+                <div
+                  style={{
+                    display: "flex"
+                  }}
                 >
-                  VIEW RESULT
-                </Typography>
+                  <Typography
+                    className={classes.buttonText}
+                    to={"/results"}
+                    component={Link}
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#C8B06B",
+                      padding: "6% 0",
+                      textDecoration: "none",
+                      borderRadius: "3px",
+                      textAlign: "center"
+                    }}
+                  >
+                    VIEW RESULT
+                  </Typography>
+                </div>
               </Grid>
             </Grid>
             <ResultBarHorizontal halls={halls} />
