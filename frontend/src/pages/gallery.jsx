@@ -7,12 +7,22 @@ import { withStyles } from "@material-ui/core/styles";
 import { CSSTransition } from "react-transition-group";
 
 const styles = theme => ({
-  // paper: {
-  //   paddingTop: theme.spacing(1),
-  //   paddingBottom: theme.spacing(1),
-  //   textAlign: "center",
-  //   margin: 5
-  // },
+  banner: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "8%"
+    },
+    // mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
+    },
+    height: "45vmax",
+    marginTop: "4%",
+    backgroundImage: "url('./headers/gallery.jpg')",
+    backgroundSize: "cover"
+  },
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%"
@@ -44,6 +54,15 @@ const styles = theme => ({
       marginBottom: "-30%"
     },
     color: "white",
+    fontSize: "200%"
+  },
+  subcaption: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "80%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "110%"
+    },
     fontSize: "200%"
   },
   // mainPhotoSuperContainer: {
@@ -124,22 +143,6 @@ const styles = theme => ({
     width: "12vmax",
     height: "12vmax",
     objectFit: "cover"
-  },
-  banner: {
-    [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
-    },
-    [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
-    },
-    // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
-    },
-    height: "45vmax",
-    marginTop: "4%",
-    backgroundImage: "url('./headers/about.jpg')",
-    backgroundSize: "cover"
   }
 });
 
@@ -244,11 +247,9 @@ class Gallery extends Component {
                         }}
                       >
                         <Typography
-                          // className={classes.caption}
+                          className={classes.subcaption}
                           style={{
-                            color: "#C8B06B",
-                            fontSize: "130%",
-                            textDecoration: "none"
+                            color: "#C8B06B"
                           }}
                         >
                           @ihgofficial
@@ -256,10 +257,9 @@ class Gallery extends Component {
                       </Link>
                     </Typography>
                     <Typography
-                      // className={classes.caption}
+                      className={classes.subcaption}
                       style={{
                         // fontSize: "2vw",
-                        fontSize: "100%",
                         fontWeight: "bold",
                         color: "white"
                       }}

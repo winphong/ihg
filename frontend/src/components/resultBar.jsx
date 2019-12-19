@@ -63,7 +63,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
         <ResponsiveContainer height={barSize * multiplier}>
           <BarChart
             data={halls}
-            margin={{ top: 30 }}
+            margin={{ top: 20 }}
             barCategoryGap="0"
             style={{ width: "100%" }}
           >
@@ -98,7 +98,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
           height={barSize * multiplier}
           width={width}
           data={halls}
-          margin={{ top: 30 }}
+          margin={{ top: 20 }}
           barCategoryGap="0"
           style={{ width: "100%" }}
         >

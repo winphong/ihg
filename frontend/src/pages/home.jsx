@@ -449,7 +449,7 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "6px 0",
+                      padding: "3px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"
@@ -505,7 +505,7 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "6px 0",
+                      padding: "3px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"

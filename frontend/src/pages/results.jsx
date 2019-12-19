@@ -31,6 +31,7 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       marginBottom: "3%"
     },
+    // mate 10 landscape
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
       marginTop: "10%"
     },
@@ -41,13 +42,18 @@ const styles = theme => ({
   },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "300%"
+      fontSize: "300%",
+      marginTop: "3%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%"
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "600%"
+    },
+    // mate 10 portrait
+    ["@media(min-width: 315px) and (max-width: 325px)"]: {
+      marginTop: "10%"
     },
     fontSize: "700%",
     textAlign: "center",
