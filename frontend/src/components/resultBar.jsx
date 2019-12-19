@@ -6,19 +6,40 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   const isScrollable = useMediaQuery({
     maxWidth: 959
   });
+
+  const mate10Potrait = useMediaQuery({
+    minWidth: 315,
+    maxWidth: 325,
+    orientation: "portrait"
+  });
+  const mate10Landscape = useMediaQuery({
+    minWidth: 565,
+    maxWidth: 570,
+    orientation: "landscape"
+  });
   const isIphoneXLandscape = useMediaQuery({
     minWidth: 810,
     maxWidth: 820,
     orientation: "landscape"
   });
-  const isIpadPotrait = useMediaQuery({
-    minWidth: 760,
-    maxWidth: 770,
-    orientation: "portrait"
+  // const isIpadPotrait = useMediaQuery({
+  //   minWidth: 760,
+  //   maxWidth: 770,
+  //   orientation: "portrait"
+  // });
+  const upLg = useMediaQuery({
+    minWidth: 1280
   });
 
+  let multiplier = 25;
+  if (mate10Potrait || mate10Landscape) {
+    multiplier = 20;
+  } else if (upLg) {
+    multiplier = 30;
+  }
+
   let width = barSize * 30;
-  // if (isIphoneXLandscape) width = barSize * 32;
+  if (isIphoneXLandscape) width = barSize * 32;
   // if (isIpadPotrait) width = barSize * 35;
 
   const renderCustomizedLabel = ({ x, y, fill, value }) => {
@@ -39,7 +60,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   return (
     <React.Fragment>
       {!isScrollable && (
-        <ResponsiveContainer height={barSize * 40}>
+        <ResponsiveContainer height={barSize * multiplier}>
           <BarChart
             data={halls}
             margin={{ top: 30 }}
@@ -51,7 +72,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
               axisLine={false}
               tickLine={false}
               fontFamily={"TheNextFont"}
-              tick={{ fill: "grey" }}
+              tick={{ fill: "white" }}
               interval={0}
             />
             <Bar
@@ -74,7 +95,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
       )}
       {isScrollable && (
         <BarChart
-          height={barSize * 40}
+          height={barSize * multiplier}
           width={width}
           data={halls}
           margin={{ top: 30 }}
@@ -86,7 +107,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
             axisLine={false}
             tickLine={false}
             fontFamily={"TheNextFont"}
-            tick={{ fill: "grey" }}
+            tick={{ fill: "white" }}
           />
           <Bar
             dataKey={dataKey}

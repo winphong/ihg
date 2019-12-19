@@ -20,9 +20,14 @@ const styles = theme => ({
     [theme.breakpoints.only("xs")]: {
       marginTop: "15%"
     },
+
     [theme.breakpoints.only("sm")]: {
       marginTop: "8%"
       // height: "45vmax"
+    },
+
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
     },
     height: "45vmax",
     marginTop: "4%",
@@ -65,6 +70,12 @@ const styles = theme => ({
     },
     [theme.breakpoints.only("lg")]: {
       fontSize: "800%"
+    },
+    ["@media(max-width: 320px)"]: {
+      fontSize: "280%"
+    },
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      fontSize: "400%"
     },
     fontSize: "1000%",
     lineHeight: "120%",
@@ -404,11 +415,16 @@ class Home extends Component {
             <Grid
               container
               xs={12}
-              style={{ padding: "0 5%", height: "7vmax" }}
+              style={{ padding: "2% 5%" }}
               alignItems="center"
             >
               <Grid item xs={9}>
-                <Typography className={classes.subTitle}>
+                <Typography
+                  className={classes.subTitle}
+                  style={{
+                    padding: "2px 0"
+                  }}
+                >
                   UPCOMING GAMES
                 </Typography>
               </Grid>
@@ -433,7 +449,7 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "6% 0",
+                      padding: "6px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"
@@ -463,11 +479,16 @@ class Home extends Component {
             <Grid
               container
               xs={12}
-              style={{ padding: "0 5%", height: "7vmax" }}
+              style={{ padding: "2% 5%" }}
               alignItems="center"
             >
               <Grid item xs={9}>
-                <Typography className={classes.subTitle}>
+                <Typography
+                  className={classes.subTitle}
+                  style={{
+                    padding: "2px 0"
+                  }}
+                >
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
@@ -484,7 +505,7 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "6% 0",
+                      padding: "6px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"

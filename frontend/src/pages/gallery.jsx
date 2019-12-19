@@ -15,19 +15,22 @@ const styles = theme => ({
   // },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "300%",
-      marginTop: "25%"
+      fontSize: "300%"
+      // marginTop: "25%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "420%",
-      marginTop: "10%"
+      fontSize: "420%"
+      // marginTop: "10%"
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "600%"
     },
+    ["@media(orientation: portrait)"]: {
+      marginTop: "10%"
+    },
+    marginTop: "4%",
     lineHeight: "120%",
-    fontSize: "700%",
-    marginTop: "8%"
+    fontSize: "700%"
   },
   caption: {
     [theme.breakpoints.only("xs")]: {
@@ -35,6 +38,10 @@ const styles = theme => ({
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "110%"
+    },
+    // iphone x potrait
+    ["@media (min-width: 370px) and (max-width: 380px)"]: {
+      marginBottom: "-30%"
     },
     color: "white",
     fontSize: "200%"
@@ -54,37 +61,41 @@ const styles = theme => ({
   //   }
   // },
   mainPhotoContainer: {
-    [theme.breakpoints.only("xs")]: {
-      height: "18vmax"
-    },
-    [theme.breakpoints.only("sm")]: {
-      height: "25vmax"
-    },
-    [theme.breakpoints.only("md")]: {
-      height: "300px"
-    },
-    [theme.breakpoints.up("lg")]: {
-      height: "30vmax"
-    },
-    objectFit: "cover",
-    margin: "5% 0"
+    // [theme.breakpoints.only("xs")]: {
+    //   height: "18vmax"
+    // },
+    // [theme.breakpoints.only("sm")]: {
+    //   height: "25vmax"
+    // },
+    // [theme.breakpoints.only("md")]: {
+    //   height: "300px"
+    // },
+    // [theme.breakpoints.up("lg")]: {
+    //   height: "30vmax"
+    // },
+    // objectFit: "cover",
+    // margin: "5% 0"
   },
   mainPhoto: {
     [theme.breakpoints.only("xs")]: {
-      width: "18vmax",
-      height: "18vmax"
+      width: "83%"
     },
     [theme.breakpoints.only("sm")]: {
-      width: "25vmax",
-      height: "25vmax"
+      width: "55%"
     },
     [theme.breakpoints.only("md")]: {
-      width: "300px",
-      height: "300px"
+      width: "220px"
     },
-    [theme.breakpoints.up("lg")]: {
-      width: "30vmax",
-      height: "30vmax"
+    [theme.breakpoints.up("md")]: {
+      width: "75%"
+    },
+    // mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      width: "55%"
+    },
+    // iphone x potrait
+    ["@media (min-width: 370px) and (max-width: 380px)"]: {
+      width: "90%"
     },
     objectFit: "cover"
     // width: "100%"
@@ -115,7 +126,20 @@ const styles = theme => ({
     objectFit: "cover"
   },
   banner: {
-    textAlign: "center"
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "8%"
+    },
+    // mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
+    },
+    height: "45vmax",
+    marginTop: "4%",
+    backgroundImage: "url('./headers/about.jpg')",
+    backgroundSize: "cover"
   }
 });
 
@@ -141,7 +165,7 @@ class Gallery extends Component {
         <React.Fragment>
           <Grid container xs={12}>
             {/* Background image */}
-            <Grid
+            {/* <Grid
               item
               xs={12}
               style={{
@@ -157,94 +181,98 @@ class Gallery extends Component {
                 }}
                 alt="home"
               />
-            </Grid>
-            <Grid item xs={1} md={2} />
-            {/* Top segment */}
-            <Grid
-              item
-              container
-              className={classes.banner}
-              style={{
-                zIndex: 1
-              }}
-              xs={10}
-              md={8}
-            >
-              <Grid item xs={12}>
-                <Typography variant="h1" className={classes.title}>
-                  GALLERY
-                </Typography>
-                <Typography variant="h1" className={classes.caption}>
-                  FOLLOW US{" "}
-                  <Link
-                    href="https://www.instagram.com/ihgofficial"
-                    style={{
-                      color: "#C8B06B"
-                    }}
-                  >
-                    @IHGOFFICIAL
-                  </Link>{" "}
-                  FOR MORE UPDATES
-                </Typography>
-              </Grid>
+            </Grid> */}
+            <Grid item container xs={12} className={classes.banner}>
+              <Grid item xs={1} md={2} />
+              {/* Top segment */}
               <Grid
                 item
                 container
-                xs={12}
-                alignItems="center"
-                // className={classes.mainPhotoSuperContainer}
+                style={{
+                  textAlign: "center"
+                }}
+                xs={10}
+                md={8}
               >
-                <Grid item xs={6} className={classes.mainPhotoContainer}>
-                  {photos.length > 0 && (
-                    <img
-                      src={photos[0].media_url}
-                      className={classes.mainPhoto}
-                      style={{
-                        cursor: "pointer"
-                      }}
-                      onClick={() => {
-                        window.location = photos[0].permalink;
-                      }}
-                    />
-                  )}
-                </Grid>
-                <Grid item xs={6} style={{ textAlign: "left" }}>
-                  <Typography>
+                <Grid item xs={12}>
+                  <Typography variant="h1" className={classes.title}>
+                    GALLERY
+                  </Typography>
+                  <Typography variant="h1" className={classes.caption}>
+                    FOLLOW US{" "}
                     <Link
                       href="https://www.instagram.com/ihgofficial"
-                      // className={classes.caption}
                       style={{
-                        color: "#C8B06B",
-                        // fontSize: "2vw",
-                        fontWeight: "bold"
+                        color: "#C8B06B"
                       }}
                     >
-                      <Typography
-                        className={classes.caption}
-                        style={{
-                          color: "#C8B06B"
-                        }}
-                      >
-                        @ihgofficial
-                      </Typography>
-                    </Link>
-                  </Typography>
-                  <Typography
-                    className={classes.caption}
-                    style={{
-                      // fontSize: "2vw",
-                      fontWeight: "bold",
-                      color: "white"
-                    }}
-                  >
-                    Summary for yesterday and schedule for today!
+                      @IHGOFFICIAL
+                    </Link>{" "}
+                    FOR MORE UPDATES
                   </Typography>
                 </Grid>
+                <Grid
+                  item
+                  container
+                  xs={12}
+                  alignItems="center"
+                  // className={classes.mainPhotoSuperContainer}
+                >
+                  <Grid item xs={6} className={classes.mainPhotoContainer}>
+                    {photos.length > 0 && (
+                      <img
+                        src={photos[0].media_url}
+                        className={classes.mainPhoto}
+                        style={{
+                          cursor: "pointer"
+                        }}
+                        onClick={() => {
+                          window.location = photos[0].permalink;
+                        }}
+                      />
+                    )}
+                  </Grid>
+                  <Grid item xs={6} style={{ textAlign: "left" }}>
+                    <Typography>
+                      <Link
+                        href="https://www.instagram.com/ihgofficial"
+                        // className={classes.caption}
+                        style={{
+                          color: "#C8B06B",
+                          // fontSize: "2vw",
+                          fontWeight: "bold"
+                        }}
+                      >
+                        <Typography
+                          // className={classes.caption}
+                          style={{
+                            color: "#C8B06B",
+                            fontSize: "130%",
+                            textDecoration: "none"
+                          }}
+                        >
+                          @ihgofficial
+                        </Typography>
+                      </Link>
+                    </Typography>
+                    <Typography
+                      // className={classes.caption}
+                      style={{
+                        // fontSize: "2vw",
+                        fontSize: "100%",
+                        fontWeight: "bold",
+                        color: "white"
+                      }}
+                    >
+                      Summary for yesterday and schedule for today!
+                    </Typography>
+                  </Grid>
+                </Grid>
               </Grid>
+              <Grid item xs={1} md={2} />
             </Grid>
-            <Grid item xs={1} md={2} />
-            <Grid item xs={1} md={2} />
             {/* Bottom segment */}
+            <Grid item xs={1} md={2} />
             <Grid
               item
               container

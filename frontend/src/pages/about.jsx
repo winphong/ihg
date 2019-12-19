@@ -24,30 +24,72 @@ const halls = [
 ];
 
 const styles = theme => ({
+  banner: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "8%"
+    },
+    // mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
+    },
+    height: "45vmax",
+    marginTop: "4%",
+    backgroundImage: "url('./headers/about.jpg')",
+    backgroundSize: "cover"
+  },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "350%",
-      marginTop: "25%"
+      fontSize: "300%",
+      marginTop: "10%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%",
-      marginTop: "10%"
+      marginTop: "6%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "600%"
+      fontSize: "600%",
+      marginTop: "7%"
+    },
+    // iphone x potrait
+    ["@media (min-width: 370px) and (max-width: 380px)"]: {
+      marginTop: "15%"
+    },
+    // huawei mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "3%"
+    },
+    // iphone x landscape
+    ["@media(min-width: 810px) and (max-width: 815px)"]: {
+      marginTop: "6%"
+    },
+    // ipad portrait
+    ["@media(min-width: 760px) and (max-width: 770px)"]: {
+      marginTop: "15%"
+    },
+    // ipad pro portrait
+    ["@media(min-width: 1020px) and (max-width: 1030px) and (orientation: portrait)"]: {
+      marginTop: "15%"
     },
     textAlign: "center",
     fontSize: "700%",
     color: "#C8B06B",
-    marginTop: "7%"
+    marginTop: "10%"
   },
   titleCaption: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       fontSize: "80%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "100%"
     },
     fontSize: "150%",
     color: "white",
-    lineHeight: "120%"
+    lineHeight: "120%",
+    padding: "8% 23%",
+    textAlign: "center"
   },
   subtitleContainer: {
     // [theme.breakpoints.only("md")]: {
@@ -139,10 +181,13 @@ const styles = theme => ({
     color: "#252527"
   },
   transitionContainer: {
-    [theme.breakpoints.down("sm")]: {
-      height: "50vmax"
+    [theme.breakpoints.only("xs")]: {
+      height: "35vmax"
       // display: "flex",
       // justifyContent: "center"
+    },
+    [theme.breakpoints.only("sm")]: {
+      height: "50vmax"
     },
     textAlign: "left"
   },
@@ -182,7 +227,16 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "80%"
     },
-    fontSize: "120%",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "120%"
+    },
+    // ipad portrait
+    ["@media(min-width: 760px) and (max-width: 770px)"]: {
+      fontSize: "120%"
+    },
+    ["@media(min-width: 800px) and (max-width: 960px)"]: {
+      fontSize: "100%"
+    },
     color: "#252527"
     // fontWeight: "bold"
   }
@@ -220,210 +274,226 @@ class About extends Component {
     return (
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
-          <Grid container xs={12}>
-            <Grid item xs={1} />
-            <Grid item xs={10} container style={{ textAlign: "center" }}>
+          <React.Fragment>
+            <Grid container xs={12}>
               {/* About IHG */}
-              <Grid item xs={12}>
+              <Grid item xs={12} className={classes.banner}>
                 <Typography variant="h1" className={classes.title}>
-                  ABOUT IHG
+                  ABOUT
                 </Typography>
                 <Typography variant="h1" className={classes.titleCaption}>
                   <div style={{ display: "inline", color: "#C8B06B" }}>
                     Inter-Hall Games{" "}
                   </div>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Eget egestas purus viverra accumsan. Feugiat in fermentum
-                  posuere urna nec tincidunt praesent semper feugiat. Ut tortor
-                  pretium viverra suspendisse potenti nullam. Lacus suspendisse
-                  faucibus interdum posuere lorem ipsum dolor sit amet.
+                  IS AN ANNUAL COMPETITION BETWEEN THE 7 RESIDENTIAL HALLS
+                  WITHIN NUS: SHEARES, KENT RIDGE, TEMASEK, EUSOFF, RAFFLES,
+                  KING EDWARD VII, PGP HOUSE. THE COMPETITION CONSISTS OF 17
+                  SPORTS WHERE ATHLETES OF THE HALLS COMPETE FOR THE TITLE OF
+                  IHG CHAMPIONS.
                 </Typography>
               </Grid>
-              {/* Hall of NUS */}
-              <Grid
-                item
-                xs={12}
-                container
-                className={classes.border}
-                alignItems="flex-end"
-              >
-                <Grid item xs={12} md={3} className={classes.subtitleContainer}>
-                  <Typography variant="h1" className={classes.hallOfNus}>
-                    HALLS OF NUS
-                  </Typography>
-                </Grid>
-                <Grid container item xs={12} md={9}>
-                  {halls.map((hall, index) => {
-                    return (
-                      <React.Fragment>
-                        <Grid item xs={false} md={index === 3 ? 3 : false} />
-                        <Grid item xs={6} md={3} style={{ marginBottom: "5%" }}>
-                          <img
-                            className={classes.crestImage}
-                            src={`/${hall.abbreviation}.png`}
-                          />
-                          <Typography
-                            variant="h1"
-                            className={classes.staticImageCaption}
-                          >
-                            {hall.name}
-                          </Typography>
-                        </Grid>
-                      </React.Fragment>
-                    );
-                  })}
-                </Grid>
-                <Divider />
-              </Grid>
-
-              {/* Sports Director */}
-              <Grid
-                item
-                container
-                className={classes.border}
-                xs={12}
-                alignItems="flex-end"
-              >
-                <MediaQuery maxWidth={959}>
-                  <Grid item xs={12} className={classes.subtitleContainer}>
-                    <Typography variant="h1" className={classes.director}>
-                      SPORTS DIRECTOR
+              <Grid item xs={1} />
+              <Grid item xs={10} container style={{ textAlign: "center" }}>
+                {/* Hall of NUS */}
+                <Grid
+                  item
+                  xs={12}
+                  container
+                  alignItems="flex-end"
+                  className={classes.border}
+                >
+                  <Grid
+                    item
+                    xs={12}
+                    md={3}
+                    className={classes.subtitleContainer}
+                  >
+                    <Typography variant="h1" className={classes.hallOfNus}>
+                      HALLS OF NUS
                     </Typography>
                   </Grid>
-                </MediaQuery>
-                <Grid container item xs={12} md={8}>
-                  {halls.map((hall, index) => {
-                    return (
-                      <React.Fragment>
-                        <Grid item xs={false} md={index === 3 ? 3 : false} />
-
-                        <Grid item xs={6} md={3} style={{ marginBottom: "5%" }}>
-                          <img
-                            style={{ width: "80%" }}
-                            src={`/directors/${hall.director}.png`}
-                          />
-                          <Typography
-                            variant="h1"
-                            className={classes.staticImageCaption}
+                  <Grid container item xs={12} md={9}>
+                    {halls.map((hall, index) => {
+                      return (
+                        <React.Fragment>
+                          <Grid item xs={false} md={index === 3 ? 3 : false} />
+                          <Grid
+                            item
+                            xs={6}
+                            md={3}
+                            style={{ marginBottom: "5%" }}
                           >
-                            {hall.abbreviation} - {hall.director}
-                          </Typography>
-                        </Grid>
-                      </React.Fragment>
-                    );
-                  })}
+                            <img
+                              className={classes.crestImage}
+                              src={`/${hall.abbreviation}.png`}
+                            />
+                            <Typography
+                              variant="h1"
+                              className={classes.staticImageCaption}
+                            >
+                              {hall.name}
+                            </Typography>
+                          </Grid>
+                        </React.Fragment>
+                      );
+                    })}
+                  </Grid>
+                  <Divider />
                 </Grid>
-                <MediaQuery minWidth={960}>
+
+                {/* Sports Director */}
+                <Grid
+                  item
+                  container
+                  className={classes.border}
+                  xs={12}
+                  alignItems="flex-end"
+                >
+                  <MediaQuery maxWidth={959}>
+                    <Grid item xs={12} className={classes.subtitleContainer}>
+                      <Typography variant="h1" className={classes.director}>
+                        SPORTS DIRECTOR
+                      </Typography>
+                    </Grid>
+                  </MediaQuery>
+                  <Grid container item xs={12} md={8}>
+                    {halls.map((hall, index) => {
+                      return (
+                        <React.Fragment>
+                          <Grid item xs={false} md={index === 3 ? 3 : false} />
+
+                          <Grid
+                            item
+                            xs={6}
+                            md={3}
+                            style={{ marginBottom: "5%" }}
+                          >
+                            <img
+                              style={{ width: "80%" }}
+                              src={`/directors/${hall.director}.png`}
+                            />
+                            <Typography
+                              variant="h1"
+                              className={classes.staticImageCaption}
+                            >
+                              {hall.abbreviation} - {hall.director}
+                            </Typography>
+                          </Grid>
+                        </React.Fragment>
+                      );
+                    })}
+                  </Grid>
+                  <MediaQuery minWidth={960}>
+                    <Grid
+                      item
+                      xs={12}
+                      md={4}
+                      className={classes.subtitleContainer}
+                    >
+                      <Typography variant="h1" className={classes.director}>
+                        SPORTS DIRECTOR
+                      </Typography>
+                    </Grid>
+                  </MediaQuery>
+                  <Divider />
+                </Grid>
+
+                {/* Sports */}
+                <Grid
+                  container
+                  // style={{ height: "500px" }}
+                  className={classes.sportsContainer}
+                  // style={{ paddingLeft: "4%" }}
+                >
                   <Grid
                     item
                     xs={12}
                     md={4}
                     className={classes.subtitleContainer}
-                  >
-                    <Typography variant="h1" className={classes.director}>
-                      SPORTS DIRECTOR
-                    </Typography>
-                  </Grid>
-                </MediaQuery>
-                <Divider />
-              </Grid>
-
-              {/* Sports */}
-              <Grid
-                container
-                // style={{ height: "500px" }}
-                className={classes.sportsContainer}
-                // style={{ paddingLeft: "4%" }}
-              >
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  className={classes.subtitleContainer}
-                  style={{
-                    textAlign: "left"
-                  }}
-                >
-                  <MediaQuery minWidth={960}>
-                    <SportsList
-                      sports={sports}
-                      selectedSport={selectedSport}
-                      handleSortBySport={this.handleClick}
-                    />
-                  </MediaQuery>
-                  <Typography variant="h1" className={classes.sportList}>
-                    SPORTS
-                  </Typography>
-                </Grid>
-                <MediaQuery maxWidth={959}>
-                  <div
                     style={{
-                      display: "flex",
-                      overflowX: "scroll",
-                      paddingBottom: "3%"
-                      // backgroundColor: "pink"
-                      // height: "4vmax"
+                      textAlign: "left"
                     }}
                   >
-                    {sports.map(sport => {
-                      return (
-                        <Typography
-                          className={classes.sports}
-                          onClick={() => this.handleClick(sport)}
-                          style={{
-                            // width: "150px",
-                            color:
-                              selectedSport.name === sport.name
-                                ? "#C8B06B"
-                                : "#D3DBD9"
-                          }}
-                        >
-                          {sport.name}
-                        </Typography>
-                      );
-                    })}
-                  </div>
-                </MediaQuery>
-                <Grid
-                  container
-                  item
-                  xs={12}
-                  md={8}
-                  className={classes.transitionContainer}
-                >
-                  <TransitionGroup>
-                    <CSSTransition
-                      key={selectedSport._id}
-                      timeout={400}
-                      classNames="fade"
+                    <MediaQuery minWidth={960}>
+                      <SportsList
+                        sports={sports}
+                        selectedSport={selectedSport}
+                        handleSortBySport={this.handleClick}
+                      />
+                    </MediaQuery>
+                    <Typography variant="h1" className={classes.sportList}>
+                      SPORTS
+                    </Typography>
+                  </Grid>
+                  <MediaQuery maxWidth={959}>
+                    <div
+                      style={{
+                        display: "flex",
+                        overflowX: "scroll",
+                        paddingBottom: "3%"
+                        // backgroundColor: "pink"
+                        // height: "4vmax"
+                      }}
                     >
-                      <div className={classes.sportsInformationContainer}>
-                        <img
-                          className={classes.sportPhoto}
-                          src={this.state.imgUrl}
-                        />
-                        {/* <Typography className={classes.information}>
+                      {sports.map(sport => {
+                        return (
+                          <Typography
+                            className={classes.sports}
+                            onClick={() => this.handleClick(sport)}
+                            style={{
+                              // width: "150px",
+                              color:
+                                selectedSport.name === sport.name
+                                  ? "#C8B06B"
+                                  : "#D3DBD9"
+                            }}
+                          >
+                            {sport.name}
+                          </Typography>
+                        );
+                      })}
+                    </div>
+                  </MediaQuery>
+                  <Grid
+                    container
+                    item
+                    xs={12}
+                    md={8}
+                    className={classes.transitionContainer}
+                  >
+                    <TransitionGroup>
+                      <CSSTransition
+                        key={selectedSport._id}
+                        timeout={400}
+                        classNames="fade"
+                      >
+                        <div className={classes.sportsInformationContainer}>
+                          <img
+                            className={classes.sportPhoto}
+                            src={this.state.imgUrl}
+                          />
+                          {/* <Typography className={classes.information}>
                           {selectedSport.name}
                         </Typography> */}
-                        <Typography className={classes.information}>
-                          {selectedSport.description}
-                        </Typography>
-                      </div>
-                    </CSSTransition>
-                  </TransitionGroup>
-                </Grid>
-                {/* <Grid
+                          <Typography className={classes.information}>
+                            {selectedSport.description}
+                          </Typography>
+                        </div>
+                      </CSSTransition>
+                    </TransitionGroup>
+                  </Grid>
+                  {/* <Grid
                 item
                 container
                 xs={12}
                 md={5}
                 style={{ backgroundColor: "grey" }}
               ></Grid> */}
+                </Grid>
               </Grid>
+              <Grid item xs={1} />
             </Grid>
-            <Grid item xs={1} />
-          </Grid>
+          </React.Fragment>
         </CSSTransition>
       </React.Fragment>
     );

@@ -20,30 +20,41 @@ import miscService from "../services/miscService";
 import { Link } from "react-router-dom";
 
 const styles = theme => ({
-  title: {
+  banner: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "350%",
-      marginTop: "31.5%"
+      marginTop: "15%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "420%",
-      marginTop: "13%"
+      marginTop: "8%"
+      // height: "45vmax"
+    },
+    [theme.breakpoints.up("md")]: {
+      marginBottom: "3%"
+    },
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
+    },
+    height: "45vmax",
+    marginTop: "4%",
+    backgroundImage: "url('./headers/results.jpg')",
+    backgroundSize: "cover"
+  },
+  title: {
+    [theme.breakpoints.only("xs")]: {
+      fontSize: "300%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "420%"
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "600%"
     },
     fontSize: "700%",
     textAlign: "center",
-    marginTop: "7%"
+    marginTop: "3%"
   },
   buttonColumn: {
-    [theme.breakpoints.only("xs")]: {
-      marginTop: "18%"
-    },
-    [theme.breakpoints.only("sm")]: {
-      marginTop: "10%"
-    },
-    marginTop: "6%"
+    marginTop: "3%"
   },
   currentDate: {
     [theme.breakpoints.down("sm")]: {
@@ -77,9 +88,13 @@ const styles = theme => ({
     }
   },
   barChartTitle: {
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.only("xs")]: {
       textAlign: "center",
-      fontSize: "200%"
+      fontSize: "150%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      textAlign: "center",
+      fontSize: "160%"
     },
     fontSize: "300%",
     color: "#C8B06B",
@@ -455,7 +470,7 @@ class Results extends Component {
       <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
         <React.Fragment>
           {/* Standings */}
-          <Grid container alignItems="center">
+          <Grid container alignItems="center" className={classes.banner}>
             <Grid item xs={2} md={1} />
             <Grid item xs={8} md={10}>
               <Typography variant="h1" className={classes.title}>
@@ -467,118 +482,129 @@ class Results extends Component {
             </Grid>
             <Grid item xs={2} md={1} className={classes.buttonColumn}>
               {isAdmin && (
-                <IconButton to={"/admin/standing"} component={Link}>
+                <IconButton
+                  to={"/admin/standing"}
+                  component={Link}
+                  style={{ backgroundColor: "#D3DBD9" }}
+                >
                   <EditRoundedIcon />
                 </IconButton>
               )}
             </Grid>
-          </Grid>
-          <Grid container xs={12}>
-            {/* --------------------------------- */}
-            <MediaQuery minWidth={960}>
-              <Grid item container className={classes.barChart} md={12}>
-                <Grid item sm={1} />
-                <Grid item sm={2}>
-                  <ResultBar halls={halls} dataKey={"malePoint"} barSize={6} />
-                  <Typography
-                    className={classes.barChartTitle}
-                    style={{ fontSize: "200%" }}
-                  >
-                    MALE
-                  </Typography>
-                </Grid>
-                <Grid item sm={1} />
-                <Grid item sm={4}>
-                  <ResultBar
-                    halls={halls}
-                    dataKey={"totalPoint"}
-                    barSize={10}
-                  />
-                  <Typography className={classes.barChartTitle}>
-                    OVERALL
-                  </Typography>
-                </Grid>
-                <Grid item sm={1} />
-                <Grid item sm={2}>
-                  <ResultBar
-                    halls={halls}
-                    dataKey={"femalePoint"}
-                    barSize={6}
-                  />
-                  <Typography
-                    className={classes.barChartTitle}
-                    style={{ fontSize: "200%" }}
-                  >
-                    FEMALE
-                  </Typography>
-                </Grid>
-                <Grid item sm={1} />
-              </Grid>
-            </MediaQuery>
-            {/* --------------------------------- */}
-            {/* ********************************* */}
-            <MediaQuery maxWidth={959}>
-              <Grid item xs={12}>
-                <div
-                  // className="slider"
-                  style={{
-                    display: "flex",
-                    overflowX: "scroll",
-                    padding: "5% 0"
-                    // backgroundColor: "pink",
-                  }}
-                >
-                  <div className={classes.overall} style={{ padding: "0 3%" }}>
+            <Grid container xs={12}>
+              {/* --------------------------------- */}
+              <MediaQuery minWidth={960}>
+                <Grid item container className={classes.barChart} md={12}>
+                  <Grid item sm={1} />
+                  <Grid item sm={2}>
+                    <ResultBar
+                      halls={halls}
+                      dataKey={"malePoint"}
+                      barSize={6}
+                    />
+                    <Typography
+                      className={classes.barChartTitle}
+                      style={{ fontSize: "200%" }}
+                    >
+                      MALE
+                    </Typography>
+                  </Grid>
+                  <Grid item sm={1} />
+                  <Grid item sm={4}>
                     <ResultBar
                       halls={halls}
                       dataKey={"totalPoint"}
-                      barSize={7}
+                      barSize={10}
                     />
                     <Typography className={classes.barChartTitle}>
                       OVERALL
                     </Typography>
-                  </div>
-                  <div
-                    className={classes.male}
-                    style={{
-                      padding: "0 3%"
-                      // transform: "scale(0.8)",
-                      // backgroundColor: "pink"
-                      // order: -1,
-                      // borderLeft: "0.5px #958F87 solid",
-                      // borderRight: "0.5px #958F87 solid"
-                    }}
-                  >
-                    <ResultBar
-                      halls={halls}
-                      dataKey={"malePoint"}
-                      barSize={7}
-                    />
-                    <Typography className={classes.barChartTitle}>
-                      MALE
-                    </Typography>
-                  </div>
-                  <div
-                    className={classes.female}
-                    style={{
-                      padding: "0 3%"
-                      // transform: "scale(0.8)",
-                      // backgroundColor: "pink",
-                    }}
-                  >
+                  </Grid>
+                  <Grid item sm={1} />
+                  <Grid item sm={2}>
                     <ResultBar
                       halls={halls}
                       dataKey={"femalePoint"}
-                      barSize={7}
+                      barSize={6}
                     />
-                    <Typography className={classes.barChartTitle}>
+                    <Typography
+                      className={classes.barChartTitle}
+                      style={{ fontSize: "200%" }}
+                    >
                       FEMALE
                     </Typography>
+                  </Grid>
+                  <Grid item sm={1} />
+                </Grid>
+              </MediaQuery>
+              {/* --------------------------------- */}
+              {/* ********************************* */}
+              <MediaQuery maxWidth={959}>
+                <Grid item xs={12}>
+                  <div
+                    // className="slider"
+                    style={{
+                      display: "flex",
+                      overflowX: "scroll"
+                      // padding: "5% 0"
+                      // backgroundColor: "pink",
+                    }}
+                  >
+                    <div
+                      className={classes.overall}
+                      style={{ padding: "0 3%" }}
+                    >
+                      <ResultBar
+                        halls={halls}
+                        dataKey={"totalPoint"}
+                        barSize={7}
+                      />
+                      <Typography className={classes.barChartTitle}>
+                        OVERALL
+                      </Typography>
+                    </div>
+                    <div
+                      className={classes.male}
+                      style={{
+                        padding: "0 3%"
+                        // transform: "scale(0.8)",
+                        // backgroundColor: "pink"
+                        // order: -1,
+                        // borderLeft: "0.5px #958F87 solid",
+                        // borderRight: "0.5px #958F87 solid"
+                      }}
+                    >
+                      <ResultBar
+                        halls={halls}
+                        dataKey={"malePoint"}
+                        barSize={7}
+                      />
+                      <Typography className={classes.barChartTitle}>
+                        MALE
+                      </Typography>
+                    </div>
+                    <div
+                      className={classes.female}
+                      style={{
+                        padding: "0 3%"
+                        // transform: "scale(0.8)",
+                        // backgroundColor: "pink",
+                      }}
+                    >
+                      <ResultBar
+                        halls={halls}
+                        dataKey={"femalePoint"}
+                        barSize={7}
+                      />
+                      <Typography className={classes.barChartTitle}>
+                        FEMALE
+                      </Typography>
+                    </div>
                   </div>
-                </div>
-              </Grid>
-            </MediaQuery>
-            {/* ********************************* */}
+                </Grid>
+              </MediaQuery>
+              {/* ********************************* */}
+            </Grid>
           </Grid>
 
           <Grid container xs={12}>
