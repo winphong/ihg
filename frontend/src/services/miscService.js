@@ -17,7 +17,7 @@ function createNewEnquiry(enquiry) {
 function getInstagramPhotos() {
   // removing request header as instagram doesn't accept x-auth-token as request header
   delete axios.defaults.headers.common["x-auth-token"];
-  // const response = axios.get(`${process.env.REACT_APP_INSTAGRAM_API_URL}`);
+  const response = axios.get(`${process.env.REACT_APP_INSTAGRAM_API_URL}`);
   http.setJwt(getJwt());
   return response;
 }
