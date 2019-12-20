@@ -163,7 +163,19 @@ const styles = theme => ({
       fontSize: "150%"
     },
     fontFamily: "TheNextFont",
-    color: "white"
+    color: "white",
+    width: "100%",
+    backgroundColor: "#C8B06B",
+    textDecoration: "none",
+    borderRadius: "3px",
+    textAlign: "center",
+    padding: "2% 0"
+  },
+  centerAlign: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "3vmax"
   }
 });
 
@@ -418,40 +430,24 @@ class Home extends Component {
               style={{ padding: "2% 5%" }}
               alignItems="center"
             >
-              <Grid item xs={9}>
+              <Grid
+                item
+                xs={9}
+                className={classes.centerAlign}
+                style={{ justifyContent: "flex-start" }}
+              >
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={3}
-                // style={{
-                //   display: "flex",
-                //   alignItems: "center",
-                //   justifyContent: "center"
-                // }}
-              >
-                <div
-                  style={{
-                    display: "flex"
-                  }}
+              <Grid item xs={3} className={classes.centerAlign}>
+                <Typography
+                  className={classes.buttonText}
+                  to={"/schedule"}
+                  component={Link}
                 >
-                  <Typography
-                    className={classes.buttonText}
-                    to={"/schedule"}
-                    component={Link}
-                    style={{
-                      width: "100%",
-                      backgroundColor: "#C8B06B",
-                      textDecoration: "none",
-                      borderRadius: "3px",
-                      textAlign: "center"
-                    }}
-                  >
-                    VIEW SCHEDULE
-                  </Typography>
-                </div>
+                  VIEW SCHEDULE
+                </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -476,32 +472,24 @@ class Home extends Component {
               style={{ padding: "2% 5%" }}
               alignItems="center"
             >
-              <Grid item xs={9}>
+              <Grid
+                item
+                xs={9}
+                className={classes.centerAlign}
+                style={{ justifyContent: "flex-start" }}
+              >
                 <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
-                <div
-                  style={{
-                    display: "flex"
-                  }}
+              <Grid item xs={3} className={classes.centerAlign}>
+                <Typography
+                  className={classes.buttonText}
+                  to={"/results"}
+                  component={Link}
                 >
-                  <Typography
-                    className={classes.buttonText}
-                    to={"/results"}
-                    component={Link}
-                    style={{
-                      width: "100%",
-                      backgroundColor: "#C8B06B",
-                      textDecoration: "none",
-                      borderRadius: "3px",
-                      textAlign: "center"
-                    }}
-                  >
-                    VIEW RESULT
-                  </Typography>
-                </div>
+                  VIEW RESULT
+                </Typography>
               </Grid>
             </Grid>
             <ResultBarHorizontal halls={halls} />

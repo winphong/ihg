@@ -63,6 +63,7 @@ const selections = [
 
 export default function NavBar({ pathname, handleTabChange }) {
   const classes = useStyles();
+  const isAdmin = auth.getCurrentAdmin();
 
   const [state, setState] = React.useState({
     top: false,
@@ -110,6 +111,25 @@ export default function NavBar({ pathname, handleTabChange }) {
             </Button>
           </ListItem>
         ))}
+        {isAdmin && (
+          <ListItem button key={"logout"}>
+            <Button
+              color="inherit"
+              to={"/logout"}
+              component={Link}
+              disableRipple
+            >
+              <Typography
+                style={{
+                  color: "#958F87",
+                  fontWeight: "bold"
+                }}
+              >
+                Logout
+              </Typography>
+            </Button>
+          </ListItem>
+        )}
       </List>
       <Divider />
     </div>
@@ -182,7 +202,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                   </IconButton>
                 );
               })}
-              {auth.getCurrentAdmin() && (
+              {isAdmin && (
                 <IconButton
                   style={{
                     backgroundColor: "transparent",

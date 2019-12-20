@@ -165,7 +165,9 @@ const styles = theme => ({
     [theme.breakpoints.up("lg")]: {},
     marginRight: "-15px",
     height: "300px",
-    overflowY: "auto"
+    overflowY: "auto",
+    display: "flex",
+    alignItems: "center"
   }
 });
 

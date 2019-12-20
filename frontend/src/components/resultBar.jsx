@@ -30,12 +30,18 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   const upLg = useMediaQuery({
     minWidth: 1280
   });
+  const md = useMediaQuery({
+    minWidth: 960,
+    maxWidth: 1279
+  });
 
   let multiplier = 25;
   if (mate10Potrait || mate10Landscape) {
     multiplier = 20;
-  } else if (upLg) {
+  } else if (md) {
     multiplier = 30;
+  } else if (upLg) {
+    multiplier = 35;
   }
 
   let width = barSize * 30;
