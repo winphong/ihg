@@ -419,12 +419,7 @@ class Home extends Component {
               alignItems="center"
             >
               <Grid item xs={9}>
-                <Typography
-                  className={classes.subTitle}
-                  style={{
-                    padding: "2px 0"
-                  }}
-                >
+                <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
@@ -449,7 +444,6 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "3px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"
@@ -483,12 +477,7 @@ class Home extends Component {
               alignItems="center"
             >
               <Grid item xs={9}>
-                <Typography
-                  className={classes.subTitle}
-                  style={{
-                    padding: "2px 0"
-                  }}
-                >
+                <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
@@ -505,7 +494,6 @@ class Home extends Component {
                     style={{
                       width: "100%",
                       backgroundColor: "#C8B06B",
-                      padding: "3px 0",
                       textDecoration: "none",
                       borderRadius: "3px",
                       textAlign: "center"

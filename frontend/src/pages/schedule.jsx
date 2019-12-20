@@ -90,13 +90,11 @@ const styles = theme => ({
     // },
   },
   icon: {
-    // [theme.breakpoints.only("xs")]: {
-    //   marginLeft: "-80%"
-    // }
-    color: "white",
     [theme.breakpoints.down("xs")]: {
       display: "none"
-    }
+    },
+    color: "white",
+    transform: "scale(1.5)"
   }
 });
 
