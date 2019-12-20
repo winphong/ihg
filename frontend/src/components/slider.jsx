@@ -77,6 +77,7 @@ export default function Slider({ schedules }) {
           <IconButton
             onClick={handleBack}
             disabled={currentWeekSchedule.length === 1}
+            style={{ color: "grey", transform: "scale(1.5)" }}
           >
             <KeyboardArrowLeft />
           </IconButton>
@@ -99,6 +100,7 @@ export default function Slider({ schedules }) {
                     <Card
                       schedule={currentWeekSchedule[previous]}
                       size="small"
+                      white={true}
                     />
                   )}
                   {/* )} */}
@@ -108,12 +110,17 @@ export default function Slider({ schedules }) {
                     schedule={currentWeekSchedule[current]}
                     center={true}
                     size="small"
+                    white={true}
                   />
                 </Grid>
                 <Grid item className={classes.side} md={4}>
                   {/* {next < schedules.length && ( */}
                   {currentWeekSchedule.length >= 3 && (
-                    <Card schedule={currentWeekSchedule[next]} size="small" />
+                    <Card
+                      schedule={currentWeekSchedule[next]}
+                      size="small"
+                      white={true}
+                    />
                   )}
                   {/* )} */}
                 </Grid>
@@ -125,8 +132,11 @@ export default function Slider({ schedules }) {
           <IconButton
             onClick={handleNext}
             disabled={currentWeekSchedule.length === 1}
+            style={{ color: "grey", transform: "scale(1.5)" }}
           >
-            <KeyboardArrowRight />
+            <KeyboardArrowRight
+            // style={{ color: "grey", transform: "scale(1.5)" }}
+            />
           </IconButton>
         </Grid>
       </MediaQuery>
@@ -137,7 +147,6 @@ export default function Slider({ schedules }) {
               display: "flex",
               overflowX: "scroll",
               width: "100%"
-
               // height: "50vmax"
               // backgroundColor: "pink"
             }}
@@ -148,6 +157,7 @@ export default function Slider({ schedules }) {
                   schedule={e}
                   size="big"
                   index={index}
+                  white={true}
                   // scheduleSize={schedules.length}
                 />
               );
@@ -175,16 +185,11 @@ const styles = theme => ({
   },
   sliderContainer: {
     [theme.breakpoints.only("xs")]: {
-      height: "30vmax"
+      // height: "30vmax"
     },
     [theme.breakpoints.up("lg")]: {
       height: "20vmax"
-    },
-    height: "40vmax"
-
-    // [theme.breakpoints.between("sm", "sm")]: {
-    //   height: "80vmax"
-    // }
+    }
     // backgroundColor: "pink"
   }
 });

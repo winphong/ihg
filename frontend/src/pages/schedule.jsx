@@ -13,21 +13,41 @@ import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { Link } from "react-router-dom";
 
 const styles = theme => ({
+  banner: {
+    [theme.breakpoints.only("xs")]: {
+      marginTop: "15%"
+    },
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "8%"
+    },
+    // mate 10 landscape
+    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+      marginTop: "10%"
+    },
+    height: "45vmax",
+    marginTop: "4%",
+    backgroundImage: "url('./headers/schedule.jpg')",
+    backgroundSize: "cover",
+    marginBottom: "2%"
+  },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "300%",
-      marginTop: "25%"
+      fontSize: "280%",
+      marginTop: "6%"
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%",
-      marginTop: "10%"
+      marginTop: "4%"
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "600%"
     },
+    ["@media(min-width: 315px) and (max-width: 325px)"]: {
+      fontSize: "245%"
+    },
     color: "#C8B06B",
     fontSize: "700%",
-    marginTop: "7%"
+    marginTop: "4%"
   },
   buttonColumn: {
     [theme.breakpoints.only("xs")]: {
@@ -50,9 +70,7 @@ const styles = theme => ({
     }
   },
   slider: {
-    [theme.breakpoints.only("xs")]: {
-      height: "30vmax"
-    },
+    [theme.breakpoints.only("xs")]: {},
     // [theme.breakpoints.only("sm")]: {
     //   height: "40vmax"
     // },
@@ -60,21 +78,24 @@ const styles = theme => ({
     //   height: "40vmax"
     // },
     [theme.breakpoints.only("md")]: {
-      margin: "3% 0 5% 0"
+      // margin: "3% 0 5% 0"
     },
     [theme.breakpoints.up("lg")]: {
-      height: "25vmax",
-      margin: "5% 0 3% 0"
-    },
-    height: "40vmax"
+      margin: "5% 0 3% 0",
+      height: "40vmax"
+    }
     // [theme.breakpoints.up("sm")]: {
     //   margin: "5% 0",
     //   height: "20vmax"
     // },
   },
   icon: {
-    [theme.breakpoints.only("xs")]: {
-      marginLeft: "-80%"
+    // [theme.breakpoints.only("xs")]: {
+    //   marginLeft: "-80%"
+    // }
+    color: "white",
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
     }
   }
 });
@@ -107,47 +128,57 @@ class Schedule extends Component {
       <Grid container className={classes.container}>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <React.Fragment>
-            <Grid container xs={12} alignItems="center">
-              <Grid item xs={1} md={1} />
-              <Grid item xs={10} md={10}>
-                <Typography variant="h1" className={classes.title}>
-                  UPCOMING GAMES
-                </Typography>
+            <Grid container xs={12} className={classes.banner}>
+              <Grid item container xs={12} alignItems="center">
+                <Grid item xs={12}>
+                  <Typography variant="h1" className={classes.title}>
+                    {isAdmin && (
+                      <IconButton
+                        className={classes.icon}
+                        style={{ visibility: "hidden" }}
+                      >
+                        <AddCircleRoundedIcon />
+                      </IconButton>
+                    )}
+                    UPCOMING GAMES
+                    {isAdmin && (
+                      <IconButton
+                        className={classes.icon}
+                        to={"/admin/schedule"}
+                        component={Link}
+                      >
+                        <AddCircleRoundedIcon />
+                      </IconButton>
+                    )}
+                  </Typography>
+                </Grid>
+                {/* <Grid item xs={1} md={1} className={classes.buttonColumn}>
+                  
+                </Grid> */}
               </Grid>
-              <Grid item xs={1} md={1} className={classes.buttonColumn}>
-                {isAdmin && (
-                  <IconButton
-                    className={classes.icon}
-                    to={"/admin/schedule"}
-                    component={Link}
-                  >
-                    <AddCircleRoundedIcon />
-                  </IconButton>
-                )}
+              <Grid item xs={12} className={classes.slider}>
+                <CSSTransition
+                  in={true}
+                  appear={true}
+                  timeout={500}
+                  classNames="fade"
+                >
+                  <div>
+                    {schedules.length > 0 && (
+                      <Slider
+                        // schedules={schedules.filter(e => {
+                        //   return (
+                        //     this.df(e.startTime) ===
+                        //     this.df(new Date("6 Jan 2020"))
+                        //     // this.df(new Date())
+                        //   );
+                        // })}
+                        schedules={schedules}
+                      />
+                    )}
+                  </div>
+                </CSSTransition>
               </Grid>
-            </Grid>
-            <Grid item xs={12} className={classes.slider}>
-              <CSSTransition
-                in={true}
-                appear={true}
-                timeout={500}
-                classNames="fade"
-              >
-                <div>
-                  {schedules.length > 0 && (
-                    <Slider
-                      // schedules={schedules.filter(e => {
-                      //   return (
-                      //     this.df(e.startTime) ===
-                      //     this.df(new Date("6 Jan 2020"))
-                      //     // this.df(new Date())
-                      //   );
-                      // })}
-                      schedules={schedules}
-                    />
-                  )}
-                </div>
-              </CSSTransition>
             </Grid>
             {/* Calendar */}
             <CSSTransition

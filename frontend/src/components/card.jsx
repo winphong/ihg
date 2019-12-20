@@ -1,14 +1,36 @@
 import React from "react";
 import dateformat from "dateformat";
 import Grid from "@material-ui/core/Grid";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useMediaQuery } from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-export default function Card({ schedule, center, size }) {
+export default function Card({ schedule, center, size, white }) {
   const classes = useStyles();
-  const theme = useTheme();
   const hasHalls = schedule.halls.length > 0;
+
+  const mate10Landscapre = useMediaQuery({
+    minWidth: 565,
+    maxWidth: 570,
+    orientation: "landscape"
+  });
+
+  const xxs = useMediaQuery({ maxWidth: 329 });
+  const xs = useMediaQuery({ maxWidth: 499 });
+  const sm = useMediaQuery({ maxWidth: 959 });
+  const md = useMediaQuery({ maxWidth: 1279 });
+  const lg = useMediaQuery({ maxWidth: 1919 });
+
+  let width = "";
+  let transform = "";
+
+  if (xxs) width = "65%";
+  else if (sm) width = "55%";
+  else if (md) width = "40%";
+
+  if (mate10Landscapre) {
+    transform = "scale(0.65)";
+  }
 
   return (
     <Grid
@@ -16,6 +38,10 @@ export default function Card({ schedule, center, size }) {
       className={
         center ? classes.center : size === "big" ? classes.big : classes.small
       }
+      style={{
+        width: width,
+        transform: transform
+      }}
     >
       {schedule.halls.length <= 2 && (
         <React.Fragment>
@@ -44,6 +70,7 @@ export default function Card({ schedule, center, size }) {
             <Grid item xs={5}>
               <Typography
                 className={size === "small" ? classes.hallSlider : classes.hall}
+                style={{ color: white ? "#F9FBFA" : "" }}
               >
                 {hasHalls ? schedule.halls[0].name.toUpperCase() : "TBA"}
               </Typography>
@@ -52,6 +79,7 @@ export default function Card({ schedule, center, size }) {
             <Grid item xs={5}>
               <Typography
                 className={size === "small" ? classes.hallSlider : classes.hall}
+                style={{ color: white ? "#F9FBFA" : "" }}
               >
                 {hasHalls ? schedule.halls[1].name.toUpperCase() : "TBA"}
               </Typography>
@@ -124,6 +152,7 @@ export default function Card({ schedule, center, size }) {
                   className={
                     size === "small" ? classes.hallSlider : classes.hall
                   }
+                  style={{ color: white ? "#F9FBFA" : "" }}
                 >
                   {hall.abbreviation}
                 </Typography>
@@ -141,7 +170,10 @@ export default function Card({ schedule, center, size }) {
         </Typography>
         <Typography
           className={classes.information}
-          style={{ fontSize: size === "small" ? "100%" : "" }}
+          style={{
+            fontSize: size === "small" ? "100%" : "",
+            color: white ? "#F9FBFA" : ""
+          }}
         >
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
           {schedule.venue}
@@ -160,20 +192,8 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       width: "80%",
       flexShrink: 0
-      // height: "35vh",
-      // transform: "scale(0.8)",
-      // borderRadius: "10px",
-      // marginLeft: "10px"
-      // backgroundColor: "yellow",
-      // border: "1px solid black"
     },
     transform: "scale(0.8)"
-    // margin: "1% 0.5%",
-    // width: "100%",
-    // height: "100%",
-    // backgroundColor: "beige",
-    // border: "1px solid black"
-    // padding: "1vh"
   },
   small: {
     textAlign: "center",
@@ -183,19 +203,12 @@ const styles = theme => ({
     padding: "0.5%",
     opacity: 0.3,
     transform: "scale(0.8)"
-    // backgroundColor: "pink",
-    // border: "1px solid gold"
   },
   center: {
     textAlign: "center",
-    // height: "18vmax",
     padding: "1%",
     transform: "scale(1.3)",
-    // border: "1px solid gold",
-    [theme.breakpoints.down("md")]: {
-      // transform: "scale(0.9)",
-      // height: "35vmax"
-    }
+    [theme.breakpoints.down("md")]: {}
   },
   vs: {
     display: "flex",
@@ -242,6 +255,7 @@ const styles = theme => ({
     },
     fontSize: "120%",
     lineHeight: "100%",
+    color: "#F9FBFA",
     fontFamily: "TheNextFont"
   },
   sportSlider: {

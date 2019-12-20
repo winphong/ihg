@@ -37,12 +37,18 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   },
   container: {
+    [theme.breakpoints.only("sm")]: {
+      height: "150vh"
+    },
     [theme.breakpoints.only("md")]: {
       height: "83vh"
     },
     // mate 10 portrait
     ["@media(min-width: 315px) and (max-width: 325px)"]: {
       height: "90vh"
+    },
+    ["@media(min-width: 760px) and (max-width: 770px)"]: {
+      height: "80vh"
     },
     height: "80vh",
     textAlign: "center"
