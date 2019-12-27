@@ -159,7 +159,7 @@ export default function NavBar({ pathname, handleTabChange }) {
             onClick={() => handleTabChange("/home")}
             to={"/home"}
             component={Link}
-            style={{}}
+            style={{ backgroundColor: "transparent" }}
           >
             <img src="/Logo.png" className={classes.logoSize} />
           </IconButton>
