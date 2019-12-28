@@ -181,7 +181,10 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "150%"
     },
-    fontFamily: "TheNextFont"
+    fontFamily: "TheNextFont",
+    ["@media(max-width: 325px)"]: {
+      fontSize: "52%"
+    }
     // color: "white",
     // width: "100%",
     // backgroundColor: "#C8B06B",
@@ -194,7 +197,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "3vmax"
+    height: "5vmax"
   }
 });
 
