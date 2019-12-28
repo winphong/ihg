@@ -203,7 +203,7 @@ const styles = theme => ({
   },
   viewButton: {
     [theme.breakpoints.down("sm")]: {
-      padding: "3px 8px",
+      padding: "4px 8px 2px 8px",
       marginTop: "-6px"
     },
     color: "white",
