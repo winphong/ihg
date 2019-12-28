@@ -185,7 +185,7 @@ const styles = theme => ({
     },
     fontFamily: "TheNextFont",
     ["@media(max-width: 325px)"]: {
-      fontSize: "52%"
+      fontSize: "50%"
     }
     // color: "white",
     // width: "100%",
