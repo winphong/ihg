@@ -200,6 +200,13 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "center"
     // height: "4vmax"
+  },
+  viewButton: {
+    [theme.breakpoints.only("xs")]: {
+      padding: "3px 8px"
+    },
+    backgroundColor: "#C8B06B",
+    color: "white"
   }
 });
 
@@ -471,12 +478,7 @@ class Home extends Component {
               >
                 <Button
                   fullWidth
-                  style={{
-                    backgroundColor: "#C8B06B",
-                    color: "white",
-                    margin: "3px 0"
-                    // padding: "3px 8px"
-                  }}
+                  className={classes.viewButton}
                   to={"/schedule"}
                   component={Link}
                 >
@@ -506,7 +508,7 @@ class Home extends Component {
               container
               xs={12}
               style={{ padding: "2% 5%" }}
-              // alignItems="center"
+              alignItems="center"
             >
               <Grid
                 item
@@ -525,11 +527,7 @@ class Home extends Component {
               >
                 <Button
                   fullWidth
-                  style={{
-                    backgroundColor: "#C8B06B",
-                    color: "white",
-                    margin: "3px 0"
-                  }}
+                  className={classes.viewButton}
                   to={"/results"}
                   component={Link}
                 >
