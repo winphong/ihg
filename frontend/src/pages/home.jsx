@@ -91,9 +91,11 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "400%"
     },
+    [theme.breakpoints.up("lg")]: {
+      lineHeight: "120%"
+    },
     fontSize: "450%",
     color: "#C8B06B",
-    lineHeight: "120%",
     fontFamily: "TheNextFont"
   },
   subTitleTransparent: {
@@ -196,8 +198,8 @@ const styles = theme => ({
   centerAlign: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    height: "4vmax"
+    justifyContent: "center"
+    // height: "4vmax"
   }
 });
 
@@ -499,7 +501,7 @@ class Home extends Component {
               container
               xs={12}
               style={{ padding: "2% 5%" }}
-              alignItems="center"
+              // alignItems="center"
             >
               <Grid
                 item
