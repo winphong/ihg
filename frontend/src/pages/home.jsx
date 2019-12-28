@@ -152,6 +152,25 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center"
   },
+  // buttonText: {
+  //   [theme.breakpoints.only("xs")]: {
+  //     fontSize: "59%"
+  //   },
+  //   [theme.breakpoints.only("sm")]: {
+  //     fontSize: "100%"
+  //   },
+  //   [theme.breakpoints.only("md")]: {
+  //     fontSize: "150%"
+  //   },
+  //   fontFamily: "TheNextFont",
+  //   color: "white",
+  //   width: "100%",
+  //   backgroundColor: "#C8B06B",
+  //   textDecoration: "none",
+  //   borderRadius: "3px",
+  //   textAlign: "center",
+  //   padding: "2% 0"
+  // },
   buttonText: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "59%"
@@ -162,14 +181,14 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "150%"
     },
-    fontFamily: "TheNextFont",
-    color: "white",
-    width: "100%",
-    backgroundColor: "#C8B06B",
-    textDecoration: "none",
-    borderRadius: "3px",
-    textAlign: "center",
-    padding: "2% 0"
+    fontFamily: "TheNextFont"
+    // color: "white",
+    // width: "100%",
+    // backgroundColor: "#C8B06B",
+    // textDecoration: "none",
+    // borderRadius: "3px",
+    // textAlign: "center",
+    // padding: "2% 0"
   },
   centerAlign: {
     display: "flex",
@@ -441,13 +460,19 @@ class Home extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={3} className={classes.centerAlign}>
-                <Typography
-                  className={classes.buttonText}
+                <Button
+                  fullWidth
+                  style={{
+                    backgroundColor: "#C8B06B",
+                    color: "white"
+                  }}
                   to={"/schedule"}
                   component={Link}
                 >
-                  VIEW SCHEDULE
-                </Typography>
+                  <Typography className={classes.buttonText}>
+                    VIEW SCHEDULE
+                  </Typography>
+                </Button>
               </Grid>
             </Grid>
             <Grid item xs={12}>
@@ -483,13 +508,19 @@ class Home extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={3} className={classes.centerAlign}>
-                <Typography
-                  className={classes.buttonText}
+                <Button
+                  fullWidth
+                  style={{
+                    backgroundColor: "#C8B06B",
+                    color: "white"
+                  }}
                   to={"/results"}
                   component={Link}
                 >
-                  VIEW RESULT
-                </Typography>
+                  <Typography className={classes.buttonText}>
+                    VIEW RESULT
+                  </Typography>
+                </Button>
               </Grid>
             </Grid>
             <ResultBarHorizontal halls={halls} />
