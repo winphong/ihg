@@ -202,9 +202,9 @@ const styles = theme => ({
     // height: "4vmax"
   },
   viewButton: {
-    [theme.breakpoints.only("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       padding: "3px 8px",
-      marginTop: "-3px"
+      marginTop: "-6px"
     },
     backgroundColor: "#C8B06B",
     color: "white",
