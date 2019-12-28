@@ -203,10 +203,14 @@ const styles = theme => ({
   },
   viewButton: {
     [theme.breakpoints.only("xs")]: {
-      padding: "3px 8px"
+      padding: "3px 8px",
+      marginTop: "-3px"
     },
     backgroundColor: "#C8B06B",
-    color: "white"
+    color: "white",
+    // display: "inline-block",
+    minHeight: 0,
+    minWidth: 0
   }
 });
 
