@@ -206,7 +206,6 @@ const styles = theme => ({
       padding: "3px 8px",
       marginTop: "-6px"
     },
-    backgroundColor: "#C8B06B",
     color: "white",
     // display: "inline-block",
     minHeight: 0,
@@ -485,6 +484,7 @@ class Home extends Component {
                   className={classes.viewButton}
                   to={"/schedule"}
                   component={Link}
+                  style={{ backgroundColor: "#C8B06B" }}
                 >
                   <Typography className={classes.buttonText}>
                     VIEW SCHEDULE
@@ -532,6 +532,7 @@ class Home extends Component {
                 <Button
                   fullWidth
                   className={classes.viewButton}
+                  style={{ backgroundColor: "#C8B06B" }}
                   to={"/results"}
                   component={Link}
                 >
