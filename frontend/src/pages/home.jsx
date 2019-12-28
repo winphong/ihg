@@ -197,7 +197,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "5vmax"
+    height: "4vmax"
   }
 });
 
@@ -467,7 +467,8 @@ class Home extends Component {
                   fullWidth
                   style={{
                     backgroundColor: "#C8B06B",
-                    color: "white"
+                    color: "white",
+                    padding: "3px 8px"
                   }}
                   to={"/schedule"}
                   component={Link}
@@ -515,7 +516,8 @@ class Home extends Component {
                   fullWidth
                   style={{
                     backgroundColor: "#C8B06B",
-                    color: "white"
+                    color: "white",
+                    padding: "3px 8px"
                   }}
                   to={"/results"}
                   component={Link}
