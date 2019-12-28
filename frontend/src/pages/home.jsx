@@ -457,20 +457,25 @@ class Home extends Component {
               <Grid
                 item
                 xs={9}
-                className={classes.centerAlign}
-                style={{ justifyContent: "flex-start" }}
+                // className={classes.centerAlign}
+                // style={{ justifyContent: "flex-start" }}
               >
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid item xs={3} className={classes.centerAlign}>
+              <Grid
+                item
+                xs={3}
+                // className={classes.centerAlign}
+              >
                 <Button
                   fullWidth
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    padding: "3px 8px"
+                    margin: "3px 0"
+                    // padding: "3px 8px"
                   }}
                   to={"/schedule"}
                   component={Link}
@@ -506,20 +511,24 @@ class Home extends Component {
               <Grid
                 item
                 xs={9}
-                className={classes.centerAlign}
-                style={{ justifyContent: "flex-start" }}
+                // className={classes.centerAlign}
+                // style={{ justifyContent: "flex-start" }}
               >
                 <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
-              <Grid item xs={3} className={classes.centerAlign}>
+              <Grid
+                item
+                xs={3}
+                // className={classes.centerAlign}
+              >
                 <Button
                   fullWidth
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    padding: "3px 8px"
+                    margin: "3px 0"
                   }}
                   to={"/results"}
                   component={Link}
