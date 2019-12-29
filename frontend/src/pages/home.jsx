@@ -204,7 +204,7 @@ const styles = theme => ({
   viewButton: {
     [theme.breakpoints.down("sm")]: {
       padding: "4px 8px 2px 8px",
-      marginTop: "-6px"
+      marginTop: "-9px"
     },
     color: "white",
     // display: "inline-block",
