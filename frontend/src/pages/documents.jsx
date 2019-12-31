@@ -66,8 +66,8 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       fontSize: "150%"
     },
-    fontSize: "200%",
-    fontFamily: "TheNextFont"
+    fontSize: "200%"
+    // fontFamily: "TheNextFont"
   }
 }));
 
@@ -108,7 +108,7 @@ export default function Documents({ handleTabChange, props }) {
                       href={`/documents/${form.fullName}.docx`}
                       download={`${form.fullName}.docx`}
                       style={{
-                        textDecoration: "none",
+                        // textDecoration: "none",
                         color: "#252527"
                       }}
                     >
