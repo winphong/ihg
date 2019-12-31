@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       height: "45px"
     },
-    height: "35px"
+    height: "45px"
   }
 }));
 
@@ -58,7 +58,7 @@ const selections = [
   "Schedule",
   "Results",
   "Gallery",
-  "Contact"
+  "Documents"
 ];
 
 export default function NavBar({ pathname, handleTabChange }) {

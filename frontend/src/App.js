@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import NavBar from "./components/navBar";
 import About from "./pages/about";
-import Contact from "./pages/contact";
+import Documents from "./pages/documents";
 import Gallery from "./pages/gallery";
 import Home from "./pages/home";
 import Results from "./pages/results";
@@ -99,9 +99,12 @@ class App extends Component {
                 )}
               />
               <Route
-                path="/contact"
+                path="/documents"
                 render={props => (
-                  <Contact {...props} handleTabChange={this.handleTabChange} />
+                  <Documents
+                    {...props}
+                    handleTabChange={this.handleTabChange}
+                  />
                 )}
               />
               <Route path="/admin" exact component={Login} />

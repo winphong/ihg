@@ -39,11 +39,6 @@ export default function ResultsTable({
 
   return (
     <React.Fragment>
-      {!byDate && (
-        <Typography className={classes.sportHeader}>
-          {selectedSport.name}
-        </Typography>
-      )}
       <div className={classes.scrollableContainer}>
         <div
           className={classes.scrollable}

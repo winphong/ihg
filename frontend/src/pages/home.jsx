@@ -437,7 +437,7 @@ class Home extends Component {
                   style={{
                     backgroundColor: "#C8B06B",
                     color: "white",
-                    width: "50%",
+                    width: "45%",
                     padding: "3% 0",
                     margin: "5% 0 6% 0"
                   }}

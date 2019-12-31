@@ -35,6 +35,7 @@ const styles = theme => ({
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
       marginTop: "10%"
     },
+
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/about.jpg')",
@@ -53,9 +54,13 @@ const styles = theme => ({
       fontSize: "600%",
       marginTop: "7%"
     },
-    // iphone x potrait
+    // iphone 6/7/8 potrait
     ["@media (min-width: 370px) and (max-width: 380px)"]: {
       marginTop: "15%"
+    },
+    // iphone X potrait
+    ["@media (min-width: 370px) and (max-width: 380px) and (min-height: 810px)"]: {
+      marginTop: "25%"
     },
     // huawei mate 10 landscape
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
@@ -476,7 +481,7 @@ class About extends Component {
                           {selectedSport.name}
                         </Typography> */}
                           <Typography className={classes.information}>
-                            {selectedSport.description}
+                            {/* {selectedSport.description} */}
                           </Typography>
                         </div>
                       </CSSTransition>

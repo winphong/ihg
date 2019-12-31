@@ -97,7 +97,8 @@ const styles = theme => ({
   },
   mainPhoto: {
     [theme.breakpoints.only("xs")]: {
-      width: "83%"
+      width: "83%",
+      marginLeft: "-2%"
     },
     [theme.breakpoints.only("sm")]: {
       width: "55%"
@@ -108,13 +109,30 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       width: "75%"
     },
+    [theme.breakpoints.only("md")]: {
+      marginLeft: "-20%"
+    },
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: "-16%"
+    },
     // mate 10 landscape
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
       width: "55%"
     },
     // iphone x potrait
     ["@media (min-width: 370px) and (max-width: 380px)"]: {
-      width: "90%"
+      width: "90%",
+      marginLeft: "-7%"
+    },
+    // iphone 6/7/8
+    ["@media (min-width: 370px) and (max-width: 380px) and (max-height: 668px)"]: {
+      width: "90%",
+      marginLeft: "5%"
+    },
+    // ipad portrait
+    ["@media (min-width: 765px) and (max-width: 770px) and (max-height: 1024px)"]: {
+      width: "80%",
+      marginLeft: "-11%"
     },
     objectFit: "cover"
     // width: "100%"
