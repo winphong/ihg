@@ -313,6 +313,7 @@ class ScheduleForm extends Component {
                             "SRC Field 2 & 3",
                             "SRC Field 3",
                             "USC Indoor Court",
+                            "USC Sports Hall",
                             "USC Squash Court",
                             "USC Swimming Pool",
                             "USC Tennis Court",
