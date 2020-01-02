@@ -26,6 +26,7 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import green from "@material-ui/core/colors/green";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   title: {
@@ -97,7 +98,7 @@ class ScheduleForm extends Component {
     schedule: {
       sport: "",
       halls: [],
-      startTime: new Date(),
+      startTime: new Date("Feb 2020"),
       endTime: "",
       venue: "",
       gender: "",
@@ -187,8 +188,7 @@ class ScheduleForm extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-
-    if (this.state.success) window.history.back();
+    if (this.state.success) this.props.history.push("/schedule");
   };
 
   handleOpen = () => {
@@ -421,7 +421,7 @@ class ScheduleForm extends Component {
             horizontal: "left"
           }}
           open={this.state.open}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           onClose={this.handleClose}
         >
           <SnackbarContent

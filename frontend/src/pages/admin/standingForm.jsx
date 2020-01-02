@@ -82,8 +82,7 @@ class StandingForm extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-
-    if (this.state.success) window.history.back();
+    if (this.state.success) this.props.history.push("/results");
   };
 
   handleOpen = () => {
@@ -209,7 +208,7 @@ class StandingForm extends Component {
             horizontal: "left"
           }}
           open={this.state.open}
-          autoHideDuration={6000}
+          autoHideDuration={3000}
           onClose={this.handleClose}
         >
           <SnackbarContent
