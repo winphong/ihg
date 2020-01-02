@@ -114,7 +114,6 @@ export default function Calendar({ schedules, isAdmin }) {
   if (globalEndDate === "") {
     globalEndDate = new Date(startDate);
     globalEndDate.setDate(globalEndDate.getDate() + 7);
-    console.log("initial", globalEndDate);
 
     startDaysOfWeek.map((day, index) => {
       if (today >= globalEndDate) {

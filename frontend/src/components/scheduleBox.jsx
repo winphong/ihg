@@ -17,7 +17,6 @@ export default function ScheduleBox({
   const theme = useTheme();
   const size = schedule.halls.length;
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
   return (
     <React.Fragment>
       {!isMobile && (
@@ -237,13 +236,15 @@ const styles = theme => ({
       marginTop: "40%",
       height: "7vmax"
     },
-    ["@media(min-width: 1500px)"]: {
-      marginTop: "27%",
+    [theme.breakpoints.up("xl")]: {
       height: "4.5vmax"
     },
-    ["@media(min-width: 1500px)"]: {
-      marginTop: "27%",
+    ["@media(min-width: 1501px)"]: {
+      marginTop: "30%",
       height: "4.5vmax"
+    },
+    ["@media(min-width: 1760px)"]: {
+      marginTop: "25%"
     },
     ["@media(min-width: 1980px)"]: {
       height: "4vmax"
