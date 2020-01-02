@@ -12,20 +12,31 @@ import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 
 const arrayOfMaxSchedulePerWeek = [];
+const startDaysOfWeek = [
+  new Date("5 Jan 2020"),
+  new Date("12 Jan 2020"),
+  new Date("19 Jan 2020"),
+  new Date("26 Jan 2020"),
+  new Date("2 Feb 2020"),
+  new Date("9 Feb 2020")
+];
+const days = [
+  { num: 7, name: "Sunday" },
+  { num: 1, name: "Monday" },
+  { num: 2, name: "Tuesday" },
+  { num: 3, name: "Wednesday" },
+  { num: 4, name: "Thursday" },
+  { num: 5, name: "Friday" },
+  { num: 6, name: "Saturday" }
+];
+let globalEndDate = "";
+let weekNum = -1;
 
 export default function Calendar({ schedules, isAdmin }) {
   const classes = useStyles();
-  const [days, setDay] = React.useState([
-    { num: 7, name: "Sunday" },
-    { num: 1, name: "Monday" },
-    { num: 2, name: "Tuesday" },
-    { num: 3, name: "Wednesday" },
-    { num: 4, name: "Thursday" },
-    { num: 5, name: "Friday" },
-    { num: 6, name: "Saturday" }
-  ]);
+
   const [startDate, setStartDate] = React.useState(new Date("5 Jan 2020"));
-  const [weekNum, setWeekNum] = React.useState(-1);
+  // const [weekNum, setWeekNum] = React.useState(-1);
   const [currentDay, setCurrentDay] = React.useState(3);
   const mobileDays = [currentDay - 3, currentDay - 2, currentDay - 1];
   const [stay, setStay] = React.useState(false);
@@ -55,6 +66,7 @@ export default function Calendar({ schedules, isAdmin }) {
   let end = new Date(start);
   end.setDate(end.getDate() + 7);
 
+  // height calculation
   let currentDate = "";
   let count = 0;
   let max = 0;
@@ -81,38 +93,35 @@ export default function Calendar({ schedules, isAdmin }) {
     });
   }
 
-  function handleBack(isMobile) {
+  function handleBack() {
     setStay(true);
-    if (isMobile) {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() - 3)));
-      current = current - 3;
-      if (current <= 0) {
-        current = 7 - Math.abs(current);
-        setWeekNum(weekNum - 1);
-      }
-      setCurrentDay(current);
-    } else {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
-      setWeekNum(weekNum - 1);
-    }
+    setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
+    // setWeekNum(weekNum - 1);
+    weekNum -= 1;
     setTimeout(() => setStay(false), 200);
   }
 
-  function handleNext(isMobile) {
+  function handleNext() {
+    if (weekNum === 4) return;
     setStay(true);
-    if (isMobile) {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() + 3)));
-      current = current + 3;
-      if (current > 7) {
-        current = current % 7;
-        setWeekNum(weekNum + 1);
-      }
-      setCurrentDay(current);
-    } else {
-      setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
-      setWeekNum(weekNum + 1);
-    }
+    setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
+    // setWeekNum(weekNum + 1);
+    weekNum += 1;
     setTimeout(() => setStay(false), 200);
+  }
+
+  const today = new Date();
+  if (globalEndDate === "") {
+    globalEndDate = new Date(startDate);
+    globalEndDate.setDate(globalEndDate.getDate() + 7);
+    console.log("initial", globalEndDate);
+
+    startDaysOfWeek.map((day, index) => {
+      if (today >= globalEndDate) {
+        handleNext();
+      }
+      globalEndDate.setDate(globalEndDate.getDate() + 7);
+    });
   }
 
   return (
@@ -134,6 +143,7 @@ export default function Calendar({ schedules, isAdmin }) {
         >
           <IconButton
             disabled={date <= new Date("5 Jan 2020")}
+            // disabled={weekNum === -1}
             onClick={() => handleBack(false)}
             // onClick={
             //   notMobile ? () => handleBack(false) : () => handleBack(true)
@@ -158,6 +168,7 @@ export default function Calendar({ schedules, isAdmin }) {
         >
           <IconButton
             disabled={date >= new Date("9 Feb 2020")}
+            // disabled={weekNum === 4}
             onClick={() => handleNext(false)}
           >
             <KeyboardArrowRight />

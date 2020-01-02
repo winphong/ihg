@@ -236,6 +236,17 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       marginTop: "40%",
       height: "7vmax"
+    },
+    ["@media(min-width: 1500px)"]: {
+      marginTop: "27%",
+      height: "4.5vmax"
+    },
+    ["@media(min-width: 1500px)"]: {
+      marginTop: "27%",
+      height: "4.5vmax"
+    },
+    ["@media(min-width: 1980px)"]: {
+      height: "4vmax"
     }
   },
   bar: {
