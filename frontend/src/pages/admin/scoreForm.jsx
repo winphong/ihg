@@ -80,7 +80,7 @@ class ScoreForm extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-    if (this.state.success) this.props.history.push("/results");
+    if (this.state.success) window.location = "/results";
   };
 
   handleOpen = () => {

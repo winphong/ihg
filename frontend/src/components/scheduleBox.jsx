@@ -286,7 +286,7 @@ const styles = theme => ({
     fontStyle: "italic",
     fontSize: "90%",
     color: "#958F87",
-    minHeight: "35px"
+    minHeight: "37px"
   }
 });
 

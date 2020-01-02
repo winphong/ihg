@@ -61,6 +61,9 @@ export default function Calendar({ schedules, isAdmin }) {
     minWidth: 1061,
     maxWidth: 1220
   });
+  const xlplus = useMediaQuery({
+    minWidth: 1800
+  });
 
   let start = new Date("5 Jan 2020");
   let end = new Date(start);
@@ -75,9 +78,8 @@ export default function Calendar({ schedules, isAdmin }) {
     schedules.map((schedule, index) => {
       if (currentDate !== dateformat(schedule.startTime, "ddmmm")) {
         currentDate = dateformat(schedule.startTime, "ddmmm");
-        if (count > max) {
-          max = count;
-        }
+        if (count > max) max = count;
+
         if (new Date(schedule.startTime) >= end) {
           start.setDate(start.getDate() + 7);
           end.setDate(end.getDate() + 7);
@@ -88,7 +90,9 @@ export default function Calendar({ schedules, isAdmin }) {
       }
       count++;
       if (index === schedules.length - 1) {
-        arrayOfMaxSchedulePerWeek.push(count);
+        if (count > max) max = count;
+
+        arrayOfMaxSchedulePerWeek.push(max);
       }
     });
   }
@@ -182,7 +186,7 @@ export default function Calendar({ schedules, isAdmin }) {
           className={classes.schedulesTableContainer}
           style={{
             height: `${arrayOfMaxSchedulePerWeek[weekNum + 1] *
-              (md ? 16 : mdplus ? 15 : 13) +
+              (md ? 15 : mdplus ? 14 : xlplus ? 9 : 12) +
               4}vw`
           }}
         >

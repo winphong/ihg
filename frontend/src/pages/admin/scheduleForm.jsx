@@ -188,7 +188,7 @@ class ScheduleForm extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-    if (this.state.success) this.props.history.push("/schedule");
+    if (this.state.success) window.location = "/schedule";
   };
 
   handleOpen = () => {
