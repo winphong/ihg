@@ -50,7 +50,7 @@ export default function ResultsTable({
           {schedules.length === 0 && (
             <Typography
               className={classes.noResult}
-              style={{ textAlign: byDate ? "center" : "left" }}
+              style={{ textAlign: "center" }}
             >
               Results will be available soon
             </Typography>

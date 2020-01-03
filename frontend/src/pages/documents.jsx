@@ -72,11 +72,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const forms = [
-  { fullName: "Indemnity Form" },
-  { fullName: "PAR-Q Form" },
-  { fullName: "Line-up List" },
-  { fullName: "Rules and Regulations" },
-  { fullName: "Match Score Form" }
+  { fullName: "Indemnity Form.docx" },
+  { fullName: "PAR-Q Form.docx" },
+  { fullName: "Line-up List.zip" },
+  { fullName: "Rules and Regulations.docx" },
+  { fullName: "Match Score Form.docx" }
 ];
 
 export default function Documents({ handleTabChange, props }) {
@@ -105,15 +105,15 @@ export default function Documents({ handleTabChange, props }) {
                     style={{ backgroundColor: "transparent" }}
                   >
                     <a
-                      href={`/documents/${form.fullName}.docx`}
-                      download={`${form.fullName}.docx`}
+                      href={`/documents/${form.fullName}`}
+                      download={`${form.fullName}`}
                       style={{
                         // textDecoration: "none",
                         color: "#252527"
                       }}
                     >
                       <Typography className={classes.formName}>
-                        {form.fullName}
+                        {form.fullName.split(".")[0]}
                       </Typography>
                     </a>
                   </Button>
