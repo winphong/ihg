@@ -186,7 +186,7 @@ export default function Calendar({ schedules, isAdmin }) {
           className={classes.schedulesTableContainer}
           style={{
             height: `${arrayOfMaxSchedulePerWeek[weekNum + 1] *
-              (md ? 15 : mdplus ? 14 : xlplus ? 9 : 12) +
+              (md ? 15 : mdplus ? 14 : xlplus ? 10 : 12) +
               4}vw`
           }}
         >
