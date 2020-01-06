@@ -75,8 +75,8 @@ const forms = [
   { fullName: "Indemnity Form.docx" },
   { fullName: "PAR-Q Form.docx" },
   { fullName: "Line-up List.zip" },
-  { fullName: "Rules and Regulations.docx" },
-  { fullName: "Match Score Form.docx" }
+  { fullName: "Rules and Regulations.zip" },
+  { fullName: "Match Score Form.zip" }
 ];
 
 export default function Documents({ handleTabChange, props }) {

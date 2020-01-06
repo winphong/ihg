@@ -481,7 +481,7 @@ class About extends Component {
                           {selectedSport.name}
                         </Typography> */}
                           <Typography className={classes.information}>
-                            {/* {selectedSport.description} */}
+                            {selectedSport.description}
                           </Typography>
                         </div>
                       </CSSTransition>
