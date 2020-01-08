@@ -40,6 +40,11 @@ const styles = theme => ({
     backgroundImage: "url('./headers/results.jpg')",
     backgroundSize: "cover"
   },
+  titleContainer: {
+    ["@media(min-width: 315px) and (max-width: 325px)"]: {
+      marginTop: "5%"
+    }
+  },
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
@@ -53,10 +58,10 @@ const styles = theme => ({
     },
     // mate 10 portrait
     ["@media(min-width: 315px) and (max-width: 325px)"]: {
-      marginTop: "15%"
+      marginTop: "0%"
     },
     ["@media(min-width: 565px) and (max-width: 568px)"]: {
-      marginTop: "4%"
+      marginTop: "5%"
     },
     fontSize: "700%",
     textAlign: "center",
@@ -481,7 +486,7 @@ class Results extends Component {
           {/* Standings */}
           <Grid container alignItems="center" className={classes.banner}>
             <Grid item xs={2} md={1} />
-            <Grid item xs={8} md={10}>
+            <Grid item xs={8} md={10} className={classes.titleContainer}>
               <Typography variant="h1" className={classes.title}>
                 RANKING
               </Typography>
