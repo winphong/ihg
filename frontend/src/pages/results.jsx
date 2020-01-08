@@ -53,7 +53,10 @@ const styles = theme => ({
     },
     // mate 10 portrait
     ["@media(min-width: 315px) and (max-width: 325px)"]: {
-      marginTop: "10%"
+      marginTop: "15%"
+    },
+    ["@media(min-width: 565px) and (max-width: 568px)"]: {
+      marginTop: "4%"
     },
     fontSize: "700%",
     textAlign: "center",

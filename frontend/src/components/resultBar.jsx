@@ -36,7 +36,9 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   });
 
   let multiplier = 25;
-  if (mate10Potrait || mate10Landscape) {
+  if (mate10Potrait) {
+    multiplier = 15;
+  } else if (mate10Landscape) {
     multiplier = 20;
   } else if (md) {
     multiplier = 30;

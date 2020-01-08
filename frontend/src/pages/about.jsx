@@ -194,6 +194,11 @@ const styles = theme => ({
     [theme.breakpoints.only("sm")]: {
       height: "50vmax"
     },
+    ["@media(max-width: 320px)"]: {
+      height: "40vmax"
+    },
+    // display: "flex",
+    // justifyContent: "center"
     textAlign: "left"
   },
   sportsContainer: {
