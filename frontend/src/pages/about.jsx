@@ -194,8 +194,8 @@ const styles = theme => ({
     [theme.breakpoints.only("sm")]: {
       height: "50vmax"
     },
-    ["@media(max-width: 320px)"]: {
-      height: "45vmax"
+    ["@media(min-width: 360px) and (max-width: 360px) and (min-width: 570px) and (max-width: 575px)"]: {
+      height: "40vmax"
     },
     // display: "flex",
     // justifyContent: "center"

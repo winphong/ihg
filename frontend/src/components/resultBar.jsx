@@ -8,8 +8,10 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   });
 
   const mate10Potrait = useMediaQuery({
-    minWidth: 315,
-    maxWidth: 325,
+    minWidth: 360,
+    maxWidth: 360,
+    minHeight: 570,
+    maxHeight: 575,
     orientation: "portrait"
   });
   const mate10Landscape = useMediaQuery({
@@ -37,7 +39,7 @@ export default function ResultBar({ halls, dataKey, barSize }) {
 
   let multiplier = 25;
   if (mate10Potrait) {
-    multiplier = 15;
+    multiplier = 17;
   } else if (mate10Landscape) {
     multiplier = 20;
   } else if (md) {
