@@ -41,7 +41,7 @@ const styles = theme => ({
     backgroundSize: "cover"
   },
   titleContainer: {
-    ["@media(min-width: 360px) and (max-width: 360px) and (min-width: 570px) and (max-width: 575px)"]: {
+    ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)"]: {
       marginTop: "5%"
     }
   },
@@ -56,12 +56,15 @@ const styles = theme => ({
     [theme.breakpoints.only("md")]: {
       fontSize: "600%"
     },
-    ["@media(min-width: 315px) and (max-width: 325px)"]: {
-      marginTop: "10%"
+    ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)"]: {
+      marginTop: "0%"
     },
     // mate 10 landscape
     ["@media(min-width: 640px) and (max-width: 640px)"]: {
       marginTop: "5%"
+    },
+    ["@media(min-width: 315px) and (max-width: 325px)"]: {
+      marginTop: "10%"
     },
     fontSize: "700%",
     textAlign: "center",

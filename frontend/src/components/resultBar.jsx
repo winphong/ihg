@@ -7,11 +7,16 @@ export default function ResultBar({ halls, dataKey, barSize }) {
     maxWidth: 959
   });
 
+  const iphone5se = useMediaQuery({
+    minWidth: 315,
+    maxWidth: 325,
+    orientation: "portrait"
+  });
   const mate10Potrait = useMediaQuery({
     minWidth: 360,
     maxWidth: 360,
-    minHeight: 570,
-    maxHeight: 575,
+    minHeight: 550,
+    maxHeight: 600,
     orientation: "portrait"
   });
   const mate10Landscape = useMediaQuery({
@@ -38,9 +43,9 @@ export default function ResultBar({ halls, dataKey, barSize }) {
   });
 
   let multiplier = 25;
-  if (mate10Potrait) {
+  if (iphone5se) {
     multiplier = 17;
-  } else if (mate10Landscape) {
+  } else if (mate10Potrait || mate10Landscape) {
     multiplier = 20;
   } else if (md) {
     multiplier = 30;
