@@ -195,7 +195,7 @@ const styles = theme => ({
       height: "50vmax"
     },
     ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 570px) and (max-height: 575px)"]: {
-      height: "45vmax"
+      height: "50vmax"
     },
     // display: "flex",
     // justifyContent: "center"
