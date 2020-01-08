@@ -102,7 +102,14 @@ export default function Footer() {
             <Typography className={classes.title}>
               IHG Convening 19/20
             </Typography>
-            <Typography className={classes.subTitle}>Tan Win Phong</Typography>
+            <a
+              href="https://www.linkedin.com/in/tan-win-phong-995512121/"
+              style={{ textDecoration: "none" }}
+            >
+              <Typography className={classes.subTitle}>
+                Tan Win Phong
+              </Typography>
+            </a>
             <Typography className={classes.subTitle}>Jennifer Lim</Typography>
           </Grid>
           {/* </Grid> */}

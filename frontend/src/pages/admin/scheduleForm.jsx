@@ -308,6 +308,7 @@ class ScheduleForm extends Component {
                             "MPSH 6",
                             "Netball Court 1 & 2",
                             "Netball Court 3 & 4",
+                            "PGP",
                             "SRC Field 1",
                             "SRC Field 2",
                             "SRC Field 2 & 3",
