@@ -238,7 +238,7 @@ const CustomButton = ({
             justifyContent: "flex-end"
           }}
         >
-          <IconButton disabled={weekNum === -1} onClick={handleBack}>
+          <IconButton disabled={weekNum === 0} onClick={handleBack}>
             <KeyboardArrowLeft />
           </IconButton>
         </div>
@@ -262,7 +262,7 @@ const CustomButton = ({
               //   ? index >= schedules.length - stateLimit
               //   : index >= schedules.length - 5
               // index >= schedules.length - stateLimit
-              weekNum === 4
+              weekNum === 5
             }
             onClick={() => {
               handleNext(limit);
@@ -292,7 +292,7 @@ class Results extends Component {
     isAdmin: false,
     redirect: false,
     startDate: new Date("5 Jan 2020"),
-    weekNum: -1
+    weekNum: 0
   };
 
   async componentDidMount() {
@@ -430,7 +430,7 @@ class Results extends Component {
       byDate: true,
       index: 0,
       startDate: firstDayOfWeek,
-      weekNum: -1
+      weekNum: 0
     });
   };
 

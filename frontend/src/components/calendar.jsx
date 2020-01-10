@@ -30,7 +30,7 @@ const days = [
   { num: 6, name: "Saturday" }
 ];
 let globalEndDate = "";
-let weekNum = -1;
+let weekNum = 0;
 
 export default function Calendar({ schedules, isAdmin }) {
   const classes = useStyles();

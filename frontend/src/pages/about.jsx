@@ -187,7 +187,7 @@ const styles = theme => ({
   },
   transitionContainer: {
     [theme.breakpoints.only("xs")]: {
-      height: "35vmax"
+      height: "37vmax"
       // display: "flex",
       // justifyContent: "center"
     },
