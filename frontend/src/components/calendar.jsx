@@ -106,7 +106,7 @@ export default function Calendar({ schedules, isAdmin }) {
   }
 
   function handleNext() {
-    if (weekNum === 4) return;
+    if (weekNum === 5) return;
     setStay(true);
     setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
     // setWeekNum(weekNum + 1);
@@ -147,7 +147,7 @@ export default function Calendar({ schedules, isAdmin }) {
           <IconButton
             disabled={date <= new Date("5 Jan 2020")}
             // disabled={weekNum === -1}
-            onClick={() => handleBack(false)}
+            onClick={handleBack}
             // onClick={
             //   notMobile ? () => handleBack(false) : () => handleBack(true)
             // }
@@ -172,7 +172,7 @@ export default function Calendar({ schedules, isAdmin }) {
           <IconButton
             disabled={date >= new Date("9 Feb 2020")}
             // disabled={weekNum === 4}
-            onClick={() => handleNext(false)}
+            onClick={handleNext}
           >
             <KeyboardArrowRight />
           </IconButton>
