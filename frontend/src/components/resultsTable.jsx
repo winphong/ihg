@@ -83,7 +83,8 @@ export default function ResultsTable({
                     {![1, 2, 3, 21, 22, 23, 31].includes(date.getDate()) &&
                       dateformat(date, "dd'th' mmm")}
                   </Typography>
-                  {schedule.stage === "Carnival" ? (
+                  {schedule.stage === "Carnival" ||
+                  schedule.stage === "Playoffs" ? (
                     <ResultRowCarnival
                       schedule={schedule}
                       isAdmin={isAdmin}
@@ -102,7 +103,8 @@ export default function ResultsTable({
             }
             return (
               <div key={index}>
-                {schedule.stage === "Carnival" ? (
+                {schedule.stage === "Carnival" ||
+                schedule.stage === "Playoffs" ? (
                   <ResultRowCarnival
                     schedule={schedule}
                     isAdmin={isAdmin}

@@ -22,6 +22,7 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
 
   const isMobilePortrait = useMediaQuery({ minDeviceWidth: 500 });
   const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
+  const gender = schedule.gender.substr(0, 1);
 
   return (
     <Grid container className={classes.container}>
@@ -88,14 +89,14 @@ export default function ResultRow({ schedule, isAdmin, byDate }) {
                   color: "#0074d9"
                 }}
               >
-                {schedule.sport} {schedule.stage}
+                {schedule.sport} ({gender}) {schedule.stage}
               </Typography>
             </Link>
           )}
           {!isAdmin && (
             <React.Fragment>
               <Typography className={classes.sport}>
-                {schedule.sport} {schedule.stage}
+                {schedule.sport} ({gender}) {schedule.stage}
               </Typography>
             </React.Fragment>
           )}

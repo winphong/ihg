@@ -18,6 +18,7 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
       });
   const isMobilePortrait = useMediaQuery({ minDeviceWidth: 500 });
   const dateFormat = byDate ? "HHMM'h'" : "dd mmm',' HHMM'h'";
+  const gender = schedule.gender.substr(0, 1);
 
   return (
     <Grid container className={classes.container}>
@@ -50,7 +51,7 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
         item
         container
         xs={12}
-        className={classes.infoContainer}
+        className={sortedHall[0].score ? "" : classes.infoContainer}
         alignItems="center"
       >
         <Grid item xs={5} sm={4} md={3} className={classes.nameContainer}>
@@ -71,7 +72,9 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                     color: "#0074d9"
                   }}
                 >
-                  {schedule.sport} {schedule.stage}
+                  {schedule.sport}{" "}
+                  {schedule.sport === "Floorball" ? `(${gender})` : ""}{" "}
+                  {schedule.stage}
                 </Typography>
               </Link>
               {!isMobilePortrait && (
@@ -88,7 +91,9 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
           {!isAdmin && (
             <React.Fragment>
               <Typography className={classes.sport}>
-                {schedule.sport} {schedule.stage}
+                {schedule.sport}
+                {schedule.sport === "Floorball" ? `(${gender})` : ""}{" "}
+                {schedule.stage}
               </Typography>
               {!isMobilePortrait && (
                 <Grid item xs={12}>
