@@ -52,6 +52,9 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
         container
         xs={12}
         className={sortedHall[0].score ? "" : classes.infoContainer}
+        style={{
+          margin: isMobilePortrait ? "" : "1% 0"
+        }}
         alignItems="center"
       >
         <Grid item xs={5} sm={4} md={3} className={classes.nameContainer}>
