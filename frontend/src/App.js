@@ -17,6 +17,7 @@ import Login from "./pages/admin/login";
 import ProtectedRoute from "./components/protectedRoute";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Logout from "./components/logout";
+import miscService from "./services/miscService";
 
 const theme = createMuiTheme({
   typography: {
@@ -47,6 +48,10 @@ class App extends Component {
   handleTabChange = pathname => {
     this.setState({ pathname });
   };
+
+  async componentDidMount() {
+    await miscService.updateTraffic();
+  }
 
   render() {
     // if (this.detectmobile() === true)
