@@ -276,7 +276,14 @@ const CustomButton = ({
   );
 };
 
-let startDate;
+const startDaysOfWeek = [
+  new Date("5 Jan 2020"),
+  new Date("12 Jan 2020"),
+  new Date("19 Jan 2020"),
+  new Date("26 Jan 2020"),
+  new Date("2 Feb 2020"),
+  new Date("9 Feb 2020")
+];
 
 class Results extends Component {
   state = {
@@ -314,6 +321,7 @@ class Results extends Component {
       const scheduleDate = new Date(schedule.startTime);
       return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
     });
+
     this.setState({
       halls,
       schedules: schedulesByWeek,
@@ -322,58 +330,14 @@ class Results extends Component {
       isAdmin
     });
 
-    // const firstDayOfWeek = new Date(startDate);
-    // firstDayOfWeek.setDate(firstDayOfWeek.getDate() + 7);
-    // const lastDay = new Date(firstDayOfWeek);
-    // lastDay.setDate(lastDay.getDate() + 7);
-    // const schedulesByWeek = originalSchedules.filter(schedule => {
-    //   const scheduleDate = new Date(schedule.startTime);
-    //   return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
-    // });
+    const current = new Date();
 
-    // const slider = document.querySelector(".slider");
-    // const width = window.screen.width;
-    // const padding = width * 0.03;
-    // if (slider)
-    //   slider.scroll({
-    //     left: (((840 + padding) / (280 + padding)) * height) / 10
-    //   });
-    // if (slider)
-    //   slider.scroll({
-    //     // left: ((280 + padding) / (280 * 3 + 4 * padding)) * width
-    //     left: 280 - padding
-    //   });
+    for (let i = 0; i < startDaysOfWeek.length - 1; i++) {
+      if (current >= startDaysOfWeek[i]) {
+        if (current > startDaysOfWeek[i + 1]) this.handleNext();
+      }
+    }
   }
-
-  // handleNext = limit => {
-  //   const index = this.state.index + limit;
-  //   if (index >= this.state.originalSchedules.length) return;
-
-  //   const schedules = (this.state.byDate
-  //     ? [...this.state.originalSchedules]
-  //     : [...this.state.originalSchedulesBySport]
-  //   ).splice(index, index + this.state.limit);
-
-  //   if (arr[idx] === undefined) {
-  //     arr.push(this.state.limit - limit);
-  //   }
-  //   idx++;
-
-  //   this.setState({ schedules, index });
-  // };
-
-  // handleBack = () => {
-  //   idx--;
-  //   const index = this.state.index - this.state.limit + arr[idx];
-  //   if (index < 0) return;
-
-  //   const schedules = (this.state.byDate
-  //     ? [...this.state.originalSchedules]
-  //     : [...this.state.originalSchedulesBySport]
-  //   ).splice(index, index + this.state.limit);
-
-  //   this.setState({ schedules, index });
-  // };
 
   handleNext = () => {
     const { startDate, weekNum, originalSchedules } = this.state;
