@@ -29,10 +29,16 @@ const days = [
   { num: 5, name: "Friday" },
   { num: 6, name: "Saturday" }
 ];
-let globalEndDate = "";
-let weekNum = 0;
+// let globalEndDate = "";
 
-export default function Calendar({ schedules, isAdmin }) {
+export default function Calendar({
+  schedules,
+  isAdmin,
+  globalEndDate,
+  handleUpdateGlobalEndDate,
+  weekNum,
+  handleUpdateWeeknum
+}) {
   const classes = useStyles();
 
   const [startDate, setStartDate] = React.useState(new Date("5 Jan 2020"));
@@ -91,39 +97,44 @@ export default function Calendar({ schedules, isAdmin }) {
       count++;
       if (index === schedules.length - 1) {
         if (count > max) max = count;
-
         arrayOfMaxSchedulePerWeek.push(max);
       }
     });
   }
 
   function handleBack() {
+    console.log("back");
     setStay(true);
     setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
     // setWeekNum(weekNum - 1);
-    weekNum -= 1;
+    handleUpdateWeeknum(weekNum - 1);
     setTimeout(() => setStay(false), 200);
   }
 
   function handleNext() {
     if (weekNum === 5) return;
+    console.log("next");
     setStay(true);
     setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
     // setWeekNum(weekNum + 1);
-    weekNum += 1;
+    handleUpdateWeeknum(weekNum + 1);
     setTimeout(() => setStay(false), 200);
   }
 
   const today = new Date();
   if (globalEndDate === "") {
     globalEndDate = new Date(startDate);
-    globalEndDate.setDate(globalEndDate.getDate() + 7);
+    handleUpdateGlobalEndDate(
+      globalEndDate.setDate(globalEndDate.getDate() + 7)
+    );
 
     startDaysOfWeek.map((day, index) => {
       if (today >= globalEndDate) {
         handleNext();
       }
-      globalEndDate.setDate(globalEndDate.getDate() + 7);
+      handleUpdateGlobalEndDate(
+        globalEndDate.setDate(globalEndDate.getDate() + 7)
+      );
     });
   }
 
@@ -145,8 +156,8 @@ export default function Calendar({ schedules, isAdmin }) {
           }}
         >
           <IconButton
-            disabled={date <= new Date("5 Jan 2020")}
-            // disabled={weekNum === -1}
+            // disabled={date <= new Date("5 Jan 2020")}
+            disabled={weekNum === 0}
             onClick={handleBack}
             // onClick={
             //   notMobile ? () => handleBack(false) : () => handleBack(true)
@@ -170,8 +181,8 @@ export default function Calendar({ schedules, isAdmin }) {
           }}
         >
           <IconButton
-            disabled={date >= new Date("9 Feb 2020")}
-            // disabled={weekNum === 4}
+            // disabled={date >= new Date("9 Feb 2020")}
+            disabled={weekNum === 5}
             onClick={handleNext}
           >
             <KeyboardArrowRight />

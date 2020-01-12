@@ -102,7 +102,9 @@ class Schedule extends Component {
   state = {
     schedules: [],
     isAdmin: false,
-    redirect: false
+    redirect: false,
+    globalEndDate: "",
+    weekNum: 0
   };
 
   async componentDidMount() {
@@ -114,13 +116,21 @@ class Schedule extends Component {
     this.setState({ schedules, isAdmin });
   }
 
+  handleUpdateGlobalEndDate = globalEndDate => {
+    this.setState({ globalEndDate });
+  };
+
+  handleUpdateWeeknum = weekNum => {
+    this.setState({ weekNum });
+  };
+
   df = time => {
     return dateformat(time, "dd mmm yyyy");
   };
 
   render() {
     const { classes } = this.props;
-    const { schedules, isAdmin } = this.state;
+    const { schedules, isAdmin, globalEndDate, weekNum } = this.state;
 
     return (
       <Grid container className={classes.container}>
@@ -189,7 +199,14 @@ class Schedule extends Component {
                 <Grid item xs={1} />
                 <Grid item xs={10} className={classes.calendar}>
                   {schedules.length > 0 && (
-                    <Calendar schedules={schedules} isAdmin={isAdmin} />
+                    <Calendar
+                      schedules={schedules}
+                      isAdmin={isAdmin}
+                      globalEndDate={globalEndDate}
+                      handleUpdateGlobalEndDate={this.handleUpdateGlobalEndDate}
+                      weekNum={weekNum}
+                      handleUpdateWeeknum={this.handleUpdateWeeknum}
+                    />
                   )}
                 </Grid>
                 <Grid item xs={1} />
