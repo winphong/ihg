@@ -19,6 +19,8 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import hallService from "../../services/hallService";
 import scheduleService from "../../services/scheduleService";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Hidden from "@material-ui/core/Hidden";
 //
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -66,6 +68,15 @@ const styles = theme => ({
   },
   icon: {
     fontSize: 20
+  },
+  deleteIcon: {
+    [theme.breakpoints.only("sm")]: {
+      marginTop: "45%"
+    },
+    color: "#C8B06B",
+    backgroundColor: "#f0f0f0",
+    marginTop: "45%",
+    transform: "scale(1.5)"
   },
   message: {
     display: "flex",
@@ -115,7 +126,8 @@ class ScheduleForm extends Component {
     },
     halls: [],
     open: false,
-    success: false
+    success: false,
+    message: "An error has occured. Please try again!"
   };
 
   async componentDidMount() {
@@ -172,7 +184,7 @@ class ScheduleForm extends Component {
       await scheduleService
         .updateSchedule(id, schedule)
         .then(() => {
-          this.setState({ success: true });
+          this.setState({ success: true, message: "Successfully updated!" });
           this.handleOpen();
         })
         .catch(() => this.handleOpen());
@@ -180,10 +192,20 @@ class ScheduleForm extends Component {
       await scheduleService
         .createSchedule(schedule)
         .then(() => {
-          this.setState({ success: true });
+          this.setState({ success: true, message: "Successfully created!" });
           this.handleOpen();
         })
         .catch(() => this.handleOpen());
+  };
+
+  handleDelete = async () => {
+    await scheduleService
+      .deleteSchedule(this.props.match.params.id)
+      .then(() => {
+        this.setState({ success: true, message: "Successfully deleted!" });
+        this.handleOpen();
+      })
+      .catch(() => this.handleOpen());
   };
 
   handleClose = () => {
@@ -197,17 +219,33 @@ class ScheduleForm extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedule, checkbox, halls, success } = this.state;
+    const { schedule, checkbox, halls, message, success } = this.state;
+    const showDeleteButton = this.props.match.params.id;
 
     return (
       <React.Fragment>
         <CSSTransition in={true} appear={true} timeout={500} classNames="fade">
           <Grid container className={classes.container}>
-            <Grid item xs={12} className={{}}>
+            <Hidden smDown>
+              <Grid item md={2} />
+            </Hidden>
+            <Grid item xs={12} md={8}>
               <Typography variant="h1" className={classes.title}>
                 SCHEDULE
               </Typography>
             </Grid>
+            <Hidden smDown>
+              <Grid item md={2}>
+                {showDeleteButton && (
+                  <IconButton
+                    className={classes.deleteIcon}
+                    onClick={this.handleDelete}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                )}
+              </Grid>
+            </Hidden>
             <Grid item xs={1} md={3} />
             <Grid item xs={10} md={6}>
               <form>
@@ -431,9 +469,7 @@ class ScheduleForm extends Component {
             }}
             message={
               <span id="client-snackbar" className={classes.message}>
-                {success
-                  ? "Succesfully created / updated!"
-                  : "An error has occured. Try again."}
+                {message}
               </span>
             }
             action={[

@@ -138,4 +138,12 @@ router.put("/:id", [admin], async (req, res) => {
     });
 });
 
+router.delete("/:id", [admin], async (req, res) => {
+  const schedule = await Schedule.findById(req.params.id);
+  if (!schedule) return res.status(400).send("Schedule not found!");
+
+  await schedule.delete();
+  res.send(schedule);
+});
+
 module.exports = router;

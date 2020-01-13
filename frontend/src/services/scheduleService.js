@@ -38,6 +38,10 @@ function updateScore(id, req) {
   return http.put(getUrl(`updateScore/${id}`), req);
 }
 
+function deleteSchedule(id) {
+  return http.delete(getUrl(id));
+}
+
 export default {
   getSchedule,
   getUpcomingSchedules,
@@ -46,5 +50,6 @@ export default {
   getDescendingSchedules,
   createSchedule,
   updateScore,
-  updateSchedule
+  updateSchedule,
+  deleteSchedule
 };
