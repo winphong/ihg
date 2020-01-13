@@ -50,7 +50,7 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    // await miscService.updateTraffic();
+    await miscService.updateTraffic();
   }
 
   render() {
