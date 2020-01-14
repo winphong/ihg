@@ -76,7 +76,10 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                   }}
                 >
                   {schedule.sport}{" "}
-                  {schedule.sport === "Floorball" ? `(${gender})` : ""}{" "}
+                  {schedule.sport === "Floorball" ||
+                  schedule.sport === "Swimming"
+                    ? `(${gender})`
+                    : ""}{" "}
                   {schedule.stage}
                 </Typography>
               </Link>
