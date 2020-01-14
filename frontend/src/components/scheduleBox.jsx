@@ -165,7 +165,6 @@ export default function ScheduleBox({
               {schedule.sport}{" "}
               {schedule.sport !== "Ultimate Frisbee" &&
                 schedule.sport !== "Softball" &&
-                schedule.sport !== "Swimming" &&
                 `(${schedule.gender.substr(0, 1)})`}
             </Typography>
           )}
@@ -190,7 +189,6 @@ export default function ScheduleBox({
                 {schedule.sport}{" "}
                 {schedule.sport !== "Ultimate Frisbee" &&
                   schedule.sport !== "Softball" &&
-                  schedule.sport !== "Swimming" &&
                   `(${schedule.gender.substr(0, 1)})`}
               </Typography>
             </Link>
