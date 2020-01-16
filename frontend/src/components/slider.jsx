@@ -8,38 +8,10 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import IconButton from "@material-ui/core/IconButton";
 import MediaQuery, { useMediaQuery } from "react-responsive";
 
-export default function Slider({ schedules }) {
+export default function Slider({ upcomingSchedules }) {
   const classes = useStyles();
 
-  // const [margin, setMargin] = useState(
-  //   schedules.length >= 3 ? 3 : schedules.length
-  // );
-
-  const weeks = [
-    new Date("5 Jan 2020"),
-    new Date("12 Jan 2020"),
-    new Date("19 Jan 2020"),
-    new Date("26 Jan 2020"),
-    new Date("2 Feb 2020"),
-    new Date("9 Feb 2020"),
-    new Date("16 Feb 2020")
-  ];
-
-  const currentDate = new Date();
-  let idx = 0;
-
-  weeks.map((week, index) => {
-    if (currentDate > week) idx = index;
-  });
-
-  const firstDay = weeks[idx];
-  const lastDay = new Date(weeks[idx]);
-  lastDay.setDate(lastDay.getDate() + 7);
-
-  let currentWeekSchedule = schedules.filter(schedule => {
-    const scheduleDate = new Date(schedule.startTime);
-    return scheduleDate >= firstDay && scheduleDate < lastDay;
-  });
+  let currentWeekSchedule = upcomingSchedules;
 
   const [previous, setPrevious] = useState(
     currentWeekSchedule.length > 1 ? currentWeekSchedule.length - 1 : 0

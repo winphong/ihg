@@ -12,6 +12,7 @@ const cnyEnd = new Date("28 Jan 2020");
 // get 2 days worth of schedules
 router.get("/upcomingSchedules/:date", async (req, res) => {
   let current = new Date(req.params.date);
+  if (current > new Date("9 Feb 2020")) current = new Date("9 Feb 2020");
   const firstDay = new Date("6 Jan 2020");
   if (current < firstDay) {
     current = firstDay;

@@ -104,16 +104,20 @@ class Schedule extends Component {
     isAdmin: false,
     redirect: false,
     globalEndDate: "",
-    weekNum: 0
+    weekNum: 0,
+    upcomingSchedules: []
   };
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
     this.props.handleTabChange(this.props.location.pathname);
     const { data: schedules } = await scheduleService.getAscendingSchedules();
+    const {
+      data: upcomingSchedules
+    } = await scheduleService.getUpcomingSchedules(new Date());
     const admin = await miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
-    this.setState({ schedules, isAdmin });
+    this.setState({ schedules, isAdmin, upcomingSchedules });
   }
 
   handleUpdateGlobalEndDate = globalEndDate => {
@@ -130,7 +134,13 @@ class Schedule extends Component {
 
   render() {
     const { classes } = this.props;
-    const { schedules, isAdmin, globalEndDate, weekNum } = this.state;
+    const {
+      schedules,
+      isAdmin,
+      globalEndDate,
+      weekNum,
+      upcomingSchedules
+    } = this.state;
 
     return (
       <Grid container className={classes.container}>
@@ -172,7 +182,7 @@ class Schedule extends Component {
                   classNames="fade"
                 >
                   <div>
-                    {schedules.length > 0 && (
+                    {upcomingSchedules.length > 0 && (
                       <Slider
                         // schedules={schedules.filter(e => {
                         //   return (
@@ -181,7 +191,7 @@ class Schedule extends Component {
                         //     // this.df(new Date())
                         //   );
                         // })}
-                        schedules={schedules}
+                        upcomingSchedules={upcomingSchedules}
                       />
                     )}
                   </div>
