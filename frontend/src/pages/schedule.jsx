@@ -125,7 +125,7 @@ class Schedule extends Component {
   };
 
   handleUpdateWeeknum = weekNum => {
-    this.setState({ weekNum });
+    this.setState({ weekNum: weekNum });
   };
 
   df = time => {

@@ -42,7 +42,6 @@ export default function Calendar({
   const classes = useStyles();
 
   const [startDate, setStartDate] = React.useState(new Date("5 Jan 2020"));
-  // const [weekNum, setWeekNum] = React.useState(-1);
   const [currentDay, setCurrentDay] = React.useState(3);
   const mobileDays = [currentDay - 3, currentDay - 2, currentDay - 1];
   const [stay, setStay] = React.useState(false);
@@ -103,24 +102,23 @@ export default function Calendar({
   }
 
   function handleBack() {
-    console.log("back");
+    handleUpdateWeeknum(weekNum - 1);
     setStay(true);
     setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
     // setWeekNum(weekNum - 1);
-    handleUpdateWeeknum(weekNum - 1);
     setTimeout(() => setStay(false), 200);
   }
 
   function handleNext() {
     if (weekNum === 5) return;
-    console.log("next");
+    handleUpdateWeeknum(weekNum + 1);
     setStay(true);
     setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
     // setWeekNum(weekNum + 1);
-    handleUpdateWeeknum(weekNum + 1);
     setTimeout(() => setStay(false), 200);
   }
 
+  let increaseCount = 0;
   const today = new Date();
   if (globalEndDate === "") {
     globalEndDate = new Date(startDate);
@@ -131,10 +129,14 @@ export default function Calendar({
     startDaysOfWeek.map((day, index) => {
       if (today >= globalEndDate) {
         handleNext();
+        increaseCount++;
       }
       handleUpdateGlobalEndDate(
         globalEndDate.setDate(globalEndDate.getDate() + 7)
       );
+      if (index === startDaysOfWeek.length - 1 && increaseCount > 0) {
+        handleUpdateWeeknum(weekNum + increaseCount);
+      }
     });
   }
 
