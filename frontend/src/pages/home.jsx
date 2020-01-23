@@ -225,8 +225,11 @@ class Home extends Component {
     window.scrollTo({ top: 0 });
     this.props.handleTabChange("/home");
     const { data: schedules } = await scheduleService.getUpcomingSchedules(
-      new Date()
+      new Date(
+        new Date().toLocaleString("en-US", { timeZone: "Asia/Singapore" })
+      )
     );
+    console.log(schedules);
     const { data: halls } = await hallService.getAllHalls();
 
     this.setState({
