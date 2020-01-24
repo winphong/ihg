@@ -77,7 +77,9 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                 >
                   {schedule.sport}{" "}
                   {schedule.sport === "Floorball" ||
-                  schedule.sport === "Swimming"
+                  schedule.sport === "Swimming" ||
+                  schedule.sport === "Touch Rugby" ||
+                  schedule.sport === "Road Relay"
                     ? `(${gender})`
                     : ""}{" "}
                   {schedule.stage}
@@ -97,8 +99,13 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
           {!isAdmin && (
             <React.Fragment>
               <Typography className={classes.sport}>
-                {schedule.sport}
-                {schedule.sport === "Floorball" ? `(${gender})` : ""}{" "}
+                {schedule.sport}{" "}
+                {schedule.sport === "Floorball" ||
+                schedule.sport === "Swimming" ||
+                schedule.sport === "Touch Rugby" ||
+                schedule.sport === "Road Relay"
+                  ? `(${gender})`
+                  : ""}{" "}
                 {schedule.stage}
               </Typography>
               {!isMobilePortrait && (
