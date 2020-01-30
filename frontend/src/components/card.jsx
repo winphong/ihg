@@ -166,7 +166,8 @@ export default function Card({ schedule, center, size, white }) {
           variant="h1"
           className={size === "small" ? classes.sportSlider : classes.sport}
         >
-          {schedule.sport.toUpperCase()} {schedule.stage.toUpperCase()}
+          {schedule.sport.toUpperCase()} ({schedule.gender.substr(0, 1)}){" "}
+          {schedule.stage.toUpperCase()}
         </Typography>
         <Typography
           className={classes.information}
