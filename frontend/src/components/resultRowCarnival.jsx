@@ -79,7 +79,8 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                   {schedule.sport === "Floorball" ||
                   schedule.sport === "Swimming" ||
                   schedule.sport === "Touch Rugby" ||
-                  schedule.sport === "Road Relay"
+                  schedule.sport === "Road Relay" ||
+                  schedule.sport === "Soccer"
                     ? `(${gender})`
                     : ""}{" "}
                   {schedule.stage}
@@ -103,7 +104,8 @@ export default function ResultRowCarnival({ schedule, isAdmin, byDate }) {
                 {schedule.sport === "Floorball" ||
                 schedule.sport === "Swimming" ||
                 schedule.sport === "Touch Rugby" ||
-                schedule.sport === "Road Relay"
+                schedule.sport === "Road Relay" ||
+                schedule.sport === "Soccer"
                   ? `(${gender})`
                   : ""}{" "}
                 {schedule.stage}
