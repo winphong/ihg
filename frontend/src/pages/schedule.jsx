@@ -20,6 +20,9 @@ const styles = theme => ({
     [theme.breakpoints.only("sm")]: {
       marginTop: "8%"
     },
+    [theme.breakpoints.up("xl")]: {
+      marginTop: "3.7%"
+    },
     // mate 10 landscape
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
       marginTop: "10%"

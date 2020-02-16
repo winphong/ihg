@@ -59,6 +59,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.only("lg")]: {
       height: "70vh"
     },
+    [theme.breakpoints.up("xl")]: {
+      height: "74.35vh"
+    },
     height: "73.35vh",
     textAlign: "center"
   },

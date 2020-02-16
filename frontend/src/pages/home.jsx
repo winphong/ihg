@@ -20,12 +20,13 @@ const styles = theme => ({
     [theme.breakpoints.only("xs")]: {
       marginTop: "15%"
     },
-
     [theme.breakpoints.only("sm")]: {
       marginTop: "8%"
       // height: "45vmax"
     },
-
+    [theme.breakpoints.up("xl")]: {
+      marginTop: "3.7%"
+    },
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
       marginTop: "10%"
     },
