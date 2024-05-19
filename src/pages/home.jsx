@@ -12,7 +12,7 @@ import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import MediaQuery from "react-responsive";
 import hallService from "../services/hallService";
-import ResultBarHorizontal from "./../components/resultBarHorizontal";
+import ResultBarHorizontal from "../components/resultBarHorizontal";
 import Button from "@material-ui/core/Button";
 
 const styles = (theme) => ({

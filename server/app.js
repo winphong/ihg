@@ -8,12 +8,12 @@ require("./startup/cors")(app);
 require("./startup/db")();
 require("./startup/routes")(app);
 
-app.use(express.static(path.join(__dirname, "frontend", "public")));
+app.use(express.static(path.join(__dirname, "..", "build")));
 
 const port = process.env.PORT || config.get("port");
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "public", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "build", "index.html"));
 });
 
 const server = app.listen(port, () => {

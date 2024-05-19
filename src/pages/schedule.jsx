@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
-import Calendar from "./../components/calendar";
+import Calendar from "../components/calendar";
 import scheduleService from "../services/scheduleService";
 import { CSSTransition } from "react-transition-group";
 import { Typography } from "@material-ui/core";

@@ -1,27 +1,46 @@
 {
   "name": "ihg",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.2.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "express-async-errors": "^3.1.1",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.7.5",
-    "react-cookies": "^0.1.1"
+    "@date-io/dayjs": "^1.3.11",
+    "@material-ui/core": "^4.2.0",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/pickers": "^3.2.8",
+    "axios": "^0.19.0",
+    "css-loader": "^3.0.0",
+    "dateformat": "^3.0.3",
+    "dayjs": "^1.8.17",
+    "jwt-decode": "^2.2.0",
+    "react": "^16.8.6",
+    "react-cookies": "^0.1.1",
+    "react-dom": "^16.8.6",
+    "react-responsive": "^8.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "recharts": "^1.7.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "start": "bun app.js",
-    "watch": "bun --watch app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "cd frontend && npm install && npm run build && cd .."
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "author": "",
-  "license": "ISC"
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import dateformat from "dateformat";
-import ResultRow from "../components/resultRow";
+import ResultRow from "./resultRow";
 import { Divider } from "@material-ui/core";
-import ResultRowCarnival from "../components/resultRowCarnival";
+import ResultRowCarnival from "./resultRowCarnival";
 import Typography from "@material-ui/core/Typography";
 import { useMediaQuery } from "react-responsive";
 

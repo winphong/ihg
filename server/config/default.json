@@ -1,0 +1,6 @@
+{
+  "db": "//mongodb+srv://winphong:1K1lhZxmA7yypA4g@codewithmosh.azrpv.mongodb.net/ihg?retryWrites=true&w=majority&appName=codewithmosh",
+  "port": "3900",
+  "requiresAuth": true,
+  "jwtPrivateKey": "development"
+}

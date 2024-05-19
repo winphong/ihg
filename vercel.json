@@ -22,11 +22,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/app.js"
+      "destination": "/server/app.js"
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/build/$1"
+      "destination": "/build/$1"
     }
   ]
 }
