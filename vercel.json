@@ -18,7 +18,14 @@
       ]
     }
   ],
-  "buildCommand": "npm run vercel-build",
+  "builds": [
+    {
+      "src": "./server/app.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/" }],
+  "buildCommand": "npm run build",
   "rewrites": [
     {
       "source": "/api/(.*)",
