@@ -17,9 +17,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js",
+    "start": "bun app.js",
+    "watch": "bun --watch app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "cd frontend && npm install && npm run build"
+    "vercel-build": "cd frontend && npm install && npm run build && cd .. && npm install && npm run build"
   },
   "author": "",
   "license": "ISC"
