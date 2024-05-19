@@ -1,5 +1,5 @@
 // update standing form
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
@@ -14,45 +14,45 @@ import green from "@material-ui/core/colors/green";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
 
-const styles = theme => ({
+const styles = (theme) => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "20%"
+      marginTop: "20%",
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "11%"
+      marginTop: "11%",
     },
     color: "#C8B06B",
     fontSize: "1000%",
     marginTop: "6%",
-    marginBottom: "3%"
+    marginBottom: "3%",
   },
   container: {
-    textAlign: "center"
+    textAlign: "center",
     // height: "730px"
   },
   formControl: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   buttonText: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     color: "white",
-    padding: "1% 0"
-  }
+    padding: "1% 0",
+  },
 });
 
 class StandingForm extends Component {
   state = {
     halls: [],
-    success: false
+    success: false,
   };
 
   async componentDidMount() {
@@ -137,11 +137,11 @@ class StandingForm extends Component {
                               name="femalePoint"
                               label="Female"
                               fullWidth
-                              onChange={e => this.handleChange(e, index)}
+                              onChange={(e) => this.handleChange(e, index)}
                               className={classes.formControl}
                               value={hall.femalePoint}
                               inputProps={{
-                                style: { textAlign: "center" }
+                                style: { textAlign: "center" },
                               }}
                             />
                           </Grid>
@@ -153,11 +153,11 @@ class StandingForm extends Component {
                               name="malePoint"
                               label="Male"
                               fullWidth
-                              onChange={e => this.handleChange(e, index)}
+                              onChange={(e) => this.handleChange(e, index)}
                               className={classes.formControl}
                               value={hall.malePoint}
                               inputProps={{
-                                style: { textAlign: "center" }
+                                style: { textAlign: "center" },
                               }}
                             />
                           </Grid>
@@ -174,7 +174,7 @@ class StandingForm extends Component {
                               className={classes.formControl}
                               value={hall.totalPoint}
                               inputProps={{
-                                style: { textAlign: "center" }
+                                style: { textAlign: "center" },
                               }}
                             />
                           </Grid>
@@ -187,7 +187,7 @@ class StandingForm extends Component {
                       variant="contained"
                       onClick={this.handleSubmit}
                       style={{
-                        backgroundColor: "#C8B06B"
+                        backgroundColor: "#C8B06B",
                       }}
                     >
                       <Typography variant="h1" className={classes.buttonText}>
@@ -205,7 +205,7 @@ class StandingForm extends Component {
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "left"
+            horizontal: "left",
           }}
           open={this.state.open}
           autoHideDuration={3000}
@@ -213,7 +213,7 @@ class StandingForm extends Component {
         >
           <SnackbarContent
             style={{
-              backgroundColor: success ? green[600] : "#d32f2f"
+              backgroundColor: success ? green[600] : "#d32f2f",
             }}
             message={
               <span id="client-snackbar" className={classes.message}>
@@ -233,7 +233,7 @@ class StandingForm extends Component {
                 ) : (
                   <ErrorIcon className={classes.icon} />
                 )}
-              </IconButton>
+              </IconButton>,
             ]}
           />
         </Snackbar>

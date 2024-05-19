@@ -3,7 +3,7 @@ import dateformat from "dateformat";
 import Grid from "@material-ui/core/Grid";
 import { useMediaQuery } from "react-responsive";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 export default function Card({ schedule, center, size, white }) {
   const classes = useStyles();
@@ -12,14 +12,12 @@ export default function Card({ schedule, center, size, white }) {
   const mate10Landscapre = useMediaQuery({
     minWidth: 565,
     maxWidth: 570,
-    orientation: "landscape"
+    orientation: "landscape",
   });
 
   const xxs = useMediaQuery({ maxWidth: 329 });
-  const xs = useMediaQuery({ maxWidth: 499 });
   const sm = useMediaQuery({ maxWidth: 959 });
   const md = useMediaQuery({ maxWidth: 1279 });
-  const lg = useMediaQuery({ maxWidth: 1919 });
 
   let width = "";
   let transform = "";
@@ -40,7 +38,7 @@ export default function Card({ schedule, center, size, white }) {
       }
       style={{
         width: width,
-        transform: transform
+        transform: transform,
       }}
     >
       {schedule.halls.length <= 2 && (
@@ -49,20 +47,20 @@ export default function Card({ schedule, center, size, white }) {
             <Grid item xs={5}>
               <img
                 style={{
-                  width: "90%"
-                  // border: hasHalls ? "" : "1px solid black"
+                  width: "90%",
                 }}
                 src={hasHalls ? schedule.halls[0].imgUrl : "./blank.png"}
+                alt="hall-1"
               />
             </Grid>
             <Grid item xs={2} className={classes.vs}></Grid>
             <Grid item xs={5}>
               <img
                 style={{
-                  width: "90%"
-                  // border: hasHalls ? "" : "1px solid black"
+                  width: "90%",
                 }}
                 src={hasHalls ? schedule.halls[1].imgUrl : "./blank.png"}
+                alt="hall-2"
               />
             </Grid>
           </Grid>
@@ -92,7 +90,11 @@ export default function Card({ schedule, center, size, white }) {
           {schedule.halls.map((hall, index) => {
             return (
               <Grid item xs={4} key={index}>
-                <img className={classes.sixHallImage} src={hall.imgUrl} />
+                <img
+                  className={classes.sixHallImage}
+                  src={hall.imgUrl}
+                  alt="hall-img"
+                />
               </Grid>
             );
           })}
@@ -107,6 +109,7 @@ export default function Card({ schedule, center, size, white }) {
                   <img
                     className={classes.sevenHallImageTop}
                     src={hall.imgUrl}
+                    alt="hall-img-3"
                   />
                 </Grid>
               );
@@ -116,30 +119,34 @@ export default function Card({ schedule, center, size, white }) {
                   <Grid item xs={4}>
                     <img
                       style={{
-                        marginLeft: "46%"
+                        marginLeft: "46%",
                       }}
                       className={classes.sevenHallImageBottom}
                       src={schedule.halls[4].imgUrl}
+                      alt="hall-img-4"
                     />
                   </Grid>
                   <Grid item xs={4}>
                     <img
                       className={classes.sevenHallImageBottom}
                       src={schedule.halls[5].imgUrl}
+                      alt="hall-mg-5"
                     />
                   </Grid>
                   <Grid item xs={4}>
                     <img
                       style={{
-                        marginLeft: "-46%"
+                        marginLeft: "-46%",
                       }}
                       className={classes.sevenHallImageBottom}
                       src={schedule.halls[6].imgUrl}
+                      alt="hall-mg-6"
                     />
                   </Grid>
                 </React.Fragment>
               );
             }
+            return null;
           })}
         </Grid>
       )}
@@ -173,7 +180,7 @@ export default function Card({ schedule, center, size, white }) {
           className={classes.information}
           style={{
             fontSize: size === "small" ? "100%" : "",
-            color: white ? "#F9FBFA" : ""
+            color: white ? "#F9FBFA" : "",
           }}
         >
           {dateformat(new Date(schedule.startTime), "dd'th' mmm, HHMM'h', ")}
@@ -184,17 +191,17 @@ export default function Card({ schedule, center, size, white }) {
   );
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   big: {
     textAlign: "center",
     [theme.breakpoints.up("lg")]: {
-      height: "310px" // to align buttons
+      height: "310px", // to align buttons
     },
     [theme.breakpoints.down("md")]: {
       width: "80%",
-      flexShrink: 0
+      flexShrink: 0,
     },
-    transform: "scale(0.8)"
+    transform: "scale(0.8)",
   },
   small: {
     textAlign: "center",
@@ -203,113 +210,113 @@ const styles = theme => ({
     height: "100%",
     padding: "0.5%",
     opacity: 0.3,
-    transform: "scale(0.8)"
+    transform: "scale(0.8)",
   },
   center: {
     textAlign: "center",
     padding: "1%",
     transform: "scale(1.3)",
-    [theme.breakpoints.down("md")]: {}
+    [theme.breakpoints.down("md")]: {},
   },
   vs: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center"
+    textAlign: "center",
   },
   hall: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "100%"
+      fontSize: "100%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "130%"
+      fontSize: "130%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "170%"
+      fontSize: "170%",
     },
     fontSize: "140%",
     lineHeight: "100%",
-    fontFamily: "TheNextFont"
+    fontFamily: "TheNextFont",
   },
   sport: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "120%"
+      fontSize: "120%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "150%"
+      fontSize: "150%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     fontSize: "180%",
-    lineHeight: "100%"
+    lineHeight: "100%",
   },
   hallSlider: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "100%"
+      fontSize: "100%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "130%"
+      fontSize: "130%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "170%"
+      fontSize: "170%",
     },
     fontSize: "120%",
     lineHeight: "100%",
     color: "#F9FBFA",
-    fontFamily: "TheNextFont"
+    fontFamily: "TheNextFont",
   },
   sportSlider: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "120%"
+      fontSize: "120%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "150%"
+      fontSize: "150%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     fontSize: "170%",
-    lineHeight: "100%"
+    lineHeight: "100%",
   },
   hallContainer: {
     [theme.breakpoints.down("sm")]: {
-      height: "40px"
+      height: "40px",
     },
     [theme.breakpoints.only("md")]: {
-      height: "80px"
+      height: "80px",
     },
-    height: "60px"
+    height: "60px",
   },
   information: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "90%"
+      fontSize: "90%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "120%"
+      fontSize: "120%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "180%"
+      fontSize: "180%",
     },
     fontSize: "130%",
     color: "grey",
     lineHeight: "100%",
-    marginTop: "1%"
+    marginTop: "1%",
   },
   sixHallImage: {
     [theme.breakpoints.down("md")]: {},
-    width: "55%"
+    width: "55%",
   },
   sevenHallImageTop: {
     [theme.breakpoints.down("md")]: {},
-    width: "70%"
+    width: "70%",
   },
   sevenHallImageBottom: {
     [theme.breakpoints.down("md")]: {
-      width: "55%"
+      width: "55%",
     },
-    width: "60%"
-  }
+    width: "60%",
+  },
 });
 
 const useStyles = makeStyles(styles);

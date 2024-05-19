@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { useTheme } from "@material-ui/core/styles";
 import {
   BarChart,
   Bar,
@@ -7,7 +7,7 @@ import {
   XAxis,
   ResponsiveContainer,
   YAxis,
-  LabelList
+  LabelList,
 } from "recharts";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -69,5 +69,3 @@ export default function ResultBarHorizontal({ halls }) {
     </React.Fragment>
   );
 }
-
-const useStyles = makeStyles({});

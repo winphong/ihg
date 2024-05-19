@@ -19,78 +19,80 @@ import MediaQuery from "react-responsive";
 import miscService from "../services/miscService";
 import { Link } from "react-router-dom";
 
-const styles = theme => ({
+const styles = (theme) => ({
   banner: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
+      marginTop: "8%",
       // height: "45vmax"
     },
     [theme.breakpoints.up("md")]: {
-      marginBottom: "3%"
+      marginBottom: "3%",
     },
     [theme.breakpoints.up("xl")]: {
-      marginTop: "3.7%"
+      marginTop: "3.7%",
     },
     // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      marginTop: "10%",
     },
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/results.jpg')",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
   titleContainer: {
-    ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)"]: {
-      marginTop: "5%"
-    }
+    "@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)":
+      {
+        marginTop: "5%",
+      },
   },
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "3%"
+      marginTop: "3%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "420%"
+      fontSize: "420%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "600%"
+      fontSize: "600%",
     },
-    ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)"]: {
-      marginTop: "0%"
-    },
+    "@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)":
+      {
+        marginTop: "0%",
+      },
     // mate 10 landscape
-    ["@media(min-width: 640px) and (max-width: 640px)"]: {
-      marginTop: "5%"
+    "@media(min-width: 640px) and (max-width: 640px)": {
+      marginTop: "5%",
     },
-    ["@media(min-width: 315px) and (max-width: 325px)"]: {
-      marginTop: "10%"
+    "@media(min-width: 315px) and (max-width: 325px)": {
+      marginTop: "10%",
     },
     fontSize: "700%",
     textAlign: "center",
-    marginTop: "3%"
+    marginTop: "3%",
   },
   buttonColumn: {
-    marginTop: "3%"
+    marginTop: "3%",
   },
   currentDate: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "13 0%"
+      fontSize: "13 0%",
     },
     color: "#958F87",
     fontSize: "200%",
-    textAlign: "center"
+    textAlign: "center",
   },
   resultsTableSuperContainer: {
     [theme.breakpoints.only("xs")]: {
-      height: "80vmax"
+      height: "80vmax",
     },
     [theme.breakpoints.only("sm")]: {
-      height: "90vmax"
-    }
+      height: "90vmax",
+    },
     // [theme.breakpoints.only("md")]: {
     //   height: "70vmax"
     // }
@@ -104,17 +106,17 @@ const styles = theme => ({
     position: "absolute",
     width: "58.33%",
     [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
+      width: "100%",
+    },
   },
   barChartTitle: {
     [theme.breakpoints.only("xs")]: {
       textAlign: "center",
-      fontSize: "150%"
+      fontSize: "150%",
     },
     [theme.breakpoints.only("sm")]: {
       textAlign: "center",
-      fontSize: "160%"
+      fontSize: "160%",
     },
     fontSize: "300%",
     color: "#C8B06B",
@@ -122,38 +124,38 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "40px"
+    height: "40px",
   },
   barChart: {
     textAlign: "center",
     display: "flex",
     alignItems: "baseline",
-    marginBottom: "3vh"
+    marginBottom: "3vh",
     // backgroundColor: "grey"
   },
   subTitle: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "300%"
+      fontSize: "300%",
     },
     [theme.breakpoints.down("sm")]: {
       textAlign: "center",
-      margin: "5% 0"
+      margin: "5% 0",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "380%"
+      fontSize: "380%",
     },
-    fontSize: "450%"
+    fontSize: "450%",
   },
   sortButton: {
     [theme.breakpoints.up("sm")]: {
       marginTop: "1vmax",
-      fontSize: "150%"
+      fontSize: "150%",
     },
     cursor: "pointer",
-    fontSize: "100%"
+    fontSize: "100%",
     // lineHeight: "150%",
   },
   sports: {
@@ -161,59 +163,61 @@ const styles = theme => ({
     fontSize: "120%",
     cursor: "pointer",
     fontFamily: "TheNextFont",
-    margin: "0 3%"
+    margin: "0 3%",
   },
   overall: {
     [theme.breakpoints.up("sm")]: {
-      order: 2
-    }
+      order: 2,
+    },
   },
   male: {
     [theme.breakpoints.up("sm")]: {
-      order: 1
-    }
+      order: 1,
+    },
   },
   female: {
     [theme.breakpoints.up("sm")]: {
-      order: 3
-    }
+      order: 3,
+    },
   },
   divider: {
     [theme.breakpoints.only("xs")]: {
-      height: "17px"
+      height: "17px",
     },
     [theme.breakpoints.only("sm")]: {
-      height: "45px"
+      height: "45px",
     },
     borderRight: "2px solid #C8B06B",
-    width: "50%"
+    width: "50%",
   },
   sportListContainer: {
     [theme.breakpoints.down("md")]: {
-      height: "450px"
+      height: "450px",
     },
     [theme.breakpoints.only("lg")]: {
-      height: "35vmax"
+      height: "35vmax",
     },
-    height: "30vmax"
+    height: "30vmax",
     //  backgroundColor: "yellow"
   },
   week: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "160%"
+      fontSize: "160%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "210%"
+      fontSize: "210%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     fontSize: "300%",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
+// eslint-disable-next-line no-unused-vars
 let arr = []; // keep track of how many resultTable element in a page
+// eslint-disable-next-line no-unused-vars
 let idx = 0; // index pointer for
 const CustomButton = ({
   schedules,
@@ -223,14 +227,14 @@ const CustomButton = ({
   handleBack,
   handleNext,
   weekNum,
-  classes
+  classes,
 }) => {
   return (
     <Grid
       container
       style={{
         display: "flex",
-        alignItems: "center"
+        alignItems: "center",
       }}
     >
       <Grid item xs={4}>
@@ -238,7 +242,7 @@ const CustomButton = ({
           style={{
             display: "flex",
             width: "100%",
-            justifyContent: "flex-end"
+            justifyContent: "flex-end",
           }}
         >
           <IconButton disabled={weekNum === 0} onClick={handleBack}>
@@ -256,7 +260,7 @@ const CustomButton = ({
           style={{
             display: "flex",
             width: "100%",
-            justifyContent: "left"
+            justifyContent: "left",
           }}
         >
           <IconButton
@@ -285,7 +289,7 @@ const startDaysOfWeek = [
   new Date("19 Jan 2020"),
   new Date("26 Jan 2020"),
   new Date("2 Feb 2020"),
-  new Date("9 Feb 2020")
+  new Date("9 Feb 2020"),
 ];
 
 class Results extends Component {
@@ -302,7 +306,7 @@ class Results extends Component {
     isAdmin: false,
     redirect: false,
     startDate: new Date("5 Jan 2020"),
-    weekNum: 0
+    weekNum: 0,
   };
 
   async componentDidMount() {
@@ -320,7 +324,7 @@ class Results extends Component {
     const lastDay = new Date(firstDayOfWeek);
     lastDay.setDate(lastDay.getDate() + 7);
 
-    const schedulesByWeek = schedules.filter(schedule => {
+    const schedulesByWeek = schedules.filter((schedule) => {
       const scheduleDate = new Date(schedule.startTime);
       return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
     });
@@ -330,7 +334,7 @@ class Results extends Component {
       schedules: schedulesByWeek,
       originalSchedules: [...schedules],
       sports,
-      isAdmin
+      isAdmin,
     });
 
     const current = new Date();
@@ -349,7 +353,7 @@ class Results extends Component {
     const lastDay = new Date(firstDayOfWeek);
     lastDay.setDate(lastDay.getDate() + 7);
 
-    const schedulesByWeek = originalSchedules.filter(schedule => {
+    const schedulesByWeek = originalSchedules.filter((schedule) => {
       const scheduleDate = new Date(schedule.startTime);
       return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
     });
@@ -357,7 +361,7 @@ class Results extends Component {
     this.setState({
       startDate: firstDayOfWeek,
       weekNum: weekNum + 1,
-      schedules: schedulesByWeek
+      schedules: schedulesByWeek,
     });
   };
 
@@ -366,7 +370,7 @@ class Results extends Component {
     const firstDayOfWeek = new Date(startDate);
     firstDayOfWeek.setDate(firstDayOfWeek.getDate() - 7);
 
-    const schedulesByWeek = originalSchedules.filter(schedule => {
+    const schedulesByWeek = originalSchedules.filter((schedule) => {
       const scheduleDate = new Date(schedule.startTime);
       return scheduleDate >= firstDayOfWeek && scheduleDate < startDate;
     });
@@ -374,7 +378,7 @@ class Results extends Component {
     this.setState({
       startDate: firstDayOfWeek,
       weekNum: weekNum - 1,
-      schedules: schedulesByWeek
+      schedules: schedulesByWeek,
     });
   };
 
@@ -387,7 +391,7 @@ class Results extends Component {
     const lastDay = new Date(firstDayOfWeek);
     lastDay.setDate(lastDay.getDate() + 7);
 
-    const schedulesByWeek = this.state.originalSchedules.filter(schedule => {
+    const schedulesByWeek = this.state.originalSchedules.filter((schedule) => {
       const scheduleDate = new Date(schedule.startTime);
       return scheduleDate >= firstDayOfWeek && scheduleDate < lastDay;
     });
@@ -397,20 +401,21 @@ class Results extends Component {
       byDate: true,
       index: 0,
       startDate: firstDayOfWeek,
-      weekNum: 0
+      weekNum: 0,
     });
   };
 
-  handleSortBySport = sport => {
+  handleSortBySport = (sport) => {
     arr = [];
     idx = 0;
     // const schedules = [...this.state.originalSchedules].sort((a, b) => {
     //   return a.sport >= b.sport ? 1 : -1;
     // });
-    const schedules = [...this.state.originalSchedules].filter(schedule => {
+    const schedules = [...this.state.originalSchedules].filter((schedule) => {
       if (schedule.sport === sport.name) {
-        return schedule;
+        return !!schedule;
       }
+      return false;
     });
 
     this.setState({
@@ -418,7 +423,7 @@ class Results extends Component {
       originalSchedulesBySport: [...schedules],
       byDate: false,
       index: 0,
-      selectedSport: sport
+      selectedSport: sport,
     });
   };
 
@@ -435,7 +440,7 @@ class Results extends Component {
       selectedSport,
       isAdmin,
       redirect,
-      weekNum
+      weekNum,
     } = this.state;
 
     if (redirect)
@@ -443,7 +448,7 @@ class Results extends Component {
         <Redirect
           to={{
             pathname: "/admin/standing",
-            state: { from: this.props.location }
+            state: { from: this.props.location },
           }}
         />
       );
@@ -529,7 +534,7 @@ class Results extends Component {
                     // className="slider"
                     style={{
                       display: "flex",
-                      overflowX: "scroll"
+                      overflowX: "scroll",
                       // padding: "5% 0"
                       // backgroundColor: "pink",
                     }}
@@ -606,7 +611,7 @@ class Results extends Component {
                     className={classes.sortButton}
                     variant="h1"
                     style={{
-                      color: byDate ? "black" : "#D3DBD9"
+                      color: byDate ? "black" : "#D3DBD9",
                     }}
                     onClick={this.handleSortByDate}
                   >
@@ -617,7 +622,7 @@ class Results extends Component {
                     variant="h1"
                     onClick={() => this.handleSortBySport(this.state.sports[0])}
                     style={{
-                      color: !byDate ? "black" : "#D3DBD9"
+                      color: !byDate ? "black" : "#D3DBD9",
                     }}
                   >
                     BY SPORTS
@@ -641,7 +646,7 @@ class Results extends Component {
                     item
                     xs={12}
                     style={{
-                      visibility: sports.length === 0 ? "hidden" : ""
+                      visibility: sports.length === 0 ? "hidden" : "",
                     }}
                   >
                     <Grid item xs={2} />
@@ -654,7 +659,7 @@ class Results extends Component {
                           color: byDate ? "black" : "#D3DBD9",
                           textAlign: "right",
                           paddingRight: "10%",
-                          borderRight: "2px solid #C8B06B"
+                          borderRight: "2px solid #C8B06B",
                         }}
                       >
                         BY WEEK
@@ -666,7 +671,7 @@ class Results extends Component {
                         variant="h1"
                         style={{
                           color: !byDate ? "black" : "#D3DBD9",
-                          paddingLeft: "10%"
+                          paddingLeft: "10%",
                         }}
                         onClick={() =>
                           this.handleSortBySport(this.state.sports[0])
@@ -683,10 +688,10 @@ class Results extends Component {
                           overflowX: "scroll",
                           padding: "2% 0",
                           margin: "1% 0",
-                          visibility: byDate ? "hidden" : ""
+                          visibility: byDate ? "hidden" : "",
                         }}
                       >
-                        {sports.map(sport => {
+                        {sports.map((sport) => {
                           return (
                             <Typography
                               className={classes.sports}
@@ -695,7 +700,7 @@ class Results extends Component {
                                 color:
                                   selectedSport.name === sport.name
                                     ? "#C8B06B"
-                                    : "#D3DBD9"
+                                    : "#D3DBD9",
                               }}
                             >
                               {sport.name}

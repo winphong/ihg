@@ -17,12 +17,11 @@ import Login from "./pages/admin/login";
 import ProtectedRoute from "./components/protectedRoute";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
 import Logout from "./components/logout";
-import miscService from "./services/miscService";
 
 const theme = createMuiTheme({
   typography: {
     fontFamily: "Lato",
-    h1: { fontFamily: "TheNextFont", color: "#C8B06B" }
+    h1: { fontFamily: "TheNextFont", color: "#C8B06B" },
   },
   breakpoints: {
     // Define custom breakpoint values.
@@ -35,23 +34,23 @@ const theme = createMuiTheme({
       sm: 500,
       md: 960,
       lg: 1280,
-      xl: 1350
-    }
-  }
+      xl: 1350,
+    },
+  },
 });
 
 class App extends Component {
   state = {
-    pathname: window.location.pathname
+    pathname: window.location.pathname,
   };
 
-  handleTabChange = pathname => {
+  handleTabChange = (pathname) => {
     this.setState({ pathname });
   };
 
-  async componentDidMount() {
-    await miscService.updateTraffic();
-  }
+  // async componentDidMount() {
+  //   await miscService.updateTraffic();
+  // }
 
   render() {
     // if (this.detectmobile() === true)
@@ -59,8 +58,15 @@ class App extends Component {
 
     return (
       <MuiPickersUtilsProvider utils={DayjsUtils}>
-        <div style={{ backgroundColor: "#F9FBFA" }}>
-          <MuiThemeProvider theme={theme}>
+        <MuiThemeProvider theme={theme}>
+          <div
+            style={{
+              backgroundColor: "#F9FBFA",
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+            }}
+          >
             <NavBar
               pathname={this.state.pathname}
               handleTabChange={this.handleTabChange}
@@ -69,43 +75,43 @@ class App extends Component {
               <Route
                 path="/"
                 exact
-                render={props => (
+                render={(props) => (
                   <Home {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/home"
-                render={props => (
+                render={(props) => (
                   <Home {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/about"
-                render={props => (
+                render={(props) => (
                   <About {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/schedule"
-                render={props => (
+                render={(props) => (
                   <Schedule {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/results"
-                render={props => (
+                render={(props) => (
                   <Results {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/gallery"
-                render={props => (
+                render={(props) => (
                   <Gallery {...props} handleTabChange={this.handleTabChange} />
                 )}
               />
               <Route
                 path="/documents"
-                render={props => (
+                render={(props) => (
                   <Documents
                     {...props}
                     handleTabChange={this.handleTabChange}
@@ -125,13 +131,13 @@ class App extends Component {
               />
               <ProtectedRoute path="/admin/score/:id" component={ScoreForm} />
               <ProtectedRoute path="/admin/standing" component={StandingForm} />
-              +{/* <Route path="/not-found" component={NotFound} /> */}
+              {/* <Route path="/not-found" component={NotFound} /> */}
               <Redirect from="/" exact to="/home" />
               <Redirect to="/home" />
             </Switch>
             <Footer />
-          </MuiThemeProvider>
-        </div>
+          </div>
+        </MuiThemeProvider>
       </MuiPickersUtilsProvider>
     );
   }
