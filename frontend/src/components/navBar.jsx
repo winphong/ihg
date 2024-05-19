@@ -126,89 +126,87 @@ export default function NavBar({ pathname, handleTabChange }) {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar color="inherit" style={{ boxShadow: "1px 1px 5px #aaaaaa" }}>
-        <Toolbar disableGutters>
-          {/* Mobile */}
-          <MediaQuery maxWidth={959}>
-            <Button onClick={toggleDrawer("left", true)} disableRipple>
-              <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
-            </Button>
-            <Drawer
-              anchor="left"
-              open={state.left}
-              onClose={toggleDrawer("left", false)}
-            >
-              {sideList("left")}
-            </Drawer>
-          </MediaQuery>
-          <IconButton
-            className={classes.logo}
-            disableRipple
-            color="inherit"
-            onClick={() => handleTabChange("/home")}
-            to={"/home"}
-            component={Link}
-            style={{ backgroundColor: "transparent" }}
+    <AppBar color="inherit" style={{ boxShadow: "1px 1px 5px #aaaaaa" }}>
+      <Toolbar disableGutters>
+        {/* Mobile */}
+        <MediaQuery maxWidth={959}>
+          <Button onClick={toggleDrawer("left", true)} disableRipple>
+            <MenuIcon disableRipple style={{ color: "#C8B06B" }} />
+          </Button>
+          <Drawer
+            anchor="left"
+            open={state.left}
+            onClose={toggleDrawer("left", false)}
           >
-            <img src="/Logo.png" className={classes.logoSize} />
-          </IconButton>
-          {/* Laptop */}
-          <MediaQuery minWidth={960}>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "flex-end",
-                marginRight: "3%",
-              }}
-            >
-              {selections.map((selection) => {
-                const newPathname = `/${selection.toLowerCase()}`;
-                return (
-                  <IconButton
-                    key={selection}
-                    style={{
-                      backgroundColor: "transparent",
-                      color: pathname === newPathname ? "#252527" : "#958F87",
-                    }}
-                    disableRipple
-                    color="inherit"
-                    onClick={() => handleTabChange(newPathname)}
-                    to={newPathname}
-                    component={Link}
-                  >
-                    <Typography
-                      style={{
-                        fontWeight: pathname === newPathname ? 900 : "",
-                      }}
-                    >
-                      {selection}
-                    </Typography>
-                  </IconButton>
-                );
-              })}
-              {isAdmin && (
+            {sideList("left")}
+          </Drawer>
+        </MediaQuery>
+        <IconButton
+          className={classes.logo}
+          disableRipple
+          color="inherit"
+          onClick={() => handleTabChange("/home")}
+          to={"/home"}
+          component={Link}
+          style={{ backgroundColor: "transparent" }}
+        >
+          <img src="/Logo.png" className={classes.logoSize} />
+        </IconButton>
+        {/* Laptop */}
+        <MediaQuery minWidth={960}>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "flex-end",
+              marginRight: "3%",
+            }}
+          >
+            {selections.map((selection) => {
+              const newPathname = `/${selection.toLowerCase()}`;
+              return (
                 <IconButton
+                  key={selection}
                   style={{
                     backgroundColor: "transparent",
-                    color: "#958F87",
-                    fontWeight: "bold",
+                    color: pathname === newPathname ? "#252527" : "#958F87",
                   }}
                   disableRipple
-                  disableTouchRipple
-                  disableFocusRipple
                   color="inherit"
-                  to={"/logout"}
+                  onClick={() => handleTabChange(newPathname)}
+                  to={newPathname}
                   component={Link}
                 >
-                  <Typography>Logout</Typography>
+                  <Typography
+                    style={{
+                      fontWeight: pathname === newPathname ? 900 : "",
+                    }}
+                  >
+                    {selection}
+                  </Typography>
                 </IconButton>
-              )}
-            </div>
-          </MediaQuery>
-        </Toolbar>
-      </AppBar>
-    </div>
+              );
+            })}
+            {isAdmin && (
+              <IconButton
+                style={{
+                  backgroundColor: "transparent",
+                  color: "#958F87",
+                  fontWeight: "bold",
+                }}
+                disableRipple
+                disableTouchRipple
+                disableFocusRipple
+                color="inherit"
+                to={"/logout"}
+                component={Link}
+              >
+                <Typography>Logout</Typography>
+              </IconButton>
+            )}
+          </div>
+        </MediaQuery>
+      </Toolbar>
+    </AppBar>
   );
 }
