@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -11,14 +13,6 @@ import { useMediaQuery } from "react-responsive";
 import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 
-const startDaysOfWeek = [
-  new Date("5 Jan 2020"),
-  new Date("12 Jan 2020"),
-  new Date("19 Jan 2020"),
-  new Date("26 Jan 2020"),
-  new Date("2 Feb 2020"),
-  new Date("9 Feb 2020"),
-];
 const days = [
   { num: 7, name: "Sunday" },
   { num: 1, name: "Monday" },
@@ -28,13 +22,10 @@ const days = [
   { num: 5, name: "Friday" },
   { num: 6, name: "Saturday" },
 ];
-// let globalEndDate = "";
 
 export default function Calendar({
   schedules,
   isAdmin,
-  globalEndDate,
-  handleUpdateGlobalEndDate,
   weekNum,
   handleUpdateWeeknum,
 }) {
@@ -42,15 +33,21 @@ export default function Calendar({
   const today = new Date(process.env.REACT_APP_WEEK_0);
 
   const [startDate, setStartDate] = React.useState(today);
-  const [currentDay, setCurrentDay] = React.useState(3);
+  const [currentDay] = React.useState(3);
   const mobileDays = [currentDay - 3, currentDay - 2, currentDay - 1];
-  const [stay, setStay] = React.useState(false);
 
   let currentCount = 0;
   let previousCount = -1;
 
+  const dateFormatter = (time) => {
+    return dateformat(time, "dd mmm yyyy");
+  };
+
+  const schedulesGroupedByStartDate = _.groupBy(schedules, (schedule) => {
+    return dateFormatter(schedule.startTime);
+  });
+
   const date = new Date(startDate);
-  let current = currentDay;
 
   const notMobile = useMediaQuery({ minDeviceWidth: 960 });
   const isIpad = useMediaQuery({
@@ -58,61 +55,16 @@ export default function Calendar({
     maxWidth: 800,
     orientation: "portrait",
   });
-  const md = useMediaQuery({
-    minWidth: 960,
-    maxWidth: 1060,
-  });
-  const mdplus = useMediaQuery({
-    minWidth: 1061,
-    maxWidth: 1220,
-  });
-  const xlplus = useMediaQuery({
-    minWidth: 1800,
-  });
-
-  let start = today;
-  let end = new Date(start);
-  end.setDate(end.getDate() + 7);
 
   function handleBack() {
-    // handleUpdateWeeknum(weekNum - 1);
-    // setStay(true);
-    // setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
-    // setWeekNum(weekNum - 1);
-    // setTimeout(() => setStay(false), 200);
+    handleUpdateWeeknum(weekNum - 1);
+    setStartDate(new Date(startDate.setDate(startDate.getDate() - 7)));
   }
 
   function handleNext() {
-    // if (weekNum === 5) return;
-    // handleUpdateWeeknum(weekNum + 1);
-    // setStay(true);
-    // setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
-    // setWeekNum(weekNum + 1);
-    // setTimeout(() => setStay(false), 200);
+    handleUpdateWeeknum(weekNum + 1);
+    setStartDate(new Date(startDate.setDate(startDate.getDate() + 7)));
   }
-
-  let increaseCount = 0;
-  // const today = new Date();
-
-  // if (globalEndDate === "") {
-  //   globalEndDate = new Date(startDate);
-  //   handleUpdateGlobalEndDate(
-  //     globalEndDate.setDate(globalEndDate.getDate() + 7)
-  //   );
-
-  //   startDaysOfWeek.map((day, index) => {
-  //     if (today >= globalEndDate) {
-  //       handleNext();
-  //       increaseCount++;
-  //     }
-  //     handleUpdateGlobalEndDate(
-  //       globalEndDate.setDate(globalEndDate.getDate() + 7)
-  //     );
-  //     if (index === startDaysOfWeek.length - 1 && increaseCount > 0) {
-  //       handleUpdateWeeknum(weekNum + increaseCount);
-  //     }
-  //   });
-  // }
 
   return (
     <Grid container>
@@ -212,28 +164,32 @@ export default function Calendar({
                       classNames="fade"
                     >
                       <Grid container className={classes.column}>
-                        {schedules.length > 0 &&
-                          schedules.map((schedule) => {
-                            const columnTime = new Date(schedule.startTime);
-                            if (
-                              columnTime.getDate() === date.getDate() &&
-                              columnTime.getMonth() === date.getMonth()
-                            ) {
-                              currentCount += 1;
-                              return (
-                                <Grid item>
-                                  <ScheduleBox
-                                    schedule={schedule}
-                                    isAdmin={isAdmin}
-                                    printLeftBorder={
-                                      currentCount <= previousCount
-                                    }
-                                    index={index}
-                                  />
-                                </Grid>
-                              );
+                        {schedulesGroupedByStartDate[dateFormatter(date)] &&
+                          schedulesGroupedByStartDate[dateFormatter(date)]
+                            .length > 0 &&
+                          schedulesGroupedByStartDate[dateFormatter(date)].map(
+                            (schedule) => {
+                              const columnTime = new Date(schedule.startTime);
+                              if (
+                                columnTime.getDate() === date.getDate() &&
+                                columnTime.getMonth() === date.getMonth()
+                              ) {
+                                currentCount += 1;
+                                return (
+                                  <Grid item>
+                                    <ScheduleBox
+                                      schedule={schedule}
+                                      isAdmin={isAdmin}
+                                      printLeftBorder={
+                                        currentCount <= previousCount
+                                      }
+                                      index={index}
+                                    />
+                                  </Grid>
+                                );
+                              }
                             }
-                          })}
+                          )}
                       </Grid>
                     </CSSTransition>
                   </TransitionGroup>
@@ -262,15 +218,6 @@ export default function Calendar({
             return (
               <div key={day}>
                 <div style={{ height: "3%", marginLeft: "8%" }}>
-                  {stay && (
-                    <div
-                      style={{
-                        height: "7%",
-                        position: "absolute",
-                        zIndex: 100,
-                      }}
-                    ></div>
-                  )}
                   <TransitionGroup style={{ width: isIpad ? "20vmax" : "" }}>
                     <CSSTransition
                       key={`${weekNum}${date}`}
@@ -281,8 +228,8 @@ export default function Calendar({
                         <Typography
                           className={classes.date}
                           style={{
-                            position: stay ? "absolute" : "static",
-                            display: stay ? "none" : "block",
+                            position: "static",
+                            display: "block",
                             width: isIpad ? "20vmax" : "",
                           }}
                         >
@@ -318,32 +265,36 @@ export default function Calendar({
                     classNames="fade"
                   >
                     <div>
-                      {schedules.length > 0 &&
-                        schedules.map((schedule) => {
-                          const columnTime = new Date(schedule.startTime);
-                          if (
-                            columnTime.getDate() === date.getDate() &&
-                            columnTime.getMonth() === date.getMonth()
-                          ) {
-                            currentCount += 1;
-                            return (
-                              <Grid container key={schedule._id}>
-                                <Grid item xs={10}>
-                                  <div>
-                                    <ScheduleBox
-                                      schedule={schedule}
-                                      isAdmin={isAdmin}
-                                      printLeftBorder={
-                                        currentCount <= previousCount
-                                      }
-                                      index={index}
-                                    />
-                                  </div>
+                      {schedulesGroupedByStartDate[dateFormatter(date)] &&
+                        schedulesGroupedByStartDate[dateFormatter(date)]
+                          .length > 0 &&
+                        schedulesGroupedByStartDate[dateFormatter(date)].map(
+                          (schedule) => {
+                            const columnTime = new Date(schedule.startTime);
+                            if (
+                              columnTime.getDate() === date.getDate() &&
+                              columnTime.getMonth() === date.getMonth()
+                            ) {
+                              currentCount += 1;
+                              return (
+                                <Grid container key={schedule._id}>
+                                  <Grid item xs={10}>
+                                    <div>
+                                      <ScheduleBox
+                                        schedule={schedule}
+                                        isAdmin={isAdmin}
+                                        printLeftBorder={
+                                          currentCount <= previousCount
+                                        }
+                                        index={index}
+                                      />
+                                    </div>
+                                  </Grid>
                                 </Grid>
-                              </Grid>
-                            );
+                              );
+                            }
                           }
-                        })}
+                        )}
                     </div>
                   </CSSTransition>
                 </TransitionGroup>
