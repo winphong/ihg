@@ -113,9 +113,7 @@ export default function Calendar({
             {(notMobile ? days : mobileDays).map((day, index) => {
               if (index !== 0) {
                 if (notMobile) date.setDate(date.getDate() + 1);
-                previousCount = currentCount;
               }
-              currentCount = 0;
 
               return (
                 <Grid item xs={true}>
@@ -174,15 +172,11 @@ export default function Calendar({
                                 columnTime.getDate() === date.getDate() &&
                                 columnTime.getMonth() === date.getMonth()
                               ) {
-                                currentCount += 1;
                                 return (
                                   <Grid item>
                                     <ScheduleBox
                                       schedule={schedule}
                                       isAdmin={isAdmin}
-                                      printLeftBorder={
-                                        currentCount <= previousCount
-                                      }
                                       index={index}
                                     />
                                   </Grid>
@@ -205,54 +199,41 @@ export default function Calendar({
           style={{
             display: "flex",
             overflowX: "scroll",
+            minHeight: "200px",
           }}
         >
           {/* <Grid container> */}
           {days.map((day, index) => {
             if (index !== 0) {
               date.setDate(date.getDate() + 1);
-              previousCount = currentCount;
             }
-            currentCount = 0;
 
             return (
-              <div key={day}>
-                <div style={{ height: "3%", marginLeft: "8%" }}>
-                  <TransitionGroup style={{ width: isIpad ? "20vmax" : "" }}>
-                    <CSSTransition
-                      key={`${weekNum}${date}`}
-                      timeout={400}
-                      classNames="fade"
+              <div key={day} style={{ minWidth: "200px" }}>
+                <div>
+                  <div className={classes.dateRow}>
+                    <Typography
+                      className={classes.date}
+                      style={{
+                        width: isIpad ? "20vmax" : "",
+                      }}
                     >
-                      <div className={classes.dateRow}>
-                        <Typography
-                          className={classes.date}
-                          style={{
-                            position: "static",
-                            display: "block",
-                            width: isIpad ? "20vmax" : "",
-                          }}
-                        >
-                          {(date.getDate() === 1 ||
-                            date.getDate() === 21 ||
-                            date.getDate() === 31) &&
-                            dateformat(date, "dd'st' mmm")}
-                          {(date.getDate() === 2 || date.getDate() === 22) &&
-                            dateformat(date, "dd'nd' mmm")}
-                          {(date.getDate() === 3 || date.getDate() === 23) &&
-                            dateformat(date, "dd'rd' mmm")}
-                          {![1, 2, 3, 21, 22, 23, 31].includes(
-                            date.getDate()
-                          ) && dateformat(date, "dd'th' mmm")}
-                        </Typography>
-                      </div>
-                    </CSSTransition>
-                  </TransitionGroup>
+                      {(date.getDate() === 1 ||
+                        date.getDate() === 21 ||
+                        date.getDate() === 31) &&
+                        dateformat(date, "dd'st' mmm")}
+                      {(date.getDate() === 2 || date.getDate() === 22) &&
+                        dateformat(date, "dd'nd' mmm")}
+                      {(date.getDate() === 3 || date.getDate() === 23) &&
+                        dateformat(date, "dd'rd' mmm")}
+                      {![1, 2, 3, 21, 22, 23, 31].includes(date.getDate()) &&
+                        dateformat(date, "dd'th' mmm")}
+                    </Typography>
+                  </div>
                 </div>
                 <Typography
                   className={classes.day}
                   style={{
-                    marginLeft: "8%",
                     width: isIpad ? "20vmax" : "",
                   }}
                 >
@@ -275,7 +256,6 @@ export default function Calendar({
                               columnTime.getDate() === date.getDate() &&
                               columnTime.getMonth() === date.getMonth()
                             ) {
-                              currentCount += 1;
                               return (
                                 <Grid container key={schedule._id}>
                                   <Grid item xs={10}>
@@ -283,9 +263,6 @@ export default function Calendar({
                                       <ScheduleBox
                                         schedule={schedule}
                                         isAdmin={isAdmin}
-                                        printLeftBorder={
-                                          currentCount <= previousCount
-                                        }
                                         index={index}
                                       />
                                     </div>
@@ -322,7 +299,6 @@ const styles = (theme) => ({
   date: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "100%",
-      width: "50vmin",
     },
     fontWeight: "bold",
     fontSize: "150%",
@@ -340,7 +316,6 @@ const styles = (theme) => ({
   day: {
     [theme.breakpoints.down("sm")]: {
       fontSize: "100%",
-      width: "50vmin",
     },
     fontSize: "110%",
     color: "#958F87",
@@ -359,7 +334,7 @@ const styles = (theme) => ({
     fontSize: "150%",
   },
   schedulesTableContainer: {
-    // backgroundColor: "beige",
+    minHeight: "200px",
   },
 });
 
