@@ -15,41 +15,31 @@ import MediaQuery from "react-responsive";
 // import { useMediaQuery } from "react-responsive";
 import auth from "../services/miscService";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    // position: "fixed",
-    // top: 0,
-    // width: "100%",
-    // zIndex: 1000
-    // right: 0,
-    // top: 0,
-    // border: "3px solid #73AD21",
-    // marginBottom: 100
-  },
+const useStyles = makeStyles((theme) => ({
   title: {
-    fontSize: "300%"
+    fontSize: "300%",
   },
   logo: {
     [theme.breakpoints.only("xs")]: {
       display: "flex",
       justifyContent: "center",
-      width: "65%"
+      width: "65%",
     },
     [theme.breakpoints.only("sm")]: {
       display: "flex",
       justifyContent: "center",
-      width: "83.33333%"
+      width: "83.33333%",
     },
     [theme.breakpoints.up("md")]: {
-      marginLeft: "1.5%"
-    }
+      marginLeft: "1.5%",
+    },
   },
   logoSize: {
     [theme.breakpoints.up("md")]: {
-      height: "45px"
+      height: "45px",
     },
-    height: "45px"
-  }
+    height: "45px",
+  },
 }));
 
 const selections = [
@@ -58,7 +48,7 @@ const selections = [
   "Schedule",
   "Results",
   "Gallery",
-  "Documents"
+  "Documents",
 ];
 
 export default function NavBar({ pathname, handleTabChange }) {
@@ -69,10 +59,10 @@ export default function NavBar({ pathname, handleTabChange }) {
     top: false,
     left: false,
     bottom: false,
-    right: false
+    right: false,
   });
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -82,7 +72,7 @@ export default function NavBar({ pathname, handleTabChange }) {
     setState({ ...state, [side]: open });
   };
 
-  const sideList = side => (
+  const sideList = (side) => (
     <div
       onClick={toggleDrawer(side, false)}
       onKeyDown={toggleDrawer(side, false)}
@@ -103,7 +93,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                     pathname === `/${selection.toLowerCase()}`
                       ? "#252527"
                       : "#958F87",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 {selection}
@@ -122,7 +112,7 @@ export default function NavBar({ pathname, handleTabChange }) {
               <Typography
                 style={{
                   color: "#958F87",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 Logout
@@ -163,11 +153,6 @@ export default function NavBar({ pathname, handleTabChange }) {
           >
             <img src="/Logo.png" className={classes.logoSize} />
           </IconButton>
-          {/* 
-          <MediaQuery maxWidth={959}>
-            <Button disabled style={{ padding: 0 }}></Button>
-          </MediaQuery> */}
-
           {/* Laptop */}
           <MediaQuery minWidth={960}>
             <div
@@ -175,16 +160,17 @@ export default function NavBar({ pathname, handleTabChange }) {
                 width: "100%",
                 display: "flex",
                 justifyContent: "flex-end",
-                marginRight: "3%"
+                marginRight: "3%",
               }}
             >
-              {selections.map(selection => {
+              {selections.map((selection) => {
                 const newPathname = `/${selection.toLowerCase()}`;
                 return (
                   <IconButton
+                    key={selection}
                     style={{
                       backgroundColor: "transparent",
-                      color: pathname === newPathname ? "#252527" : "#958F87"
+                      color: pathname === newPathname ? "#252527" : "#958F87",
                     }}
                     disableRipple
                     color="inherit"
@@ -194,7 +180,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                   >
                     <Typography
                       style={{
-                        fontWeight: pathname === newPathname ? 900 : ""
+                        fontWeight: pathname === newPathname ? 900 : "",
                       }}
                     >
                       {selection}
@@ -207,7 +193,7 @@ export default function NavBar({ pathname, handleTabChange }) {
                   style={{
                     backgroundColor: "transparent",
                     color: "#958F87",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
                   }}
                   disableRipple
                   disableTouchRipple
