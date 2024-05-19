@@ -63,11 +63,10 @@ export default function Slider({ upcomingSchedules }) {
                 style={{
                   position: "absolute",
                   width: "83.333%",
-                  margin: "0px"
+                  margin: "0px",
                 }}
               >
                 <Grid className={classes.side} item md={4}>
-                  {/* {previous  && ( */}
                   {currentWeekSchedule.length >= 3 && (
                     <Card
                       schedule={currentWeekSchedule[previous]}
@@ -75,7 +74,6 @@ export default function Slider({ upcomingSchedules }) {
                       white={true}
                     />
                   )}
-                  {/* )} */}
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <Card
@@ -106,9 +104,7 @@ export default function Slider({ upcomingSchedules }) {
             disabled={currentWeekSchedule.length === 1}
             style={{ color: "grey", transform: "scale(1.5)" }}
           >
-            <KeyboardArrowRight
-            // style={{ color: "grey", transform: "scale(1.5)" }}
-            />
+            <KeyboardArrowRight />
           </IconButton>
         </Grid>
       </MediaQuery>
@@ -118,9 +114,7 @@ export default function Slider({ upcomingSchedules }) {
             style={{
               display: "flex",
               overflowX: "scroll",
-              width: "100%"
-              // height: "50vmax"
-              // backgroundColor: "pink"
+              width: "100%",
             }}
           >
             {currentWeekSchedule.map((e, index) => {
@@ -130,7 +124,7 @@ export default function Slider({ upcomingSchedules }) {
                   size="big"
                   index={index}
                   white={true}
-                  // scheduleSize={schedules.length}
+                  key={e._id}
                 />
               );
             })}
@@ -141,29 +135,29 @@ export default function Slider({ upcomingSchedules }) {
   );
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   side: {
     [theme.breakpoints.down("sm")]: {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   iconButton: {
     [theme.breakpoints.down("sm")]: {
-      display: "flex"
+      display: "flex",
       // justifyContent: "flex-start",
       // justifyItems: "flex-start"
       // marginLeft: "-24px"
-    }
+    },
   },
   sliderContainer: {
     [theme.breakpoints.only("xs")]: {
       // height: "30vmax"
     },
     [theme.breakpoints.up("lg")]: {
-      height: "20vmax"
-    }
+      height: "20vmax",
+    },
     // backgroundColor: "pink"
-  }
+  },
 });
 
 const useStyles = makeStyles(styles);

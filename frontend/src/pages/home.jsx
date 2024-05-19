@@ -15,96 +15,85 @@ import hallService from "../services/hallService";
 import ResultBarHorizontal from "./../components/resultBarHorizontal";
 import Button from "@material-ui/core/Button";
 
-const styles = theme => ({
+const styles = (theme) => ({
   banner: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
+      marginTop: "8%",
       // height: "45vmax"
     },
     [theme.breakpoints.up("xl")]: {
-      marginTop: "3.7%"
+      marginTop: "3.7%",
     },
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
+      marginTop: "10%",
     },
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/home.jpg')",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
-  // bannerImageContainer: {
-  //   [theme.breakpoints.only("xs")]: {
-  //     marginLeft: "-38%",
-  //     overflow: "hidden"
-  //   },
-  //   [theme.breakpoints.up("md")]: {
-  //     marginLeft: "-33.5%",
-  //     zIndex: 0
-  //   },
-  //   display: "block"
-  // },
   bannerImage: {
     [theme.breakpoints.only("xs")]: {
       height: "95vmax",
-      marginLeft: "-250%"
+      marginLeft: "-250%",
     },
     [theme.breakpoints.only("sm")]: {
       height: "30vmax",
-      marginLeft: "-150%"
+      marginLeft: "-150%",
     },
     [theme.breakpoints.up("md")]: {
-      width: "200%"
-    }
+      width: "200%",
+    },
   },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "300%"
+      fontSize: "300%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "450%"
+      fontSize: "450%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "650%"
+      fontSize: "650%",
     },
     [theme.breakpoints.only("lg")]: {
-      fontSize: "800%"
+      fontSize: "800%",
     },
     ["@media(max-width: 320px)"]: {
-      fontSize: "280%"
+      fontSize: "280%",
     },
     ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      fontSize: "400%"
+      fontSize: "400%",
     },
     fontSize: "1000%",
     lineHeight: "120%",
-    color: "#C8B06B"
+    color: "#C8B06B",
   },
   subTitle: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "140%"
+      fontSize: "140%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "400%"
+      fontSize: "400%",
     },
     [theme.breakpoints.up("lg")]: {
-      lineHeight: "120%"
+      lineHeight: "120%",
     },
     fontSize: "450%",
     color: "#C8B06B",
-    fontFamily: "TheNextFont"
+    fontFamily: "TheNextFont",
   },
   subTitleTransparent: {
     fontSize: "450%",
     color: "transparent",
     "-webkit-text-stroke-width": "1px",
     "-webkit-text-stroke-color": "#C8B06B",
-    lineHeight: "120%"
+    lineHeight: "120%",
   },
   subTitleContainer: {
     // [theme.breakpoints.up("sm")]: {
@@ -115,14 +104,14 @@ const styles = theme => ({
   },
   cardRowContainer: {
     [theme.breakpoints.down("sm")]: {
-      padding: "0 6vw"
+      padding: "0 6vw",
     },
     [theme.breakpoints.up("sm")]: {
       height: "650px",
       paddingRight: "10vw",
       // backgroundColor: "pink",
-      marginTop: "10%"
-    }
+      marginTop: "10%",
+    },
   },
   cardContainer: {
     [theme.breakpoints.only("sm")]: {
@@ -132,86 +121,54 @@ const styles = theme => ({
     [theme.breakpoints.down("md")]: {
       display: "flex",
       overflowX: "scroll",
-      width: "100%"
+      width: "100%",
     },
     [theme.breakpoints.up("lg")]: {
       position: "absolute",
-      width: "63.6vw"
-    }
+      width: "63.6vw",
+    },
     // height: "inherit"
   },
   buttonColumn: {
     [theme.breakpoints.down("sm")]: {
-      // padding: "61% 0"
-      // backgroundColor: "pink",
-      height: "500px"
+      height: "500px",
     },
     [theme.breakpoints.up("sm")]: {
-      // padding: "61% 0"
-      // backgroundColor: "ivory",
-      height: "inherit"
+      height: "inherit",
     },
     zIndex: 2,
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
-  // buttonText: {
-  //   [theme.breakpoints.only("xs")]: {
-  //     fontSize: "59%"
-  //   },
-  //   [theme.breakpoints.only("sm")]: {
-  //     fontSize: "100%"
-  //   },
-  //   [theme.breakpoints.only("md")]: {
-  //     fontSize: "150%"
-  //   },
-  //   fontFamily: "TheNextFont",
-  //   color: "white",
-  //   width: "100%",
-  //   backgroundColor: "#C8B06B",
-  //   textDecoration: "none",
-  //   borderRadius: "3px",
-  //   textAlign: "center",
-  //   padding: "2% 0"
-  // },
   buttonText: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "59%"
+      fontSize: "59%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "100%"
+      fontSize: "100%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "150%"
+      fontSize: "150%",
     },
     fontFamily: "TheNextFont",
     ["@media(max-width: 325px)"]: {
-      fontSize: "50%"
-    }
-    // color: "white",
-    // width: "100%",
-    // backgroundColor: "#C8B06B",
-    // textDecoration: "none",
-    // borderRadius: "3px",
-    // textAlign: "center",
-    // padding: "2% 0"
+      fontSize: "50%",
+    },
   },
   centerAlign: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
-    // height: "4vmax"
+    justifyContent: "center",
   },
   viewButton: {
     [theme.breakpoints.down("sm")]: {
       padding: "4px 8px 2px 8px",
-      marginTop: "-9px"
+      marginTop: "-9px",
     },
     color: "white",
-    // display: "inline-block",
     minHeight: 0,
-    minWidth: 0
-  }
+    minWidth: 0,
+  },
 });
 
 class Home extends Component {
@@ -219,7 +176,7 @@ class Home extends Component {
     schedules: [],
     schedulesToDisplay: [],
     halls: [],
-    index: 0
+    index: 0,
   };
 
   async componentDidMount() {
@@ -230,17 +187,16 @@ class Home extends Component {
         new Date().toLocaleString("en-US", { timeZone: "Asia/Singapore" })
       )
     );
-    console.log(schedules);
     const { data: halls } = await hallService.getAllHalls();
 
     this.setState({
       schedules,
       schedulesToDisplay: schedules,
-      halls
+      halls,
     });
   }
 
-  handleNext = num => {
+  handleNext = (num) => {
     const index = this.state.index + num;
     if (index >= this.state.schedules.length) return;
 
@@ -250,7 +206,7 @@ class Home extends Component {
     this.setState({ schedulesToDisplay, index });
   };
 
-  handleBack = num => {
+  handleBack = (num) => {
     const index = this.state.index - num;
     if (index < 0) return;
 
@@ -286,10 +242,10 @@ class Home extends Component {
                 variant="h1"
                 className={classes.title}
                 style={{
-                  color: "white"
+                  color: "white",
                 }}
               >
-                19/20
+                {process.env.REACT_APP_ACADEMIC_YEAR}
               </Typography>
             </Grid>
           </Grid>
@@ -331,18 +287,11 @@ class Home extends Component {
                                     <Divider
                                       style={{
                                         margin: "15px 8vw 15px 8vw",
-                                        backgroundColor: "#C8B06B"
+                                        backgroundColor: "#C8B06B",
                                       }}
                                     />
                                   )}
                                 </Grid>
-                                {/* {index % 2 == 0 && (
-                                  <Grid
-                                    item
-                                    xs={1}
-                                    style={{ backgroundColor: "pink" }}
-                                  />
-                                )} */}
                               </React.Fragment>
                             );
                           }
@@ -369,7 +318,7 @@ class Home extends Component {
                   height: "inherit",
                   display: "flex",
                   alignItems: "flex-end",
-                  textAlign: "right"
+                  textAlign: "right",
                 }}
               >
                 <Grid item>
@@ -395,7 +344,7 @@ class Home extends Component {
                       color: "white",
                       width: "50%",
                       padding: "3% 0",
-                      margin: "15px 0 40px 0"
+                      margin: "15px 0 40px 0",
                     }}
                     to={"/schedule"}
                     component={Link}
@@ -413,10 +362,8 @@ class Home extends Component {
               container
               xs={12}
               style={{
-                // height: "70vh",
                 padding: "0 7vw",
-                marginTop: "10%"
-                // backgroundColor: "pink"
+                marginTop: "10%",
               }}
               alignItems="flex-end"
             >
@@ -443,7 +390,7 @@ class Home extends Component {
                     color: "white",
                     width: "45%",
                     padding: "3% 0",
-                    margin: "5% 0 6% 0"
+                    margin: "5% 0 6% 0",
                   }}
                   to={"/results"}
                   component={Link}
@@ -468,21 +415,12 @@ class Home extends Component {
               style={{ padding: "2% 5%" }}
               alignItems="center"
             >
-              <Grid
-                item
-                xs={9}
-                // className={classes.centerAlign}
-                // style={{ justifyContent: "flex-start" }}
-              >
+              <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   UPCOMING GAMES
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={3}
-                // className={classes.centerAlign}
-              >
+              <Grid item xs={3}>
                 <Button
                   fullWidth
                   className={classes.viewButton}
@@ -518,21 +456,12 @@ class Home extends Component {
               style={{ padding: "2% 5%" }}
               alignItems="center"
             >
-              <Grid
-                item
-                xs={9}
-                // className={classes.centerAlign}
-                // style={{ justifyContent: "flex-start" }}
-              >
+              <Grid item xs={9}>
                 <Typography className={classes.subTitle}>
                   CURRENT STANDINGS
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={3}
-                // className={classes.centerAlign}
-              >
+              <Grid item xs={3}>
                 <Button
                   fullWidth
                   className={classes.viewButton}
