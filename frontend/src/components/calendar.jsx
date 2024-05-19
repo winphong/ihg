@@ -36,9 +36,6 @@ export default function Calendar({
   const [currentDay] = React.useState(3);
   const mobileDays = [currentDay - 3, currentDay - 2, currentDay - 1];
 
-  let currentCount = 0;
-  let previousCount = -1;
-
   const dateFormatter = (time) => {
     return dateformat(time, "dd mmm yyyy");
   };
@@ -182,6 +179,8 @@ export default function Calendar({
                                   </Grid>
                                 );
                               }
+
+                              return null;
                             }
                           )}
                       </Grid>
@@ -270,6 +269,8 @@ export default function Calendar({
                                 </Grid>
                               );
                             }
+
+                            return null;
                           }
                         )}
                     </div>

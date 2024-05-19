@@ -19,247 +19,250 @@ const halls = [
   {
     name: "Prince George's Park Hall",
     abbreviation: "PH",
-    director: "Anabelle"
-  }
+    director: "Anabelle",
+  },
 ];
 
-const styles = theme => ({
+const styles = (theme) => ({
   banner: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
+      marginTop: "8%",
     },
     [theme.breakpoints.up("xl")]: {
-      marginTop: "3.7%"
+      marginTop: "3.7%",
     },
     // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      marginTop: "10%",
     },
 
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/about.jpg')",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "10%"
+      marginTop: "10%",
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%",
-      marginTop: "6%"
+      marginTop: "6%",
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "600%",
-      marginTop: "7%"
+      marginTop: "7%",
     },
     // iphone 6/7/8 potrait
-    ["@media (min-width: 370px) and (max-width: 380px)"]: {
-      marginTop: "15%"
+    "@media (min-width: 370px) and (max-width: 380px)": {
+      marginTop: "15%",
     },
     // iphone X potrait
-    ["@media (min-width: 370px) and (max-width: 380px) and (min-height: 810px)"]: {
-      marginTop: "25%"
-    },
+    "@media (min-width: 370px) and (max-width: 380px) and (min-height: 810px)":
+      {
+        marginTop: "25%",
+      },
     // huawei mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "3%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      marginTop: "3%",
     },
     // iphone x landscape
-    ["@media(min-width: 810px) and (max-width: 815px)"]: {
-      marginTop: "6%"
+    "@media(min-width: 810px) and (max-width: 815px)": {
+      marginTop: "6%",
     },
     // ipad portrait
-    ["@media(min-width: 760px) and (max-width: 770px)"]: {
-      marginTop: "15%"
+    "@media(min-width: 760px) and (max-width: 770px)": {
+      marginTop: "15%",
     },
     // ipad pro portrait
-    ["@media(min-width: 1020px) and (max-width: 1030px) and (orientation: portrait)"]: {
-      marginTop: "15%"
-    },
+    "@media(min-width: 1020px) and (max-width: 1030px) and (orientation: portrait)":
+      {
+        marginTop: "15%",
+      },
     textAlign: "center",
     fontSize: "700%",
     color: "#C8B06B",
-    marginTop: "10%"
+    marginTop: "10%",
   },
   titleCaption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "80%"
+      fontSize: "80%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "100%"
+      fontSize: "100%",
     },
     fontSize: "150%",
     color: "white",
     lineHeight: "120%",
     padding: "8% 23%",
-    textAlign: "center"
+    textAlign: "center",
   },
   subtitleContainer: {
     // [theme.breakpoints.only("md")]: {
     //   paddingLeft: "4%"
     // },
     [theme.breakpoints.up("md")]: {
-      paddingLeft: "2%"
-    }
+      paddingLeft: "2%",
+    },
   },
   director: {
     [theme.breakpoints.only("xs")]: {
       marginBottom: "10%",
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.only("sm")]: {
       marginBottom: "5%",
-      fontSize: "400%"
+      fontSize: "400%",
     },
     [theme.breakpoints.up("md")]: {
       paddingBottom: "10%", // align subtitle up with hall logo
       fontSize: "350%",
-      textAlign: "right"
+      textAlign: "right",
     },
     [theme.breakpoints.up("lg")]: {
-      fontSize: "450%"
+      fontSize: "450%",
     },
-    textAlign: "center"
+    textAlign: "center",
   },
   hallOfNus: {
     [theme.breakpoints.only("xs")]: {
       marginBottom: "10%",
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.only("sm")]: {
       marginBottom: "5%",
-      fontSize: "400%"
+      fontSize: "400%",
     },
     [theme.breakpoints.up("md")]: {
       paddingBottom: "15%", // align subtitle up with hall logo
       fontSize: "350%",
-      textAlign: "left"
+      textAlign: "left",
     },
     [theme.breakpoints.up("lg")]: {
-      fontSize: "450%"
+      fontSize: "450%",
     },
-    textAlign: "center"
+    textAlign: "center",
   },
   sportList: {
     [theme.breakpoints.only("xs")]: {
       marginBottom: "10%",
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.only("sm")]: {
       marginBottom: "5%",
-      fontSize: "400%"
+      fontSize: "400%",
     },
     [theme.breakpoints.up("md")]: {
       paddingBottom: "5%", // align subtitle up with hall logo
       fontSize: "350%",
-      textAlign: "left"
+      textAlign: "left",
     },
     [theme.breakpoints.up("lg")]: {
-      fontSize: "450%"
+      fontSize: "450%",
     },
-    textAlign: "center"
+    textAlign: "center",
   },
   border: {
     [theme.breakpoints.down("sm")]: {},
     // paddingLeft: "4%",
-    marginTop: "15%"
+    marginTop: "15%",
   },
   directorImage: {
-    width: "80%"
+    width: "80%",
   },
   crestImage: {
-    width: "60%"
+    width: "60%",
   },
   staticImageCaption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "90%"
+      fontSize: "90%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "130%"
+      fontSize: "130%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "120%"
+      fontSize: "120%",
     },
     fontSize: "120%",
-    color: "#252527"
+    color: "#252527",
   },
   transitionContainer: {
     [theme.breakpoints.only("xs")]: {
-      height: "37vmax"
+      height: "37vmax",
       // display: "flex",
       // justifyContent: "center"
     },
     [theme.breakpoints.only("sm")]: {
-      height: "50vmax"
+      height: "50vmax",
     },
-    ["@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)"]: {
-      height: "40vmax"
-    },
+    "@media(min-width: 360px) and (max-width: 360px) and (min-height: 550px) and (max-height: 600px)":
+      {
+        height: "40vmax",
+      },
     // display: "flex",
     // justifyContent: "center"
-    textAlign: "left"
+    textAlign: "left",
   },
   sportsContainer: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "10%"
+      marginTop: "10%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "5%"
+      marginTop: "5%",
     },
-    marginTop: "15%"
+    marginTop: "15%",
   },
   sports: {
     flexShrink: 0,
     cursor: "pointer",
     fontSize: "120%",
     fontFamily: "TheNextFont",
-    margin: "0 3%"
+    margin: "0 3%",
     // backgroundColor: "pink",
     // padding: "1% 0",
     // minHeight: "auto"
   },
   sportPhoto: {
-    width: "100%"
+    width: "100%",
   },
   sportsInformationContainer: {
     [theme.breakpoints.up("md")]: {
       paddingLeft: "5%",
       display: "flex",
       flexDirection: "column",
-      width: "55%"
+      width: "55%",
     },
     width: "83.33%",
-    position: "absolute"
+    position: "absolute",
   },
   information: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "80%"
+      fontSize: "80%",
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: "120%"
+      fontSize: "120%",
     },
     // ipad portrait
-    ["@media(min-width: 760px) and (max-width: 770px)"]: {
-      fontSize: "120%"
+    "@media(min-width: 760px) and (max-width: 770px)": {
+      fontSize: "120%",
     },
-    ["@media(min-width: 800px) and (max-width: 960px)"]: {
-      fontSize: "100%"
+    "@media(min-width: 800px) and (max-width: 960px)": {
+      fontSize: "100%",
     },
-    color: "#252527"
+    color: "#252527",
     // fontWeight: "bold"
-  }
+  },
 });
 
 class About extends Component {
   state = {
     sports: [],
     selectedSport: {},
-    imgUrl: ""
+    imgUrl: "",
   };
 
   async componentDidMount() {
@@ -271,11 +274,11 @@ class About extends Component {
     this.setState({
       sports,
       selectedSport: sports[0],
-      imgUrl
+      imgUrl,
     });
   }
 
-  handleClick = async sport => {
+  handleClick = async (sport) => {
     const imgUrl = `/sports/${sport.imgUrl}`;
     this.setState({ imgUrl, selectedSport: sport });
   };
@@ -339,6 +342,7 @@ class About extends Component {
                             <img
                               className={classes.crestImage}
                               src={`/${hall.abbreviation}.png`}
+                              alt="crest"
                             />
                             <Typography
                               variant="h1"
@@ -384,6 +388,7 @@ class About extends Component {
                             <img
                               style={{ width: "80%" }}
                               src={`/directors/${hall.director}.png`}
+                              alt="director"
                             />
                             <Typography
                               variant="h1"
@@ -424,7 +429,7 @@ class About extends Component {
                     md={4}
                     className={classes.subtitleContainer}
                     style={{
-                      textAlign: "left"
+                      textAlign: "left",
                     }}
                   >
                     <MediaQuery minWidth={960}>
@@ -443,12 +448,12 @@ class About extends Component {
                       style={{
                         display: "flex",
                         overflowX: "scroll",
-                        paddingBottom: "3%"
+                        paddingBottom: "3%",
                         // backgroundColor: "pink"
                         // height: "4vmax"
                       }}
                     >
-                      {sports.map(sport => {
+                      {sports.map((sport) => {
                         return (
                           <Typography
                             className={classes.sports}
@@ -458,7 +463,7 @@ class About extends Component {
                               color:
                                 selectedSport.name === sport.name
                                   ? "#C8B06B"
-                                  : "#D3DBD9"
+                                  : "#D3DBD9",
                             }}
                           >
                             {sport.name}
@@ -484,10 +489,8 @@ class About extends Component {
                           <img
                             className={classes.sportPhoto}
                             src={this.state.imgUrl}
+                            alt="sport"
                           />
-                          {/* <Typography className={classes.information}>
-                          {selectedSport.name}
-                        </Typography> */}
                           <Typography className={classes.information}>
                             {selectedSport.description}
                           </Typography>
@@ -495,13 +498,6 @@ class About extends Component {
                       </CSSTransition>
                     </TransitionGroup>
                   </Grid>
-                  {/* <Grid
-                item
-                container
-                xs={12}
-                md={5}
-                style={{ backgroundColor: "grey" }}
-              ></Grid> */}
                 </Grid>
               </Grid>
               <Grid item xs={1} />

@@ -12,15 +12,12 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.7.5",
-    "react-cookies": "^0.1.1"
+    "mongoose": "^5.7.5"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "bun app.js",
     "watch": "bun --watch app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "cd frontend && npm install && npm run build && cd .. && npm install && npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC"

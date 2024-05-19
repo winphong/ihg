@@ -1,5 +1,5 @@
 // add or edit sports form
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { withStyles } from "@material-ui/core/styles";
-import { TextField, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import { DateTimePicker } from "@material-ui/pickers";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -28,60 +28,59 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import green from "@material-ui/core/colors/green";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
-import { Redirect } from "react-router-dom";
 
-const styles = theme => ({
+const styles = (theme) => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "20%"
+      marginTop: "20%",
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "11%"
+      marginTop: "11%",
     },
     color: "#C8B06B",
     fontSize: "1000%",
     marginTop: "6%",
-    marginBottom: "3%"
+    marginBottom: "3%",
   },
   container: {
-    textAlign: "center"
+    textAlign: "center",
   },
   label: {
     backgroundColor: "#fafafa",
-    padding: "0 5px"
+    padding: "0 5px",
   },
   formControl: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   buttonText: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     color: "white",
-    padding: "1% 0"
+    padding: "1% 0",
   },
   icon: {
-    fontSize: 20
+    fontSize: 20,
   },
   deleteIcon: {
     [theme.breakpoints.only("sm")]: {
-      marginTop: "45%"
+      marginTop: "45%",
     },
     color: "#C8B06B",
     backgroundColor: "#f0f0f0",
     marginTop: "45%",
-    transform: "scale(1.5)"
+    transform: "scale(1.5)",
   },
   message: {
     display: "flex",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 const sports = [
@@ -101,7 +100,7 @@ const sports = [
   "Tennis",
   "Touch Rugby",
   "Track & Field",
-  "Volleyball"
+  "Volleyball",
 ];
 
 class ScheduleForm extends Component {
@@ -113,7 +112,7 @@ class ScheduleForm extends Component {
       endTime: "",
       venue: "",
       gender: "",
-      stage: ""
+      stage: "",
     },
     checkbox: {
       EH: false,
@@ -122,12 +121,12 @@ class ScheduleForm extends Component {
       KR: false,
       SH: false,
       KE7: false,
-      PGP: false
+      PGP: false,
     },
     halls: [],
     open: false,
     success: false,
-    message: "An error has occured. Please try again!"
+    message: "An error has occured. Please try again!",
   };
 
   async componentDidMount() {
@@ -137,7 +136,7 @@ class ScheduleForm extends Component {
     const checkbox = { ...this.state.checkbox };
     if (id) {
       schedule = (await scheduleService.getSchedule(id)).data;
-      schedule.halls.map(hall => {
+      schedule.halls.forEach((hall) => {
         checkbox[hall.abbreviation] = true;
       });
     }
@@ -156,7 +155,7 @@ class ScheduleForm extends Component {
     this.setState({ checkbox });
   };
 
-  handleDateChange = e => {
+  handleDateChange = (e) => {
     const schedule = { ...this.state.schedule };
     schedule.startTime = e.$d;
     this.setState({ schedule });
@@ -175,7 +174,7 @@ class ScheduleForm extends Component {
     const arr = [];
     for (const key in checkbox) {
       if (checkbox.hasOwnProperty(key)) {
-        if (checkbox[key] == true) arr.push(key);
+        if (checkbox[key] === true) arr.push(key);
       }
     }
     schedule.halls = arr;
@@ -271,7 +270,7 @@ class ScheduleForm extends Component {
                         input={<OutlinedInput />}
                       >
                         <MenuItem value=""></MenuItem>
-                        {sports.map(sport => {
+                        {sports.map((sport) => {
                           return <MenuItem value={sport}>{sport}</MenuItem>;
                         })}
                       </Select>
@@ -285,14 +284,14 @@ class ScheduleForm extends Component {
                     >
                       <FormLabel
                         style={{
-                          textAlign: "left"
+                          textAlign: "left",
                         }}
                         required
                       >
                         Halls
                       </FormLabel>
                       <FormGroup>
-                        {halls.map(hall => {
+                        {halls.map((hall) => {
                           return (
                             <FormControlLabel
                               control={
@@ -359,8 +358,8 @@ class ScheduleForm extends Component {
                             "USC Tennis Court",
                             "USC Track & Grandstand",
                             "UTSH 1",
-                            "UTSH 2"
-                          ].map(venue => {
+                            "UTSH 2",
+                          ].map((venue) => {
                             return <MenuItem value={venue}>{venue}</MenuItem>;
                           })}
                         </Select>
@@ -388,7 +387,7 @@ class ScheduleForm extends Component {
                           value={schedule.gender}
                           onChange={this.handleRadioChange}
                         >
-                          {["Male", "Female", "Mixed"].map(gender => {
+                          {["Male", "Female", "Mixed"].map((gender) => {
                             return (
                               <FormControlLabel
                                 value={gender}
@@ -426,8 +425,8 @@ class ScheduleForm extends Component {
                           "Semi 2",
                           "Finals",
                           "Carnival",
-                          "Playoffs"
-                        ].map(stage => {
+                          "Playoffs",
+                        ].map((stage) => {
                           return <MenuItem value={stage}>{stage}</MenuItem>;
                         })}
                       </Select>
@@ -440,7 +439,7 @@ class ScheduleForm extends Component {
                       variant="contained"
                       onClick={this.handleSubmit}
                       style={{
-                        backgroundColor: "#C8B06B"
+                        backgroundColor: "#C8B06B",
                       }}
                     >
                       <Typography variant="h1" className={classes.buttonText}>
@@ -458,7 +457,7 @@ class ScheduleForm extends Component {
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "left"
+            horizontal: "left",
           }}
           open={this.state.open}
           autoHideDuration={3000}
@@ -466,7 +465,7 @@ class ScheduleForm extends Component {
         >
           <SnackbarContent
             style={{
-              backgroundColor: success ? green[600] : "#d32f2f"
+              backgroundColor: success ? green[600] : "#d32f2f",
             }}
             message={
               <span id="client-snackbar" className={classes.message}>
@@ -484,7 +483,7 @@ class ScheduleForm extends Component {
                 ) : (
                   <ErrorIcon className={classes.icon} />
                 )}
-              </IconButton>
+              </IconButton>,
             ]}
           />
         </Snackbar>

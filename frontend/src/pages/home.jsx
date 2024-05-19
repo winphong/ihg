@@ -27,7 +27,7 @@ const styles = (theme) => ({
     [theme.breakpoints.up("xl")]: {
       marginTop: "3.7%",
     },
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+    "@media(min-width: 565px) and (max-width: 570px)": {
       marginTop: "10%",
     },
     height: "45vmax",
@@ -61,10 +61,10 @@ const styles = (theme) => ({
     [theme.breakpoints.only("lg")]: {
       fontSize: "800%",
     },
-    ["@media(max-width: 320px)"]: {
+    "@media(max-width: 320px)": {
       fontSize: "280%",
     },
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
+    "@media(min-width: 565px) and (max-width: 570px)": {
       fontSize: "400%",
     },
     fontSize: "1000%",
@@ -151,7 +151,7 @@ const styles = (theme) => ({
       fontSize: "150%",
     },
     fontFamily: "TheNextFont",
-    ["@media(max-width: 325px)"]: {
+    "@media(max-width: 325px)": {
       fontSize: "50%",
     },
   },
@@ -295,6 +295,7 @@ class Home extends Component {
                               </React.Fragment>
                             );
                           }
+                          return null;
                         })}
                       </Grid>
                     </Grid>

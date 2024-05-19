@@ -82,7 +82,12 @@ export default function Footer() {
       <footer className={classes.footer}>
         <Grid container>
           <Grid item xs={2} md={1}>
-            <img src="./Logo.png" width="100%" className={classes.logo} />
+            <img
+              src="./Logo.png"
+              width="100%"
+              className={classes.logo}
+              alt="ihg-logo"
+            />
           </Grid>
           <Grid item xs={5} md={4}>
             <Typography className={classes.title}>

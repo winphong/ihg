@@ -3,7 +3,7 @@ import http from "./httpService";
 const apiEndpoint = `/schedule`;
 
 function getUrl(pathParam) {
-  return `${apiEndpoint}/${pathParam}/`;
+  return `${apiEndpoint}/${pathParam}`;
 }
 
 function getSchedule(id) {
@@ -15,11 +15,11 @@ function getUpcomingSchedules(date) {
 }
 
 function getAscendingSchedules() {
-  return http.get(getUrl("/asc"));
+  return http.get(getUrl("asc"));
 }
 
 function getDescendingSchedulesForAdmin() {
-  return http.get(getUrl("/admin"));
+  return http.get(getUrl("admin"));
 }
 
 function getDescendingSchedules() {
@@ -51,5 +51,5 @@ export default {
   createSchedule,
   updateScore,
   updateSchedule,
-  deleteSchedule
+  deleteSchedule,
 };

@@ -13,50 +13,50 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import IconButton from "@material-ui/core/IconButton";
 import ErrorIcon from "@material-ui/icons/Error";
 
-const styles = theme => ({
+const styles = (theme) => ({
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "300%",
-      marginTop: "20%"
+      marginTop: "20%",
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "500%",
-      marginTop: "11%"
+      marginTop: "11%",
     },
     color: "#C8B06B",
     fontSize: "1000%",
     marginTop: "6%",
-    marginBottom: "3%"
+    marginBottom: "3%",
   },
   container: {
     [theme.breakpoints.down("sm")]: {
-      height: "60vh"
+      height: "60vh",
     },
     height: "70vh",
-    textAlign: "center"
+    textAlign: "center",
   },
   formControl: {
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   buttonText: {
     [theme.breakpoints.down("sm")]: {
-      fontSize: "200%"
+      fontSize: "200%",
     },
     [theme.breakpoints.up("md")]: {
-      fontSize: "250%"
+      fontSize: "250%",
     },
     color: "white",
-    padding: "1% 0"
-  }
+    padding: "1% 0",
+  },
 });
 
 class Login extends Component {
   state = {
     credentials: {
       username: "",
-      password: ""
-    }
+      password: "",
+    },
   };
 
   async componentDidMount() {}
@@ -67,7 +67,7 @@ class Login extends Component {
     this.setState({ credentials });
   };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await miscService.login(this.state.credentials);
@@ -95,7 +95,6 @@ class Login extends Component {
   render() {
     const { classes } = this.props;
     const { username, password } = this.state.credentials;
-    const { success } = this.state;
     if (miscService.getCurrentAdmin()) return <Redirect to="/" />;
 
     return (
@@ -144,7 +143,7 @@ class Login extends Component {
                       variant="contained"
                       onClick={this.handleSubmit}
                       style={{
-                        backgroundColor: "#C8B06B"
+                        backgroundColor: "#C8B06B",
                       }}
                     >
                       <Typography variant="h1" className={classes.buttonText}>
@@ -162,7 +161,7 @@ class Login extends Component {
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "left"
+            horizontal: "left",
           }}
           open={this.state.open}
           autoHideDuration={3000}
@@ -170,7 +169,7 @@ class Login extends Component {
         >
           <SnackbarContent
             style={{
-              backgroundColor: "#d32f2f"
+              backgroundColor: "#d32f2f",
             }}
             message={
               <span id="client-snackbar" className={classes.message}>
@@ -184,7 +183,7 @@ class Login extends Component {
                 onClick={this.handleClose}
               >
                 <ErrorIcon className={classes.icon} />
-              </IconButton>
+              </IconButton>,
             ]}
           />
         </Snackbar>

@@ -6,67 +6,67 @@ import miscService from "../services/miscService";
 import { withStyles } from "@material-ui/core/styles";
 import { CSSTransition } from "react-transition-group";
 
-const styles = theme => ({
+const styles = (theme) => ({
   banner: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
+      marginTop: "8%",
     },
     [theme.breakpoints.up("xl")]: {
-      marginTop: "3.7%"
+      marginTop: "3.7%",
     },
     // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      marginTop: "10%",
     },
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/gallery.jpg')",
-    backgroundSize: "cover"
+    backgroundSize: "cover",
   },
   title: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "300%"
+      fontSize: "300%",
       // marginTop: "25%"
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "420%"
+      fontSize: "420%",
       // marginTop: "10%"
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "600%"
+      fontSize: "600%",
     },
-    ["@media(orientation: portrait)"]: {
-      marginTop: "10%"
+    "@media(orientation: portrait)": {
+      marginTop: "10%",
     },
     marginTop: "4%",
     lineHeight: "120%",
-    fontSize: "700%"
+    fontSize: "700%",
   },
   caption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "80%"
+      fontSize: "80%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "110%"
+      fontSize: "110%",
     },
     // iphone x potrait
-    ["@media (min-width: 370px) and (max-width: 380px)"]: {
-      marginBottom: "-30%"
+    "@media (min-width: 370px) and (max-width: 380px)": {
+      marginBottom: "-30%",
     },
     color: "white",
-    fontSize: "200%"
+    fontSize: "200%",
   },
   subcaption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "80%"
+      fontSize: "80%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "110%"
+      fontSize: "110%",
     },
-    fontSize: "200%"
+    fontSize: "200%",
   },
   // mainPhotoSuperContainer: {
   //   [theme.breakpoints.only("xs")]: {
@@ -101,43 +101,45 @@ const styles = theme => ({
   mainPhoto: {
     [theme.breakpoints.only("xs")]: {
       width: "83%",
-      marginLeft: "-2%"
+      marginLeft: "-2%",
     },
     [theme.breakpoints.only("sm")]: {
-      width: "55%"
+      width: "55%",
     },
     [theme.breakpoints.only("md")]: {
-      width: "220px"
+      width: "220px",
     },
     [theme.breakpoints.up("md")]: {
-      width: "75%"
+      width: "75%",
     },
     [theme.breakpoints.only("md")]: {
-      marginLeft: "-20%"
+      marginLeft: "-20%",
     },
     [theme.breakpoints.up("lg")]: {
-      marginLeft: "-16%"
+      marginLeft: "-16%",
     },
     // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      width: "55%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      width: "55%",
     },
     // iphone x potrait
-    ["@media (min-width: 370px) and (max-width: 380px)"]: {
+    "@media (min-width: 370px) and (max-width: 380px)": {
       width: "90%",
-      marginLeft: "-7%"
+      marginLeft: "-7%",
     },
     // iphone 6/7/8
-    ["@media (min-width: 370px) and (max-width: 380px) and (max-height: 668px)"]: {
-      width: "90%",
-      marginLeft: "5%"
-    },
+    "@media (min-width: 370px) and (max-width: 380px) and (max-height: 668px)":
+      {
+        width: "90%",
+        marginLeft: "5%",
+      },
     // ipad portrait
-    ["@media (min-width: 765px) and (max-width: 770px) and (max-height: 1024px)"]: {
-      width: "80%",
-      marginLeft: "-11%"
-    },
-    objectFit: "cover"
+    "@media (min-width: 765px) and (max-width: 770px) and (max-height: 1024px)":
+      {
+        width: "80%",
+        marginLeft: "-11%",
+      },
+    objectFit: "cover",
     // width: "100%"
   },
   photosContainer: {
@@ -146,55 +148,54 @@ const styles = theme => ({
     // backgroundColor: "pink",
     paddingTop: "3%",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   photos: {
     [theme.breakpoints.only("sm")]: {
       width: "18vmax",
-      height: "18vmax"
+      height: "18vmax",
     },
     [theme.breakpoints.only("md")]: {
       width: "210px",
-      height: "210px"
+      height: "210px",
     },
     [theme.breakpoints.up("lg")]: {
       width: "19vmax",
-      height: "19vmax"
+      height: "19vmax",
     },
     width: "12vmax",
     height: "12vmax",
-    objectFit: "cover"
+    objectFit: "cover",
   },
   photoCaption: {
     [theme.breakpoints.only("xs")]: {
-      fontSize: "60%"
+      fontSize: "60%",
     },
     [theme.breakpoints.only("sm")]: {
-      fontSize: "70%"
+      fontSize: "70%",
     },
     fontSize: "120%",
     paddingRight: "15px",
-    display: "flex"
+    display: "flex",
   },
   photoCaptionContainer: {
     [theme.breakpoints.down("sm")]: {
-      height: "100px"
+      height: "100px",
     },
     [theme.breakpoints.only("md")]: {
-      height: "250px"
+      height: "250px",
     },
     [theme.breakpoints.up("lg")]: {},
     marginRight: "-15px",
     height: "300px",
-    overflowY: "auto",
     display: "flex",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });
 
 class Gallery extends Component {
   state = {
-    photos: []
+    photos: [],
   };
 
   async componentDidMount() {
@@ -238,7 +239,7 @@ class Gallery extends Component {
                 item
                 container
                 style={{
-                  textAlign: "center"
+                  textAlign: "center",
                 }}
                 xs={10}
                 md={8}
@@ -252,7 +253,7 @@ class Gallery extends Component {
                     <Link
                       href="https://www.instagram.com/ihgofficial"
                       style={{
-                        color: "#C8B06B"
+                        color: "#C8B06B",
                       }}
                     >
                       @IHGOFFICIAL
@@ -273,11 +274,12 @@ class Gallery extends Component {
                         src={photos[0].media_url}
                         className={classes.mainPhoto}
                         style={{
-                          cursor: "pointer"
+                          cursor: "pointer",
                         }}
                         onClick={() => {
                           window.location = photos[0].permalink;
                         }}
+                        alt="media"
                       />
                     )}
                   </Grid>
@@ -317,7 +319,7 @@ class Gallery extends Component {
                         <Typography
                           className={classes.photoCaption}
                           style={{
-                            color: "white"
+                            color: "white",
                           }}
                         >
                           {photos.length > 0 && photos[0].caption}
@@ -338,7 +340,7 @@ class Gallery extends Component {
               md={8}
               style={{ minHeight: "50vmax", zIndex: 1 }}
             >
-              {photos.splice(1, 9).map(photo => {
+              {photos.splice(1, 9).map((photo) => {
                 return (
                   <Grid item xs={4} md={4} className={classes.photosContainer}>
                     <img
@@ -346,11 +348,12 @@ class Gallery extends Component {
                       src={photo.media_url}
                       className={classes.photos}
                       style={{
-                        cursor: "pointer"
+                        cursor: "pointer",
                       }}
                       onClick={() => {
                         window.location = photo.permalink;
                       }}
+                      alt="media"
                     />
                   </Grid>
                 );

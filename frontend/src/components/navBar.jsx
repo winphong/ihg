@@ -150,7 +150,7 @@ export default function NavBar({ pathname, handleTabChange }) {
           component={Link}
           style={{ backgroundColor: "transparent" }}
         >
-          <img src="/Logo.png" className={classes.logoSize} />
+          <img src="/Logo.png" className={classes.logoSize} alt="logo" />
         </IconButton>
         {/* Laptop */}
         <MediaQuery minWidth={960}>

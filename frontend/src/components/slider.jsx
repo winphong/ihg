@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "../components/card";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
