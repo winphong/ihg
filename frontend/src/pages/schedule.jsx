@@ -12,93 +12,76 @@ import IconButton from "@material-ui/core/IconButton";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
 import { Link } from "react-router-dom";
 
-const styles = theme => ({
+const styles = (theme) => ({
   banner: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "8%"
+      marginTop: "8%",
     },
     [theme.breakpoints.up("xl")]: {
-      marginTop: "3.7%"
+      marginTop: "3.7%",
     },
     // mate 10 landscape
-    ["@media(min-width: 565px) and (max-width: 570px)"]: {
-      marginTop: "10%"
+    "@media(min-width: 565px) and (max-width: 570px)": {
+      marginTop: "10%",
     },
     height: "45vmax",
     marginTop: "4%",
     backgroundImage: "url('./headers/schedule.jpg')",
     backgroundSize: "cover",
-    marginBottom: "2%"
+    marginBottom: "2%",
   },
   title: {
     [theme.breakpoints.only("xs")]: {
       fontSize: "280%",
-      marginTop: "6%"
+      marginTop: "6%",
     },
     [theme.breakpoints.only("sm")]: {
       fontSize: "420%",
-      marginTop: "4%"
+      marginTop: "4%",
     },
     [theme.breakpoints.only("md")]: {
-      fontSize: "600%"
+      fontSize: "600%",
     },
-    ["@media(min-width: 315px) and (max-width: 325px)"]: {
-      fontSize: "245%"
+    "@media(min-width: 315px) and (max-width: 325px)": {
+      fontSize: "245%",
     },
     color: "#C8B06B",
     fontSize: "700%",
-    marginTop: "4%"
+    marginTop: "4%",
   },
   buttonColumn: {
     [theme.breakpoints.only("xs")]: {
-      marginTop: "15%"
+      marginTop: "15%",
     },
     [theme.breakpoints.only("sm")]: {
-      marginTop: "10%"
+      marginTop: "10%",
     },
-    marginTop: "6%"
+    marginTop: "6%",
   },
   container: {
-    textAlign: "center"
+    textAlign: "center",
   },
   calendar: {
-    [theme.breakpoints.up("sm")]: {
-      // padding: "0% 2%"
-    },
     [theme.breakpoints.down("sm")]: {
-      margin: "0 1%"
-    }
+      margin: "0 1%",
+    },
   },
   slider: {
-    [theme.breakpoints.only("xs")]: {},
-    // [theme.breakpoints.only("sm")]: {
-    //   height: "40vmax"
-    // },
-    // [theme.breakpoints.only("md")]: {
-    //   height: "40vmax"
-    // },
-    [theme.breakpoints.only("md")]: {
-      // margin: "3% 0 5% 0"
-    },
     [theme.breakpoints.up("lg")]: {
       margin: "5% 0 3% 0",
-      height: "40vmax"
-    }
-    // [theme.breakpoints.up("sm")]: {
-    //   margin: "5% 0",
-    //   height: "20vmax"
-    // },
+      height: "40vmax",
+    },
   },
   icon: {
     [theme.breakpoints.down("xs")]: {
-      display: "none"
+      display: "none",
     },
     color: "white",
-    transform: "scale(1.5)"
-  }
+    transform: "scale(1.5)",
+  },
 });
 
 class Schedule extends Component {
@@ -108,42 +91,36 @@ class Schedule extends Component {
     redirect: false,
     globalEndDate: "",
     weekNum: 0,
-    upcomingSchedules: []
+    upcomingSchedules: [],
   };
 
   async componentDidMount() {
     window.scrollTo({ top: 0 });
     this.props.handleTabChange(this.props.location.pathname);
     const { data: schedules } = await scheduleService.getAscendingSchedules();
-    const {
-      data: upcomingSchedules
-    } = await scheduleService.getUpcomingSchedules(new Date());
+    const { data: upcomingSchedules } =
+      await scheduleService.getUpcomingSchedules(new Date());
     const admin = await miscService.getCurrentAdmin();
     const isAdmin = admin ? true : false;
     this.setState({ schedules, isAdmin, upcomingSchedules });
   }
 
-  handleUpdateGlobalEndDate = globalEndDate => {
+  handleUpdateGlobalEndDate = (globalEndDate) => {
     this.setState({ globalEndDate });
   };
 
-  handleUpdateWeeknum = weekNum => {
+  handleUpdateWeeknum = (weekNum) => {
     this.setState({ weekNum: weekNum });
   };
 
-  df = time => {
+  df = (time) => {
     return dateformat(time, "dd mmm yyyy");
   };
 
   render() {
     const { classes } = this.props;
-    const {
-      schedules,
-      isAdmin,
-      globalEndDate,
-      weekNum,
-      upcomingSchedules
-    } = this.state;
+    const { schedules, isAdmin, globalEndDate, weekNum, upcomingSchedules } =
+      this.state;
 
     return (
       <Grid container className={classes.container}>
@@ -173,9 +150,6 @@ class Schedule extends Component {
                     )}
                   </Typography>
                 </Grid>
-                {/* <Grid item xs={1} md={1} className={classes.buttonColumn}>
-                  
-                </Grid> */}
               </Grid>
               <Grid item xs={12} className={classes.slider}>
                 <CSSTransition
@@ -186,16 +160,7 @@ class Schedule extends Component {
                 >
                   <div>
                     {upcomingSchedules.length > 0 && (
-                      <Slider
-                        // schedules={schedules.filter(e => {
-                        //   return (
-                        //     this.df(e.startTime) ===
-                        //     this.df(new Date("6 Jan 2020"))
-                        //     // this.df(new Date())
-                        //   );
-                        // })}
-                        upcomingSchedules={upcomingSchedules}
-                      />
+                      <Slider upcomingSchedules={upcomingSchedules} />
                     )}
                   </div>
                 </CSSTransition>

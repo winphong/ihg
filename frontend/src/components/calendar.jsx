@@ -11,7 +11,6 @@ import { useMediaQuery } from "react-responsive";
 import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography";
 
-const arrayOfMaxSchedulePerWeek = [];
 const startDaysOfWeek = [
   new Date("5 Jan 2020"),
   new Date("12 Jan 2020"),
@@ -74,33 +73,6 @@ export default function Calendar({
   let start = today;
   let end = new Date(start);
   end.setDate(end.getDate() + 7);
-
-  // height calculation
-  let currentDate = "";
-  let count = 0;
-  let max = 0;
-
-  if (arrayOfMaxSchedulePerWeek.length === 0) {
-    schedules.map((schedule, index) => {
-      if (currentDate !== dateformat(schedule.startTime, "ddmmm")) {
-        currentDate = dateformat(schedule.startTime, "ddmmm");
-        if (count > max) max = count;
-
-        if (new Date(schedule.startTime) >= end) {
-          start.setDate(start.getDate() + 7);
-          end.setDate(end.getDate() + 7);
-          arrayOfMaxSchedulePerWeek.push(max);
-          max = 0;
-        }
-        count = 0;
-      }
-      count++;
-      if (index === schedules.length - 1) {
-        if (count > max) max = count;
-        arrayOfMaxSchedulePerWeek.push(max);
-      }
-    });
-  }
 
   function handleBack() {
     // handleUpdateWeeknum(weekNum - 1);
@@ -184,18 +156,7 @@ export default function Calendar({
       </Grid>
 
       <MediaQuery minWidth={960}>
-        <Grid
-          item
-          xs={12}
-          className={classes.schedulesTableContainer}
-          style={{
-            height: `${
-              arrayOfMaxSchedulePerWeek[weekNum] *
-                (md ? 15 : mdplus ? 14 : xlplus ? 10 : 12) +
-              4
-            }vw`,
-          }}
-        >
+        <Grid item xs={12} className={classes.schedulesTableContainer}>
           <Grid container>
             {(notMobile ? days : mobileDays).map((day, index) => {
               if (index !== 0) {
@@ -250,7 +211,7 @@ export default function Calendar({
                       timeout={400}
                       classNames="fade"
                     >
-                      <Grid container xs={12} className={classes.column}>
+                      <Grid container className={classes.column}>
                         {schedules.length > 0 &&
                           schedules.map((schedule) => {
                             const columnTime = new Date(schedule.startTime);
@@ -260,7 +221,7 @@ export default function Calendar({
                             ) {
                               currentCount += 1;
                               return (
-                                <Grid item xs={12}>
+                                <Grid item>
                                   <ScheduleBox
                                     schedule={schedule}
                                     isAdmin={isAdmin}
@@ -286,10 +247,8 @@ export default function Calendar({
       <MediaQuery maxWidth={959}>
         <div
           style={{
-            height: "100vmax",
             display: "flex",
             overflowX: "scroll",
-            overflowY: "scroll",
           }}
         >
           {/* <Grid container> */}
@@ -369,20 +328,8 @@ export default function Calendar({
                             currentCount += 1;
                             return (
                               <Grid container key={schedule._id}>
-                                <Grid item xs={1}>
-                                  <div
-                                    className={classes.border}
-                                    style={{
-                                      borderLeft:
-                                        index === 0 ? 0 : "1px solid #C8B06B",
-                                      marginLeft: "100%",
-                                      height: isIpad ? "8vmax" : "10vmax",
-                                      marginTop: isIpad ? "300%" : "350%",
-                                    }}
-                                  />
-                                </Grid>
                                 <Grid item xs={10}>
-                                  <div style={{ width: "110%" }}>
+                                  <div>
                                     <ScheduleBox
                                       schedule={schedule}
                                       isAdmin={isAdmin}
@@ -392,18 +339,6 @@ export default function Calendar({
                                       index={index}
                                     />
                                   </div>
-                                </Grid>
-                                <Grid item xs={1}>
-                                  <div
-                                    className={classes.border}
-                                    style={{
-                                      borderRight:
-                                        index === 6 ? 0 : "1px solid #C8B06B",
-                                      marginLeft: "200%",
-                                      height: isIpad ? "8vmax" : "10vmax",
-                                      marginTop: isIpad ? "300%" : "350%",
-                                    }}
-                                  />
                                 </Grid>
                               </Grid>
                             );
@@ -461,8 +396,10 @@ const styles = (theme) => ({
     fontStyle: "italic",
   },
   column: {
-    position: "absolute",
-    width: `${(10 / 12 / 7) * 100}%`,
+    display: "flex",
+    flexDirection: "column",
+    // position: "absolute",
+    width: `100%`,
   },
   week: {
     [theme.breakpoints.up("sm")]: {

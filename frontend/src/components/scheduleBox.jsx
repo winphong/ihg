@@ -4,36 +4,26 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import dateformat from "dateformat";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { useTheme } from "@material-ui/core/styles";
+import BoxDivider from "./BoxDivider";
 
-export default function ScheduleBox({
-  schedule,
-  isAdmin,
-  printLeftBorder,
-  index
-}) {
+export default function ScheduleBox({ schedule, isAdmin }) {
   const classes = useStyles();
-  const theme = useTheme();
   const size = schedule.halls.length;
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <React.Fragment>
-      {!isMobile && (
-        <div
-          style={{
-            borderLeft: printLeftBorder
-              ? 0
-              : index === 0
-              ? 0
-              : "1px solid #C8B06B",
-            borderRight: index === 6 ? 0 : "1px solid #C8B06B"
-          }}
-          className={classes.border}
-        />
-      )}
-      <Grid container className={classes.container}>
+    <Grid container className={classes.container}>
+      <BoxDivider />
+      <div
+        style={{
+          padding: "15%",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          width: "100%",
+        }}
+      >
         <Grid item container md={12}>
+          {/* Colour Bar */}
           <Grid item container md={12}>
             {schedule.halls.length > 0 &&
               schedule.halls.map(({ colourCode }) => {
@@ -48,13 +38,13 @@ export default function ScheduleBox({
                       border:
                         colourCode === "#ffffff"
                           ? "0.05px solid #252527"
-                          : `0.05px solid ${colourCode}`
+                          : `0.05px solid ${colourCode}`,
                     }}
                   />
                 );
               })}
             {schedule.halls.length === 0 &&
-              [0, 1].map(key => {
+              [0, 1].map((key) => {
                 return (
                   <Grid
                     key={key}
@@ -62,7 +52,7 @@ export default function ScheduleBox({
                     xs={true}
                     className={classes.bar}
                     style={{
-                      backgroundColor: "#C8B06B"
+                      backgroundColor: "#C8B06B",
                     }}
                   />
                 );
@@ -89,7 +79,7 @@ export default function ScheduleBox({
                         <Typography
                           style={{
                             fontSize: "100%",
-                            color: "#958F87"
+                            color: "#958F87",
                           }}
                         >
                           vs
@@ -109,7 +99,7 @@ export default function ScheduleBox({
                     style={{
                       fontSize: "100%",
                       color: "#958F87",
-                      fontStyle: "italic"
+                      fontStyle: "italic",
                     }}
                   >
                     vs
@@ -147,7 +137,7 @@ export default function ScheduleBox({
                         className={classes.hallCarnival}
                         style={{
                           marginLeft:
-                            index === 6 ? "-46%" : index !== 5 ? "46%" : ""
+                            index === 6 ? "-46%" : index !== 5 ? "46%" : "",
                         }}
                       >
                         {hall.abbreviation}
@@ -174,16 +164,16 @@ export default function ScheduleBox({
               style={{
                 color: "#0074d9",
                 cursor: "pointer",
-                textDecoration: "none"
+                textDecoration: "none",
               }}
               to={{
-                pathname: `/admin/schedule/${schedule._id}`
+                pathname: `/admin/schedule/${schedule._id}`,
               }}
             >
               <Typography
                 className={classes.sport}
                 style={{
-                  color: "#0074d9"
+                  color: "#0074d9",
                 }}
               >
                 {schedule.sport}{" "}
@@ -195,99 +185,68 @@ export default function ScheduleBox({
           )}
           <Typography className={classes.sport}>{schedule.stage}</Typography>
           <Typography className={classes.information}>
-            {dateformat(new Date(schedule.startTime), "HHMM'h'")},{" "}
+            {dateformat(new Date(schedule.startTime), "dd mmm yy, HHMM'h'")}
+          </Typography>
+          <Typography className={classes.information}>
             {schedule.venue}
           </Typography>
         </Grid>
-      </Grid>
-    </React.Fragment>
+      </div>
+    </Grid>
   );
 }
 
-const styles = theme => ({
+const styles = (theme) => ({
   container: {
     [theme.breakpoints.only("xs")]: {
-      width: "50vmin",
-      transform: "scale(0.9)"
-    },
-    [theme.breakpoints.up("sm")]: {
-      marginTop: "5%"
+      width: "200px",
     },
     [theme.breakpoints.only("sm")]: {
       transform: "scale(0.9)",
-      width: "inherit"
-      // borderLeft: "2.5px solid #C8B06B",
-      // borderRight: "2.5px solid #C8B06B"
+      width: "inherit",
     },
+    height: "160px",
     textAlign: "center",
-    padding: "10%",
-    // backgroundColor: "pink",
     position: "relative",
-    zIndex: 2
-  },
-  border: {
-    [theme.breakpoints.up("md")]: {
-      position: "absolute",
-      height: "5.5vmax",
-      marginTop: "35%",
-      width: "100%"
-    },
-    [theme.breakpoints.down("md")]: {
-      marginTop: "40%",
-      height: "7vmax"
-    },
-    [theme.breakpoints.up("xl")]: {
-      height: "4.5vmax"
-    },
-    ["@media(min-width: 1501px)"]: {
-      marginTop: "30%",
-      height: "4.5vmax"
-    },
-    ["@media(min-width: 1760px)"]: {
-      marginTop: "25%"
-    },
-    ["@media(min-width: 1980px)"]: {
-      height: "4vmax"
-    }
+    zIndex: 2,
   },
   bar: {
-    height: "8px"
+    height: "8px",
   },
   hallContainer: {
-    minHeight: "50px"
+    minHeight: "50px",
   },
   hallDuo: {
     [theme.breakpoints.down("md")]: {
-      fontSize: "100%"
+      fontSize: "100%",
     },
     fontWeight: "bold",
     fontSize: "150%",
-    color: "black"
+    color: "black",
   },
   hallCarnival: {
     [theme.breakpoints.down("md")]: {},
     fontWeight: "bold",
     fontSize: "100%",
-    color: "black"
+    color: "black",
   },
   sport: {
     [theme.breakpoints.only("md")]: {
-      fontSize: "95%"
+      fontSize: "95%",
     },
     fontWeight: "bold",
     fontSize: "110%",
     lineHeight: "120%",
-    color: "#958F87"
+    color: "#958F87",
   },
   information: {
     [theme.breakpoints.only("md")]: {
-      fontSize: "80%"
+      fontSize: "80%",
     },
     fontStyle: "italic",
     fontSize: "90%",
     color: "#958F87",
-    minHeight: "37px"
-  }
+  },
 });
 
 const useStyles = makeStyles(styles);
