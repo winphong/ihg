@@ -18,5 +18,15 @@
       ]
     }
   ],
-  "buildCommand": "npm run vercel-build"
+  "buildCommand": "npm run vercel-build",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/app.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/frontend/build/$1"
+    }
+  ]
 }

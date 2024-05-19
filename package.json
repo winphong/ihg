@@ -20,7 +20,7 @@
     "start": "bun app.js",
     "watch": "bun --watch app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "cd frontend && npm install && npm run build && cd .. && npm install && npm start"
+    "vercel-build": "cd frontend && npm install && npm run build && cd .. && vercel build"
   },
   "author": "",
   "license": "ISC"
