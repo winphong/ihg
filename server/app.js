@@ -8,13 +8,13 @@ require("./startup/cors")(app);
 require("./startup/db")();
 require("./startup/routes")(app);
 
-app.use(express.static(path.join(__dirname, "frontend", "public")));
+// app.use(express.static(path.join(__dirname, "frontend", "public")));
 
 const port = process.env.PORT || 3000;
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "public", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "frontend", "public", "index.html"));
+// });
 
 const server = app.listen(port, () => {
   // winston.info(`Listening on port ${port}...`);
