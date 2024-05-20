@@ -10,7 +10,7 @@ require("./startup/routes")(app);
 
 app.use(express.static(path.join(__dirname, "frontend", "public")));
 
-const port = process.env.PORT || config.get("port");
+const port = process.env.PORT || 3000;
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "public", "index.html"));
