@@ -39,6 +39,8 @@ const theme = createMuiTheme({
   },
 });
 
+const tele = window.Telegram.WebApp;
+
 class App extends Component {
   state = {
     pathname: window.location.pathname,
@@ -48,9 +50,9 @@ class App extends Component {
     this.setState({ pathname });
   };
 
-  // async componentDidMount() {
-  //   await miscService.updateTraffic();
-  // }
+  async componentDidMount() {
+    tele.ready();
+  }
 
   render() {
     // if (this.detectmobile() === true)
