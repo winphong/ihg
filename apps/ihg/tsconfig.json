@@ -20,7 +20,13 @@
         "name": "next"
       }
     ],
-    "types": ["jest", "node"]
+    "types": ["jest", "node", "vite/client"],
+    "paths": {
+      "@/entity/*": ["./apps/ihg/src/server/entity/*"],
+      "@/lib/*": ["./apps/ihg/src/server/lib/*"],
+      "@/services/*": ["./apps/ihg/src/server/services/*"],
+      "@/components/*": ["./apps/ihg/src/components/*"]
+    }
   },
   "include": [
     "**/*.ts",
@@ -29,7 +35,8 @@
     "**/*.jsx",
     "../../apps/ihg/.next/types/**/*.ts",
     "../../dist/apps/ihg/.next/types/**/*.ts",
-    "next-env.d.ts"
+    "next-env.d.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "jest.config.ts", "**/*.spec.ts", "**/*.test.ts"]
 }
