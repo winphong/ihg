@@ -7,6 +7,15 @@ At root folder, run `npm i` to install the dependencies. `cd` to **/frontend** a
 ### Running the project
 At root folder, run `nodemon`. Using another terminal, `cd` to **/frontend** and run `npm start`
 
+### Running the Go API (new backend, replacing `server/`)
+1. Copy `.env.example` to `.env` and fill in `DB_URL` (and `PRIVATE_KEY` for admin auth) - see that file for details on each variable.
+2. At root folder, run:
+   ```
+   go run ./cmd/server
+   ```
+   This starts the same handler Vercel runs in production on `http://localhost:3900` (override with a `PORT` env var).
+3. Using another terminal, `cd` to **/frontend** and run `npm start`, pointing `REACT_APP_API_URL` at `http://localhost:3900/api`.
+
 ### Setting up database
 1. Go to https://www.mongodb.com/download-center/community to download (MSI) & install MongoDB Community Server. 
 2. For installation setup, make sure to check the *Install MongoDB as A Service* box and select *Run service as Network Service User*.
