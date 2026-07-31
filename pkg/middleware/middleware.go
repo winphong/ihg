@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 type contextKey string

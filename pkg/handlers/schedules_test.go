@@ -11,7 +11,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 func TestParseJSDate(t *testing.T) {

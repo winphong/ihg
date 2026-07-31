@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"sync"
 
-	"ihg/api/pkg/db"
-	"ihg/api/pkg/handlers"
-	"ihg/api/pkg/middleware"
+	"ihg/pkg/db"
+	"ihg/pkg/handlers"
+	"ihg/pkg/middleware"
 )
 
 var (

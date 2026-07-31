@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 // Hardcoded CNY term-break window from the AY19/20 schedule logic in

@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-const apiEndpoint = `/hall`;
+const apiEndpoint = `/halls`;
 
 function getAllHalls() {
   return http.get(apiEndpoint);

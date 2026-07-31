@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"golang.org/x/crypto/bcrypt"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 // Login mirrors POST /api/admin: returns the raw JWT string as the body

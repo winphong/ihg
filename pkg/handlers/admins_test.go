@@ -12,7 +12,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 	"golang.org/x/crypto/bcrypt"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 func TestLogin(t *testing.T) {

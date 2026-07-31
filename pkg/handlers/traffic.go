@@ -6,7 +6,7 @@ import (
 
 	"go.mongodb.org/mongo-driver/v2/bson"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 // GetTraffic mirrors GET /api/traffic.

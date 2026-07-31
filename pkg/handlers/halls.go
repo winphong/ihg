@@ -7,7 +7,7 @@ import (
 	"go.mongodb.org/mongo-driver/v2/bson"
 	"go.mongodb.org/mongo-driver/v2/mongo/options"
 
-	"ihg/api/pkg/models"
+	"ihg/pkg/models"
 )
 
 // GetHalls mirrors GET /api/halls (server/routes/halls.js).
