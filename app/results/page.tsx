@@ -2,6 +2,11 @@ import { getHalls, getResults, getSports } from "@/lib/api";
 import { ResultsView } from "@/components/results-view";
 import { PageHero } from "@/components/page-hero";
 
+// Fetches the Go API same-origin, which isn't reachable yet during this
+// deployment's own build - force request-time rendering so it only ever
+// fetches once the deployment is live.
+export const dynamic = "force-dynamic";
+
 export default async function ResultsPage() {
   const [halls, results, sports] = await Promise.all([
     getHalls(),

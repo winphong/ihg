@@ -5,6 +5,11 @@ import { ScheduleDayColumn } from "@/components/schedule-day-column";
 import { WeekNavLink } from "@/components/week-nav-link";
 import { PageHero } from "@/components/page-hero";
 
+// Fetches the Go API same-origin, which isn't reachable yet during this
+// deployment's own build - force request-time rendering so it only ever
+// fetches once the deployment is live.
+export const dynamic = "force-dynamic";
+
 function startOfWeek(date: Date) {
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
