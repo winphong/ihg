@@ -85,13 +85,19 @@ function resolveApiBaseUrl(): string {
 
 async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const baseUrl = resolveApiBaseUrl();
+  const bypassSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET;
 
   const res = await fetch(`${baseUrl}${path}`, {
     // "next" (time-based revalidation) and "no-store" are mutually
     // exclusive - only default to no-store when the caller didn't opt into
     // caching via `next.revalidate`.
     cache: init?.next ? undefined : "no-store",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      // Bypasses Vercel Authentication when calling our own protected
+      // deployment same-origin (e.g. during build-time prerender).
+      ...(bypassSecret && { "x-vercel-protection-bypass": bypassSecret }),
+    },
     ...init,
   });
 
