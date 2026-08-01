@@ -12,11 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Legacy CRA/Express code being replaced by this Next.js app - not part
-    // of it, will be deleted at cutover (see docs/MIGRATION_PLAN.md).
-    "frontend/**",
-    "server/**",
-    "apps/**",
   ]),
 ]);
 
