@@ -4,7 +4,6 @@ import { ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function BackToTopButton() {
-  console.log("back to top");
   return (
     <Button
       variant="ghost"

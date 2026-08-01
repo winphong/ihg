@@ -65,11 +65,26 @@ class ApiError extends Error {
   }
 }
 
-async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+// On Vercel, the Go API is bundled into this same deployment (see the
+// root vercel.json /api rewrite) - resolve same-origin via VERCEL_URL so
+// every preview hits its own API, not a hardcoded env var. API_URL is only
+// needed for local dev, pointing at `go run ./cmd/server`.
+function resolveApiBaseUrl(): string {
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}/api`;
+  }
+
   const baseUrl = process.env.API_URL;
   if (!baseUrl) {
-    throw new Error("API_URL environment variable is not set");
+    throw new Error(
+      "API_URL environment variable is not set (and VERCEL_URL is unavailable)",
+    );
   }
+  return baseUrl;
+}
+
+async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const baseUrl = resolveApiBaseUrl();
 
   const res = await fetch(`${baseUrl}${path}`, {
     // "next" (time-based revalidation) and "no-store" are mutually
