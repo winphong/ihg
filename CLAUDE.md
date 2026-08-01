@@ -43,12 +43,14 @@ go test ./pkg/handlers/ -run TestParseJSDate   # single test
 go vet ./...
 ```
 
-**Next.js frontend** (repo root):
+**Next.js frontend** (repo root): always use `bun` for installs/scripts
+(`bun install`, `bun run dev`, etc.) — fall back to the `npm` equivalent only
+if `bun` isn't available in the environment.
 ```
-npm install
-npm run dev                      # next dev
-npm run build                    # next build
-npm run lint                     # eslint
+bun install
+bun run dev                      # next dev
+bun run build                    # next build
+bun run lint                     # oxlint
 ```
 
 ## Environment setup
