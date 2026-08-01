@@ -8,6 +8,18 @@ node_modules
 .env.test.local
 .env.production
 .env.production.local
+!.env.example
 
 build
 .vercel
+
+# next.js
+/.next/
+/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
