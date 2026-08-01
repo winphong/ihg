@@ -9,9 +9,15 @@ import (
 	"os"
 
 	handler "ihg/api"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	if err := godotenv.Load(".env.local"); err != nil {
+		log.Printf("no .env.local found, relying on existing environment: %v", err)
+	}
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3900"

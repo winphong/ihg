@@ -12,3 +12,14 @@ node_modules
 
 build
 .vercel
+
+# next.js
+/.next/
+/out/
+*.tsbuildinfo
+next-env.d.ts
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*

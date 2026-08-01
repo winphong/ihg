@@ -1,21 +1,36 @@
 # Migrate IHG to Next.js + Go, all Vercel-deployable
 
-## Status (as of 2026-07-31)
+## Status (as of 2026-08-01)
 
 Phase 1 backend is code-complete and passing tests, but **not yet deployed or
 cut over**:
 
 - [x] Go toolchain installed locally
-- [x] `/api` Go module scaffolded (`go.mod`, Mongo client singleton in `api/internal/db`)
-- [x] Models ported (`api/internal/models`)
-- [x] Route handlers ported (`api/internal/handlers`)
-- [x] Auth/error/CORS middleware ported (`api/internal/middleware`)
+- [x] `/api` Go module scaffolded (`go.mod`, Mongo client singleton in `pkg/db`)
+- [x] Models ported (`pkg/models`)
+- [x] Route handlers ported (`pkg/handlers`)
+- [x] Auth/error/CORS middleware ported (`pkg/middleware`)
 - [x] Baseline Go tests written and passing (`go test ./...`)
 - [x] `.env.example` / `frontend/.env.example` added documenting required env vars
 - [x] `cmd/server/main.go` added for running the Go API locally (`go run ./cmd/server`)
 - [ ] Deploy Go backend as a Vercel preview and verify parity vs the live Node API
 - [ ] Cut prod over to the Go backend, delete `server/`
-- [ ] Phase 2 (Next.js + TS + Tailwind/shadcn frontend) — not started
+
+Phase 2 (Next.js + TS + Tailwind/shadcn frontend) is underway, at the repo
+root alongside `/api` (not `apps/ihg`, an empty leftover from an abandoned
+Nx experiment on `migrate/nx`):
+
+- [x] Scaffolded via `create-next-app` (TS, App Router, Tailwind v4) + `shadcn/ui` init
+- [x] Brand theme ported: custom breakpoints/colors in `app/globals.css`'s
+      `@theme`, `TheNextFont`/Lato via `next/font/*`
+- [x] Shared layout (`NavBar`, `Footer`, `BoxDivider`) and typed server-only
+      API client (`lib/api.ts`, `lib/instagram.ts`)
+- [x] Static/marketing pages ported and verified against the live Go API +
+      Mongo data: `home`, `about`, `contact` (incl. working enquiry submit via
+      a Server Action), `documents`, `gallery`
+- [ ] `schedule` and `results` pages (data-driven, step 2 below)
+- [ ] Admin flow + httpOnly-cookie auth (step 3 below) - `NavBar` is
+      currently public-links-only, no auth/logout wired up yet
 - [ ] Phase 3 (consolidation/cleanup) — not started
 
 Blocked on: real `DB_URL`/`PRIVATE_KEY` values and a decision on Vercel deploy
