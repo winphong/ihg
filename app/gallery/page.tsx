@@ -1,5 +1,6 @@
 import { getInstagramPhotos } from "@/lib/instagram";
 import { PageHero } from "@/components/page-hero";
+import Image from "next/image";
 
 export default async function GalleryPage() {
   const photos = await getInstagramPhotos();
@@ -7,7 +8,10 @@ export default async function GalleryPage() {
 
   return (
     <div>
-      <PageHero image="/headers/gallery.jpg" className="px-[8%] py-[8%] text-center">
+      <PageHero
+        image="/headers/gallery.jpg"
+        className="px-[8%] py-[8%] text-center"
+      >
         <h1 className="text-ihg-gold text-[400%] leading-tight sm:text-[500%] md:text-[600%]">
           GALLERY
         </h1>
@@ -33,7 +37,9 @@ export default async function GalleryPage() {
                 className="w-[75%] max-w-xs object-cover md:w-[220px]"
               />
             </a>
-            {main.caption && <p className="max-w-md text-white">{main.caption}</p>}
+            {main.caption && (
+              <p className="max-w-md text-white">{main.caption}</p>
+            )}
           </div>
         )}
       </PageHero>
@@ -46,7 +52,7 @@ export default async function GalleryPage() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               src={photo.media_url}
               alt="media"
               className="size-[12vmax] object-cover sm:size-[18vmax] md:size-[210px] lg:size-[19vmax]"

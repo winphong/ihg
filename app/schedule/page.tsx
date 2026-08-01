@@ -87,7 +87,10 @@ const SchedulePage = async ({
 
   return (
     <div>
-      <PageHero image="/headers/schedule.jpg" className="px-[8%] py-[8%] text-center">
+      <PageHero
+        image="/headers/schedule.jpg"
+        className="px-[8%] py-[8%] text-center"
+      >
         <h1 className="text-ihg-gold text-[300%] sm:text-[420%] md:text-[600%]">
           SCHEDULE
         </h1>

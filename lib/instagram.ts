@@ -1,7 +1,6 @@
 import "server-only";
 
-// Shape of the Instagram Graph API media object the upstream endpoint
-// forwards (see frontend/src/pages/gallery.jsx's original usage).
+// Shape of the Instagram Graph API media object the upstream endpoint forwards.
 export type InstagramPhoto = {
   media_url: string;
   caption?: string;

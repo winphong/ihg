@@ -1,28 +1,18 @@
 # IHG
 NUS IHG Website AY19/20
 
-### Installing dependencies for project
-At root folder, run `npm i` to install the dependencies. `cd` to **/frontend** and run `npm i` again.
-
-### Running the project
-At root folder, run `nodemon`. Using another terminal, `cd` to **/frontend** and run `npm start`
-
-### Running the Go API (new backend, replacing `server/`)
+### Running the Go API
 1. Copy `.env.example` to `.env` and fill in `DB_URL` (and `PRIVATE_KEY` for admin auth) - see that file for details on each variable.
 2. At root folder, run:
    ```
    go run ./cmd/server
    ```
    This starts the same handler Vercel runs in production on `http://localhost:3900` (override with a `PORT` env var).
-3. Using another terminal, `cd` to **/frontend** and run `npm start`, pointing `REACT_APP_API_URL` at `http://localhost:3900/api`
-   (or, for the new Next.js frontend being built at the repo root, see below instead).
 
-### Running the Next.js frontend (new frontend, replacing `frontend/`)
+### Running the Next.js frontend
 1. Copy `.env.example` to `.env.local` and fill in `API_URL` (pointing at the Go API above, e.g. `http://localhost:3900/api`).
 2. At root folder, run `npm install` then `npm run dev`.
-3. See `docs/MIGRATION_PLAN.md` for migration status - only the static/marketing pages
-   (home, about, contact, documents, gallery) are ported so far; `frontend/` is still the
-   production frontend until the migration completes.
+3. See `docs/MIGRATION_PLAN.md` for migration status.
 
 ### Setting up database
 1. Go to https://www.mongodb.com/download-center/community to download (MSI) & install MongoDB Community Server. 

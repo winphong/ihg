@@ -1,9 +1,11 @@
 # Migrate IHG to Next.js + Go, all Vercel-deployable
 
-## Status (as of 2026-08-01)
+## Status (as of 2026-08-02)
 
-Phase 1 backend is code-complete and passing tests, but **not yet deployed or
-cut over**:
+Phases 1 and 2 have cut over: the legacy `frontend/` (CRA) and `server/`
+(Express) directories have been deleted from the repo. The Go API
+(`cmd/server`, `api/`, `pkg/`) and Next.js app (repo root) are now the only
+frontend/backend.
 
 - [x] Go toolchain installed locally
 - [x] `/api` Go module scaffolded (`go.mod`, Mongo client singleton in `pkg/db`)
@@ -11,15 +13,8 @@ cut over**:
 - [x] Route handlers ported (`pkg/handlers`)
 - [x] Auth/error/CORS middleware ported (`pkg/middleware`)
 - [x] Baseline Go tests written and passing (`go test ./...`)
-- [x] `.env.example` / `frontend/.env.example` added documenting required env vars
 - [x] `cmd/server/main.go` added for running the Go API locally (`go run ./cmd/server`)
-- [ ] Deploy Go backend as a Vercel preview and verify parity vs the live Node API
-- [ ] Cut prod over to the Go backend, delete `server/`
-
-Phase 2 (Next.js + TS + Tailwind/shadcn frontend) is underway, at the repo
-root alongside `/api` (not `apps/ihg`, an empty leftover from an abandoned
-Nx experiment on `migrate/nx`):
-
+- [x] Cut prod over to the Go backend, delete `server/`
 - [x] Scaffolded via `create-next-app` (TS, App Router, Tailwind v4) + `shadcn/ui` init
 - [x] Brand theme ported: custom breakpoints/colors in `app/globals.css`'s
       `@theme`, `TheNextFont`/Lato via `next/font/*`
@@ -28,13 +23,11 @@ Nx experiment on `migrate/nx`):
 - [x] Static/marketing pages ported and verified against the live Go API +
       Mongo data: `home`, `about`, `contact` (incl. working enquiry submit via
       a Server Action), `documents`, `gallery`
+- [x] Cut prod over to the Next.js frontend, delete `frontend/`
 - [ ] `schedule` and `results` pages (data-driven, step 2 below)
 - [ ] Admin flow + httpOnly-cookie auth (step 3 below) - `NavBar` is
       currently public-links-only, no auth/logout wired up yet
-- [ ] Phase 3 (consolidation/cleanup) — not started
-
-Blocked on: real `DB_URL`/`PRIVATE_KEY` values and a decision on Vercel deploy
-authorization (see README for local dev setup in the meantime).
+- [ ] Phase 3 (consolidation/cleanup, see below) — not started
 
 ---
 
@@ -105,7 +98,7 @@ Replace `frontend/` with a Next.js (latest, App Router, TS strict) app at the re
 
 ## Phase 3 — Consolidation & cleanup
 
-- Collapse deploy config to one root `vercel.json` (likely much smaller than today's — same-origin Next.js+Go means little to no CORS/rewrite config is needed beyond what Vercel infers by convention). Remove the stale root `config.json` once superseded.
+- [x] Collapsed deploy config to one root `vercel.json`; removed the stale root `config.json`.
 - Update `README.md`: new local dev instructions (install Go, `go run`/Vercel dev for `/api`, `next dev` for the app instead of the old manual MongoDB Compass/`nodemon` steps).
 - Optional follow-up (flag, don't block on): add a GitHub Actions workflow running `go test ./...` and the frontend test/lint suite on PRs, since this is the first time either side of the repo will have tests worth gating on.
 
